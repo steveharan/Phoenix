@@ -16,8 +16,8 @@
                 </div>
             </div>
         </div>
-        <button ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</button>
-        <button ng-click="toggleView()" ng-show="showTableFormat">Show Card View</button>
+        <md-button class="md-raised" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</md-button>
+        <md-button class="md-raised" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</md-button>
         <div class="panel-body" ng-hide="showTableFormat">
             <div class="row">
                 <div class="col-sm-6" ng-repeat="customer in Customers | filter:filterCustomers">
