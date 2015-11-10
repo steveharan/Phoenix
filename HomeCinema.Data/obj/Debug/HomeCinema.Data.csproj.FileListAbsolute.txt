@@ -1,0 +1,41 @@
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Data.dll.config
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Data.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Data.pdb
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.SqlServer.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Entities.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Entities.pdb
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.xml
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.SqlServer.xml
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.csprojResolveAssemblyReference.cache
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.pdb
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Data.dll.config
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Data.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Data.pdb
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Antlr3.Runtime.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Entities.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\MockData.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Newtonsoft.Json.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\System.Net.Http.Formatting.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\System.Web.Http.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\WebGrease.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\HomeCinema.Entities.pdb
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Antlr3.Runtime.pdb
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.xml
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Newtonsoft.Json.xml
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\System.Net.Http.Formatting.xml
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\System.Web.Http.xml
+C:\Work\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.csprojResolveAssemblyReference.cache
+C:\Work\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.Migrations.initial_migration.resources
+C:\Work\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.csproj.GenerateResource.Cache
+C:\Work\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\obj\Debug\HomeCinema.Data.pdb
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
+C:\Work\ConsoleApplication1\HomeCinema.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.xml

@@ -1,0 +1,17 @@
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.dll.config
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.dll
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.pdb
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\EntityFramework.dll
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\MockData.dll
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\Newtonsoft.Json.dll
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\System.Net.Http.Formatting.dll
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\System.Web.Http.dll
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\EntityFramework.xml
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\Newtonsoft.Json.xml
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\System.Net.Http.Formatting.xml
+C:\Work\Phoenix\HomeCinema.Entities\bin\Debug\System.Web.Http.xml
+C:\Work\Phoenix\HomeCinema.Entities\obj\Debug\Phoenix.Entities.csprojResolveAssemblyReference.cache
+C:\Work\Phoenix\HomeCinema.Entities\obj\Debug\HomeCinema.Entities.dll
+C:\Work\Phoenix\HomeCinema.Entities\obj\Debug\HomeCinema.Entities.pdb

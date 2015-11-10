@@ -1,0 +1,26 @@
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.pdb
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\obj\Debug\HomeCinema.Entities.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\obj\Debug\HomeCinema.Entities.pdb
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.dll.config
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.SqlServer.dll
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.xml
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.SqlServer.xml
+\\lonstor01\user\sharan\visual studio 2015\Projects\ConsoleApplication1\HomeCinema.Entities\obj\Debug\HomeCinema.Entities.csprojResolveAssemblyReference.cache
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.dll.config
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\HomeCinema.Entities.pdb
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\MockData.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\Newtonsoft.Json.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\System.Net.Http.Formatting.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\System.Web.Http.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.xml
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\Newtonsoft.Json.xml
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\System.Net.Http.Formatting.xml
+C:\Work\ConsoleApplication1\HomeCinema.Entities\bin\Debug\System.Web.Http.xml
+C:\Work\ConsoleApplication1\HomeCinema.Entities\obj\Debug\HomeCinema.Entities.dll
+C:\Work\ConsoleApplication1\HomeCinema.Entities\obj\Debug\HomeCinema.Entities.pdb
