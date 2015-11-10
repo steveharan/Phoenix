@@ -67,8 +67,7 @@
                     <th>DOB</th>
                     <th>Registered</th>
                 </tr>
-                <tr ng-repeat="customer in Customers | filter:filterCustomers" ng-class="{'selected':$index == selectedRow}"
-                    ng-click="setClickedRow($index)">
+                <tr ng-repeat="customer in Customers | filter:filterCustomers" ng-class="{'selected':$index == selectedRow}">
                     <td><buton class="btn btn-primary btn-xs" ng-click="openEditDialog(customer);">Edit <i class="fa fa-pencil pull-right"></i></buton></td>
                     <td><strong>{{customer.FirstName}} {{customer.LastName}}</strong></td>
                     <td>{{customer.Email}}</td>

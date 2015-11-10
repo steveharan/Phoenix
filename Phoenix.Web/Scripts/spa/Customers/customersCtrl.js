@@ -22,11 +22,6 @@
 
         $scope.showTableFormat = false;
 
-        $scope.selectedRow = null;  
-        $scope.setClickedRow = function (index) {
-            $scope.selectedRow = index;
-        }
-
         $scope.toggleView = function () {
             $scope.showTableFormat = $scope.showTableFormat === false ? true : false;
         };
