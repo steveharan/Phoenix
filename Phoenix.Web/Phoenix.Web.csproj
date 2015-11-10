@@ -744,13 +744,11 @@
     <Content Include="Scripts\spa\account\register.html" />
     <Content Include="Scripts\spa\account\registerCtrl.js" />
     <Content Include="Scripts\spa\app.js" />
-    <Content Include="Scripts\spa\Customers\CreateSchoolyearDialog.html" />
     <Content Include="Scripts\spa\Customers\customerEditCtrl.js" />
     <Content Include="Scripts\spa\Customers\customers.html" />
     <Content Include="Scripts\spa\Customers\customersCtrl.js" />
     <Content Include="Scripts\spa\Customers\customersRegCtrl.js" />
     <Content Include="Scripts\spa\Customers\editCustomerModal.html" />
-    <Content Include="Scripts\spa\Customers\editCustomerModalOld.html" />
     <Content Include="Scripts\spa\Customers\register.html" />
     <Content Include="Scripts\spa\directives\availableMovie.directive.js" />
     <Content Include="Scripts\spa\directives\availableMovie.html" />

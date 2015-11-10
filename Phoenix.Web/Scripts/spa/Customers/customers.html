@@ -4,20 +4,28 @@
         color: white;
     }
 </style>
+<hr/>
 <div class="row">
     <div class="panel panel-primary">
         <div class="panel-heading clearfix">
-            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Home Cinema Customers</h4>
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Customers</h3>
             <div class="input-group">
                 <input id="inputSearchCustomers" type="search" ng-model="filterCustomers" class="form-control shortInputSearch" placeholder="Filter, search customers..">
                 <div class="input-group-btn">
                     <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
                     <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
                 </div>
+                
+            </div>
+            <div class="text-center">
+                <custom-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
             </div>
         </div>
-        <md-button class="md-raised" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</md-button>
-        <md-button class="md-raised" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</md-button>
+        <span>
+            <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</button>
+            <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</button>
+            <button class="btn btn-primary btn-xs" ng-click="openEditDialog();">Add Customer<i class="fa fa-pencil pull-right"></i></button>
+        </span>
         <div class="panel-body" ng-hide="showTableFormat">
             <div class="row">
                 <div class="col-sm-6" ng-repeat="customer in Customers | filter:filterCustomers">
@@ -44,11 +52,14 @@
                                         <td class="shortPadding">Registered:</td>
                                         <td class="shortPadding"><i>{{customer.RegistrationDate | date:'mediumDate'}}</i></td>
                                     </tr>
+                                    <tr>
+                                        <td class="shortPadding">Id Card:</td>
+                                        <td class="shortPadding"><i>{{customer.IdentityCard}}</i></td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
                         <div class="panel-footer clearfix">
-                            <label class="label label-danger">{{customer.IdentityCard}}</label>
                             <div class="pull-right">
                                 <buton class="btn btn-primary btn-xs" ng-click="openEditDialog(customer);">Edit <i class="fa fa-pencil pull-right"></i></buton>
                             </div>

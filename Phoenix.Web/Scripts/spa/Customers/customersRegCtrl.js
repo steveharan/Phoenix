@@ -8,7 +8,6 @@
     function customersRegCtrl($scope, $location, $rootScope, apiService, notificationService) {
 
         $scope.newCustomer = {};
-
         $scope.Register = Register;
 
         $scope.openDatePicker = openDatePicker;
@@ -24,7 +23,7 @@
         };
 
         function Register() {
-            apiService.post('/api/customers/register', $scope.newCustomer,
+           apiService.post('/api/customers/register', $scope.newCustomer,
            registerCustomerSucceded,
            registerCustomerFailed);
         }

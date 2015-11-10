@@ -32,12 +32,12 @@ namespace Phoenix.Web.App_Start
                 "~/Scripts/Vendors/morris.js",
                 "~/Scripts/Vendors/jquery.fancybox.js",
                 "~/Scripts/Vendors/jquery.fancybox-media.js",
-                "~/Scripts/Vendors/loading-bar.js",
-                "~/Scripts/bower_components/angular-aria/angular-aria.js",
-                "~/Scripts/bower_components/angular-animate/angular-animate.js",
-                "~/Scripts/bower_components/angular-material/angular-material.js",
-                "~/Scripts/bower_components/angular-aria/angular-aria.js",
-                "~/Scripts/bower_components/angular-messages/angular-messages.js"
+                "~/Scripts/Vendors/loading-bar.js"
+                //"~/Scripts/bower_components/angular-aria/angular-aria.js",
+                //"~/Scripts/bower_components/angular-animate/angular-animate.js",
+                //"~/Scripts/bower_components/angular-material/angular-material.js",
+                //"~/Scripts/bower_components/angular-aria/angular-aria.js",
+                //"~/Scripts/bower_components/angular-messages/angular-messages.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
@@ -78,8 +78,8 @@ namespace Phoenix.Web.App_Start
                 "~/content/css/toastr.css",
                 "~/content/css/jquery.fancybox.css",
                 "~/content/css/loading-bar.css"
-                ,
-                "~/Scripts/bower_components/angular-material/angular-material.css"
+                //,
+                //"~/Scripts/bower_components/angular-material/angular-material.css"
                 ));
 
             BundleTable.EnableOptimizations = false;

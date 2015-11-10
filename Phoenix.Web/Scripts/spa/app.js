@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('phoenix', ['common.core', 'common.ui', 'ngMaterial', 'ngAria', 'ngMessages'])
+    angular.module('phoenix', ['common.core', 'common.ui'])
         .config(config)
         .run(run);
 
@@ -16,19 +16,19 @@
                 templateUrl: "scripts/spa/account/login.html",
                 controller: "loginCtrl"
             })
-            .when("/register", {
-                templateUrl: "scripts/spa/account/register.html",
-                controller: "registerCtrl"
-            })
+            //.when("/register", {
+            //    templateUrl: "scripts/spa/account/register.html",
+            //    controller: "registerCtrl"
+            //})
             .when("/customers", {
                 templateUrl: "scripts/spa/customers/customers.html",
                 controller: "customersCtrl"
             })
-            .when("/customers/register", {
-                templateUrl: "scripts/spa/customers/register.html",
-                controller: "customersRegCtrl",
-                resolve: { isAuthenticated: isAuthenticated }
-            })
+            //.when("/customers/register", {
+            //    templateUrl: "scripts/spa/customers/register.html",
+            //    controller: "customersRegCtrl",
+            //    resolve: { isAuthenticated: isAuthenticated }
+            //})
             .when("/movies", {
                 templateUrl: "scripts/spa/movies/movies.html",
                 controller: "moviesCtrl"

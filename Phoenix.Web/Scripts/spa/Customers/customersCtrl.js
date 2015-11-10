@@ -3,9 +3,9 @@
 
     app.controller('customersCtrl', customersCtrl);
 
-    customersCtrl.$inject = ['$scope', '$modal', 'apiService', 'notificationService', '$mdDialog'];
+    customersCtrl.$inject = ['$scope', '$modal', 'apiService', 'notificationService'];
 
-    function customersCtrl($scope, $modal, apiService, notificationService, $mdDialog) {
+    function customersCtrl($scope, $modal, apiService, notificationService) {
 
         $scope.pageClass = 'page-customers';
         $scope.loadingCustomers = true;
@@ -44,38 +44,14 @@
             customersLoadFailed);
         }
 
-        $scope.openDialog = function (ev) {
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'scripts/spa/customers/CreateSchoolyearDialog.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true
-            })
-                .then(function (schoolyear) {
-                    $scope.status = 'You changed the name to "' + schoolyear.name + '".';
-                }, function () {
-                    $scope.status = 'You cancelled the dialog.';
-                });
-        }
-
-        function DialogController($scope, $mdDialog) {
-            $scope.schoolyear = { name: 'bastienJS 2014-2015', startDate: new Date(), endDate: new Date() };
-            $scope.hide = function () {
-                $mdDialog.hide();
-            };
-            $scope.cancel = function () {
-                $mdDialog.cancel();
-            };
-            $scope.save = function () {
-                // Make ajax call here with .then
-                // (
-                $mdDialog.hide($scope.schoolyear);
-                // ); so the dialog closes when ajax call is done!
-            };
-        }
-
         function openEditDialog(customer) {
+            if (customer == null)
+            {
+                $scope.newCustomer = true;
+            }
+            else {
+                $scope.newCustomer = false;
+            }
             $scope.EditedCustomer = customer;
             $modal.open({
                 templateUrl: 'scripts/spa/customers/editCustomerModal.html',

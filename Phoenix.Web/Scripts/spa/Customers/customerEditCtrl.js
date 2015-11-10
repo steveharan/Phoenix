@@ -7,6 +7,17 @@
 
     function customerEditCtrl($scope, $modalInstance, $timeout, apiService, notificationService) {
 
+        $scope.addOrEdit = setLable();
+
+        function setLable() {
+            if ($scope.newCustomer) {
+                return 'Add New Customer';
+            }
+            else {
+                return 'Edit';
+            }
+        }
+
         $scope.cancelEdit = cancelEdit;
         $scope.updateCustomer = updateCustomer;
 
@@ -21,9 +32,16 @@
 
         function updateCustomer() {
             console.log($scope.EditedCustomer);
-            apiService.post('/api/customers/update/', $scope.EditedCustomer,
-            updateCustomerCompleted,
-            updateCustomerLoadFailed);
+            if (!$scope.newCustomer) {
+                apiService.post('/api/customers/update/', $scope.EditedCustomer,
+                updateCustomerCompleted,
+                updateCustomerLoadFailed);
+            }
+            else {
+                apiService.post('/api/customers/register', $scope.EditedCustomer,
+                updateCustomerCompleted,
+                updateCustomerLoadFailed);
+            }
         }
 
         function updateCustomerCompleted(response) {
