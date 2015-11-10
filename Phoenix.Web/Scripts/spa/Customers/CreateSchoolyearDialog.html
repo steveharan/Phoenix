@@ -1,0 +1,56 @@
+﻿<md-dialog aria-label="Edit schoolyear" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Edit schoolyear</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+
+            <form name="schoolyearForm">
+
+                <md-input-container>
+                    <label>Name</label>
+                    <input type="text" md-maxlength="30" required name="name" ng-model="schoolyear.name">
+
+                    <div ng-messages="schoolyearForm.name.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container>
+                    <lab>Start date</lab>
+                    <md-datepicker required name="startDate" ng-model="schoolyear.startDate"
+                                   md-placeholder="start date"></md-datepicker>
+                    <div ng-messages="schoolyearForm.startDate.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container>
+                    <lab>End date</lab>
+                    <md-datepicker aria-label="Start date" required name="endDate" ng-model="schoolyear.endDate"
+                                   md-placeholder="end date"></md-datepicker>
+                    <div ng-messages="schoolyearForm.endDate.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+            </form>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button ng-click="save()" style="margin-right:20px;">
+                Save
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

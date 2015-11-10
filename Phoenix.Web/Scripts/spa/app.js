@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('phoenix', ['common.core', 'common.ui', 'ngMaterial'])
+    angular.module('phoenix', ['common.core', 'common.ui', 'ngMaterial', 'ngAria', 'ngMessages'])
         .config(config)
         .run(run);
 

@@ -35,7 +35,9 @@ namespace Phoenix.Web.App_Start
                 "~/Scripts/Vendors/loading-bar.js",
                 "~/Scripts/bower_components/angular-aria/angular-aria.js",
                 "~/Scripts/bower_components/angular-animate/angular-animate.js",
-                "~/Scripts/bower_components/angular-material/angular-material.js"
+                "~/Scripts/bower_components/angular-material/angular-material.js",
+                "~/Scripts/bower_components/angular-aria/angular-aria.js",
+                "~/Scripts/bower_components/angular-messages/angular-messages.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
