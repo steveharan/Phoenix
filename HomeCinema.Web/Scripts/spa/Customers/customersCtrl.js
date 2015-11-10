@@ -22,6 +22,11 @@
 
         $scope.showTableFormat = false;
 
+        $scope.selectedRow = null;  
+        $scope.setClickedRow = function (index) {
+            $scope.selectedRow = index;
+        }
+
         $scope.toggleView = function () {
             $scope.showTableFormat = $scope.showTableFormat === false ? true : false;
         };
@@ -34,7 +39,7 @@
             var config = {
                 params: {
                     page: page,
-                    pageSize: 4,
+                    pageSize: 10,
                     filter: $scope.filterCustomers
                 }
             };

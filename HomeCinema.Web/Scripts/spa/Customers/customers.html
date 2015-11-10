@@ -1,4 +1,10 @@
-﻿<div class="row">
+﻿<style>
+    .selected {
+        background-color: dodgerblue;
+        color: white;
+    }
+</style>
+<div class="row">
     <div class="panel panel-primary">
         <div class="panel-heading clearfix">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Home Cinema Customers</h4>
@@ -18,7 +24,6 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <strong>{{customer.FirstName}} {{customer.LastName}}</strong><br />
-
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -53,9 +58,26 @@
             </div>
         </div>
         <div class="panel-body" ng-hide="!showTableFormat">
-            <div class="col-lg-1" ng-repeat="customer in Customers | filter:filterCustomers">
-                hello!
-            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>DOB</th>
+                    <th>Registered</th>
+                </tr>
+                <tr ng-repeat="customer in Customers | filter:filterCustomers" ng-class="{'selected':$index == selectedRow}"
+                    ng-click="setClickedRow($index)">
+                    <td><buton class="btn btn-primary btn-xs" ng-click="openEditDialog(customer);">Edit <i class="fa fa-pencil pull-right"></i></buton></td>
+                    <td><strong>{{customer.FirstName}} {{customer.LastName}}</strong></td>
+                    <td>{{customer.Email}}</td>
+                    <td>{{customer.Mobile}}</td>
+                    <td>{{customer.DateOfBirth | date:'mediumDate'}}</td>
+                    <td>{{customer.RegistrationDate | date:'mediumDate'}}</td>
+                </tr>
+            </table>
+        </div>
         <div class="panel-footer">
             <div class="text-center">
                 <custom-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
