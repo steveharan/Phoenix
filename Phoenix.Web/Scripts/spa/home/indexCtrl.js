@@ -10,7 +10,7 @@
         $scope.loadingMovies = true;
         $scope.loadingGenres = true;
         $scope.isReadOnly = false;
-
+        $scope.myDate = new Date();
         $scope.latestMovies = [];
         $scope.loadData = loadData;
 
