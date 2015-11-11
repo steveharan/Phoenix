@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="phoenixsh" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\MyGit\\Phoenix\\Phoenix\.Web\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\MyGit\\Phoenix\\Phoenix\.Web\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Phoenix-Web.config Connection String" description="" value="Data Source=tcp:rdsuyabpwx.database.windows.net,1433;Initial Catalog=HomeCinema;User ID=phoenixdb_user@rdsuyabpwx;Password=Pablo2007" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\MyGit\\Phoenix\\Phoenix\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Phoenix']/@connectionString" />
+  </parameter>
+</parameters>
