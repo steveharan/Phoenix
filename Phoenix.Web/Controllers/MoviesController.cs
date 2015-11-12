@@ -136,6 +136,40 @@ namespace Phoenix.Web.Controllers
                 return response;
             });
         }
+
+        [HttpPost]
+        [Route("update")]
+        public HttpResponseMessage Update(HttpRequestMessage request, MovieViewModel movie)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var movieDb = _moviesRepository.GetSingle(movie.ID);
+                    if (movieDb == null)
+                        response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid movie.");
+                    else
+                    {
+                        movieDb.UpdateMovie(movie);
+                        movie.Image = movieDb.Image;
+                        _moviesRepository.Edit(movieDb);
+
+                        _unitOfWork.Commit();
+                        response = request.CreateResponse<MovieViewModel>(HttpStatusCode.OK, movie);
+                    }
+                }
+
+                return response;
+            });
+        }
+
+
         [MimeMultipart]
         [Route("images/upload")]
         public HttpResponseMessage Post(HttpRequestMessage request, int movieId)

@@ -24,11 +24,11 @@
                 templateUrl: "scripts/spa/customers/customers.html",
                 controller: "customersCtrl"
             })
-            //.when("/customers/register", {
-            //    templateUrl: "scripts/spa/customers/register.html",
-            //    controller: "customersRegCtrl",
-            //    resolve: { isAuthenticated: isAuthenticated }
-            //})
+            .when("/customers/register", {
+                templateUrl: "scripts/spa/customers/register.html",
+                controller: "customersRegCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
+            })
             .when("/movies", {
                 templateUrl: "scripts/spa/movies/movies.html",
                 controller: "moviesCtrl"

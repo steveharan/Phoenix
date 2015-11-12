@@ -66,7 +66,6 @@
         }
 
         function UpdateMovieModel() {
-            alert('update');
             apiService.post('/api/movies/update', $scope.movie,
             updateMovieSucceded,
             updateMovieFailed);
