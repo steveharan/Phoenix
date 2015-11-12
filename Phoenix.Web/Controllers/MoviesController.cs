@@ -138,6 +138,47 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpPost]
+        [Route("add")]
+        public HttpResponseMessage Add(HttpRequestMessage request, MovieViewModel movie)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    Movie newMovie = new Movie();
+                    newMovie.UpdateMovie(movie);
+
+                    for (int i = 0; i < movie.NumberOfStocks; i++)
+                    {
+                        Stock stock = new Stock()
+                        {
+                            IsAvailable = true,
+                            Movie = newMovie,
+                            UniqueKey = Guid.NewGuid()
+                        };
+                        newMovie.Stocks.Add(stock);
+                    }
+
+                    _moviesRepository.Add(newMovie);
+
+                    _unitOfWork.Commit();
+
+                    // Update view model
+                    movie = Mapper.Map<Movie, MovieViewModel>(newMovie);
+                    response = request.CreateResponse<MovieViewModel>(HttpStatusCode.Created, movie);
+                }
+
+                return response;
+            });
+        }
+
+        [HttpPost]
         [Route("update")]
         public HttpResponseMessage Update(HttpRequestMessage request, MovieViewModel movie)
         {
@@ -168,7 +209,6 @@ namespace Phoenix.Web.Controllers
                 return response;
             });
         }
-
 
         [MimeMultipart]
         [Route("images/upload")]
