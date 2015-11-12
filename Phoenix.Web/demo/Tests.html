@@ -1,0 +1,1639 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Basic Primitives QUnit Tests</title>
+    <link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.15.0.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="//code.jquery.com/qunit/qunit-1.15.0.js"></script>
+
+    <link rel="stylesheet" href="demo/js/jquery/ui-lightness/jquery-ui-1.10.2.custom.css" />
+    <script type="text/javascript" src="demo/js/jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="demo/js/jquery/jquery-ui-1.10.2.custom.min.js"></script>
+
+    <!-- # include file="src/src.primitives.html"-->
+
+    <script  type="text/javascript" src="demo/js/primitives.min.js?2100"></script>
+    <link href="demo/css/primitives.latest.css?2100" media="screen" rel="stylesheet" type="text/css" />
+
+
+    <script type="text/javascript" src="demo/js/dependencies.js"></script>
+
+
+    <script type='text/javascript'>
+        QUnit.test("primitives.common.isEmptyObject - test for empty object.", function (assert) {
+            assert.ok(primitives.common.isEmptyObject({}), "Object is empty returns true. Passed!");
+            assert.ok(!primitives.common.isEmptyObject({ a: 1000 }), "Object is not empty returns false. Passed!");
+        });
+
+        QUnit.test("primitives.common.isNullOrEmpty - test for empty string.", function (assert) {
+            assert.ok(primitives.common.isNullOrEmpty(""), "String is empty returns true. Passed!");
+            assert.ok(primitives.common.isNullOrEmpty(null), "String is null returns true. Passed!");
+            assert.ok(!primitives.common.isNullOrEmpty("Some string"), "String is not empty returns false. Passed!");
+        });
+
+        QUnit.test("primitives.common.indexOf - test for object position.", function (assert) {
+            assert.ok(primitives.common.indexOf([{ a: 2 }, { a: 5 }, { a: 3 }, { a: 10 }, { a: 8 }, { a: 4 }], { a: 3 }, function (a, b) { return a.a == b.a; }) == 2, "Object. Passed!");
+            assert.ok(primitives.common.indexOf([2, 5, 3, 10, 8, 4, 1], 3) == 2, "Integer. Passed!");
+            assert.ok(primitives.common.indexOf([2, 5, 3, 10, 8, 4, 1], 24) == -1, "Integer was not found. Passed!");
+        });
+
+        QUnit.test("primitives.common.compareArrays - compare non-object non-sorted arrays.", function (assert) {
+            assert.ok(primitives.common.compareArrays([], []), "Empty arrays are equal. Passed!");
+            assert.ok(!primitives.common.compareArrays([1], []), "First array is empty and second is not. Arrays are not equal. Passed!");
+            assert.ok(!primitives.common.compareArrays([], [1]), "First array is not empty and second is empty. Arrays are not equal. Passed!");
+            assert.ok(primitives.common.compareArrays([1, 1, 1, 2, 2, 3, 3, 3, 3], [1, 2, 3, 1, 2, 3, 1, 3, 3]), "Compare equal non sorted arrays having duplicates. Arrays are equal. Passed!");
+            assert.ok(primitives.common.compareArrays(['A', 'B', 'AB', 'AC'], ['AC', 'AB', 'A', 'B']), "Compare equal non sorted arrays having no duplicates. Arrays are equal. Passed!");
+            assert.ok(!primitives.common.compareArrays([1, 2, 3, 4, 4, 5, 6, 7, 8], [1, 2, 3, 4, 4, 4, 5, 6, 7, 8]), "Compare non-equal non-sorted arrays having the same values but different number of duplicates. Arrays are not equal. Passed!");
+        });
+
+        QUnit.test("primitives.common.mergeSort", function (assert) {
+            var arrays = [
+                [1, 5, 9, 13, 17],
+                [0, 2, 4, 6, 8, 10],
+                [3, 7, 11],
+                [],
+                [18, 19, 20]
+            ];
+
+            var result = primitives.common.mergeSort(arrays);
+            
+            var expectedResult = [];
+            for (var index = 0; index < arrays.length; index += 1) {
+                var array1 = arrays[index];
+
+                expectedResult = expectedResult.concat(array1);
+            }
+            expectedResult.sort(function(a, b) {
+                return a - b;
+            });
+
+            assert.ok(result.join(',') == expectedResult.join(','), "Merged sort multiple arrays!");
+
+            arrays = [
+                [1, 1, 5, 9, 9, 13, 17, 17],
+                [0, 0, 2, 4, 6, 6, 8, 10]
+            ];
+
+            result = primitives.common.mergeSort(arrays, null, true);
+
+            expectedResult = [0, 1, 2, 4, 5, 6, 8, 9, 10, 13, 17];
+
+            assert.ok(result.join(',') == expectedResult.join(','), "Merged sort multiple arrays ignoring duplicates!");
+
+            arrays = [
+                [1, 5, 9, 13, 17],
+            ];
+
+            var result = primitives.common.mergeSort(arrays);
+
+            var expectedResult = [];
+            for (var index = 0; index < arrays.length; index += 1) {
+                var array1 = arrays[index];
+
+                expectedResult = expectedResult.concat(array1);
+            }
+            expectedResult.sort(function (a, b) {
+                return a - b;
+            });
+
+            assert.ok(result.join(',') == expectedResult.join(','), "Merged sort single array!");
+
+            arrays = [
+                [1, 1, 5, 9, 9, 9, 13, 17, 17, 18, 18, 18, 18]
+            ];
+
+            result = primitives.common.mergeSort(arrays, null, true);
+
+            expectedResult = [1, 5, 9, 13, 17, 18];
+
+            assert.ok(result.join(',') == expectedResult.join(','), "Merged sort single array ignoring duplicates!");
+
+            arrays = [
+                [{ weight: 1 }, { weight: 5 }, { weight: 9 }, { weight: 13 }, { weight: 17 }],
+                [{ weight: 2 }, { weight: 4 }, { weight: 6 }, { weight: 8 }, { weight: 10 }],
+                [{ weight: 3 }, { weight: 7 }, { weight: 11 }],
+                [],
+                [{ weight: 18 }, { weight: 19 }, { weight: 20 }]
+            ];
+
+            var result = primitives.common.mergeSort(arrays, function (item) { return item.weight; });
+
+            var expectedResult = [];
+            for (var index = 0; index < arrays.length; index += 1) {
+                var array1 = arrays[index];
+
+                expectedResult = expectedResult.concat(array1);
+            }
+            expectedResult.sort(function (a, b) {
+                return a.weight - b.weight;
+            });
+
+            assert.ok(jQuery.map(result, function (item) {return item.weight;}).join(',') == jQuery.map(expectedResult, function (item) {return item.weight;}).join(','), "Merged sort multiple arrays of objects!");
+        });
+
+        QUnit.test("primitives.common.highestContrast - test for highest contrast background color.", function (assert) {
+            assert.ok(primitives.common.highestContrast("black", "white", "yellow") == "white", "White on black has higher contrast than yellow on black. Passed!");
+        });
+
+        QUnit.test("primitives.common.stackSegments -  Sorts and stack segments on top of each other so they occupy minimum space.", function (assert) {
+            var items = [
+                new primitives.common.StackSegment(1, 70, 90),
+                new primitives.common.StackSegment(2, 70, 80),
+                new primitives.common.StackSegment(3, 10, 20),
+                new primitives.common.StackSegment(4, 30, 40),
+                new primitives.common.StackSegment(5, 36, 65),
+                new primitives.common.StackSegment(6, 50, 60),
+                new primitives.common.StackSegment(7, 10, 35)             
+            ];
+
+            var offset = primitives.common.stackSegments(items, function (item, offset) {
+                item.offset = offset;
+            });
+
+            assert.ok(offset = 2, "Items should stack on top of each other in 2 layes.");
+        });
+
+        QUnit.test("primitives.common.binarySearch -  Search sorted list of elements for nearest item.", function (assert) {
+            var items = [
+                new primitives.common.Point(10, 10),
+                new primitives.common.Point(15, 10),
+                new primitives.common.Point(16, 10),
+                new primitives.common.Point(20, 10),
+                new primitives.common.Point(50, 10),
+                new primitives.common.Point(100, 10),
+                new primitives.common.Point(140, 10)
+            ];
+
+            var item = primitives.common.binarySearch(items, function (item, offset) {
+                return item.x - 4;
+            });
+
+            assert.ok(item.x = 10, "Function should return leftmost item.");
+
+            item = primitives.common.binarySearch(items, function (item, offset) {
+                return item.x - 200;
+            });
+
+            assert.ok(item.x = 140, "Function should return rightmost  item.");
+
+            item = primitives.common.binarySearch(items, function (item, offset) {
+                return item.x - 60;
+            });
+
+            assert.ok(item.x = 50, "Function should return item having x equal 50.");
+
+            item = primitives.common.binarySearch(items, function (item, offset) {
+                return item.x - 90;
+            });
+
+            assert.ok(item.x = 100, "Function should return item having x equal 100.");
+        });
+
+        QUnit.test("primitives.common.perimeter.LinkedHashItems -  Add and iterate items in linked hash items collection.", function (assert) {
+            var items = [
+                { id: 1, name: 'A' },
+                { id: 2, name: 'B' },
+                { id: 3, name: 'C' },
+                { id: 4, name: 'D' },
+                { id: 5, name: 'E' },
+                { id: 6, name: 'F' }
+            ];
+
+            var linkedHashItems = new primitives.common.perimeter.LinkedHashItems();
+            for (var index = 0; index < items.length; index++) {
+                var item = items[index];
+                linkedHashItems.add(item.id, item);
+            };
+
+            var result = [];
+            linkedHashItems.iterate(function (item) {
+                result.push(item);
+            });
+            assert.ok(primitives.common.compareArrays(items, result, function (item) {
+                return item.id;
+            }), "Forward iteration returned correct items!");
+
+            var reversedResult = [],
+                reversedItems = items.slice(0);
+            reversedItems.reverse();
+
+            linkedHashItems.iterateBack(function (item) {
+                reversedResult.push(item);
+            });
+            assert.ok(primitives.common.compareArrays(reversedItems, reversedResult, function (item) {
+                return item.id;
+            }), "Back iteration returned correct items!");
+
+            linkedHashItems.remove(3);
+            items.splice(2, 1);
+            assert.ok(primitives.common.compareArrays(items, linkedHashItems.toArray(), function (item) {
+                return item.id;
+            }), "Removed item. Passed!");
+
+            linkedHashItems.remove(1);
+            items.splice(0, 1);
+            assert.ok(primitives.common.compareArrays(items, linkedHashItems.toArray(), function (item) {
+                return item.id;
+            }), "Remove first item. Passed!");
+
+            linkedHashItems.remove(6);
+            items.splice(3, 1);
+            assert.ok(primitives.common.compareArrays(items, linkedHashItems.toArray(), function (item) {
+                return item.id;
+            }), "Remove last item. Passed!");
+
+            linkedHashItems.empty();
+            assert.ok(primitives.common.compareArrays([], linkedHashItems.toArray(), function (item) {
+                return item.id;
+            }), "Remove all items. Passed!");
+        });
+
+        QUnit.test("primitives.common.perimeter.Manager -  Add perimeters and get merged results.", function (assert) {
+            var validate = function (segments) {
+                var result = null;
+                for (var key in segments.segmentsHash) {
+                    if (segments.segmentsHash.hasOwnProperty(key)) {
+                        if (!segments.nextKeys.hasOwnProperty(key) || !segments.prevKeys.hasOwnProperty(key)) {
+                            result = "Orphant key found!";
+                        }
+                    }
+                }
+                if (!segments.segmentsHash.hasOwnProperty(segments.startSegmentKey) || !segments.segmentsHash.hasOwnProperty(segments.endSegmentKey)) {
+                    result = "Start or end values are missing!";
+                }
+                for (var key in segments.nextKeys) {
+                    if (segments.nextKeys.hasOwnProperty(key)) {
+                        if (!segments.segmentsHash.hasOwnProperty(key) || !segments.prevKeys.hasOwnProperty(key)) {
+                            result = "Orphant key found!";
+                        }
+                        var nextKey = segments.nextKeys[key];
+                        if (nextKey && !segments.nextKeys.hasOwnProperty(nextKey)) {
+                            result = "Next key not found!";
+                        }
+                    }
+                }
+                for (var key in segments.prevKeys) {
+                    if (segments.prevKeys.hasOwnProperty(key)) {
+                        if (!segments.segmentsHash.hasOwnProperty(key) || !segments.nextKeys.hasOwnProperty(key)) {
+                            result = "Orphant key found!";
+                        }
+                        var prevKey = segments.prevKeys[key];
+                        if (prevKey && !segments.prevKeys.hasOwnProperty(prevKey)) {
+                            result = "Prev key not found!";
+                        }
+                    }
+                }
+                return result;
+            };
+
+            var points = [
+                new primitives.common.Point(0, 0),
+                new primitives.common.Point(10, 0),
+                new primitives.common.Point(20, 0),
+                new primitives.common.Point(0, 10),
+                new primitives.common.Point(10, 10),
+                new primitives.common.Point(20, 10),
+                new primitives.common.Point(0, 20),
+                new primitives.common.Point(10, 20),
+                new primitives.common.Point(20, 20)
+            ];
+            var perimeters = [
+                new primitives.common.perimeter.Item(1, [
+                    new primitives.common.perimeter.SegmentItem(points[0], points[3]),
+                    new primitives.common.perimeter.SegmentItem(points[3], points[4]),
+                    new primitives.common.perimeter.SegmentItem(points[4], points[1]),
+                    new primitives.common.perimeter.SegmentItem(points[1], points[0])
+                ]),
+                new primitives.common.perimeter.Item(2, [
+                    new primitives.common.perimeter.SegmentItem(points[1], points[4]),
+                    new primitives.common.perimeter.SegmentItem(points[4], points[5]),
+                    new primitives.common.perimeter.SegmentItem(points[5], points[2]),
+                    new primitives.common.perimeter.SegmentItem(points[2], points[1])
+                ]),
+                new primitives.common.perimeter.Item(3, [
+                    new primitives.common.perimeter.SegmentItem(points[4], points[3]),
+                    new primitives.common.perimeter.SegmentItem(points[3], points[6]),
+                    new primitives.common.perimeter.SegmentItem(points[6], points[7]),
+                    new primitives.common.perimeter.SegmentItem(points[7], points[4])
+                ]),
+                new primitives.common.perimeter.Item(4, [
+                    new primitives.common.perimeter.SegmentItem(points[8], points[5]),
+                    new primitives.common.perimeter.SegmentItem(points[5], points[4]),
+                    new primitives.common.perimeter.SegmentItem(points[4], points[7]),
+                    new primitives.common.perimeter.SegmentItem(points[7], points[8])
+                ])
+            ];
+
+            var expectedResult = new primitives.common.perimeter.Item(1, [
+                    new primitives.common.perimeter.SegmentItem(points[0], points[3]),
+                    new primitives.common.perimeter.SegmentItem(points[3], points[6]),
+                    new primitives.common.perimeter.SegmentItem(points[6], points[7]),
+                    new primitives.common.perimeter.SegmentItem(points[7], points[8]),
+                    new primitives.common.perimeter.SegmentItem(points[8], points[5]),
+                    new primitives.common.perimeter.SegmentItem(points[5], points[2]),
+                    new primitives.common.perimeter.SegmentItem(points[2], points[1]),
+                    new primitives.common.perimeter.SegmentItem(points[1], points[0])
+            ]);
+
+            var manager = new primitives.common.perimeter.Manager(perimeters);
+
+            var results = manager.getMergedPerimeters([1, 2, 3, 4]);
+
+            var validationResult = validate(results[0].segments);
+            assert.ok(validationResult == null, "Structure passed validation. " + (validationResult == null || validationResult));
+
+            assert.ok(results.length == 1 && primitives.common.compareArrays(expectedResult.segments.toArray(), results[0].segments.toArray(), function (item) {
+                return item.key;
+            }), "Manager merged 4 square perimeters into one as expected. Passed!");
+
+            var perimeters2 = [
+                new primitives.common.perimeter.Item(1, [
+                    new primitives.common.perimeter.SegmentItem(points[0], points[3]),
+                    new primitives.common.perimeter.SegmentItem(points[3], points[6]),
+                    new primitives.common.perimeter.SegmentItem(points[6], points[7]),
+                    new primitives.common.perimeter.SegmentItem(points[7], points[4]),
+                    new primitives.common.perimeter.SegmentItem(points[4], points[1]),
+                    new primitives.common.perimeter.SegmentItem(points[1], points[0])
+                ]),
+                new primitives.common.perimeter.Item(2, [
+                    new primitives.common.perimeter.SegmentItem(points[1], points[4]),
+                    new primitives.common.perimeter.SegmentItem(points[4], points[7]),
+                    new primitives.common.perimeter.SegmentItem(points[7], points[8]),
+                    new primitives.common.perimeter.SegmentItem(points[8], points[5]),
+                    new primitives.common.perimeter.SegmentItem(points[5], points[2]),
+                    new primitives.common.perimeter.SegmentItem(points[2], points[1])
+                ])
+            ];
+
+            var expectedResult2 = new primitives.common.perimeter.Item(1, [
+                    new primitives.common.perimeter.SegmentItem(points[0], points[3]),
+                    new primitives.common.perimeter.SegmentItem(points[3], points[6]),
+                    new primitives.common.perimeter.SegmentItem(points[6], points[7]),
+                    new primitives.common.perimeter.SegmentItem(points[7], points[8]),
+                    new primitives.common.perimeter.SegmentItem(points[8], points[5]),
+                    new primitives.common.perimeter.SegmentItem(points[5], points[2]),
+                    new primitives.common.perimeter.SegmentItem(points[2], points[1]),
+                    new primitives.common.perimeter.SegmentItem(points[1], points[0])
+            ]);
+
+            var manager2 = new primitives.common.perimeter.Manager(perimeters2);
+
+            var results2 = manager2.getMergedPerimeters([1, 2]);
+
+            var validationResult = validate(results2[0].segments);
+            assert.ok(validationResult == null, "Structure passed validation. " + (validationResult == null || validationResult));
+
+            assert.ok(results.length == 1 && primitives.common.compareArrays(expectedResult2.segments.toArray(), results2[0].segments.toArray(), function (item) {
+                return item.key;
+            }), "Manager merged rectangular perimeters into one as expected. Passed!");
+        });
+
+        QUnit.test("primitives.common.tree -  Closure based tree data structure.", function (assert) {
+            var items = [
+                { id: 0, parent: null, name: "0" },
+                { id: 1, parent: 0, name: "1" },
+                { id: 2, parent: 1, name: "2" },
+                { id: 3, parent: 1, name: "3" },
+                { id: 4, parent: 0, name: "4" },
+                { id: 5, parent: 4, name: "5" },
+                { id: 6, parent: 4, name: "6" },
+                { id: 7, parent: 6, name: "6" },
+                { id: 8, parent: 7, name: "8" },
+                { id: 9, parent: 3, name: "9" },
+                { id: 10, parent: 9, name: "10" }
+            ];
+
+            var tree = primitives.common.tree();
+            assert.ok(tree.hasNodes() == false, "hasNodes returns false for empty tree.");
+
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                tree.add(item.parent, item.id, item);
+            }
+
+            assert.ok(tree.hasNodes() == true, "hasNodes returns true for non-empty tree.");
+
+            var postOrderSequence = [];
+            tree.loopPostOrder(this, function (nodeid, node, parentid, parent) {
+                postOrderSequence.push(nodeid);
+            });
+            var expectedChildren = [2, 10, 9, 3, 1, 5, 8, 7, 6, 4, 0];
+            assert.ok(JSON.stringify(postOrderSequence) == JSON.stringify(expectedChildren), "Post order sequence: " + JSON.stringify(postOrderSequence));
+
+            var preOrderSequence = [];
+            tree.loopPreOrder(this, function (nodeid, node) {
+                preOrderSequence.push(nodeid);
+            });
+            var expectedChildren = [0, 1, 2, 3, 9, 10, 4, 5, 6, 7, 8];
+            assert.ok(JSON.stringify(preOrderSequence) == JSON.stringify(expectedChildren), "Pre order sequence: " + JSON.stringify(preOrderSequence));
+
+            var pairs = [];
+            tree.zipUp(this, 8, 10, function (firstNodeId, firstParentId, secondNodeid, secondParentId) {
+                pairs.push([firstNodeId, secondNodeid]);
+            });
+            var expectedPairs = [[8, 10], [7, 9], [6, 3], [4, 1]];
+            assert.ok(JSON.stringify(pairs) == JSON.stringify(expectedPairs), "Function zipUp should return pairs of parent items up to the root including initial items: " + JSON.stringify(expectedPairs));
+
+
+            var parents = [];
+            tree.loopParents(this, 8, function (parentid, parent) {
+                parents.push(parentid);
+            });
+            
+            var expectedItems = [7, 6, 4, 0];
+            assert.ok(JSON.stringify(parents) == JSON.stringify(expectedItems), "Function loopParents should return parent items up to the root: " + JSON.stringify(expectedItems));
+
+            var rootItems = [];
+            tree.loopLevels(this, function (nodeid, node, levelid) {
+                if (levelid > 0) {
+                    return tree.BREAK;
+                }
+                rootItems.push(nodeid);
+            });
+            assert.ok(JSON.stringify(rootItems) == JSON.stringify([0]), "Function loopLevels should break loop on BREAK.");
+
+            var levels = [];
+            tree.loopLevels(this, function (nodeid, node, levelid) {
+                if (levels[levelid] == null) {
+                    levels[levelid] = [nodeid];
+                } else {
+                    levels[levelid].push(nodeid);
+                }
+            });
+
+            var expectedLevels = [[0], [1, 4], [2, 3, 5, 6], [9, 7], [10, 8]];
+            assert.ok(JSON.stringify(levels) == JSON.stringify(expectedLevels), "Function loopLevels should return 5 levels: " + JSON.stringify(expectedLevels));
+
+            assert.ok(tree.parent(0) == null, "Parent of 0 item is null.");
+            assert.ok(tree.node(100) == null, "Node 100 does not exists.");
+            assert.ok(tree.parent(6).id == 4, "Parent of item 6 is 4.");
+
+
+            var children = [];
+            tree.loopChildren(this, 4, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            assert.ok(JSON.stringify(children) == JSON.stringify([5, 6]), "Function loopChildren for item 4 should return:" + JSON.stringify([5, 6]));
+
+            tree.adopt(3, 10);
+            var children = [];
+            tree.loopChildren(this, 3, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [9, 10];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Item 3 should contain adopted item 10: " + JSON.stringify(expectedChildren));
+
+            var children = [];
+            tree.loopChildren(this, 9, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Item 9 should have no children: " + JSON.stringify(expectedChildren));
+
+            var items = [
+                { id: 1, name: "1" },
+                { id: 2, name: "2" },
+                { id: 3, name: "3" },
+                { id: 4, parent: 100, name: "4" },
+                { id: 5, parent: 101, name: "5" },
+                { id: 6, parent: 102, name: "6" },
+                { id: 7, parent: 4, name: "7" },
+                { id: 8, parent: 5, name: "8" },
+                { id: 9, parent: 6, name: "9" },
+                { id: 10, parent: 7, name: "10" },
+                { id: 11, parent: 8, name: "11" },
+                { id: 12, parent: 9, name: "12" }
+            ];
+
+            var tree2 = primitives.common.tree();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                tree2.add(item.parent, item.id, item);
+            }
+
+            var nodes = [];
+            tree2.loopLevels(this, function (nodeid, node, levelIndex) {
+                if (nodeid != 1) {
+                    nodes.push(nodeid);
+                }
+            });
+
+            for (var index = 0; index < nodes.length; index += 1) {
+                var itemid = nodes[index];
+                tree2.adopt(1, itemid);
+            }
+            
+            var children = [];
+            tree2.loopChildren(this, 1, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [4, 5, 6, 2, 3, 7, 8, 9, 10, 11, 12];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Item 1 should have adopted all children: " + JSON.stringify(children));
+
+            var children = [];
+            tree2.loopChildrenRange(this, 1, 3, 8, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [2, 3, 7, 8, 9, 10];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Item 1 children in range from 3 to 8 should have following children: " + JSON.stringify(children));
+
+            var children = [];
+            tree2.loopChildrenRange(this, 1, 8, 3, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [10, 9, 8, 7, 3, 2];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Item 1 children in range from 8 to 3 should have following children: " + JSON.stringify(children));
+
+            var children = [];
+            tree2.loopChildrenRange(this, 1, 8, 100, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [10, 11, 12];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Item 1 children in range from 8 to 100 should have following children: " + JSON.stringify(children));
+
+            var children = [];
+            tree2.loopChildrenRange(this, 1, 3, -1, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [2, 6, 5, 4];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Item 1 children in range from 3 to -1 should have following children: " + JSON.stringify(children));
+
+            var children = [];
+            tree2.loopChildrenReversed(this, 1, function (nodeid, node) {
+                children.push(nodeid);
+            });
+            var expectedChildren = [12, 11, 10, 9, 8, 7, 3, 2, 6, 5, 4];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "Reversed children of item 1: " + JSON.stringify(children));
+
+            var items = [
+                { id: 1 },
+                { id: 2, parent: 1 },
+                { id: 3, parent: 1 },
+                { id: 4, parent: 1 }
+            ];
+
+            var tree = primitives.common.tree();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                tree.add(item.parent, item.id, item);
+            }
+
+            assert.ok(tree.getChild(1, 0).id == 2, "getChild returns node 2 for parent 1 at 0 position.");
+            assert.ok(tree.getChild(1, 2).id == 4, "getChild returns node 4 for parent 1 at 2 position.");
+            assert.ok(tree.getChild(1, 3) == null, "getChild returns null child for parent 1 at 3 position.");
+
+            tree.insert(1, 100, {});
+            tree.insert(4, 400, {});
+
+            var children = [];
+            tree.loopLevels(this, function (nodeid, node, level) {
+                if (children[level] == null) {
+                    children[level] = { level: level, items: [] };
+                }
+                children[level].items.push({ id: nodeid, parent: tree.parentid(nodeid) });
+            });
+            var expectedChildren = [{ "level": 0, "items": [{ "id": 1, "parent": null }] },
+                { "level": 1, "items": [{ "id": 100, "parent": 1 }] },
+                { "level": 2, "items": [{ "id": 2, "parent": 100 }, { "id": 3, "parent": 100 }, { "id": 4, "parent": 100 }] },
+                { "level": 3, "items": [{ "id": 400, "parent": 4 }] }
+            ];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "insert function should change tree to the following 3 level structure: " + JSON.stringify(children));
+
+            var items = [
+                { id: 1 },
+                { id: 10 },
+                { id: 2, parent: 1 },
+                { id: 3, parent: 1 },
+                { id: 4, parent: 1 },
+                { id: 11, parent: 10 },
+                { id: 12, parent: 10 }
+            ];
+
+            var tree = primitives.common.tree();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                tree.add(item.parent, item.id, item);
+            }
+
+            tree.moveChildren(1, 10);
+
+            var children = [];
+            tree.loopLevels(this, function (nodeid, node, level) {
+                if (children[level] == null) {
+                    children[level] = { level: level, items: [] };
+                }
+                children[level].items.push({ id: nodeid, parent: tree.parentid(nodeid) });
+            });
+            var expectedChildren = [{ "level": 0, "items": [{ "id": 1, "parent": null }, { "id": 10, "parent": null }] },
+                { "level": 1, "items": [{ "id": 11, "parent": 10 }, { "id": 12, "parent": 10 }, { "id": 2, "parent": 10 }, { "id": 3, "parent": 10 }, { "id": 4, "parent": 10 }] }
+            ];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "insert function should change tree to the following 3 level structure: " + JSON.stringify(children));
+        });
+
+        QUnit.test("primitives.common.family -  Closure based family data structure.", function (assert) {
+
+            var items = [
+                { id: 1, name: "1" },
+                { id: 2, name: "2" },
+                { id: 3, name: "3" },
+                { id: 4, parents: [1, 2, 3], name: "4" },
+                { id: 5, parents: [1, 2, 3], name: "5" },
+                { id: 6, parents: [4], name: "6" },
+                { id: 7, parents: [4, 5], name: "7" },
+                { id: 8, parents: [5], name: "8" },
+                { id: 9, parents: [6], name: "9" },
+                { id: 10, parents: [7], name: "10" },
+                { id: 11, parents: [8], name: "11" }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var topoSorted = [];
+            family.loopTopo(this, function (itemid, item, position) {
+                topoSorted.push(itemid);
+            });
+
+            var expectedTopoSorted = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
+            var isValid = JSON.stringify(topoSorted) == JSON.stringify(expectedTopoSorted) && family.validate();
+            assert.ok(isValid, "Function loopTopo returned following items: " + JSON.stringify(topoSorted) + (isValid ? "" : " but returned " + JSON.stringify(topoSorted)));
+
+            var topoSorted = [];
+            family.loopTopoReversed(this, function (itemid, item, position) {
+                topoSorted.push(itemid);
+            });
+
+            var expectedTopoSorted = ["9", "10", "11", "6", "7", "8", "4", "5", "1", "2", "3"];
+            var isValid = JSON.stringify(topoSorted) == JSON.stringify(expectedTopoSorted) && family.validate();
+            assert.ok(isValid, "Function loopTopoReveresed should return following items: " + JSON.stringify(expectedTopoSorted) + (isValid ? "" : " but returned " + JSON.stringify(topoSorted)));
+
+
+            var levels = [];
+            family.loopChildren(this, 4, function (itemid, item, level) {
+                levels[level] = levels[level] || [];
+                levels[level].push(itemid);
+            });
+
+            var expected = [["6", "7"], ["9", "10"]];
+            var isValid = JSON.stringify(levels) == JSON.stringify(expected) && family.validate();
+            assert.ok(isValid, "Function loopChildren for item 4 should return: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(levels)));
+
+            var levels = [];
+            family.loopParents(this, 11, function (itemid, item, level) {
+                levels[level] = levels[level] || [];
+                levels[level].push(itemid);
+            });
+            var expected = [["8"], ["5"], ["1", "2", "3"]];
+            var isValid = JSON.stringify(levels) == JSON.stringify(expected) && family.validate();
+            assert.ok(isValid, "Function loopParents for item 11 should return following items: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(levels)));
+
+            assert.ok(family.node(100) == null, "Node 100 does not exists.");
+            assert.ok(family.node(6).name == "6", "Item 6 has name 6.");
+
+            assert.ok(family.hasCommonChild([4, 5]), "Items 4 and 5 have common child.");
+            assert.ok(!family.hasCommonChild([2, 3]), "Items 2 and 3 have no common child, because they are not unique parents for exisiting shared child.");
+            assert.ok(!family.hasCommonChild([10, 11]), "Items 10 and 11 have no common or any child.");
+
+
+            var bundleItem1 = { id: 12, name: "12" }
+            family.bundleParents(4, [2, 3], bundleItem1.id, bundleItem1);
+
+            var bundleItem2 = { id: 13, name: "13" }
+            family.bundleChildren(5, [7, 8], bundleItem2.id, bundleItem2);
+
+            var levels = [];
+            family.loopLevels(this, true, function (itemid, item, level) {
+                levels[level] = levels[level] || [];
+                levels[level].push(itemid);
+            });
+            var expected = [["1", "3", "2"], ["5", "12"], ["13", "4"], ["8", "6", "7"], ["11", "9", "10"]];
+            var isValid = JSON.stringify(levels) == JSON.stringify(expected) && family.validate();
+            assert.ok(isValid, "Function loopLevels top aligned should return following items: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(levels)));
+
+            var items2 = [
+                { id: 1, name: "1" },
+                { id: 2, name: "2" },
+                { id: 3, name: "3", parents: [2] },
+                { id: 4, name: "4", parents: [1, 3] },
+                { id: 5, name: "5", parents: [4, 9] },
+                { id: 6, name: "6", parents: [5] },
+                { id: 7, name: "7", parents: [6, 8] },
+                { id: 8, name: "8", parents: [4] },
+                { id: 9, name: "9" }
+            ];
+
+            var family2 = primitives.common.family();
+            for (var index = 0; index < items2.length; index += 1) {
+                var item = items2[index];
+                family2.add(item.parents, item.id, item);
+            }
+
+            var levels = [];
+            family2.loopLevels(this, true, function (itemid, item, level) {
+                levels[level] = levels[level] || [];
+                levels[level].push(itemid);
+            });
+            var expectedLevels = [["2"], ["1", "3"], ["4", "9"], ["5", "8"], ["6"], ["7"]];
+            assert.ok(JSON.stringify(levels) == JSON.stringify(expectedLevels), "Function loopLevels top aligned should return following items: " + JSON.stringify(levels));
+
+
+            var items3 = [
+                { id: 1, name: "1" },
+                { id: 2, name: "2" },
+                { id: 3, name: "3", parents: [1] },
+                { id: 4, name: "4", parents: [1, 2] },
+                { id: 5, name: "5", parents: [2] },
+                { id: 6, name: "6", parents: [3] },
+                { id: 7, name: "7", parents: [5] },
+                { id: 8, name: "8", parents: [6] },
+                { id: 9, name: "9", parents: [7] },
+                { id: 10, name: "10", parents: [8] },
+                { id: 11, name: "11", parents: [10] },
+                { id: 12, name: "12", parents: [4] },
+                { id: 13, name: "13", parents: [11, 12] },
+                { id: 14, name: "14", parents: [12, 15] },
+                { id: 15, name: "15", parents: [9] },
+                { id: 16, name: "16", parents: [12] },
+                { id: 17, name: "17", parents: [16] },
+                { id: 18, name: "18", parents: [17] }
+            ];
+
+            var family3 = primitives.common.family();
+            for (var index = 0; index < items3.length; index += 1) {
+                var item = items3[index];
+                family3.add(item.parents, item.id, item);
+            }
+
+            var levels = [];
+            family3.loopLevels(this, true, function (itemid, item, level) {
+                levels[level] = levels[level] || [];
+                levels[level].push(itemid);
+            });
+            var expectedLevels = [["1", "2"], ["3", "4", "5"], ["6", "12", "7"], ["8", "16", "9"], ["10", "17", "15"], ["11", "18", "14"], ["13"]];
+            assert.ok(JSON.stringify(levels) == JSON.stringify(expectedLevels), "Function loopLevels top aligned should return following items: " + JSON.stringify(levels));
+
+            var levels = [];
+            family3 = family3.clone();
+            family3.loopLevels(this, false, function (itemid, item, level) {
+                levels[level] = levels[level] || [];
+                levels[level].push(itemid);
+            });
+
+            var expected = [["1"], ["3", "2"], ["6", "5"], ["8", "7"], ["10", "9", "4"], ["11", "12", "15"], ["13", "16", "14"], ["17"], ["18"]];
+            var isValid = JSON.stringify(levels) == JSON.stringify(expected);
+            assert.ok(isValid, "Function loopLevels should return following items for cloned family: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(levels)));
+
+        });
+
+        QUnit.test("primitives.common.family.loopTopo -  Family structure topological sorting.", function (assert) {
+
+            var items = [
+                { id: "D", name: "D" },
+                { id: "C", name: "C", parents: ["D"] },
+                { id: "F", name: "F", parents: ["D"] },
+                { id: "B", name: "B", parents: ["C", "F"] },
+                { id: "E", name: "E", parents: ["C", "F"] },
+                { id: "A", name: "A", parents: ["B", "E"] }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var topoSorted = [];
+            family.loopTopo(this, function (itemid, item, position) {
+                topoSorted.push(itemid);
+            });
+
+            var expectedTopoSorted = ["D", "C", "F", "B", "E", "A"];
+            var isValid = JSON.stringify(topoSorted) == JSON.stringify(expectedTopoSorted) && family.validate();
+            assert.ok(isValid, "Function loopTopo returned following items: " + JSON.stringify(expectedTopoSorted) + (isValid ? "" : " but returned " + JSON.stringify(topoSorted)));
+
+
+            var items = [
+                { id: "A", name: "A" },
+                { id: "A2", name: "A2" },
+                { id: "C", name: "C", parents: ["B"] },
+                { id: "B", name: "B", parents: ["A"] },
+                { id: "C2", name: "C2", parents: ["B2"] },
+                { id: "B2", name: "B2", parents: ["A2"] },
+                { id: "G", name: "G", parents: ["B", "A", "B2", "A2"] }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var topoSorted = [];
+            family.loopTopo(this, function (itemid, item, position) {
+                topoSorted.push(itemid);
+            });
+
+            var expectedTopoSorted = ["A", "A2", "B", "B2", "C", "C2", "G"];
+            var isValid = JSON.stringify(topoSorted) == JSON.stringify(expectedTopoSorted) && family.validate();
+            assert.ok(isValid, "Function loopTopo returned following items: " + JSON.stringify(expectedTopoSorted) + (isValid ? "" : " but returned " + JSON.stringify(topoSorted)));
+
+
+
+            var items = [
+                { id: "A", name: "A" },
+                { id: "A2", name: "A2" },
+                { id: "C", name: "C", parents: ["B"] },
+                { id: "B", name: "B", parents: ["A"] },
+                { id: "C2", name: "C2", parents: ["B2"] },
+                { id: "B2", name: "B2", parents: ["A2"] }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var topoSorted = [];
+            family.loopTopo(this, function (itemid, item, position) {
+                topoSorted.push(itemid);
+            });
+
+            var expectedTopoSorted = ["A", "A2", "B", "B2", "C", "C2"];
+            var isValid = JSON.stringify(topoSorted) == JSON.stringify(expectedTopoSorted) && family.validate();
+            assert.ok(isValid, "Two clusters. Function loopTopo returned following items: " + JSON.stringify(expectedTopoSorted) + (isValid ? "" : " but returned " + JSON.stringify(topoSorted)));
+        });
+
+        QUnit.test("primitives.common.graph -  Closure based graph data structure.", function (assert) {
+            var items = [
+                { from: 1, to: 2, weight: 1 },
+                { from: 1, to: 3, weight: 1 },
+                { from: 1, to: 5, weight: 2 },
+                { from: 2, to: 3, weight: 3 },
+                { from: 3, to: 4, weight: 1 },
+                { from: 3, to: 5, weight: 2 },
+                { from: 4, to: 5, weight: 1 }
+            ];
+
+            var graph = primitives.common.graph();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                graph.addEdge(item.from, item.to, item);
+            }
+
+            var tree = graph.getSpanningTree(items[0].from, function (edge1, edge2) {
+                return edge1.weight - edge2.weight;
+            })
+
+            var children = [];
+            tree.loopLevels(this, function (nodeid, node, level) {
+                if (children[level] == null) {
+                    children[level] = {level: level, items: []};
+                }
+                children[level].items.push({ id: nodeid, parent: tree.parentid(nodeid) });
+            });
+            var expectedChildren = [{ "level": 0, "items": [{ "id": "1", "parent": null }] }, { "level": 1, "items": [{ "id": "5", "parent": "1" }] }, { "level": 2, "items": [{ "id": "3", "parent": "5" }, { "id": "4", "parent": "5" }] }, { "level": 3, "items": [{ "id": "2", "parent": "3" }] }];
+            assert.ok(JSON.stringify(children) == JSON.stringify(expectedChildren), "getSpanningTree function should return following tree: " + JSON.stringify(children));
+
+            var sequence = graph.getGrowthSequence(function (edge) {
+                return edge.weight;
+            })
+            var expectedsequence = ["3", "2", "1", "5", "4"];
+            assert.ok(JSON.stringify(sequence) == JSON.stringify(expectedsequence), "getGrowthSequence function should return following tree: " + JSON.stringify(sequence));
+
+
+            var items = [
+                { from: 'A', to: 'B' }, { from: 'A', to: 'C' }, { from: 'A', to: 'D' },
+                { from: 'B', to: 'E' },
+                { from: 'C', to: 'E', weight: 100 }, { from: 'C', to: 'D', weight: 100 },
+                { from: 'D', to: 'F', weight: 50 }, { from: 'D', to: 'J' },
+                { from: 'E', to: 'F', weight: 100 },
+                { from: 'J', to: 'D' }
+            ];
+
+            var graph = primitives.common.graph();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                graph.addEdge(item.from, item.to, item);
+            }
+
+            var expectedConnectionPath = ['J', 'D', 'C', 'E'];
+
+            var connectionPath = graph.getShortestPath('E', 'J');
+
+            assert.ok(expectedConnectionPath.join(',') == connectionPath.join(','), "Not weighted edges. Passed!");
+
+            expectedConnectionPath = ['J', 'D', 'A', 'B', 'E'];
+
+            connectionPath = graph.getShortestPath('E', 'J', function (edge, fromItem, toItem) {
+                return edge.weight || 1;
+            });
+
+            assert.ok(expectedConnectionPath.join(',') == connectionPath.join(','), "Weighted edges. Passed!");
+
+        });
+
+        QUnit.test("primitives.common.family.optimizeReferences - Common nodes grouping into bundle for family visual redability. Check that targets stay the same after groupping of common targets between nodes of layer.", function (assert) {
+            function testOptimizedItems(sourceItems, family) {
+                var result = true;
+
+                for (var key in sourceItems) {
+                    var sourceChildren = sourceItems[key];
+
+                    var resultChildren = [];
+                    var resultHash = {};
+                    family.loopChildren(this, key, function (itemid, item, levelIndex) {
+                        if (!item.isBundle && !resultHash.hasOwnProperty(itemid)) {
+                            resultHash[itemid] = true;
+                            resultChildren.push(itemid);
+                        }
+                    });
+
+                    sourceChildren.sort();
+                    resultChildren.sort();
+
+                    if (sourceChildren.join(',') != resultChildren.join(',')) {
+                        var result = false;
+                        break;
+                    }
+                }
+
+                return result;
+            };
+
+            function getOptimizedFamily(sourceItems) {
+                var maximum = 100;
+                var family = primitives.common.family();
+
+                var children = {};
+
+                for (var parent in sourceItems) {
+                    var items = sourceItems[parent];
+                    for (var index = 0; index < items.length; index += 1) {
+                        if (!children.hasOwnProperty(items[index])) {
+                            children[items[index]] = [];
+                        }
+                        children[items[index]].push(parent);
+                    }
+                }
+
+                for (var child in children) {
+                    family.add(children[child], child, {});
+                }
+
+                for (var parent in sourceItems) {
+                    if (children[parent] == null)
+                        family.add(null, parent, {});
+                }
+
+                family.optimizeReferences(function () {
+                    maximum += 1;
+                    return { id: maximum, isBundle: true };
+                });
+
+                return family;
+            }
+
+            function getLevels(family) {
+                var levels = [];
+                family.loopLevels(this, true, function (itemid, item, level) {
+                    var newItem = { id: itemid };
+                    var children = [];
+                    family.loopChildren(this, itemid, function (itemid, item, levelIndex) {
+                        if (levelIndex > 0) {
+                            return family.BREAK;
+                        }
+                        children.push(itemid);
+                    });
+                    if (children.length > 0) {
+                        newItem.children = children;
+                    }
+                    levels.push(newItem);
+                });
+                return levels;
+            }
+
+            var sourceItems = {
+                A: [1, 2, 3, 4],
+                B: [1, 2, 3, 4],
+                C: [1, 2, 3, 4]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["101"] },
+                { "id": "C", "children": ["101"] },
+                { "id": "B", "children": ["101"] },
+                { "id": "101", "children": ["1", "2", "3", "4"] },
+                { "id": "1" }, { "id": "2" }, { "id": "3" }, { "id": "4" }
+            ];
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Full bundle 3 by 4." + JSON.stringify(levels));
+
+            var sourceItems = {
+                A: [1, 2, 3, 4],
+                B: [1, 2, 3],
+                C: [3, 4, 5]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["101", "102"] },
+                { "id": "B", "children": ["101"] },
+                { "id": "C", "children": ["5", "102"] },
+                { "id": "101", "children": ["1", "2", "3"] },
+                { "id": "102", "children": ["3", "4"] },
+                { "id": "5" }, { "id": "1" }, { "id": "2" }, { "id": "3" }, { "id": "4" }];
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Nested item and parent together overlap with 3d item." + JSON.stringify(levels));
+
+
+            var sourceItems = {
+                A: [0, 1, 2],
+                B: [1, 2, 3],
+                C: [2, 3, 4],
+                D: [3, 4, 5],
+                E: [4, 5, 6]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["0", "101"] },
+                { "id": "B", "children": ["101", "102"] },
+                { "id": "C", "children": ["102", "103"] },
+                { "id": "D", "children": ["103", "104"] },
+                { "id": "E", "children": ["6", "104"] },
+                { "id": "0" },
+                { "id": "101", "children": ["1", "2"] },
+                { "id": "102", "children": ["2", "3"] },
+                { "id": "103", "children": ["3", "4"] },
+                { "id": "104", "children": ["4", "5"] },
+                { "id": "6" }, { "id": "1" }, { "id": "2" }, { "id": "3" }, { "id": "4" }, { "id": "5" }]
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Chained 5 elements having 3 target items. Every item overlaps its neighbours with 2 shared items." + JSON.stringify(levels));
+
+            var sourceItems = {
+                A: [0, 1, 2, 3],
+                B: [2, 3, 4, 5],
+                C: [3, 4, 5, 6],
+                D: [4, 5, 6, 7]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["0", "1", "101"] },
+                { "id": "B", "children": ["101", "102"] },
+                { "id": "C", "children": ["102", "103"] },
+                { "id": "D", "children": ["7", "103"] },
+                { "id": "0" }, { "id": "1" },
+                { "id": "101", "children": ["2", "3"] },
+                { "id": "102", "children": ["3", "104"] },
+                { "id": "103", "children": ["6", "104"] },
+                { "id": "7" }, { "id": "2" }, { "id": "3" }, { "id": "6" },
+                { "id": "104", "children": ["4", "5"] },
+                { "id": "4" }, { "id": "5" }]
+
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Chained 4 elements having 4 target items. Every item overlaps its neighbours with 2 shared items." + JSON.stringify(levels));
+
+            var sourceItems = {
+                A: [1, 2, 3, 4, 5, 6, 7, 8],
+                B: [1, 2, 3, 4, 5],
+                C: [1, 2, 3, 4, 5],
+                D: [4, 5, 6, 7],
+                E: [4, 6, 7]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["8", "101", "102"] },
+                { "id": "C", "children": ["101"] },
+                { "id": "B", "children": ["101"] },
+                { "id": "D", "children": ["102"] },
+                { "id": "8" },
+                { "id": "101", "children": ["1", "2", "3", "4", "5"] },
+                { "id": "102", "children": ["5", "103"] },
+                { "id": "E", "children": ["103"] },
+                { "id": "1" }, { "id": "2" }, { "id": "3" }, { "id": "5" },
+                { "id": "103", "children": ["4", "6", "7"] },
+                { "id": "4" }, { "id": "6" }, { "id": "7" }];
+
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "One item containing all other items. Duplicates. Overlapping sub item." + JSON.stringify(levels));
+
+            var sourceItems = {
+                A: [0, 1, 2, 3, 4],
+                B: [0, 1, 2, 3],
+                C: [0, 1, 2],
+                D: [0, 1],
+                E: [0]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["4", "101"] },
+                { "id": "B", "children": ["101"] },
+                { "id": "4" },
+                { "id": "101", "children": ["3", "102"] },
+                { "id": "C", "children": ["102"] },
+                { "id": "3" },
+                { "id": "102", "children": ["2", "103"] },
+                { "id": "D", "children": ["103"] },
+                { "id": "2" },
+                { "id": "103", "children": ["0", "1"] },
+                { "id": "E", "children": ["0"] },
+                { "id": "0" }, { "id": "1" }];
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Nesting 5 items." + JSON.stringify(levels));
+
+            var sourceItems = {
+                A: [0, 1, 2, 3],
+                B: [1, 2, 3],
+                C: [2, 3, 4],
+                D: [5, 6, 7, 8],
+                E: [5, 6, 7],
+                F: [6, 7, 9]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["0", "101"] },
+                { "id": "B", "children": ["101"] },
+                { "id": "D", "children": ["8", "103"] },
+                { "id": "E", "children": ["103"] },
+                { "id": "0" },
+                { "id": "101", "children": ["1", "102"] },
+                { "id": "C", "children": ["4", "102"] },
+                { "id": "8" },
+                { "id": "103", "children": ["5", "104"] },
+                { "id": "F", "children": ["9", "104"] },
+                { "id": "1" },
+                { "id": "102", "children": ["2", "3"] },
+                { "id": "4" }, { "id": "5" },
+                { "id": "104", "children": ["6", "7"] },
+                { "id": "9" }, { "id": "2" }, { "id": "3" }, { "id": "6" }, { "id": "7" }]
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Test 2 non-connected clusters of items. All items reference the same target items via group items." + JSON.stringify(levels));
+
+            var sourceItems = {
+                A: ["B", "D", "D2"],
+                B: ["C", "D", "D2"],
+                C: [],
+                A2: ["B2", "D", "D2"],
+                B2: ["C2", "D", "D2"],
+                C2: [],
+                D: [],
+                D2: []
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["101", "B"] },
+                { "id": "A2", "children": ["101", "B2"] },
+                { "id": "B", "children": ["101", "C"] },
+                { "id": "B2", "children": ["101", "C2"] },
+                { "id": "C" },
+                { "id": "101", "children": ["D", "D2"] },
+                { "id": "C2" },
+                { "id": "D" }, { "id": "D2" }];
+            var isValid = (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Test regrouping of items belonging to several layers." + JSON.stringify(levels));
+        });
+
+        QUnit.test("primitives.common.family.adopt - Adopt existing item to multiple existing parents in structure.", function (assert) {
+            function getLevels(family) {
+                var levels = [];
+                family.loopLevels(this, true, function (itemid, item, level) {
+                    var newItem = { id: itemid };
+                    var children = [];
+                    family.loopChildren(this, itemid, function (itemid, item, levelIndex) {
+                        if (levelIndex > 0) {
+                            return family.BREAK;
+                        }
+                        children.push(itemid);
+                    });
+                    if (children.length > 0) {
+                        newItem.children = children;
+                    }
+                    levels.push(newItem);
+                });
+                return levels;
+            }
+
+            var items = [
+                { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 },
+                { id: 5 }, { id: 6, parents: [2, 3, 4] }, { id: 7 },
+                { id: 8, parents: [1, 2, 3, 4, 5, 6, 7] }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var result = [];
+            family.adopt([1, 2, 3], 5);
+
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "1", "children": ["5", "8"] },
+                { "id": "3", "children": ["5", "6", "8"] },
+                { "id": "2", "children": ["5", "6", "8"] },
+                { "id": "4", "children": ["6", "8"] },
+                { "id": "5", "children": ["8"] },
+                { "id": "6", "children": ["8"] },
+                { "id": "7", "children": ["8"] },
+                { "id": "8" }];
+            var isValid = (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Check adopted item and validate family structure." + JSON.stringify(levels));
+        });
+
+        QUnit.test("primitives.common.family - nodes and relations removal.", function (assert) {
+            function getLevels(family) {
+                var levels = [];
+                family.loopLevels(this, true, function (itemid, item, level) {
+                    var newItem = { id: itemid };
+                    var children = [];
+                    family.loopChildren(this, itemid, function (itemid, item, levelIndex) {
+                        if (levelIndex > 0) {
+                            return family.BREAK;
+                        }
+                        children.push(itemid);
+                    });
+                    if (children.length > 0) {
+                        newItem.children = children;
+                    }
+                    levels.push(newItem);
+                });
+                return levels;
+            }
+
+            var items = [
+                { id: 1 }, { id: 2 }, { id: 3 },
+                { id: 4, parents: [1, 2, 3] }, { id: 5, parents: [1, 2, 3] },
+                { id: 6, parents: [4, 5] }, { id: 7, parents: [4, 5] }, { id: 8, parents: [4, 5] }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            assert.ok(family.validate(), "Check that family is valid.");
+
+            family.removeNode(4);
+
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "1", "children": ["5"] }, { "id": "3", "children": ["5"] }, { "id": "2", "children": ["5"] },
+                { "id": "5", "children": ["6", "7", "8"] },
+                { "id": "6" }, { "id": "7" }, { "id": "8" }
+            ];
+            var isValid = (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Check item removal and validate family structure." + JSON.stringify(levels));
+
+            family.removeRelation(5, 2);
+
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "1", "children": ["5"] }, { "id": "3", "children": ["5"] }, { "id": "2" },
+                { "id": "5", "children": ["6", "7", "8"] },
+                { "id": "6" }, { "id": "7" }, { "id": "8" }
+            ];
+            var isValid = (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Check child/parent relation removal." + JSON.stringify(levels));
+
+            family.removeRelation(5, 6);
+
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "1", "children": ["5"] }, { "id": "3", "children": ["5"] }, { "id": "2" }, { "id": "6" },
+                { "id": "5", "children": ["7", "8"] },
+                { "id": "7" }, { "id": "8" }
+            ];
+            var isValid = (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Check parent/child relation removal resulting in new orphant item 6 creation." + JSON.stringify(levels));
+
+            family.removeNode(1);
+
+            var levels = getLevels(family);
+            var expectedResults = [{"id":"2"},{"id":"3","children":["5"]},{"id":"6"},{"id":"5","children":["7","8"]},{"id":"7"},{"id":"8"}];
+            var isValid = (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate();
+            assert.ok(isValid, "Check orphant 1 removal." + JSON.stringify(levels));
+        });
+
+        QUnit.test("primitives.common.family.eliminateManyToMany - This method removes Many To Many relations via adding new bundle nodes.", function (assert) {
+            var maximum = 100;
+
+            function testOptimizedItems(sourceItems, family) {
+                var result = true;
+
+                for (var key in sourceItems) {
+                    var sourceChildren = sourceItems[key];
+
+                    var resultChildren = [];
+                    family.loopChildren(this, key, function (itemid, item, levelIndex) {
+                        if (!item.isBundle) {
+                            resultChildren.push(itemid);
+                        }
+                    });
+
+                    sourceChildren.sort();
+                    resultChildren.sort();
+
+                    if (sourceChildren.join(',') != resultChildren.join(',')) {
+                        var result = false;
+                        break;
+                    }
+                }
+
+                return result;
+            };
+
+            function getOptimizedFamily(sourceItems) {
+                var family = primitives.common.family();
+
+                var children = {};
+
+                for (var parent in sourceItems) {
+                    var items = sourceItems[parent];
+                    for (var index = 0; index < items.length; index += 1) {
+                        if (!children.hasOwnProperty(items[index])) {
+                            children[items[index]] = [];
+                        }
+                        children[items[index]].push(parent);
+                    }
+                }
+
+                for (var child in children) {
+                    family.add(children[child], child, {});
+                }
+
+                for (var parent in sourceItems) {
+                    if (children[parent] == null)
+                        family.add(null, parent, {});
+                }
+
+                family.eliminateManyToMany(function () {
+                    maximum += 1;
+                    return { id: maximum, isBundle: true };
+                });
+
+                return family;
+            }
+
+            function getLevels(family) {
+                var levels = [];
+                family.loopLevels(this, true, function (itemid, item, level) {
+                    var newItem = { id: itemid };
+                    var children = [];
+                    family.loopChildren(this, itemid, function (itemid, item, levelIndex) {
+                        if (levelIndex > 0) {
+                            return family.BREAK;
+                        }
+                        children.push(itemid);
+                    });
+                    if (children.length > 0) {
+                        newItem.children = children;
+                    }
+                    levels.push(newItem);
+                });
+                return levels;
+            }
+
+            function validate(family) {
+                var result = true;
+                family.loop(this, function (itemid, item) {
+                    item.childrenLength = 0;
+                    family.loopChildren(this, itemid, function (childid, child, levelIndex) {
+                        if (levelIndex > 0) {
+                            return family.BREAK;
+                        }
+                        parent.childrenLength += 1;
+                    });
+
+                    item.parentsLength = 0;
+                    family.loopParents(this, itemid, function (parentid, parent, levelIndex) {
+                        parent.parentsLength += 1;
+                        return family.SKIP;
+                    });
+                });
+
+                family.loop(this, function (itemid, item) {
+                    if (item.childrenLength > 1) {
+                        family.loopChildren(this, itemid, function (childid, child, levelIndex) {
+                            if (levelIndex > 0) {
+                                return family.BREAK;
+                            }
+                            if (child.parentsLength > 1) {
+                                result = false;
+                            }
+                        });
+                    }
+                });
+                return result;
+            }
+
+            var sourceItems = {
+                A: [1, 2, 3],
+                B: [2, 4],
+                C: [3, 5],
+                D: [6]
+            };
+            var family = getOptimizedFamily(sourceItems);
+            var levels = getLevels(family);
+            var expectedResults = [{ "id": "A", "children": ["1", "101", "102"] },
+                { "id": "B", "children": ["4", "103"] },
+                { "id": "C", "children": ["5", "104"] },
+                { "id": "D", "children": ["6"] },
+                { "id": "1" },
+                { "id": "101", "children": ["2"] },
+                { "id": "102", "children": ["3"] },
+                { "id": "103", "children": ["2"] },
+                { "id": "4" },
+                { "id": "104", "children": ["3"] },
+                { "id": "5" }, { "id": "6" }, { "id": "2" }, { "id": "3" }
+            ];
+            var isValid = testOptimizedItems(sourceItems, family) && (JSON.stringify(levels) == JSON.stringify(expectedResults)) && family.validate() && validate(family);
+            assert.ok(isValid, "Eliminate many to many relations from family." + JSON.stringify(levels));
+        });
+
+        QUnit.test("primitives.famdiagram.Controller.prototype._fillInItems -  Eliminate gaps between levels via addding invisible items.", function (assert) {
+
+            function getLevels(family) {
+                var levels = [];
+                family.loopLevels(this, true, function (itemid, item, level) {
+                    var newItem = { id: itemid };
+                    var children = [];
+                    family.loopChildren(this, itemid, function (itemid, item, levelIndex) {
+                        if (levelIndex > 0) {
+                            return family.BREAK;
+                        }
+                        children.push(itemid);
+                    });
+                    if (children.length > 0) {
+                        newItem.children = children;
+                    }
+                    levels.push(newItem);
+                });
+                return levels;
+            }
+
+            var items = [
+                { id: 1, name: "1", level: 0 },
+                { id: 2, parents: [1], name: "2", level: 1 },
+                { id: 3, parents: [1], name: "3", level: 2 },
+                { id: 4, parents: [1], name: "4", level: 3 },
+                { id: 5, parents: [1], name: "5", level: 4 }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var maximumFamItemId = 100;
+            primitives.famdiagram.Controller.prototype._fillInItems(family, function () {
+                var result;
+
+                maximumFamItemId += 1;
+
+                result = {
+                    id: maximumFamItemId,
+                    isBundle: true
+                };
+
+                return result;
+            });
+
+            var levels = getLevels(family);
+
+            var expected = [{ "id": "1", "children": ["2", "101"] },
+                { "id": "2" },
+                { "id": "101", "children": ["3", "102"] },
+                { "id": "3" },
+                { "id": "102", "children": ["4", "103"] },
+                { "id": "4" },
+                { "id": "103", "children": ["5"] },
+                { "id": "5" }
+            ];
+            var isValid = JSON.stringify(levels) == JSON.stringify(expected) && family.validate();
+            assert.ok(isValid, "Function should add cascade of bundle items: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(levels)));
+        });
+
+        QUnit.test("primitives.common.family.findLargestRoot -  Closure based family data structure.", function (assert) {
+
+            var items = [
+                { id: 12 },
+                { id: 11, parents: [12] },
+                { id: 14 },
+                { id: 13, parents: [14] },
+                { id: 8 },
+                { id: 9, parents: [8] },
+                { id: 10, parents: [8] },
+                { id: 1 },
+                { id: 2, parents: [1, 13] },
+                { id: 3, parents: [1, 13] },
+                { id: 6, parents: [3] },
+                { id: 7, parents: [3] },
+                { id: 4, parents: [2, 11]},
+                { id: 5, parents: [2]}
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var extractionFamily = family.clone();
+            var families = [];
+            var grandParent;
+            while ((grandParent = extractionFamily.findLargestRoot()) != null) {
+                var members = [];
+                extractionFamily.removeNode(grandParent);
+                family.loopChildren(this, grandParent, function (itemid, item, levelIndex) {
+                    if (extractionFamily.node(itemid) != null) {
+                        members.push(itemid);
+                        extractionFamily.removeNode(itemid);
+                    }
+                });
+
+                families.push({ root: grandParent, members: members });
+            };
+
+            var expected = [{ "root": "14", "members": ["13", "2", "3", "4", "5", "6", "7"] },
+                { "root": "8", "members": ["9", "10"] },
+                { "root": "12", "members": ["11"] },
+                { "root": "1", "members": [] }];
+            var isValid = JSON.stringify(families) == JSON.stringify(expected) && family.validate();
+            assert.ok(isValid, "Function findLargestRoot returned following items: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(families)));
+        });
+
+        QUnit.test("primitives.common.family.loopNeighbours -  Loop neighbouring parents & children.", function (assert) {
+
+            var items = [
+                { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 },
+                { id: 5 }, { id: 6, parents: [1, 2] }, { id: 7, parents: [3, 4] }, { id: 8, parents: [4] },
+                { id: 9, parents: [5, 6, 7] }, { id: 10, parents: [6, 7] }, { id: 11, parents: [6, 7, 8] },
+                { id: 12, parents: [9] }, { id: 13, parents: [9, 10, 11] }, { id: 14, parents: [9, 10, 11] }, { id: 15, parents: [11] },
+                { id: 16, parents: [12, 13] }, { id: 17, parents: [13] }, { id: 18, parents: [14] }, { id: 19, parents: [14] }
+            ];
+
+            var family = primitives.common.family();
+            for (var index = 0; index < items.length; index += 1) {
+                var item = items[index];
+                family.add(item.parents, item.id, item);
+            }
+
+            var result = [];
+            family.loopNeighbours(this, 10, function (itemid, item, level) {
+                result.push(itemid);
+
+                return true;
+            });
+
+            var expected = ["13", "9", "10", "11", "14", "6", "7"];
+            var isValid = JSON.stringify(result) == JSON.stringify(expected) && family.validate();
+            assert.ok(isValid, "Function loopNeighbours should return following items: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(result)));
+
+            var result = [];
+            family.loopNeighbours(this, 10, function (itemid, item, level) {
+                result.push(itemid);
+
+                if (itemid != "13" && itemid != "7") {
+                    return true;
+                }
+            });
+
+            var expected = ["13", "14", "9", "10", "11", "16", "12", "17", "6", "7", "3", "4", "8"];
+            var isValid = JSON.stringify(result) == JSON.stringify(expected) && family.validate();
+            assert.ok(isValid, "Function loopNeighbours should return following items: " + JSON.stringify(expected) + (isValid ? "" : " but returned " + JSON.stringify(result)));
+        });
+
+        QUnit.test("primitives.famdiagram.EdgeItem", function (assert) {
+
+            var edge = new primitives.famdiagram.EdgeItem(1, 1, 2, 2);
+
+            assert.ok(edge.getNear(1) == 1, "Near 1 is 1");
+            assert.ok(edge.getNear(2) == 2, "Near 2 is 2");
+            assert.ok(edge.getFar(1) == 2, "Far of 1 is 2");
+            assert.ok(edge.getFar(2) == 1, "Far of 2 is 1");
+
+            edge.setNear(1, 100);
+            edge.setFar(1, 200);
+
+            assert.ok(edge.getNear(1) == 100, "Near 1 is 100");
+            assert.ok(edge.getNear(2) == 200, "Near 2 is 200");
+            assert.ok(edge.getFar(1) == 200, "Far of 1 is 200");
+            assert.ok(edge.getFar(2) == 100, "Far of 2 is 100");
+
+            edge.setNear(2, 2000);
+            edge.setFar(2, 1000);
+
+            assert.ok(edge.getNear(1) == 1000, "Near 1 is 1000");
+            assert.ok(edge.getNear(2) == 2000, "Near 2 is 2000");
+            assert.ok(edge.getFar(1) == 2000, "Far of 1 is 2000");
+            assert.ok(edge.getFar(2) == 1000, "Far of 2 is 1000");
+        });
+    </script>
+</body>
+</html>
