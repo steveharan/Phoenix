@@ -19,6 +19,7 @@
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.openEditDialog = openEditDialog;
+        $scope.deleteFamily = deleteFamily;
 
         $scope.showTableFormat = false;
 
@@ -44,6 +45,23 @@
             familiesLoadFailed);
         }
 
+        function deleteFamilyCompleted(response) {
+            notificationService.displaySuccess('The family has been updated');
+            clearSearch();
+        }
+
+        function updateFamilyLoadFailed(response) {
+            console.log(response);
+            notificationService.displayError(response.data);
+        }
+
+        function deleteFamily(family) {
+            console.log('Delete family');
+            apiService.post('/api/families/delete/', family,
+                        deleteFamilyCompleted,
+                        deleteFamilyCompleted);
+        }
+
         function openEditDialog(family) {
             console.log('Editing...');
             console.log(family);
@@ -63,6 +81,7 @@
             }).result.then(function ($scope) {
                 clearSearch();
             }, function () {
+                clearSearch();
             });
         }
 

@@ -63,6 +63,7 @@
             }).result.then(function ($scope) {
                 clearSearch();
             }, function () {
+                clearSearch();
             });
         }
 

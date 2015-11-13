@@ -125,6 +125,40 @@ namespace Phoenix.Web.Controllers
                 return response;
             });
         }
+
+        [HttpPost]
+        [Route("delete")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, FamilyViewModel family)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest,
+                        ModelState.Keys.SelectMany(k => ModelState[k].Errors)
+                              .Select(m => m.ErrorMessage).ToArray());
+                }
+                else
+                {
+                    var familyDb = _familyRepository.GetSingle(family.ID);
+                    if (familyDb == null)
+                        response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid family.");
+                    else
+                    {
+                        familyDb.UpdateFamily(family);
+                        _familyRepository.Delete(familyDb);
+
+                        _unitOfWork.Commit();
+                        response = request.CreateResponse<FamilyViewModel>(HttpStatusCode.OK, family);
+                    }
+                }
+
+                return response;
+            });
+        }
+
         [HttpPost]
         [Route("create")]
         public HttpResponseMessage Create(HttpRequestMessage request, FamilyViewModel family)
