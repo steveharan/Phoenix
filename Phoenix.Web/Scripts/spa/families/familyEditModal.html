@@ -1,0 +1,62 @@
+﻿
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{addOrEdit}} {{EditedFamily.FamilyName}} Family
+    </div>
+    <div class="panel-body">
+        <form role="form" novalidate angular-validator name="addFamilyForm" angular-validator-submit="Register()">
+            <div class="">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="control-label" for="firstName">Family Name</label>
+                            <input type="text" class="form-control" ng-model="EditedFamily.FamilyName" name="firstName" id="firstName" placeholder="Family Name"
+                                   validate-on="blur" required required-message="'Family Name is required'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6 selectContainer">
+                            <label class="control-label" for="firstRegisteredDate">Date First Registered</label>
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="firstRegisteredDate" datepicker-popup="{{format}}" ng-model="EditedFamily.FirstRegisteredDate" is-open="datepicker.opened"
+                                       datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                       validate-on="blur" required required-message="'Registered Date is required'" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="col-xs-6 selectContainer">
+                            <label class="control-label" for="Notes">Notes</label>
+                            <input type="text" class="form-control" ng-model="EditedFamily.Notes" id="notes" name="notes" placeholder="General Notes"
+                                   validate-on="blur" required required-message="'Notes are required'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label class="control-label" for="primaryEthnicity">Primary Ethnicity</label>
+                            <input type="text" ng-model="EditedFamily.PrimaryEthnicity" class="form-control" id="primaryEthnicity" name="primaryEthnicity" placeholder="Primary Ethnicity"
+                                   validate-on="blur" required required-message="'Primary Ethnicity is required'">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label" for="primaryEthnicity">Primary Race</label>
+                            <input type="text" ng-model="EditedFamily.PrimaryRace" class="form-control" id="primaryRace" name="primaryRace" placeholder="Primary Race"
+                                   validate-on="blur" required required-message="'Primary Race is required'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
+            <button type="button" class="btn btn-primary" ng-click="updateFamily()">Update</button>
+        </div>
+    </div>
+</div>

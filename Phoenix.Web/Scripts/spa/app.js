@@ -16,10 +16,10 @@
                 templateUrl: "scripts/spa/account/login.html",
                 controller: "loginCtrl"
             })
-            //.when("/register", {
-            //    templateUrl: "scripts/spa/account/register.html",
-            //    controller: "registerCtrl"
-            //})
+            .when("/register", {
+                templateUrl: "scripts/spa/account/register.html",
+                controller: "registerCtrl"
+            })
             .when("/customers", {
                 templateUrl: "scripts/spa/customers/customers.html",
                 controller: "customersCtrl"
@@ -50,6 +50,10 @@
             .when("/rental", {
                 templateUrl: "scripts/spa/rental/rental.html",
                 controller: "rentStatsCtrl"
+            })
+            .when("/families", {
+                templateUrl: "scripts/spa/families/families.html",
+                controller: "familiesCtrl"
             }).otherwise({ redirectTo: "/" });
     }
 

@@ -81,7 +81,7 @@ C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\Newtonsoft.Json.xml
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\System.Net.Http.Formatting.xml
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\System.Web.Http.xml
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.csprojResolveAssemblyReference.cache
-C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.initial_migration.resources
+C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.Initial.resources
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.csproj.GenerateResource.Cache
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.dll
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.pdb

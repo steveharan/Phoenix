@@ -1,0 +1,91 @@
+﻿<style>
+    .selected {
+        background-color: dodgerblue;
+        color: white;
+    }
+</style>
+<hr />
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Families</h3>
+            <div class="input-group">
+                <input id="inputSearchFamilies" type="search" ng-model="filterFamilies" class="form-control shortInputSearch" placeholder="Filter, search families..">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                </div>
+
+            </div>
+            <div class="text-center">
+                <family-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></family-pager>
+            </div>
+        </div>
+        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</button>
+        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</button>
+        <button class="btn btn-primary btn-xs" ng-click="openEditDialog();">Add Family<i class="fa fa-pencil pull-right"></i></button>
+        <div class="panel-body" ng-hide="showTableFormat">
+            <div class="row">
+                <div class="col-sm-6" ng-repeat="family in Families | filter:filterFamilies">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>{{family.FamilyName}}</strong><br />
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-condensed shortMargin">
+                                    <tr>
+                                        <td class="shortPadding">Date First Registered:</td>
+                                        <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding">Primary Race:</td>
+                                        <td class="shortPadding"><i>{{family.PrimaryRace}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding">Primary Ethnicity:</td>
+                                        <td class="shortPadding"><i>{{family.PrimaryEthnicity}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding">Notes:</td>
+                                        <td class="shortPadding"><i>{{family.Notes}}</i></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="panel-footer clearfix">
+                            <div class="pull-right">
+                                <buton class="btn btn-primary btn-xs" ng-click="openEditDialog(family);">Edit <i class="fa fa-pencil pull-right"></i></buton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" ng-hide="!showTableFormat">
+            <table class="table table-bordered table table-striped table-hover table-responsive">
+                <tr>
+                    <th></th>
+                    <th>Family Name</th>
+                    <th>First Registered</th>
+                    <th>Notes</th>
+                    <th>Primary Race</th>
+                    <th>Primary Ethnicity</th>
+                </tr>
+                <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
+                    <td><buton class="btn btn-primary btn-xs" ng-click="openEditDialog(family);">Edit <i class="fa fa-pencil pull-right"></i></buton></td>
+                    <td><strong>{{family.FamilyName}}</strong></td>
+                    <td>{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
+                    <td>{{family.Notes}}</td>
+                    <td>{{family.PrimaryRace}}</td>
+                    <td>{{family.PrimaryEthnicity}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <div class="text-center">
+                <custom-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
+            </div>
+        </div>
+    </div>
+</div>

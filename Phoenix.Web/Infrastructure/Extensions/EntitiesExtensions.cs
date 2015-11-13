@@ -34,5 +34,14 @@ namespace Phoenix.Web.Infrastructure.Extensions
                 ? Guid.NewGuid() : customerVm.UniqueKey;
             customer.RegistrationDate = (customer.RegistrationDate == DateTime.MinValue ? DateTime.Now : customerVm.RegistrationDate);
         }
+
+        public static void UpdateFamily(this Family family, FamilyViewModel familyVm)
+        {
+            family.FamilyName = familyVm.FamilyName;
+            family.FirstRegisteredDate = familyVm.FirstRegisteredDate;
+            family.Notes = familyVm.Notes;
+            family.PrimaryEthnicity = familyVm.PrimaryEthnicity;
+            family.PrimaryRace = familyVm.PrimaryRace;
+        }
     }
 }

@@ -31,6 +31,9 @@ namespace Phoenix.Data.Migrations
             // create roles
             context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
 
+            // create Phoenix families
+            context.FamilySet.AddOrUpdate(GenerateFamilies());
+
             // username: chsakell, password: homecinema
             context.UserSet.AddOrUpdate(u => u.Email, new User[]{
                 new User()
@@ -66,6 +69,30 @@ namespace Phoenix.Data.Migrations
             };
 
             return genres;
+        }
+        private Family[] GenerateFamilies()
+        {
+            Family[] families = new Family[]
+            {
+                new Family()
+                {
+                    FamilyName = "Scott",
+                    FirstRegisteredDate = DateTime.Now,
+                    Notes = "A nice family",
+                    PrimaryEthnicity = 1,
+                    PrimaryRace = 2
+                },
+                new Family()
+                {
+                    FamilyName = "Alen",
+                    FirstRegisteredDate = DateTime.Now,
+                    Notes = "A great family",
+                    PrimaryEthnicity = 2,
+                    PrimaryRace = 3
+                }
+            };
+
+            return families;
         }
         private Movie[] GenerateMovies()
         {

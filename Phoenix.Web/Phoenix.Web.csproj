@@ -938,6 +938,10 @@
     <Content Include="Scripts\spa\directives\availableMovie.directive.js" />
     <Content Include="Scripts\spa\directives\availableMovie.html" />
     <Content Include="Scripts\spa\directives\rating.directive.js" />
+    <Content Include="Scripts\spa\families\familyEditCtrl.js" />
+    <Content Include="Scripts\spa\families\familyEditModal.html" />
+    <Content Include="Scripts\spa\families\families.html" />
+    <Content Include="Scripts\spa\families\familiesCtrl.js" />
     <Content Include="Scripts\spa\home\Index.html" />
     <Content Include="Scripts\spa\home\indexCtrl.js" />
     <Content Include="Scripts\spa\home\rootCtrl.js" />
@@ -997,6 +1001,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginViewModel.cs" />
@@ -1016,10 +1021,12 @@
     <Compile Include="Infrastructure\Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\Mappings\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Infrastructure\MessageHandlers\HomeCinemaAuthHandler.cs" />
-    <Compile Include="Infrastructure\Validators\AccountViewModelValidators.cs" />
+    <Compile Include="Infrastructure\Validators\AccountViewModelValidator.cs" />
     <Compile Include="Infrastructure\Validators\CustomerViewModelValidator.cs" />
+    <Compile Include="Infrastructure\Validators\FamilyViewModelValidator.cs" />
     <Compile Include="Infrastructure\Validators\MovieViewModelValidator.cs" />
     <Compile Include="Infrastructure\Validators\StockViewModelValidator.cs" />
+    <Compile Include="Models\FamilyViewModel.cs" />
     <Compile Include="Models\StockViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\GenreViewModel.cs" />
@@ -1060,6 +1067,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Customers\" />
+    <Folder Include="Views\Family\" />
     <Folder Include="Views\Genres\" />
     <Folder Include="Views\Movies\" />
     <Folder Include="Views\Rentals\" />
