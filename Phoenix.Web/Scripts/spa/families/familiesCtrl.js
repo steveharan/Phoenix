@@ -53,6 +53,8 @@
             else {
                 $scope.newFamily = false;
             }
+            console.log('newfamily=');
+            console.log($scope.newFamily);
             $scope.EditedFamily = family;
             $modal.open({
                 templateUrl: 'scripts/spa/families/familyEditModal.html',

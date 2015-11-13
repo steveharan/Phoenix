@@ -8,14 +8,16 @@
             <div class="">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-10">
                             <label class="control-label" for="firstName">Family Name</label>
                             <input type="text" class="form-control" ng-model="EditedFamily.FamilyName" name="firstName" id="firstName" placeholder="Family Name"
                                    validate-on="blur" required required-message="'Family Name is required'">
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-6 selectContainer">
+                        <div class="col-xs-10 selectContainer">
                             <label class="control-label" for="firstRegisteredDate">Date First Registered</label>
                             <p class="input-group">
                                 <input type="text" class="form-control" name="firstRegisteredDate" datepicker-popup="{{format}}" ng-model="EditedFamily.FirstRegisteredDate" is-open="datepicker.opened"
@@ -26,13 +28,11 @@
                                 </span>
                             </p>
                         </div>
-
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-
-                        <div class="col-xs-6 selectContainer">
+                        <div class="col-xs-10 selectContainer">
                             <label class="control-label" for="Notes">Notes</label>
                             <textarea rows="5" class="form-control" ng-model="EditedFamily.Notes" id="notes" name="notes" placeholder="General Notes"
                                    validate-on="blur" required required-message="'Notes are required'"></textarea>
@@ -41,11 +41,13 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <label class="control-label" for="primaryEthnicity">Primary Ethnicity</label>
-                            <select name="repeatSelect" id="repeatSelect" ng-model="EditedFamily.PrimaryEthnicity">
-                                <option ng-repeat="option in ethnicities" value="{{option.ID}}">{{option.EthnicityName}}</option>
-                            </select>
+                        <div class="col-xs-10">
+                            <div class="form-group">
+                                <label for="primaryEthnicity">Primary Ethnicity</label>
+                                <select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="EditedFamily.PrimaryEthnicity">
+                                    <option ng-repeat="option in ethnicities" value="{{option.ID}}">{{option.EthnicityName}}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

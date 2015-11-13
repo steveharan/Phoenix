@@ -18,8 +18,6 @@
         $scope.datepicker = {};
 
         $scope.submission = {
-//            successMessages: ['Successfull submission will appear here.'],
-//            errorMessages: ['Submition errors will appear here.']
         };
 
         function Register() {
@@ -29,7 +27,6 @@
         }
 
         function registerCustomerSucceded(response) {
-//            $scope.submission.errorMessages = ['Submition errors will appear here.'];
             console.log(response);
             var customerRegistered = response.data;
             $scope.submission.successMessages = [];

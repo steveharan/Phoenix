@@ -10,6 +10,7 @@
 
         function setLable() {
             if ($scope.newFamily) {
+                $scope.EditedFamily = {};
                 return 'Add New';
             }
             else {

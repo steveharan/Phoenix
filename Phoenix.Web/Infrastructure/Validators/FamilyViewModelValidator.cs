@@ -11,6 +11,8 @@ namespace Phoenix.Web.Infrastructure.Validators
     {
         public FamilyViewModelValidator()
         {
+            RuleFor(r => r.FamilyName).NotEmpty()
+                .WithMessage("Please enter the family name.");
             RuleFor(r => r.FirstRegisteredDate).NotEmpty()
                 .WithMessage("Please select first registered date.");
 
@@ -18,7 +20,7 @@ namespace Phoenix.Web.Infrastructure.Validators
                 .WithMessage("Please add some notes about this family.");
 
             RuleFor(r => r.PrimaryEthnicity).NotEmpty()
-                .WithMessage("Please select the primary ethnicity for this family");
+                .WithMessage("Please select the primary ethnicity for this family.");
         }
     }
 }

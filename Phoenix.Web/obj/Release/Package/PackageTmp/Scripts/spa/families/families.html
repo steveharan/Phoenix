@@ -68,7 +68,17 @@
                     <th>Primary Ethnicity</th>
                 </tr>
                 <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
-                    <td><buton class="btn btn-primary btn-xs" ng-click="openEditDialog(family);">Edit <i class="fa fa-pencil pull-right"></i></buton></td>
+                    <td class="col-sm-1">
+                        <!--<buton class="btn btn-primary btn-xs" ng-click="openEditDialog(family);">Edit 
+                            <i class="fa fa-pencil pull-right"></i>
+                        </buton>-->
+                        <button type="button" class="btn btn-default btn-sm" ng-click="openEditDialog(family);">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
                     <td><strong>{{family.FamilyName}}</strong></td>
                     <td>{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
                     <td>{{family.Notes}}</td>
