@@ -1,6 +1,3 @@
-C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\HomeCinema.Entities.dll.config
-C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\HomeCinema.Entities.dll
-C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\HomeCinema.Entities.pdb
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\EntityFramework.dll
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\EntityFramework.SqlServer.dll
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\MockData.dll
@@ -13,5 +10,8 @@ C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\Newtonsoft.Json.xml
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\System.Net.Http.Formatting.xml
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\System.Web.Http.xml
 C:\MyGit\Phoenix\Phoenix.Entities\obj\Release\Phoenix.Entities.csprojResolveAssemblyReference.cache
-C:\MyGit\Phoenix\Phoenix.Entities\obj\Release\HomeCinema.Entities.dll
-C:\MyGit\Phoenix\Phoenix.Entities\obj\Release\HomeCinema.Entities.pdb
+C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\Phoenix.Entities.dll.config
+C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\Phoenix.Entities.dll
+C:\MyGit\Phoenix\Phoenix.Entities\bin\Release\Phoenix.Entities.pdb
+C:\MyGit\Phoenix\Phoenix.Entities\obj\Release\Phoenix.Entities.dll
+C:\MyGit\Phoenix\Phoenix.Entities\obj\Release\Phoenix.Entities.pdb

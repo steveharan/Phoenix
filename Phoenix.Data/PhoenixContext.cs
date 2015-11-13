@@ -48,6 +48,7 @@ namespace Phoenix.Data
             modelBuilder.Configurations.Add(new GenreConfiguration());
             modelBuilder.Configurations.Add(new StockConfiguration());
             modelBuilder.Configurations.Add(new RentalConfiguration());
+            modelBuilder.Configurations.Add(new FamilyConfiguration());
         }
     }
 }

@@ -4,7 +4,6 @@ C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Phoenix.Data.pdb
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Antlr3.Runtime.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\EntityFramework.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\EntityFramework.SqlServer.dll
-C:\MyGit\Phoenix\Phoenix.Data\bin\Release\HomeCinema.Entities.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Microsoft.Web.Infrastructure.dll
@@ -13,7 +12,6 @@ C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Newtonsoft.Json.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\System.Net.Http.Formatting.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\System.Web.Http.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\WebGrease.dll
-C:\MyGit\Phoenix\Phoenix.Data\bin\Release\HomeCinema.Entities.pdb
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Antlr3.Runtime.pdb
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\EntityFramework.xml
 C:\MyGit\Phoenix\Phoenix.Data\bin\Release\EntityFramework.SqlServer.xml
@@ -27,3 +25,6 @@ C:\MyGit\Phoenix\Phoenix.Data\obj\Release\Phoenix.Data.csproj.GenerateResource.C
 C:\MyGit\Phoenix\Phoenix.Data\obj\Release\Phoenix.Data.dll
 C:\MyGit\Phoenix\Phoenix.Data\obj\Release\Phoenix.Data.pdb
 C:\MyGit\Phoenix\Phoenix.Data\obj\Release\Phoenix.Data.Migrations.Initial.resources
+C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Phoenix.Entities.dll
+C:\MyGit\Phoenix\Phoenix.Data\bin\Release\Phoenix.Entities.pdb
+C:\MyGit\Phoenix\Phoenix.Data\obj\Release\Phoenix.Data.Migrations.second.resources

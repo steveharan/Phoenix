@@ -71,6 +71,7 @@
         }
 
         function updateFamilyLoadFailed(response) {
+            console.log(response);
             notificationService.displayError(response.data);
         }
 

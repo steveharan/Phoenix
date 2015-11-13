@@ -47,4 +47,3 @@ C:\MyGit\Phoenix\Phoenix.Entities\bin\Debug\Phoenix.Entities.dll
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Debug\Phoenix.Entities.pdb
 C:\MyGit\Phoenix\Phoenix.Entities\obj\Debug\Phoenix.Entities.dll
 C:\MyGit\Phoenix\Phoenix.Entities\obj\Debug\Phoenix.Entities.pdb
-C:\MyGit\Phoenix\Phoenix.Entities\obj\Debug\Phoenix.Entities.csprojResolveAssemblyReference.cache

@@ -1013,6 +1013,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
+    <Compile Include="Infrastructure\Core\DataRepositoryFactory.cs" />
     <Compile Include="Infrastructure\Core\FileUploadResult.cs" />
     <Compile Include="Infrastructure\Core\MimeMultipart.cs" />
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />

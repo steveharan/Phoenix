@@ -1,7 +1,6 @@
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Phoenix.Services.dll.config
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Phoenix.Services.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Phoenix.Services.pdb
-C:\MyGit\Phoenix\Phoenix.Services\bin\Release\HomeCinema.Entities.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Newtonsoft.Json.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Phoenix.Data.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\System.Net.Http.Formatting.dll
@@ -9,7 +8,6 @@ C:\MyGit\Phoenix\Phoenix.Services\bin\Release\System.Web.Http.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\EntityFramework.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\MockData.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Phoenix.Data.pdb
-C:\MyGit\Phoenix\Phoenix.Services\bin\Release\HomeCinema.Entities.pdb
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Newtonsoft.Json.xml
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\System.Net.Http.Formatting.xml
 C:\MyGit\Phoenix\Phoenix.Services\bin\Release\System.Web.Http.xml
@@ -17,3 +15,5 @@ C:\MyGit\Phoenix\Phoenix.Services\bin\Release\EntityFramework.xml
 C:\MyGit\Phoenix\Phoenix.Services\obj\Release\Phoenix.Services.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Services\obj\Release\Phoenix.Services.dll
 C:\MyGit\Phoenix\Phoenix.Services\obj\Release\Phoenix.Services.pdb
+C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Phoenix.Entities.dll
+C:\MyGit\Phoenix\Phoenix.Services\bin\Release\Phoenix.Entities.pdb

@@ -50,3 +50,4 @@ Phoenix.Data/bin/Debug/HomeCinema.Entities.pdb
 *.dll
 *.cache
 *.cache
+*.txt
