@@ -12,6 +12,7 @@
         $scope.isReadOnly = false;
         $scope.myDate = new Date();
         $scope.latestMovies = [];
+        $scope.ethnicities = [];
         $scope.loadData = loadData;
 
         function loadData() {

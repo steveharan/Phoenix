@@ -41,7 +41,6 @@ namespace Phoenix.Web.Infrastructure.Extensions
             family.FirstRegisteredDate = familyVm.FirstRegisteredDate;
             family.Notes = familyVm.Notes;
             family.PrimaryEthnicity = familyVm.PrimaryEthnicity;
-            family.PrimaryRace = familyVm.PrimaryRace;
         }
     }
 }

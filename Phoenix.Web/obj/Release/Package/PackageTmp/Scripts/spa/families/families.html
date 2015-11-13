@@ -39,6 +39,10 @@
                                         <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
                                     </tr>
                                     <tr>
+                                        <td class="shortPadding">Primary Race:</td>
+                                        <td class="shortPadding"><i>{{family.PrimaryRace}}</i></td>
+                                    </tr>
+                                    <tr>
                                         <td class="shortPadding">Primary Ethnicity:</td>
                                         <td class="shortPadding"><i>{{family.PrimaryEthnicity}}</i></td>
                                     </tr>
@@ -65,6 +69,7 @@
                     <th>Family Name</th>
                     <th>First Registered</th>
                     <th>Notes</th>
+                    <th>Primary Race</th>
                     <th>Primary Ethnicity</th>
                 </tr>
                 <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
@@ -72,6 +77,7 @@
                     <td><strong>{{family.FamilyName}}</strong></td>
                     <td>{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
                     <td>{{family.Notes}}</td>
+                    <td>{{family.PrimaryRace}}</td>
                     <td>{{family.PrimaryEthnicity}}</td>
                 </tr>
             </table>

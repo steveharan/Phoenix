@@ -17,43 +17,45 @@ namespace Phoenix.Data.Migrations
         protected override void Seed(PhoenixContext context)
         {
             //  create genres
-            context.GenreSet.AddOrUpdate(g => g.Name, GenerateGenres());
+            //context.GenreSet.AddOrUpdate(g => g.Name, GenerateGenres());
 
-            // create movies
-            context.MovieSet.AddOrUpdate(m => m.Title, GenerateMovies());
+            //// create movies
+            //context.MovieSet.AddOrUpdate(m => m.Title, GenerateMovies());
 
-            //// create stocks
-            context.StockSet.AddOrUpdate(GenerateStocks());
+            ////// create stocks
+            //context.StockSet.AddOrUpdate(GenerateStocks());
 
-            // create customers
-            context.CustomerSet.AddOrUpdate(GenerateCustomers());
+            //// create customers
+            //context.CustomerSet.AddOrUpdate(GenerateCustomers());
 
-            // create roles
-            context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
+            //// create roles
+            //context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
 
-            // create Phoenix families
-            context.FamilySet.AddOrUpdate(GenerateFamilies());
+            //// create Phoenix stuff
+            //context.FamilySet.AddOrUpdate(GenerateFamilies());
+
+            context.EthnicitySet.AddOrUpdate(GenerateEthnicity());
 
             // username: chsakell, password: homecinema
-            context.UserSet.AddOrUpdate(u => u.Email, new User[]{
-                new User()
-                {
-                    Email="chsakells.blog@gmail.com",
-                    Username="chsakell",
-                    HashedPassword ="XwAQoiq84p1RUzhAyPfaMDKVgSwnn80NCtsE8dNv3XI=",
-                    Salt = "mNKLRbEFCH8y1xIyTXP4qA==",
-                    IsLocked = false,
-                    DateCreated = DateTime.Now
-                }
-            });
+            //context.UserSet.AddOrUpdate(u => u.Email, new User[]{
+            //    new User()
+            //    {
+            //        Email="chsakells.blog@gmail.com",
+            //        Username="chsakell",
+            //        HashedPassword ="XwAQoiq84p1RUzhAyPfaMDKVgSwnn80NCtsE8dNv3XI=",
+            //        Salt = "mNKLRbEFCH8y1xIyTXP4qA==",
+            //        IsLocked = false,
+            //        DateCreated = DateTime.Now
+            //    }
+            //});
 
-            // // create user-admin for chsakell
-            context.UserRoleSet.AddOrUpdate(new UserRole[] {
-                new UserRole() {
-                    RoleId = 1, // admin
-                    UserId = 1  // chsakell
-                }
-            });
+            //// // create user-admin for chsakell
+            //context.UserRoleSet.AddOrUpdate(new UserRole[] {
+            //    new UserRole() {
+            //        RoleId = 1, // admin
+            //        UserId = 1  // chsakell
+            //    }
+            //});
         }
 
         private Genre[] GenerateGenres()
@@ -70,6 +72,29 @@ namespace Phoenix.Data.Migrations
 
             return genres;
         }
+        private Ethnicity[] GenerateEthnicity()
+        {
+            Ethnicity[] ethnicity = new Ethnicity[]
+            {
+                new Ethnicity()
+                {
+                    EthnicityName = "White"
+                },
+                new Ethnicity()
+                {
+                    EthnicityName = "Black or Afro-Carribbean"
+                },
+                new Ethnicity()
+                {
+                    EthnicityName = "Asian"
+                },
+                new Ethnicity()
+                {
+                    EthnicityName = "Mixed Race"
+                }
+            };
+            return ethnicity;
+        }
         private Family[] GenerateFamilies()
         {
             Family[] families = new Family[]
@@ -79,16 +104,14 @@ namespace Phoenix.Data.Migrations
                     FamilyName = "Scott",
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A nice family",
-                    PrimaryEthnicity = 1,
-                    PrimaryRace = 2
+                    PrimaryEthnicity = 1
                 },
                 new Family()
                 {
                     FamilyName = "Alen",
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A great family",
-                    PrimaryEthnicity = 2,
-                    PrimaryRace = 3
+                    PrimaryEthnicity = 2
                 }
             };
 

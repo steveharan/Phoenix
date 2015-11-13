@@ -19,10 +19,6 @@ namespace Phoenix.Web.Infrastructure.Validators
 
             RuleFor(r => r.PrimaryEthnicity).NotEmpty()
                 .WithMessage("Please select the primary ethnicity for this family");
-
-            RuleFor(r => r.PrimaryRace).NotEmpty()
-                .WithMessage("Please select the primary race for this family");
-
         }
     }
 }

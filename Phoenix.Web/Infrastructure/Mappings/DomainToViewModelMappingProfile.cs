@@ -34,6 +34,8 @@ namespace Phoenix.Web.Infrastructure.Mappings
             Mapper.CreateMap<Rental, RentalViewModel>();
 
             Mapper.CreateMap<Family, FamilyViewModel>();
+
+            Mapper.CreateMap<Ethnicity, EthnicityViewModel>();
         }
     }
 }

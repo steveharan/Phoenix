@@ -14,6 +14,8 @@
                                    validate-on="blur" required required-message="'Family Name is required'">
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
                     <div class="row">
                         <div class="col-xs-6 selectContainer">
                             <label class="control-label" for="firstRegisteredDate">Date First Registered</label>
@@ -27,15 +29,10 @@
                             </p>
                         </div>
 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-
                         <div class="col-xs-6 selectContainer">
                             <label class="control-label" for="Notes">Notes</label>
-                            <textarea rows="5" class="form-control" ng-model="EditedFamily.Notes" id="notes" name="notes" placeholder="General Notes"
-                                   validate-on="blur" required required-message="'Notes are required'"></textarea>
+                            <input type="text" class="form-control" ng-model="EditedFamily.Notes" id="notes" name="notes" placeholder="General Notes"
+                                   validate-on="blur" required required-message="'Notes are required'">
                         </div>
                     </div>
                 </div>
@@ -43,9 +40,13 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <label class="control-label" for="primaryEthnicity">Primary Ethnicity</label>
-                            <select name="repeatSelect" id="repeatSelect" ng-model="EditedFamily.PrimaryEthnicity">
-                                <option ng-repeat="option in ethnicities" value="{{option.ID}}">{{option.EthnicityName}}</option>
-                            </select>
+                            <input type="text" ng-model="EditedFamily.PrimaryEthnicity" class="form-control" id="primaryEthnicity" name="primaryEthnicity" placeholder="Primary Ethnicity"
+                                   validate-on="blur" required required-message="'Primary Ethnicity is required'">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label" for="primaryEthnicity">Primary Race</label>
+                            <input type="text" ng-model="EditedFamily.PrimaryRace" class="form-control" id="primaryRace" name="primaryRace" placeholder="Primary Race"
+                                   validate-on="blur" required required-message="'Primary Race is required'">
                         </div>
                     </div>
                 </div>

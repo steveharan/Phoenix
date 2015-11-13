@@ -180,7 +180,6 @@ C:\MyGit\Phoenix\Phoenix.Web\bin\AutoMapper.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\EntityFramework.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\EntityFramework.SqlServer.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\FluentValidation.dll
-C:\MyGit\Phoenix\Phoenix.Web\bin\HomeCinema.Entities.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\Microsoft.Web.Infrastructure.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\Newtonsoft.Json.dll
@@ -199,7 +198,6 @@ C:\MyGit\Phoenix\Phoenix.Web\bin\System.Web.Webpages.Razor.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\WebGrease.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\MockData.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\Phoenix.Data.pdb
-C:\MyGit\Phoenix\Phoenix.Web\bin\HomeCinema.Entities.pdb
 C:\MyGit\Phoenix\Phoenix.Web\bin\Phoenix.Services.pdb
 C:\MyGit\Phoenix\Phoenix.Web\bin\Antlr3.Runtime.pdb
 C:\MyGit\Phoenix\Phoenix.Web\bin\Autofac.xml
@@ -238,3 +236,5 @@ C:\MyGit\Phoenix\Phoenix.Web\bin\tr\FluentValidation.resources.dll
 C:\MyGit\Phoenix\Phoenix.Web\obj\Debug\Phoenix.Web.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Web\obj\Debug\Phoenix.Web.dll
 C:\MyGit\Phoenix\Phoenix.Web\obj\Debug\Phoenix.Web.pdb
+C:\MyGit\Phoenix\Phoenix.Web\bin\Phoenix.Entities.dll
+C:\MyGit\Phoenix\Phoenix.Web\bin\Phoenix.Entities.pdb

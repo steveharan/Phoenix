@@ -28,6 +28,7 @@ namespace Phoenix.Data
         public IDbSet<Customer> CustomerSet { get; set; }
         public IDbSet<Rental> RentalSet { get; set; }
         public IDbSet<Family> FamilySet { get; set; }
+        public IDbSet<Ethnicity> EthnicitySet { get; set; }
         public IDbSet<Error> ErrorSet { get; set; }
         #endregion
 

@@ -29,27 +29,6 @@
 
         $scope.myDate = new Date();
 
-        function loadData() {
-            apiService.get("/api/ethnicity/list", null,
-                ethnicityLoadCompleted,
-                ethnicityLoadFailed)
-        }
-
-        function ethnicityLoadCompleted(result) {
-            console.log(result.data);
-            $scope.ethnicities = result.data;
-        }
-
-        function ethnicityLoadFailed(result) {
-            notificationService.displayError(response.data);
-        }
-
-        function moviesLoadCompleted(result) {
-            $scope.latestMovies = result.data;
-            $scope.loadingMovies = false;
-        }
-
-
         function updateFamily() {
             console.log($scope.EditedFamily);
             if (!$scope.newFamily) {
@@ -93,7 +72,6 @@
 
         };
 
-        loadData();
     }
 
 })(angular.module('phoenix'));

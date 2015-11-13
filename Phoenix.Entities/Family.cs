@@ -12,7 +12,6 @@ namespace Phoenix.Entities
         public DateTime FirstRegisteredDate { get; set; }
         public string Notes { get; set; }
         public string FamilyName { get; set; }
-        public int PrimaryRace { get; set; }
         public int PrimaryEthnicity { get; set; }
     }
 }
