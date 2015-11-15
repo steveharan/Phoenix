@@ -62,16 +62,16 @@
             </div>
         </div>
         <div class="panel-body" ng-hide="!showTableFormat">
-            <table class="table table-bordered table table-striped table-hover table-responsive">
+            <table class="table table-bordered table table-striped table-hover table-responsive" width="auto">
                 <tr>
-                    <th></th>
+                    <th class="col-md-1"></th>
                     <th>Family Name</th>
                     <th>First Registered</th>
                     <th>Notes</th>
                     <th>Primary Ethnicity</th>
                 </tr>
                 <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
-                    <td class="col-sm-1">
+                    <td class="col-md-1">
                         <button type="button" class="btn btn-default btn-sm" ng-click="openEditDialog(family);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
