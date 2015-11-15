@@ -46,7 +46,7 @@
         }
 
         function deleteFamilyCompleted(response) {
-            notificationService.displaySuccess('The family has been updated');
+            notificationService.displaySuccess('The family has been deleted');
             clearSearch();
         }
 
@@ -57,6 +57,7 @@
 
         function deleteFamily(family) {
             console.log('Delete family');
+            console.log(family);
             apiService.post('/api/families/delete/', family,
                         deleteFamilyCompleted,
                         deleteFamilyCompleted);

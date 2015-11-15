@@ -44,9 +44,8 @@
                         <div class="col-xs-10">
                             <div class="form-group">
                                 <label for="primaryEthnicity">Primary Ethnicity</label>
-                                <select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="EditedFamily.PrimaryEthnicity">
-                                    <option ng-repeat="option in ethnicities" value="{{option.ID}}">{{option.EthnicityName}}</option>
-                                </select>
+                                <select ng-model="EditedFamily.EthnicityID" class="form-control black" ng-options="option.ID as option.EthnicityName for option in ethniticies" required></select>
+                                <input type="hidden" name="EthnicityId" ng-value="EditedFamily.EthnicityId" />
                             </div>
                         </div>
                     </div>

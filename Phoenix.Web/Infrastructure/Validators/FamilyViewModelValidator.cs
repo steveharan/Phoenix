@@ -19,7 +19,7 @@ namespace Phoenix.Web.Infrastructure.Validators
             RuleFor(r => r.Notes).NotEmpty()
                 .WithMessage("Please add some notes about this family.");
 
-            RuleFor(r => r.PrimaryEthnicity).NotEmpty()
+            RuleFor(r => r.EthnicityID).NotEmpty()
                 .WithMessage("Please select the primary ethnicity for this family.");
         }
     }

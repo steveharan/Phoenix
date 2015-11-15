@@ -3,7 +3,7 @@ namespace Phoenix.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -35,17 +35,27 @@ namespace Phoenix.Data.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
+                "dbo.Ethnicity",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        EthnicityName = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.Family",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
                         FirstRegisteredDate = c.DateTime(nullable: false),
-                        Notes = c.String(),
-                        FamilyName = c.String(),
-                        PrimaryRace = c.Int(nullable: false),
-                        PrimaryEthnicity = c.Int(nullable: false),
+                        Notes = c.String(nullable: false, maxLength: 100),
+                        FamilyName = c.String(nullable: false, maxLength: 30),
+                        EthnicityID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Ethnicity", t => t.EthnicityID, cascadeDelete: true)
+                .Index(t => t.EthnicityID);
             
             CreateTable(
                 "dbo.Genre",
@@ -150,11 +160,13 @@ namespace Phoenix.Data.Migrations
             DropForeignKey("dbo.Rental", "StockId", "dbo.Stock");
             DropForeignKey("dbo.Stock", "MovieId", "dbo.Movie");
             DropForeignKey("dbo.Movie", "GenreId", "dbo.Genre");
+            DropForeignKey("dbo.Family", "EthnicityID", "dbo.Ethnicity");
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserRole", new[] { "UserId" });
             DropIndex("dbo.Rental", new[] { "StockId" });
             DropIndex("dbo.Stock", new[] { "MovieId" });
             DropIndex("dbo.Movie", new[] { "GenreId" });
+            DropIndex("dbo.Family", new[] { "EthnicityID" });
             DropTable("dbo.User");
             DropTable("dbo.UserRole");
             DropTable("dbo.Role");
@@ -163,6 +175,7 @@ namespace Phoenix.Data.Migrations
             DropTable("dbo.Movie");
             DropTable("dbo.Genre");
             DropTable("dbo.Family");
+            DropTable("dbo.Ethnicity");
             DropTable("dbo.Error");
             DropTable("dbo.Customer");
         }

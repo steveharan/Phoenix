@@ -40,7 +40,7 @@ namespace Phoenix.Web.Infrastructure.Extensions
             family.FamilyName = familyVm.FamilyName;
             family.FirstRegisteredDate = familyVm.FirstRegisteredDate;
             family.Notes = familyVm.Notes;
-            family.PrimaryEthnicity = familyVm.PrimaryEthnicity;
+            family.EthnicityID = familyVm.EthnicityID;
         }
     }
 }

@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <td class="shortPadding">Primary Ethnicity:</td>
-                                        <td class="shortPadding"><i>{{family.PrimaryEthnicity}}</i></td>
+                                        <td class="shortPadding"><i>{{family.Ethnicity}}</i></td>
                                     </tr>
                                     <tr>
                                         <td class="shortPadding">Notes:</td>
@@ -75,14 +75,15 @@
                         <button type="button" class="btn btn-default btn-sm" ng-click="openEditDialog(family);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm" ng-click="deleteFamily(family);">
+                        <button type="button" class="btn btn-default btn-sm" 
+                                 ng-click="deleteFamily(family);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
                     <td><strong>{{family.FamilyName}}</strong></td>
                     <td>{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
                     <td>{{family.Notes}}</td>
-                    <td>{{family.PrimaryEthnicity}}</td>
+                    <td>{{family.Ethnicity}}</td>
                 </tr>
             </table>
         </div>
@@ -91,5 +92,28 @@
                 <custom-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="Cancel" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sure?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Really??</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteFamily(family);">Delete</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>

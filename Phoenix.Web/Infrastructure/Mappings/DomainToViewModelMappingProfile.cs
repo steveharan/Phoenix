@@ -33,7 +33,8 @@ namespace Phoenix.Web.Infrastructure.Mappings
 
             Mapper.CreateMap<Rental, RentalViewModel>();
 
-            Mapper.CreateMap<Family, FamilyViewModel>();
+            Mapper.CreateMap<Family, FamilyViewModel>()
+                .ForMember(vm => vm.Ethnicity, map => map.MapFrom(m => m.Ethnicity.EthnicityName));
 
             Mapper.CreateMap<Ethnicity, EthnicityViewModel>();
         }

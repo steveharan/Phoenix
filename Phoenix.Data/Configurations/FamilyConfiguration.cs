@@ -14,7 +14,7 @@ namespace Phoenix.Data.Configurations
             Property(u => u.FamilyName).IsRequired().HasMaxLength(30);
             Property(u => u.FirstRegisteredDate).IsRequired();
             Property(u => u.Notes).IsRequired().HasMaxLength(100);
-            Property(u => u.PrimaryEthnicity).IsRequired();
+            Property(u => u.EthnicityID).IsRequired();
         }
     }
 }

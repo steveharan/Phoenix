@@ -1,7 +1,19 @@
-﻿using Phoenix.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Ethnicity : IEntityBase
+namespace Phoenix.Entities
 {
-    public int ID { get; set; }
-    public string EthnicityName { get; set; }
+    public class Ethnicity : IEntityBase
+    {
+        public Ethnicity()
+        {
+            Families = new List<Family>();
+        }
+        public int ID { get; set; }
+        public string EthnicityName { get; set; }
+        public virtual ICollection<Family> Families { get; set; }
+    }
 }

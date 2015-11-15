@@ -53,6 +53,9 @@
                             <div class="pull-right">
                                 <buton class="btn btn-primary btn-xs" ng-click="openEditDialog(family);">Edit <i class="fa fa-pencil pull-right"></i></buton>
                             </div>
+                            <div class="pull-right">
+                                <buton class="btn btn-primary btn-xs" ng-click="deleteFamily(family);">Delete <i class="fa fa-remove pull-right"></i></buton>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,13 +72,10 @@
                 </tr>
                 <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
                     <td class="col-sm-1">
-                        <!--<buton class="btn btn-primary btn-xs" ng-click="openEditDialog(family);">Edit 
-                            <i class="fa fa-pencil pull-right"></i>
-                        </buton>-->
                         <button type="button" class="btn btn-default btn-sm" ng-click="openEditDialog(family);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="deleteFamily(family);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
