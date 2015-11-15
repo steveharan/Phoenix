@@ -17,6 +17,7 @@ namespace Phoenix.Web.Models
         public string Notes { get; set; }
         public string Ethnicity { get; set; }
         public int EthnicityID { get; set; }
+        public bool Deleted { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var validator = new FamilyViewModelValidator();

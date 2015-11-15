@@ -58,7 +58,9 @@
         function deleteFamily(family) {
             console.log('Delete family');
             console.log(family);
-            apiService.post('/api/families/delete/', family,
+            family.deleted = true;
+            console.log(family);
+            apiService.post('/api/families/update/', family,
                         deleteFamilyCompleted,
                         deleteFamilyCompleted);
         }

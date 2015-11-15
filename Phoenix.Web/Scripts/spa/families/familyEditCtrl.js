@@ -40,26 +40,11 @@
             notificationService.displayError(response.data);
         }
 
-        function loadEthnicity() {
-            apiService.get('/api/ethnicity/list', null,
-            ethnicityLoadCompleted,
-            ethnicityLoadFailed);
-        }
-
         function loadData() {
             apiService.get("/api/ethnicity/list", null,
                 ethnicityLoadCompleted,
                 ethnicityLoadFailed)
         }
-
-        //function ethnicityLoadCompleted(result) {
-        //    console.log(result.data);
-        //    $scope.ethnicities = result.data;
-        //}
-
-        //function ethnicityLoadFailed(result) {
-        //    notificationService.displayError(response.data);
-        //}
 
         function updateFamily() {
             console.log($scope.EditedFamily);

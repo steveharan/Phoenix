@@ -14,5 +14,6 @@ namespace Phoenix.Entities
         public string FamilyName { get; set; }
         public virtual Ethnicity Ethnicity { get; set; }
         public int EthnicityID { get; set; }
+        public bool Deleted { get; set; }
     }
 }
