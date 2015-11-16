@@ -46,7 +46,7 @@
         }
 
         function deleteFamilyCompleted(response) {
-            notificationService.displaySuccess('The family has been updated');
+            notificationService.displaySuccess('The family has been deleted');
             clearSearch();
         }
 
@@ -57,7 +57,10 @@
 
         function deleteFamily(family) {
             console.log('Delete family');
-            apiService.post('/api/families/delete/', family,
+            console.log(family);
+            family.deleted = true;
+            console.log(family);
+            apiService.post('/api/families/update/', family,
                         deleteFamilyCompleted,
                         deleteFamilyCompleted);
         }
@@ -87,6 +90,7 @@
 
         function familiesLoadCompleted(result) {
             $scope.Families = result.data.Items;
+            console.log(Families);
 
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;

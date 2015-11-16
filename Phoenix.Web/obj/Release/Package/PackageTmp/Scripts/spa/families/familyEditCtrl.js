@@ -27,29 +27,44 @@
             startingDay: 1
         };
         $scope.datepicker = {};
+        $scope.ethnicities = [];
 
         $scope.myDate = new Date();
 
-        function loadData() {
-            apiService.get("/api/ethnicity/list", null,
-                ethnicityLoadCompleted,
-                ethnicityLoadFailed)
+        function ethnicitiesLoadCompleted(response) {
+            console.log(response.data);
+            $scope.ethniticies = response.data;
         }
 
-        function ethnicityLoadCompleted(result) {
-            console.log(result.data);
-            $scope.ethnicities = result.data;
-        }
-
-        function ethnicityLoadFailed(result) {
+        function ethnicitiesLoadFailed(response) {
             notificationService.displayError(response.data);
         }
 
-        function moviesLoadCompleted(result) {
-            $scope.latestMovies = result.data;
-            $scope.loadingMovies = false;
+        function loadEthnicities() {
+            apiService.get("/api/ethnicity/list", null,
+                ethnicitiesLoadCompleted,
+                ethnicitiesLoadFailed)
         }
 
+        function diagnosesLoadCompleted(response) {
+            console.log(response.data);
+            $scope.diagnoses = response.data;
+        }
+
+        function diagnosesLoadFailed(response) {
+            notificationService.displayError(response.data);
+        }
+
+        function loadDiagnoses() {
+            apiService.get("/api/diagnosis/list", null,
+                diagnosesLoadCompleted,
+                diagnosesLoadFailed)
+        }
+
+        function loadData() {
+            loadEthnicities();
+//            loadDiagnoses();
+        }
 
         function updateFamily() {
             console.log($scope.EditedFamily);

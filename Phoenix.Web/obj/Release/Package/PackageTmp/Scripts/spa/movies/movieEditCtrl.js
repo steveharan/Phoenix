@@ -44,6 +44,7 @@
         }
 
         function genresLoadCompleted(response) {
+            console.log(response.data);
             $scope.genres = response.data;
         }
 

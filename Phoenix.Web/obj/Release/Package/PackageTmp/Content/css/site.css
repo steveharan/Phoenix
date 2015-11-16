@@ -7,6 +7,10 @@ body {
     background-color: whitesmoke;
 }
 
+.table td, .table th {
+    min-width: 100px;
+}
+
 #sidebar {
     width: inherit;
     min-width: 220px;
