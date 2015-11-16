@@ -17,46 +17,51 @@ namespace Phoenix.Data.Migrations
 
         protected override void Seed(PhoenixContext context)
         {
-            ////  create genres
-            //context.GenreSet.AddOrUpdate(g => g.Name, GenerateGenres());
+            //  create genres
+            context.GenreSet.AddOrUpdate(g => g.Name, GenerateGenres());
 
-            //// create movies
-            //context.MovieSet.AddOrUpdate(m => m.Title, GenerateMovies());
+            // create movies
+            context.MovieSet.AddOrUpdate(m => m.Title, GenerateMovies());
 
-            ////// create stocks
-            //context.StockSet.AddOrUpdate(GenerateStocks());
+            //// create stocks
+            context.StockSet.AddOrUpdate(GenerateStocks());
 
-            //// create customers
-            //context.CustomerSet.AddOrUpdate(GenerateCustomers());
+            // create customers
+            context.CustomerSet.AddOrUpdate(GenerateCustomers());
 
-            //// create roles
-            //context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
+            // create roles
+            context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
 
-            //// create Phoenix stuff
-            //context.FamilySet.AddOrUpdate(GenerateFamilies());
+            // create Phoenix stuff
+            context.DiagnosisSet.AddOrUpdate(GenerateDiagnosis());
+            context.DiagnosisSubTypeSet.AddOrUpdate(GenerateDiagnosisSubType());
 
-            //context.EthnicitySet.AddOrUpdate(GenerateEthnicity());
+            context.FamilySet.AddOrUpdate(GenerateFamilies());
 
-            //// username: chsakell, password: homecinema
-            //context.UserSet.AddOrUpdate(u => u.Email, new User[]{
-            //    new User()
-            //    {
-            //        Email="chsakells.blog@gmail.com",
-            //        Username="chsakell",
-            //        HashedPassword ="XwAQoiq84p1RUzhAyPfaMDKVgSwnn80NCtsE8dNv3XI=",
-            //        Salt = "mNKLRbEFCH8y1xIyTXP4qA==",
-            //        IsLocked = false,
-            //        DateCreated = DateTime.Now
-            //    }
-            //});
+            context.PersonSet.AddOrUpdate(GeneratePersons());
 
-            //// // create user-admin for chsakell
-            //context.UserRoleSet.AddOrUpdate(new UserRole[] {
-            //    new UserRole() {
-            //        RoleId = 1, // admin
-            //        UserId = 1  // chsakell
-            //    }
-            //});
+            context.EthnicitySet.AddOrUpdate(GenerateEthnicity());
+
+            // username: chsakell, password: homecinema
+            context.UserSet.AddOrUpdate(u => u.Email, new User[]{
+                new User()
+                {
+                    Email="chsakells.blog@gmail.com",
+                    Username="chsakell",
+                    HashedPassword ="XwAQoiq84p1RUzhAyPfaMDKVgSwnn80NCtsE8dNv3XI=",
+                    Salt = "mNKLRbEFCH8y1xIyTXP4qA==",
+                    IsLocked = false,
+                    DateCreated = DateTime.Now
+                }
+            });
+
+            // // create user-admin for chsakell
+            context.UserRoleSet.AddOrUpdate(new UserRole[] {
+                new UserRole() {
+                    RoleId = 1, // admin
+                    UserId = 1  // chsakell
+                }
+            });
         }
 
         private Genre[] GenerateGenres()
@@ -96,13 +101,60 @@ namespace Phoenix.Data.Migrations
             };
             return ethnicity;
         }
+
+        private Diagnosis[] GenerateDiagnosis()
+        {
+            Diagnosis[] diagnoses = new Diagnosis[]
+            {
+                new Diagnosis()
+                {
+                    Name = "Diagnosis 1"
+                },
+                new Diagnosis()
+                {
+                    Name = "Diagnosis 2"
+                }
+            };
+
+            return diagnoses;
+        }
+
+        private DiagnosisSubType[] GenerateDiagnosisSubType()
+        {
+            DiagnosisSubType[] diagnosisSybTypes = new DiagnosisSubType[]
+            {
+                new DiagnosisSubType()
+                {
+                    Name = "Diagnosis Sub Type 1.1",
+                    DiagnosisId = 1
+                },
+                new DiagnosisSubType()
+                {
+                    Name = "Diagnosis Sub Type 1.2",
+                    DiagnosisId = 1
+                },
+                new DiagnosisSubType()
+                {
+                    Name = "Diagnosis Sub Type 2.1",
+                    DiagnosisId = 2
+                },
+                new DiagnosisSubType()
+                {
+                    Name = "Diagnosis Sub Type 2.2",
+                    DiagnosisId = 2
+                }
+            };
+
+            return diagnosisSybTypes;
+        }
+
         private Family[] GenerateFamilies()
         {
             Family[] families = new Family[]
             {
                 new Family()
                 {
-                    FamilyName = "Scott",
+                    FamilyName = "Haran",
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A nice family",
                     EthnicityID = 1,
@@ -120,6 +172,42 @@ namespace Phoenix.Data.Migrations
 
             return families;
         }
+
+        private Person[] GeneratePersons()
+        {
+            Person[] persons = new Person[]
+            {
+                new Person()
+                {
+                    FirstName = "Steve",
+                    SurName = "Haran",
+                    DateOfBirth = DateTime.Now,
+                    Twin = false,
+                    Adopted = false,
+                    HeightCM = 200,
+                    WeightKG = 76,
+                    EthnicityId = 1,
+                    FamilyId = 1,
+                    DiagnosisId = 1
+                },
+                new Person()
+                {
+                    FirstName = "Pablo",
+                    SurName = "Haran",
+                    DateOfBirth = DateTime.Now,
+                    Twin = false,
+                    Adopted = false,
+                    HeightCM = 100,
+                    WeightKG = 30,
+                    EthnicityId = 1, 
+                    FamilyId = 1,
+                    DiagnosisId = 1
+                }
+            };
+
+            return persons;
+        }
+
         private Movie[] GenerateMovies()
         {
             Movie[] movies = new Movie[] {

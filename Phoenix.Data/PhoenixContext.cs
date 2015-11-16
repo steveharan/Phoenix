@@ -28,6 +28,9 @@ namespace Phoenix.Data
         public IDbSet<Customer> CustomerSet { get; set; }
         public IDbSet<Rental> RentalSet { get; set; }
         public IDbSet<Family> FamilySet { get; set; }
+        public IDbSet<Person> PersonSet { get; set; }
+        public IDbSet<Diagnosis> DiagnosisSet { get; set; }
+        public IDbSet<DiagnosisSubType> DiagnosisSubTypeSet { get; set; }
         public IDbSet<Ethnicity> EthnicitySet { get; set; }
         public IDbSet<Error> ErrorSet { get; set; }
         #endregion
@@ -40,6 +43,7 @@ namespace Phoenix.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
             modelBuilder.Configurations.Add(new RoleConfiguration());
@@ -49,6 +53,9 @@ namespace Phoenix.Data
             modelBuilder.Configurations.Add(new StockConfiguration());
             modelBuilder.Configurations.Add(new RentalConfiguration());
             modelBuilder.Configurations.Add(new FamilyConfiguration());
+            modelBuilder.Configurations.Add(new PersonConfiguration());
+            modelBuilder.Configurations.Add(new DiagnosisConfiguration());
+            modelBuilder.Configurations.Add(new DiagnosisSubTypeConfiguration());
         }
     }
 }

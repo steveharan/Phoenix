@@ -8,6 +8,7 @@ namespace Phoenix.Entities
 {
     public class Family : IEntityBase
     {
+        public Family() { Persons = new List<Person>(); }
         public int ID { get; set; }
         public DateTime FirstRegisteredDate { get; set; }
         public string Notes { get; set; }
@@ -15,5 +16,7 @@ namespace Phoenix.Entities
         public virtual Ethnicity Ethnicity { get; set; }
         public int EthnicityID { get; set; }
         public bool Deleted { get; set; }
+        public virtual ICollection<Person> Persons { get; set; }
+
     }
 }

@@ -88,10 +88,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\CustomerConfiguration.cs" />
+    <Compile Include="Configurations\DiagnosisConfiguration.cs" />
+    <Compile Include="Configurations\DiagnosisSubTypeConfiguration.cs" />
     <Compile Include="Configurations\EntityBaseConfiguration.cs" />
     <Compile Include="Configurations\FamilyConfiguration.cs" />
     <Compile Include="Configurations\GenreConfiguration.cs" />
     <Compile Include="Configurations\MovieConfiguration.cs" />
+    <Compile Include="Configurations\PersonConfiguration.cs" />
     <Compile Include="Configurations\RentalConfiguration.cs" />
     <Compile Include="Configurations\RoleConfiguration.cs" />
     <Compile Include="Configurations\StockConfiguration.cs" />
@@ -101,13 +104,9 @@
     <Compile Include="Extensions\FamilyExtensions.cs" />
     <Compile Include="Extensions\StockExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
-    <Compile Include="Migrations\201511151803252_InitialMigration.cs" />
-    <Compile Include="Migrations\201511151803252_InitialMigration.Designer.cs">
-      <DependentUpon>201511151803252_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511152046407_second.cs" />
-    <Compile Include="Migrations\201511152046407_second.Designer.cs">
-      <DependentUpon>201511152046407_second.cs</DependentUpon>
+    <Compile Include="Migrations\201511161016157_InitialMigration.cs" />
+    <Compile Include="Migrations\201511161016157_InitialMigration.Designer.cs">
+      <DependentUpon>201511161016157_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="PhoenixContext.cs" />
     <Compile Include="Phoenix\Data\Repositories\IEntityBaseRepository.cs" />
@@ -136,11 +135,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511151803252_InitialMigration.resx">
-      <DependentUpon>201511151803252_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511152046407_second.resx">
-      <DependentUpon>201511152046407_second.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511161016157_InitialMigration.resx">
+      <DependentUpon>201511161016157_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
