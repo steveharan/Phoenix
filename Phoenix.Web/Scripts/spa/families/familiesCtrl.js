@@ -90,7 +90,7 @@
 
         function familiesLoadCompleted(result) {
             $scope.Families = result.data.Items;
-            console.log(Families);
+            console.log($scope.Families);
 
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;

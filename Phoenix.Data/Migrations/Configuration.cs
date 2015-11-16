@@ -158,7 +158,7 @@ namespace Phoenix.Data.Migrations
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A nice family",
                     EthnicityID = 1,
-                    DiagnosisId = 1,
+                    DiagnosisID = 1,
                     DiagnosisSubTypeId = 1,
                     Deleted = false
                 },
@@ -168,7 +168,7 @@ namespace Phoenix.Data.Migrations
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A great family",
                     EthnicityID = 2,
-                    DiagnosisId = 1,
+                    DiagnosisID = 1,
                     DiagnosisSubTypeId = 2,
                     Deleted = false
                 }

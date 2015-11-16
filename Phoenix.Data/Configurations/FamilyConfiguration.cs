@@ -15,7 +15,7 @@ namespace Phoenix.Data.Configurations
             Property(u => u.FirstRegisteredDate).IsRequired();
             Property(u => u.Notes).IsRequired().HasMaxLength(100);
             Property(u => u.EthnicityID).IsRequired();
-            Property(u => u.DiagnosisId).IsOptional();
+            Property(u => u.DiagnosisID).IsOptional();
             Property(u => u.DiagnosisSubTypeId).IsOptional();
         }
     }

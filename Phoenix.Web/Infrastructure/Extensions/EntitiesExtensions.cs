@@ -41,6 +41,7 @@ namespace Phoenix.Web.Infrastructure.Extensions
             family.FirstRegisteredDate = familyVm.FirstRegisteredDate;
             family.Notes = familyVm.Notes;
             family.EthnicityID = familyVm.EthnicityID;
+            family.DiagnosisID = familyVm.DiagnosisID;
             family.Deleted = familyVm.Deleted;
         }
     }

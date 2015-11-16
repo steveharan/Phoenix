@@ -41,7 +41,7 @@
         }
 
         function loadEthnicities() {
-            apiService.get("/api/ethnicity/list", null,
+            apiService.get("/api/data/ethnicity", null,
                 ethnicitiesLoadCompleted,
                 ethnicitiesLoadFailed)
         }
@@ -56,14 +56,14 @@
         }
 
         function loadDiagnoses() {
-            apiService.get("/api/diagnosis/list", null,
+            apiService.get("/api/data/diagnosis", null,
                 diagnosesLoadCompleted,
                 diagnosesLoadFailed)
         }
 
         function loadData() {
             loadEthnicities();
-//            loadDiagnoses();
+            loadDiagnoses();
         }
 
         function updateFamily() {

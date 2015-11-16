@@ -16,21 +16,23 @@ using Phoenix.Data.Extensions;
 namespace Phoenix.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/ethnicity")]
-    public class EthnicityController : ApiControllerBase
+    [RoutePrefix("api/data")]
+    public class DataController : ApiControllerBase
     {
         private readonly IEntityBaseRepository<Ethnicity> _ethnicityRepository;
+        private readonly IEntityBaseRepository<Diagnosis> _diagnosisRepository;
 
-        public EthnicityController(IEntityBaseRepository<Ethnicity> ethnicityRepository,
+        public DataController(IEntityBaseRepository<Ethnicity> ethnicityRepository, IEntityBaseRepository<Diagnosis> diagnosisRepository,
             IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork)
             : base(_errorsRepository, _unitOfWork)
         {
             _ethnicityRepository = ethnicityRepository;
+            _diagnosisRepository = diagnosisRepository;
         }
 
         [HttpGet]
-        [Route("list")]
-        public HttpResponseMessage List(HttpRequestMessage request)
+        [Route("ethnicity")]
+        public HttpResponseMessage ListEthnicity(HttpRequestMessage request)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -48,5 +50,27 @@ namespace Phoenix.Web.Controllers
                 return response;
             });
         }
+
+        [HttpGet]
+        [Route("diagnosis")]
+        public HttpResponseMessage ListDiagnosis(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<Diagnosis> diagnosis = null;
+                diagnosis = _diagnosisRepository.GetAll()
+                    .OrderBy(c => c.ID)
+                    .ToList();
+
+                IEnumerable<DiagnosisViewModel> diagnosisVM = Mapper.Map<IEnumerable<Diagnosis>,
+                    IEnumerable<DiagnosisViewModel>>(diagnosis);
+
+                response = request.CreateResponse<IEnumerable<DiagnosisViewModel>>(HttpStatusCode.OK, diagnosisVM);
+
+                return response;
+            });
+        }
+
     }
 }

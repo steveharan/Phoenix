@@ -15,7 +15,7 @@ namespace Phoenix.Entities
         public string FamilyName { get; set; }
         public virtual Ethnicity Ethnicity { get; set; }
         public int EthnicityID { get; set; }
-        public int DiagnosisId { get; set; }
+        public int DiagnosisID { get; set; }
         public virtual Diagnosis Diagnosis { get; set; }
         public int DiagnosisSubTypeId { get; set; }
         public virtual DiagnosisSubType DiagnosisSubType { get; set; }
