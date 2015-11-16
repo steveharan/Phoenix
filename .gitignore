@@ -54,3 +54,4 @@ Phoenix.Data/bin/Debug/HomeCinema.Entities.pdb
 *.pdb
 *.cache
 Phoenix.Data/obj/Debug/Phoenix.Data.pdb
+*.pdb
