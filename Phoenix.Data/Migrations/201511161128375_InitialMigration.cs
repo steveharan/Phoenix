@@ -44,17 +44,33 @@ namespace Phoenix.Data.Migrations
                         Adopted = c.Boolean(nullable: false),
                         HeightCM = c.Decimal(nullable: false, precision: 18, scale: 2),
                         WeightKG = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Deceased = c.Boolean(nullable: false),
                         FamilyId = c.Int(nullable: false),
                         DiagnosisId = c.Int(),
+                        DiagnosisSubTypeId = c.Int(),
                         EthnicityId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Diagnosis", t => t.DiagnosisId)
+                .ForeignKey("dbo.DiagnosisSubType", t => t.DiagnosisSubTypeId)
                 .ForeignKey("dbo.Family", t => t.FamilyId)
                 .ForeignKey("dbo.Ethnicity", t => t.EthnicityId)
                 .Index(t => t.FamilyId)
                 .Index(t => t.DiagnosisId)
+                .Index(t => t.DiagnosisSubTypeId)
                 .Index(t => t.EthnicityId);
+            
+            CreateTable(
+                "dbo.DiagnosisSubType",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        DiagnosisId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Diagnosis", t => t.DiagnosisId)
+                .Index(t => t.DiagnosisId);
             
             CreateTable(
                 "dbo.Ethnicity",
@@ -74,23 +90,17 @@ namespace Phoenix.Data.Migrations
                         Notes = c.String(nullable: false, maxLength: 100),
                         FamilyName = c.String(nullable: false, maxLength: 30),
                         EthnicityID = c.Int(nullable: false),
+                        DiagnosisId = c.Int(),
+                        DiagnosisSubTypeId = c.Int(),
                         Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Ethnicity", t => t.EthnicityID)
-                .Index(t => t.EthnicityID);
-            
-            CreateTable(
-                "dbo.DiagnosisSubType",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 50),
-                        DiagnosisId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Diagnosis", t => t.DiagnosisId)
-                .Index(t => t.DiagnosisId);
+                .ForeignKey("dbo.DiagnosisSubType", t => t.DiagnosisSubTypeId)
+                .ForeignKey("dbo.Ethnicity", t => t.EthnicityID)
+                .Index(t => t.EthnicityID)
+                .Index(t => t.DiagnosisId)
+                .Index(t => t.DiagnosisSubTypeId);
             
             CreateTable(
                 "dbo.Error",
@@ -206,19 +216,25 @@ namespace Phoenix.Data.Migrations
             DropForeignKey("dbo.Rental", "StockId", "dbo.Stock");
             DropForeignKey("dbo.Stock", "MovieId", "dbo.Movie");
             DropForeignKey("dbo.Movie", "GenreId", "dbo.Genre");
-            DropForeignKey("dbo.DiagnosisSubType", "DiagnosisId", "dbo.Diagnosis");
             DropForeignKey("dbo.Person", "EthnicityId", "dbo.Ethnicity");
             DropForeignKey("dbo.Person", "FamilyId", "dbo.Family");
             DropForeignKey("dbo.Family", "EthnicityID", "dbo.Ethnicity");
+            DropForeignKey("dbo.Family", "DiagnosisSubTypeId", "dbo.DiagnosisSubType");
+            DropForeignKey("dbo.Family", "DiagnosisId", "dbo.Diagnosis");
+            DropForeignKey("dbo.Person", "DiagnosisSubTypeId", "dbo.DiagnosisSubType");
+            DropForeignKey("dbo.DiagnosisSubType", "DiagnosisId", "dbo.Diagnosis");
             DropForeignKey("dbo.Person", "DiagnosisId", "dbo.Diagnosis");
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserRole", new[] { "UserId" });
             DropIndex("dbo.Rental", new[] { "StockId" });
             DropIndex("dbo.Stock", new[] { "MovieId" });
             DropIndex("dbo.Movie", new[] { "GenreId" });
-            DropIndex("dbo.DiagnosisSubType", new[] { "DiagnosisId" });
+            DropIndex("dbo.Family", new[] { "DiagnosisSubTypeId" });
+            DropIndex("dbo.Family", new[] { "DiagnosisId" });
             DropIndex("dbo.Family", new[] { "EthnicityID" });
+            DropIndex("dbo.DiagnosisSubType", new[] { "DiagnosisId" });
             DropIndex("dbo.Person", new[] { "EthnicityId" });
+            DropIndex("dbo.Person", new[] { "DiagnosisSubTypeId" });
             DropIndex("dbo.Person", new[] { "DiagnosisId" });
             DropIndex("dbo.Person", new[] { "FamilyId" });
             DropTable("dbo.User");
@@ -229,9 +245,9 @@ namespace Phoenix.Data.Migrations
             DropTable("dbo.Movie");
             DropTable("dbo.Genre");
             DropTable("dbo.Error");
-            DropTable("dbo.DiagnosisSubType");
             DropTable("dbo.Family");
             DropTable("dbo.Ethnicity");
+            DropTable("dbo.DiagnosisSubType");
             DropTable("dbo.Person");
             DropTable("dbo.Diagnosis");
             DropTable("dbo.Customer");

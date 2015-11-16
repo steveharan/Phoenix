@@ -17,6 +17,10 @@ namespace Phoenix.Web.Models
         public string Notes { get; set; }
         public string Ethnicity { get; set; }
         public int EthnicityID { get; set; }
+        public string Diagnosis { get; set; }
+        public int DiagnosisID { get; set; }
+        public string DiagnosisSubType { get; set; }
+        public int DiagnosisSubTypeID { get; set; }
         public bool Deleted { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

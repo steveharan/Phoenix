@@ -56,7 +56,6 @@ C:\MyGit\Phoenix\HomeCinema.Data\obj\Debug\HomeCinema.Data.Migrations.initial_mi
 C:\MyGit\Phoenix\HomeCinema.Data\obj\Debug\Phoenix.Data.csproj.GenerateResource.Cache
 C:\MyGit\Phoenix\HomeCinema.Data\obj\Debug\HomeCinema.Data.dll
 C:\MyGit\Phoenix\HomeCinema.Data\obj\Debug\HomeCinema.Data.pdb
-C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\Phoenix.Data.dll.config
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\Phoenix.Data.dll
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\Phoenix.Data.pdb
@@ -81,7 +80,8 @@ C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Tr
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\Newtonsoft.Json.xml
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\System.Net.Http.Formatting.xml
 C:\MyGit\Phoenix\Phoenix.Data\bin\Debug\System.Web.Http.xml
-C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.dll
-C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.pdb
+C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.InitialMigration.resources
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.csproj.GenerateResource.Cache
+C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.dll
+C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.pdb

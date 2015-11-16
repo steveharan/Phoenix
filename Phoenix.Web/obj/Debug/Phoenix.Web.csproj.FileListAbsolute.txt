@@ -158,7 +158,6 @@ C:\MyGit\Phoenix\HomeCinema.Web\obj\Debug\HomeCinema.Web.dll
 C:\MyGit\Phoenix\HomeCinema.Web\obj\Debug\HomeCinema.Web.pdb
 C:\MyGit\Phoenix\HomeCinema.Web\bin\Phoenix.Services.dll
 C:\MyGit\Phoenix\HomeCinema.Web\bin\Phoenix.Services.pdb
-C:\MyGit\Phoenix\Phoenix.Web\obj\Debug\Phoenix.Web.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Web\bin\roslyn\csc.exe
 C:\MyGit\Phoenix\Phoenix.Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -236,5 +235,6 @@ C:\MyGit\Phoenix\Phoenix.Web\bin\pt\FluentValidation.resources.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\ru\FluentValidation.resources.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\sv\FluentValidation.resources.dll
 C:\MyGit\Phoenix\Phoenix.Web\bin\tr\FluentValidation.resources.dll
+C:\MyGit\Phoenix\Phoenix.Web\obj\Debug\Phoenix.Web.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Web\obj\Debug\Phoenix.Web.dll
 C:\MyGit\Phoenix\Phoenix.Web\obj\Debug\Phoenix.Web.pdb

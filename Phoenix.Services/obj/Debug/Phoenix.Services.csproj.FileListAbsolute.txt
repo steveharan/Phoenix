@@ -36,7 +36,6 @@ C:\MyGit\Phoenix\HomeCinema.Services\bin\Debug\Phoenix.Services.dll
 C:\MyGit\Phoenix\HomeCinema.Services\bin\Debug\Phoenix.Services.pdb
 C:\MyGit\Phoenix\HomeCinema.Services\obj\Debug\Phoenix.Services.dll
 C:\MyGit\Phoenix\HomeCinema.Services\obj\Debug\Phoenix.Services.pdb
-C:\MyGit\Phoenix\Phoenix.Services\obj\Debug\Phoenix.Services.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Services\bin\Debug\Phoenix.Services.dll.config
 C:\MyGit\Phoenix\Phoenix.Services\bin\Debug\Phoenix.Services.dll
 C:\MyGit\Phoenix\Phoenix.Services\bin\Debug\Phoenix.Services.pdb
@@ -53,5 +52,6 @@ C:\MyGit\Phoenix\Phoenix.Services\bin\Debug\Newtonsoft.Json.xml
 C:\MyGit\Phoenix\Phoenix.Services\bin\Debug\System.Net.Http.Formatting.xml
 C:\MyGit\Phoenix\Phoenix.Services\bin\Debug\System.Web.Http.xml
 C:\MyGit\Phoenix\Phoenix.Services\bin\Debug\EntityFramework.xml
+C:\MyGit\Phoenix\Phoenix.Services\obj\Debug\Phoenix.Services.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Services\obj\Debug\Phoenix.Services.dll
 C:\MyGit\Phoenix\Phoenix.Services\obj\Debug\Phoenix.Services.pdb

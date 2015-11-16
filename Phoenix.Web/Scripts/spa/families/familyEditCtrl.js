@@ -31,19 +31,39 @@
 
         $scope.myDate = new Date();
 
-        function ethnicityLoadCompleted(response) {
+        function ethnicitiesLoadCompleted(response) {
             console.log(response.data);
             $scope.ethniticies = response.data;
         }
 
-        function ethnicityLoadFailed(response) {
+        function ethnicitiesLoadFailed(response) {
             notificationService.displayError(response.data);
         }
 
-        function loadData() {
+        function loadEthnicities() {
             apiService.get("/api/ethnicity/list", null,
-                ethnicityLoadCompleted,
-                ethnicityLoadFailed)
+                ethnicitiesLoadCompleted,
+                ethnicitiesLoadFailed)
+        }
+
+        function diagnosesLoadCompleted(response) {
+            console.log(response.data);
+            $scope.diagnoses = response.data;
+        }
+
+        function diagnosesLoadFailed(response) {
+            notificationService.displayError(response.data);
+        }
+
+        function loadDiagnoses() {
+            apiService.get("/api/diagnosis/list", null,
+                diagnosesLoadCompleted,
+                diagnosesLoadFailed)
+        }
+
+        function loadData() {
+            loadEthnicities();
+//            loadDiagnoses();
         }
 
         function updateFamily() {

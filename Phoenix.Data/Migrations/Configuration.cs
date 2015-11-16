@@ -158,6 +158,8 @@ namespace Phoenix.Data.Migrations
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A nice family",
                     EthnicityID = 1,
+                    DiagnosisId = 1,
+                    DiagnosisSubTypeId = 1,
                     Deleted = false
                 },
                 new Family()
@@ -166,6 +168,8 @@ namespace Phoenix.Data.Migrations
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A great family",
                     EthnicityID = 2,
+                    DiagnosisId = 1,
+                    DiagnosisSubTypeId = 2,
                     Deleted = false
                 }
             };
@@ -186,9 +190,11 @@ namespace Phoenix.Data.Migrations
                     Adopted = false,
                     HeightCM = 200,
                     WeightKG = 76,
+                    Deceased = false,
                     EthnicityId = 1,
                     FamilyId = 1,
-                    DiagnosisId = 1
+                    DiagnosisId = 1,
+                    DiagnosisSubTypeId = 2
                 },
                 new Person()
                 {
@@ -199,9 +205,11 @@ namespace Phoenix.Data.Migrations
                     Adopted = false,
                     HeightCM = 100,
                     WeightKG = 30,
+                    Deceased = false,
                     EthnicityId = 1, 
                     FamilyId = 1,
-                    DiagnosisId = 1
+                    DiagnosisId = 1,
+                    DiagnosisSubTypeId = 1
                 }
             };
 
