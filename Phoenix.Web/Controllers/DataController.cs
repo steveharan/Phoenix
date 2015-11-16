@@ -21,13 +21,18 @@ namespace Phoenix.Web.Controllers
     {
         private readonly IEntityBaseRepository<Ethnicity> _ethnicityRepository;
         private readonly IEntityBaseRepository<Diagnosis> _diagnosisRepository;
+        private readonly IEntityBaseRepository<DiagnosisSubType> _diagnosisSubTypeRepository;
 
-        public DataController(IEntityBaseRepository<Ethnicity> ethnicityRepository, IEntityBaseRepository<Diagnosis> diagnosisRepository,
-            IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork)
-            : base(_errorsRepository, _unitOfWork)
+        public DataController(IEntityBaseRepository<Ethnicity> ethnicityRepository, 
+                                IEntityBaseRepository<Diagnosis> diagnosisRepository,
+                                IEntityBaseRepository<DiagnosisSubType> diagnosisSubTypeRepository,
+                                IEntityBaseRepository<Error> _errorsRepository, 
+                                IUnitOfWork _unitOfWork)
+                                : base(_errorsRepository, _unitOfWork)
         {
             _ethnicityRepository = ethnicityRepository;
             _diagnosisRepository = diagnosisRepository;
+            _diagnosisSubTypeRepository = diagnosisSubTypeRepository;
         }
 
         [HttpGet]
@@ -67,6 +72,27 @@ namespace Phoenix.Web.Controllers
                     IEnumerable<DiagnosisViewModel>>(diagnosis);
 
                 response = request.CreateResponse<IEnumerable<DiagnosisViewModel>>(HttpStatusCode.OK, diagnosisVM);
+
+                return response;
+            });
+        }
+
+        [HttpGet]
+        [Route("diagnosisSubType/{diagnosisId:int=0}")]
+        public HttpResponseMessage ListDiagnosisSubType(HttpRequestMessage request, int diagnosisId)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<DiagnosisSubType> diagnosisSubType = null;
+                diagnosisSubType = _diagnosisSubTypeRepository.FindBy(c => c.DiagnosisId.Equals(diagnosisId))
+                    .OrderBy(c => c.ID)
+                    .ToList();
+
+                IEnumerable<DiagnosisSubTypeViewModel> diagnosisSubTypeVM = Mapper.Map<IEnumerable<DiagnosisSubType>,
+                    IEnumerable<DiagnosisSubTypeViewModel>>(diagnosisSubType);
+
+                response = request.CreateResponse<IEnumerable<DiagnosisSubTypeViewModel>>(HttpStatusCode.OK, diagnosisSubTypeVM);
 
                 return response;
             });

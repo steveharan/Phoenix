@@ -42,8 +42,7 @@ namespace Phoenix.Web.Infrastructure.Extensions
             family.Notes = familyVm.Notes;
             family.EthnicityID = familyVm.EthnicityID;
             family.DiagnosisID = familyVm.DiagnosisID;
-            //            family.DiagnosisSubTypeId = familyVm.DiagnosisSubTypeID;
-            family.DiagnosisSubTypeId = 1;
+            family.DiagnosisSubTypeId = familyVm.DiagnosisSubTypeID;
             family.Deleted = familyVm.Deleted;
         }
     }

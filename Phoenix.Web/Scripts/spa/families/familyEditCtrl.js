@@ -17,9 +17,9 @@
                 return 'Edit';
             }
         }
-
         $scope.cancelEdit = cancelEdit;
         $scope.updateFamily = updateFamily;
+        $scope.GetDiagnosisSubType = GetDiagnosisSubType;
 
         $scope.openDatePicker = openDatePicker;
         $scope.dateOptions = {
@@ -55,15 +55,39 @@
             notificationService.displayError(response.data);
         }
 
+        function diagnosesSubTypeLoadCompleted(response) {
+            console.log(response.data);
+            $scope.diagnosesSubType = response.data;
+        }
+
+        function diagnosesSubTypeLoadFailed(response) {
+            notificationService.displayError(response.data);
+        }
+
         function loadDiagnoses() {
             apiService.get("/api/data/diagnosis", null,
                 diagnosesLoadCompleted,
-                diagnosesLoadFailed)
+                diagnosesLoadFailed);
+
+            GetDiagnosisSubType();
         }
 
         function loadData() {
             loadEthnicities();
             loadDiagnoses();
+        }
+
+        function GetDiagnosisSubType() {
+
+            var config = {
+                params: {
+                    diagnosisId: $scope.EditedFamily.DiagnosisID
+                }
+            };
+
+            apiService.get("/api/data/diagnosisSubType", config,
+                diagnosesSubTypeLoadCompleted,
+                diagnosesSubTypeLoadFailed)
         }
 
         function updateFamily() {

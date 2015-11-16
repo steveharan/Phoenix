@@ -77,6 +77,8 @@
             console.log('newfamily=');
             console.log($scope.newFamily);
             $scope.EditedFamily = family;
+            console.log('editedfamily=');
+            console.log($scope.EditedFamily);
             $modal.open({
                 templateUrl: 'scripts/spa/families/familyEditModal.html',
                 controller: 'familyEditCtrl',

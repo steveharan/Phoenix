@@ -39,8 +39,9 @@ namespace Phoenix.Web.Infrastructure.Mappings
                 .ForMember(vm => vm.DiagnosisSubType, map => map.MapFrom(m => m.DiagnosisSubType.Name));
 
             Mapper.CreateMap<Ethnicity, EthnicityViewModel>();
-
             Mapper.CreateMap<Diagnosis, DiagnosisViewModel>();
+            Mapper.CreateMap<DiagnosisSubType, DiagnosisSubTypeViewModel>();
+
         }
     }
 }
