@@ -52,19 +52,23 @@ namespace Phoenix.Web.Controllers
                         .Take(currentPageSize)
                         .ToList();
 
-                    totalFamilies = _familyRepository.GetAll()
+                    totalFamilies = _familyRepository
+                        .FindBy(c => c.FamilyName.ToLower().Contains(filter)
+                                                        && c.Deleted == false)
                         .Where(c => c.FamilyName.ToLower().Contains(filter))
                         .Count();
                 }
                 else
                 {
-                    families = _familyRepository.FindBy(c => c.Deleted == false)
+                    families = _familyRepository
+                        .FindBy(c => c.Deleted == false)
                         .OrderBy(c => c.ID)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
                     .ToList();
 
-                    totalFamilies = _familyRepository.GetAll().Count();
+                    totalFamilies = _familyRepository
+                        .FindBy(c => c.Deleted == false).Count();
                 }
 
                 IEnumerable<FamilyViewModel> familiesVM = Mapper.Map<IEnumerable<Family>, IEnumerable<FamilyViewModel>>(families);
@@ -176,7 +180,7 @@ namespace Phoenix.Web.Controllers
                 }
                 else
                 {
-                    if (_familyRepository.FamilyExists(family.FamilyName))
+                    if (!family.Deleted && _familyRepository.FamilyExists(family.FamilyName))
                     {
                         ModelState.AddModelError("Error", "This family name already exists");
                         response = request.CreateResponse(HttpStatusCode.BadRequest,

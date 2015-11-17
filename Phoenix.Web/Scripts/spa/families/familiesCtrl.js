@@ -6,7 +6,6 @@
     familiesCtrl.$inject = ['$scope', '$modal', 'apiService', 'notificationService'];
 
     function familiesCtrl($scope, $modal, apiService, notificationService) {
-
         $scope.pageClass = 'page-families';
         $scope.loadingFamilies = true;
         $scope.page = 0;
@@ -19,6 +18,7 @@
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.openEditDialog = openEditDialog;
+        $scope.updateFamily = updateFamily;
         $scope.deleteFamily = deleteFamily;
 
         $scope.showTableFormat = false;
@@ -46,8 +46,10 @@
         }
 
         function deleteFamilyCompleted(response) {
-            notificationService.displaySuccess('The family has been deleted');
-            clearSearch();
+            if (confirm('Are you sure you want to delete this family?')) {
+                notificationService.displaySuccess('The family has been deleted');
+                clearSearch();
+            }
         }
 
         function updateFamilyLoadFailed(response) {
@@ -56,33 +58,32 @@
         }
 
         function deleteFamily(family) {
-            console.log('Delete family');
-            console.log(family);
             family.deleted = true;
-            console.log(family);
-            apiService.post('/api/families/update/', family,
-                        deleteFamilyCompleted,
-                        deleteFamilyCompleted);
+            openEditDialog(family);
         }
 
-        function openEditDialog(family) {
-            console.log('Editing...');
-            console.log(family);
+        function updateFamily(family) {
             if (family == null) {
                 $scope.newFamily = true;
             }
             else {
                 $scope.newFamily = false;
             }
-            console.log('newfamily=');
-            console.log($scope.newFamily);
+            family = {};
+            console.log('updatefamily');
+            console.log(family);
+            family.deleted = false;
+            openEditDialog(family);
+        }
+
+        function openEditDialog(family) {
             $scope.EditedFamily = family;
-            console.log('editedfamily=');
-            console.log($scope.EditedFamily);
             $modal.open({
                 templateUrl: 'scripts/spa/families/familyEditModal.html',
                 controller: 'familyEditCtrl',
-                scope: $scope
+                backdrop: 'static',
+                scope: $scope,
+                windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
                 clearSearch();
             }, function () {
@@ -115,6 +116,8 @@
         }
 
         $scope.search();
+
     }
+
 
 })(angular.module('phoenix'));

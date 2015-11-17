@@ -19,11 +19,11 @@ namespace Phoenix.Entities
         public bool Deceased { get; set; }
         public int FamilyId { get; set; }
         public virtual Family Family { get; set; }
-        public int DiagnosisId { get; set; }
+        public int? DiagnosisId { get; set; }
         public virtual Diagnosis Diagnosis { get; set; }
-        public int DiagnosisSubTypeId { get; set; }
+        public int? DiagnosisSubTypeId { get; set; }
         public virtual DiagnosisSubType DiagnosisSubType { get; set; }
-        public int EthnicityId { get; set; }
+        public int? EthnicityId { get; set; }
         public virtual Ethnicity Ethnicity { get; set; }
     }
 }

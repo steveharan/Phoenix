@@ -8,23 +8,19 @@
             <div class="">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-10">
+                        <div class="col-xs-5">
                             <label class="control-label" for="firstName">Family Name</label>
-                            <input type="text" class="form-control" ng-model="EditedFamily.FamilyName" name="firstName" id="firstName" placeholder="Family Name"
+                            <input type="text" class="form-control"  ng-disabled="EditedFamily.deleted" ng-model="EditedFamily.FamilyName" name="firstName" id="firstName" placeholder="Family Name"
                                    validate-on="blur" required required-message="'Family Name is required'">
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-10 selectContainer">
+                        <div class="col-xs-5 selectContainer">
                             <label class="control-label" for="firstRegisteredDate">Date First Registered</label>
                             <p class="input-group">
                                 <input type="text" class="form-control" name="firstRegisteredDate" datepicker-popup="{{format}}" ng-model="EditedFamily.FirstRegisteredDate" is-open="datepicker.opened"
-                                       datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                       datepicker-options="dateOptions" ng-disabled="EditedFamily.deleted" ng-required="true" datepicker-append-to-body="true" close-text="Close"
                                        validate-on="blur" required required-message="'Registered Date is required'" />
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    <button type="button" class="btn btn-default" ng-disabled="EditedFamily.deleted" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </p>
                         </div>
@@ -34,38 +30,32 @@
                     <div class="row">
                         <div class="col-xs-10 selectContainer">
                             <label class="control-label" for="Notes">Notes</label>
-                            <textarea rows="5" class="form-control" ng-model="EditedFamily.Notes" id="notes" name="notes" placeholder="General Notes"
-                                   validate-on="blur" required required-message="'Notes are required'"></textarea>
+                            <textarea rows="5" class="form-control" ng-disabled="EditedFamily.deleted" ng-model="EditedFamily.Notes" id="notes" name="notes" placeholder="General Notes"
+                                      validate-on="blur" required required-message="'Notes are required'"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-10">
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="primaryEthnicity">Primary Ethnicity</label>
-                                <select ng-model="EditedFamily.EthnicityID" class="form-control black" ng-options="option.ID as option.EthnicityName for option in ethniticies" required></select>
-                                <input type="hidden" name="EthnicityId" ng-value="EditedFamily.EthnicityId" />
+                                <select ng-model="EditedFamily.EthnicityID" class="form-control black" ng-disabled="EditedFamily.deleted" ng-options="option.ID as option.EthnicityName for option in ethniticies" required></select>
+                                <input type="hidden" name="EthnicityId" ng-disabled="EditedFamily.deleted" ng-value="EditedFamily.EthnicityId" />
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-10">
+                        <div class="col-xs-3">
                             <div class="form-group">
                                 <label for="primaryEthnicity">Primary Diagnosis</label>
-                                <select ng-model="EditedFamily.DiagnosisID" class="form-control black" ng-change="GetDiagnosisSubType()" ng-options="option.ID as option.Name for option in diagnoses" required></select>
-                                <input type="hidden" name="DiagnosisId" ng-value="EditedFamily.DiagnosisId" />
+                                <select ng-model="EditedFamily.DiagnosisID" class="form-control black" ng-disabled="EditedFamily.deleted" ng-change="GetDiagnosisSubType()" ng-options="option.ID as option.Name for option in diagnoses" required></select>
+                                <input type="hidden" name="DiagnosisId" ng-disabled="EditedFamily.deleted" ng-value="EditedFamily.DiagnosisId" />
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-10">
+                        <div class="col-xs-3">
                             <div class="form-group">
                                 <label for="primaryEthnicity">Diagnosis Subtype</label>
-                                <select ng-model="EditedFamily.DiagnosisSubTypeID" class="form-control black"ng-options="option.ID as option.Name for option in diagnosesSubType" required></select>
-                                <input type="hidden" name="DiagnosisSubTypeId" ng-value="EditedFamily.DiagnosisSubTypeId" />
+                                <select ng-model="EditedFamily.DiagnosisSubTypeID" ng-disabled="EditedFamily.deleted" class="form-control black" ng-options="option.ID as option.Name for option in diagnosesSubType" required></select>
+                                <input type="hidden" name="DiagnosisSubTypeId" ng-disabled="EditedFamily.deleted" ng-value="EditedFamily.DiagnosisSubTypeId" />
                             </div>
                         </div>
                     </div>
@@ -76,7 +66,9 @@
     <div class="panel-footer clearfix">
         <div class="pull-right">
             <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
-            <button type="button" class="btn btn-primary" ng-click="updateFamily()">Update</button>
+            <button type="button" class="btn btn-primary" ng-show="!newFamily && !EditedFamily.deleted" ng-click="updateFamily()">Update</button>
+            <button type="button" class="btn btn-primary" ng-show="newFamily && !EditedFamily.deleted" ng-click="updateFamily()">Add</button>
+            <button type="button" class="btn btn-primary" ng-show="EditedFamily.deleted" ng-click="updateFamily()">Delete</button>
         </div>
     </div>
 </div>

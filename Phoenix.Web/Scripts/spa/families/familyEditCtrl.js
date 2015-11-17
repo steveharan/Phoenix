@@ -7,14 +7,18 @@
 
     function familyEditCtrl($scope, $modalInstance, $timeout, apiService, notificationService) {
         $scope.addOrEdit = setLable();
-
         function setLable() {
-            if ($scope.newFamily) {
-                $scope.EditedFamily = {};
-                return 'Add New';
+            if ($scope.EditedFamily.deleted) {
+                return 'PLEASE CONFIRM DELETE FOR THE';
             }
             else {
-                return 'Edit';
+                if ($scope.newFamily) {
+                    $scope.EditedFamily = {};
+                    return 'Add New';
+                }
+                else {
+                    return 'Edit';
+                }
             }
         }
         $scope.cancelEdit = cancelEdit;
@@ -105,8 +109,15 @@
         }
 
         function updateFamilyCompleted(response) {
-            notificationService.displaySuccess('The ' + $scope.EditedFamily.FamilyName + ' family has been updated');
-            $scope.Editedfamily = {};
+            console.log('updateFamilyCompleted Scope');
+            console.log($scope);
+            if ($scope.EditedFamily.deleted) {
+                notificationService.displaySuccess('The ' + $scope.EditedFamily.FamilyName + ' family has been deleted');
+            }
+            else {
+                notificationService.displaySuccess('The ' + $scope.EditedFamily.FamilyName + ' family has been updated');
+            }
+            $scope.EditedFamily = {};
             $modalInstance.dismiss();
         }
 

@@ -14,7 +14,7 @@ namespace Phoenix.Data.Extensions
         {
             bool _familyExists = false;
 
-            _familyExists = familyRepository.GetAll()
+            _familyExists = familyRepository.FindBy(c => c.Deleted == false)
                 .Any(c => c.FamilyName.ToLower() == familyName);
 
             return _familyExists;

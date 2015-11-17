@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('phoenix', ['common.core', 'common.ui'])
+    angular.module('phoenix', ['common.core', 'common.ui', 'ui.bootstrap'])
         .config(config)
         .run(run);
 
