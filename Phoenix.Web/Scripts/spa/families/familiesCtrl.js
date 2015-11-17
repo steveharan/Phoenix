@@ -65,13 +65,11 @@
         function updateFamily(family) {
             if (family == null) {
                 $scope.newFamily = true;
+                family = {};
             }
             else {
                 $scope.newFamily = false;
             }
-            family = {};
-            console.log('updatefamily');
-            console.log(family);
             family.deleted = false;
             openEditDialog(family);
         }

@@ -978,8 +978,6 @@
     <Content Include="Scripts\spa\Layout\sideBar.html" />
     <Content Include="Scripts\spa\Layout\topBar.directive.js" />
     <Content Include="Scripts\spa\Layout\topBar.html" />
-    <Content Include="Scripts\spa\Layout\topBarMaterial.directive.js" />
-    <Content Include="Scripts\spa\Layout\topBarMaterial.html" />
     <Content Include="Scripts\spa\modules\common.core.js" />
     <Content Include="Scripts\spa\modules\common.ui.js" />
     <Content Include="Scripts\spa\movies\add.html" />
