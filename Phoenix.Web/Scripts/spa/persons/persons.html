@@ -10,7 +10,7 @@
         <div class="panel-heading clearfix">
             <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Family members for the {{FamilyName}} family...</h3>
             <div class="input-group">
-                <input id="inputSearchFamilies" type="search" ng-model="filterPersons" class="form-control shortInputSearch" placeholder="Filter, search people..">
+                <input id="inputSearchPersons" type="search" ng-model="filterPersons" class="form-control shortInputSearch" placeholder="Filter, search people..">
                 <div class="input-group-btn">
                     <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
                     <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
@@ -22,8 +22,8 @@
             </div>
         </div>
 
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="showTableFormat">Show Table View</button>
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="!showTableFormat">Show Card View</button>
+        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</button>
+        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</button>
         <button class="btn btn-primary btn-xs" ng-click="updatePerson();">Add Person<i class="fa fa-plus pull-right"></i></button>
 
         <div class="panel-body" ng-hide="showTableFormat">

@@ -69,7 +69,7 @@ namespace Phoenix.Web.Controllers
                     .ToList();
 
                     totalPersons = _personRepository
-                        .GetAll().Count();
+                        .FindBy(c => c.FamilyId == id && c.Deleted == false).Count();
                 }
 
                 IEnumerable<PersonViewModel> personsVM = Mapper.Map<IEnumerable<Person>, IEnumerable<PersonViewModel>>(persons);
