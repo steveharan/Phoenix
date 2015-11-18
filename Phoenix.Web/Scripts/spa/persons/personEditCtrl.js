@@ -1,19 +1,19 @@
 ﻿(function (app) {
     'use strict';
 
-    app.controller('familyEditCtrl', familyEditCtrl);
+    app.controller('personEditCtrl', personEditCtrl);
 
-    familyEditCtrl.$inject = ['$scope', '$modal', '$modalInstance', '$timeout', 'apiService', 'notificationService'];
+    personEditCtrl.$inject = ['$scope', '$modal', '$routeParams', '$modalInstance', '$timeout', 'apiService', 'notificationService'];
 
-    function familyEditCtrl($scope, $modal,$modalInstance, $timeout, apiService, notificationService) {
+    function personEditCtrl($scope, $modal, $routeParams, $modalInstance, $timeout, apiService, notificationService) {
         $scope.addOrEdit = setLable();
         function setLable() {
-            if ($scope.EditedFamily.deleted) {
-                return 'PLEASE CONFIRM DELETE FOR THE';
+            if ($scope.EditedPerson.deleted) {
+                return 'PLEASE CONFIRM DELETE FOR ';
             }
             else {
-                if ($scope.newFamily) {
-                    $scope.EditedFamily = {};
+                if ($scope.newPerson) {
+                    $scope.EditedPerson = {};
                     return 'Add New';
                 }
                 else {
@@ -22,34 +22,21 @@
             }
         }
         $scope.cancelEdit = cancelEdit;
-        $scope.updateFamily = updateFamily;
+        $scope.updatePerson = updatePerson;
         $scope.GetDiagnosisSubType = GetDiagnosisSubType;
 
         $scope.openDatePicker = openDatePicker;
+        $scope.openDatePicker2 = openDatePicker2;
+
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
         $scope.datepicker = {};
+        $scope.datepicker2 = {};
         $scope.ethnicities = [];
-        $scope.openPersonDialog = openPersonDialog;
 
         $scope.myDate = new Date();
-
-        function openPersonDialog(family) {
-            $scope.EditedFamily = family;
-            $modal.open({
-                templateUrl: 'scripts/spa/families/familyPersonsModal.html',
-                controller: 'familyPersonsCtrl',
-                backdrop: 'static',
-                scope: $scope,
-                windowClass: 'app-modal-window'
-            }).result.then(function ($scope) {
-                clearSearch();
-            }, function () {
-                clearSearch();
-            });
-        }
 
         function ethnicitiesLoadCompleted(response) {
             console.log(response.data);
@@ -101,7 +88,7 @@
 
             var config = {
                 params: {
-                    diagnosisId: $scope.EditedFamily.DiagnosisID
+                    diagnosisId: $scope.EditedPerson.DiagnosisID
                 }
             };
 
@@ -110,37 +97,37 @@
                 diagnosesSubTypeLoadFailed)
         }
 
-        function updateFamily() {
-            if (!$scope.newFamily) {
-                apiService.post('/api/families/update/', $scope.EditedFamily,
-                updateFamilyCompleted,
-                updateFamilyLoadFailed);
+        function updatePerson() {
+            if (!$scope.newPerson) {
+                apiService.post('/api/persons/update/', $scope.EditedPerson,
+                updatePersonCompleted,
+                updatePersonLoadFailed);
             }
             else {
-                console.log('create fam');
-
-                console.log($scope.EditedFamily);
-
-                apiService.post('/api/families/create', $scope.EditedFamily,
-                updateFamilyCompleted,
-                updateFamilyLoadFailed);
+                $scope.EditedPerson.FamilyID = $routeParams.id;
+                console.log('create person - editedperson is');
+                console.log($scope.EditedPerson);
+                console.log('create person - editedperson above');
+                apiService.post('/api/persons/create', $scope.EditedPerson,
+                updatePersonCompleted,
+                updatePersonLoadFailed);
             }
         }
 
-        function updateFamilyCompleted(response) {
-            console.log('updateFamilyCompleted Scope');
+        function updatePersonCompleted(response) {
+            console.log('updatePersonCompleted Scope');
             console.log($scope);
-            if ($scope.EditedFamily.deleted) {
-                notificationService.displaySuccess('The ' + $scope.EditedFamily.FamilyName + ' family has been deleted');
+            if ($scope.EditedPerson.deleted) {
+                notificationService.displaySuccess($scope.EditedPerson.FirstName + ' deleted');
             }
             else {
-                notificationService.displaySuccess('The ' + $scope.EditedFamily.FamilyName + ' family has been updated');
+                notificationService.displaySuccess($scope.EditedPerson.FirstName + ' updated');
             }
-            $scope.EditedFamily = {};
+            $scope.EditedPerson = {};
             $modalInstance.dismiss();
         }
 
-        function updateFamilyLoadFailed(response) {
+        function updatePersonLoadFailed(response) {
             console.log(response);
             notificationService.displayError(response.data);
         }
@@ -153,9 +140,24 @@
         function openDatePicker($event) {
             $event.preventDefault();
             $event.stopPropagation();
+            $scope.datepicker2.opened = false;
 
             $timeout(function () {
                 $scope.datepicker.opened = true;
+            });
+
+            $timeout(function () {
+                $('ul[datepicker-popup-wrap]').css('z-index', '10000');
+            }, 100);
+        };
+
+        function openDatePicker2($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.datepicker.opened = false;
+
+            $timeout(function () {
+                $scope.datepicker2.opened = true;
             });
 
             $timeout(function () {

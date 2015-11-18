@@ -45,7 +45,7 @@
             personsLoadFailed);
         }
 
-        function updateFamilyLoadFailed(response) {
+        function updatePersonLoadFailed(response) {
             console.log(response);
             notificationService.displayError(response.data);
         }
@@ -87,6 +87,7 @@
             console.log('personloadcomplete');
             console.log($scope.Persons);
             $scope.FamilyName = $scope.Persons[0].FamilyName;
+            console.log($scope);
 
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;

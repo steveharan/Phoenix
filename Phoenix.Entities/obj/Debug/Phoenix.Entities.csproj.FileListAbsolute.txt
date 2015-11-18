@@ -45,6 +45,5 @@ C:\MyGit\Phoenix\Phoenix.Entities\bin\Debug\EntityFramework.SqlServer.xml
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Debug\Newtonsoft.Json.xml
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Debug\System.Net.Http.Formatting.xml
 C:\MyGit\Phoenix\Phoenix.Entities\bin\Debug\System.Web.Http.xml
-C:\MyGit\Phoenix\Phoenix.Entities\obj\Debug\Phoenix.Entities.csprojResolveAssemblyReference.cache
 C:\MyGit\Phoenix\Phoenix.Entities\obj\Debug\Phoenix.Entities.dll
 C:\MyGit\Phoenix\Phoenix.Entities\obj\Debug\Phoenix.Entities.pdb

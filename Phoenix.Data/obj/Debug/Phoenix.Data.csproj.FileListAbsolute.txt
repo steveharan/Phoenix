@@ -85,6 +85,8 @@ C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.InitialMigration
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.second.resources
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.third.resources
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.fourth.resources
+C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.fifth.resources
+C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.Migrations.sixth.resources
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.csproj.GenerateResource.Cache
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.dll
 C:\MyGit\Phoenix\Phoenix.Data\obj\Debug\Phoenix.Data.pdb

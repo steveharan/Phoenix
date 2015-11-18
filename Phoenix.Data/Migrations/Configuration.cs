@@ -191,12 +191,13 @@ namespace Phoenix.Data.Migrations
                     HeightCM = 200,
                     WeightKG = 76,
                     Deceased = false,
-                    DateFirstRegistered = DateTime.Now,
+                    FirstRegisteredDate = DateTime.Now,
                     Notes = "Notes",
                     EthnicityId = 1,
                     FamilyId = 1,
                     DiagnosisId = 1,
-                    DiagnosisSubTypeId = 2
+                    DiagnosisSubTypeId = 2,
+                    Deleted = false
                 },
                 new Person()
                 {
@@ -208,12 +209,13 @@ namespace Phoenix.Data.Migrations
                     HeightCM = 100,
                     WeightKG = 30,
                     Deceased = false,
-                    DateFirstRegistered = DateTime.Now,
+                    FirstRegisteredDate = DateTime.Now,
                     Notes = "Notes",
                     EthnicityId = 1, 
                     FamilyId = 1,
                     DiagnosisId = 1,
-                    DiagnosisSubTypeId = 1
+                    DiagnosisSubTypeId = 1,
+                    Deleted = false
                 }
             };
 

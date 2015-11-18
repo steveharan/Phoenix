@@ -46,23 +46,23 @@ namespace Phoenix.Web.Controllers
                     filter = filter.Trim().ToLower();
 
                     persons = _personRepository.FindBy(c => (c.SurName.ToLower().Contains(filter.ToLower())
-                                                          || c.FirstName.ToLower().Contains(filter.ToLower())) && (c.FamilyId == id) )
+                                                          || c.FirstName.ToLower().Contains(filter.ToLower())) && (c.FamilyId == id) && c.Deleted == false)
                         .OrderBy(c => c.SurName)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
                         .ToList();
 
                     totalPersons = _personRepository
-                        .FindBy(c => c.SurName.ToLower().Contains(filter.ToLower())
-                             || c.FirstName.ToLower().Contains(filter.ToLower()))
-                        .Where(c => c.SurName.ToLower().Contains(filter.ToLower())
-                             || c.FirstName.ToLower().Contains(filter.ToLower()))
+                        .FindBy(c => (c.SurName.ToLower().Contains(filter.ToLower())
+                             || c.FirstName.ToLower().Contains(filter.ToLower())) && c.Deleted == false)
+                        .Where(c => (c.SurName.ToLower().Contains(filter.ToLower())
+                             || c.FirstName.ToLower().Contains(filter.ToLower())) && c.Deleted == false)
                         .Count();
                 }
                 else
                 {
                     persons = _personRepository
-                        .FindBy(c => c.FamilyId == id)
+                        .FindBy(c => c.FamilyId == id && c.Deleted == false)
                         .OrderBy(c => c.ID)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)

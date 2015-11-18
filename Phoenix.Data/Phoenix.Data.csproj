@@ -121,6 +121,14 @@
     <Compile Include="Migrations\201511181349532_fourth.Designer.cs">
       <DependentUpon>201511181349532_fourth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511181627166_fifth.cs" />
+    <Compile Include="Migrations\201511181627166_fifth.Designer.cs">
+      <DependentUpon>201511181627166_fifth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511181645144_sixth.cs" />
+    <Compile Include="Migrations\201511181645144_sixth.Designer.cs">
+      <DependentUpon>201511181645144_sixth.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhoenixContext.cs" />
     <Compile Include="Phoenix\Data\Repositories\IEntityBaseRepository.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
@@ -159,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511181349532_fourth.resx">
       <DependentUpon>201511181349532_fourth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511181627166_fifth.resx">
+      <DependentUpon>201511181627166_fifth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511181645144_sixth.resx">
+      <DependentUpon>201511181645144_sixth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

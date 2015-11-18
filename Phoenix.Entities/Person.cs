@@ -17,7 +17,7 @@ namespace Phoenix.Entities
         public decimal HeightCM { get; set; }
         public decimal WeightKG { get; set; }
         public bool Deceased { get; set; }
-        public DateTime DateFirstRegistered { get; set; }
+        public DateTime FirstRegisteredDate { get; set; }
         public string Notes { get; set; }
         public int FamilyId { get; set; }
         public virtual Family Family { get; set; }
@@ -27,5 +27,6 @@ namespace Phoenix.Entities
         public virtual DiagnosisSubType DiagnosisSubType { get; set; }
         public int? EthnicityId { get; set; }
         public virtual Ethnicity Ethnicity { get; set; }
+        public bool Deleted { get; set; }
     }
 }

@@ -56,12 +56,13 @@ namespace Phoenix.Web.Infrastructure.Extensions
             person.WeightKG = personVm.WeightKG;
             person.HeightCM = personVm.HeightCM;
             person.Deceased = personVm.Deceased;
-            person.DateFirstRegistered = personVm.DateFirstRegistered;
+            person.FirstRegisteredDate = personVm.FirstRegisteredDate;
             person.Notes = personVm.Notes;
             person.DiagnosisId = personVm.DiagnosisID;
             person.DiagnosisSubTypeId = personVm.DiagnosisSubTypeID;
             person.EthnicityId = personVm.EthnicityID;
             person.FamilyId = personVm.FamilyID;
+            person.Deleted = personVm.Deleted;
         }
 
         public static void UpdatePersonRelationship(this PersonRelationship personRelationship, PersonRelationshipViewModel personRelationshipVM)

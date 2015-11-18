@@ -988,6 +988,8 @@
     <Content Include="Scripts\spa\movies\movieEditCtrl.js" />
     <Content Include="Scripts\spa\movies\movies.html" />
     <Content Include="Scripts\spa\movies\moviesCtrl.js" />
+    <Content Include="Scripts\spa\persons\personEditCtrl.js" />
+    <Content Include="Scripts\spa\persons\personEditModal.html" />
     <Content Include="Scripts\spa\persons\persons.html" />
     <Content Include="Scripts\spa\persons\personsCtrl.js" />
     <Content Include="Scripts\spa\rental\rental.html" />
