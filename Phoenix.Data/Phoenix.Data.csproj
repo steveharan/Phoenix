@@ -95,6 +95,7 @@
     <Compile Include="Configurations\GenreConfiguration.cs" />
     <Compile Include="Configurations\MovieConfiguration.cs" />
     <Compile Include="Configurations\PersonConfiguration.cs" />
+    <Compile Include="Configurations\PersonRelationshipConfiguration.cs" />
     <Compile Include="Configurations\RentalConfiguration.cs" />
     <Compile Include="Configurations\RoleConfiguration.cs" />
     <Compile Include="Configurations\StockConfiguration.cs" />
@@ -115,6 +116,10 @@
     <Compile Include="Migrations\201511181114051_third.cs" />
     <Compile Include="Migrations\201511181114051_third.Designer.cs">
       <DependentUpon>201511181114051_third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511181349532_fourth.cs" />
+    <Compile Include="Migrations\201511181349532_fourth.Designer.cs">
+      <DependentUpon>201511181349532_fourth.cs</DependentUpon>
     </Compile>
     <Compile Include="PhoenixContext.cs" />
     <Compile Include="Phoenix\Data\Repositories\IEntityBaseRepository.cs" />
@@ -151,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511181114051_third.resx">
       <DependentUpon>201511181114051_third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511181349532_fourth.resx">
+      <DependentUpon>201511181349532_fourth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

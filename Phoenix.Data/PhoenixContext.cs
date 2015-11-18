@@ -29,6 +29,7 @@ namespace Phoenix.Data
         public IDbSet<Rental> RentalSet { get; set; }
         public IDbSet<Family> FamilySet { get; set; }
         public IDbSet<Person> PersonSet { get; set; }
+        public IDbSet<PersonRelationship> PersonRelationshipSet { get; set; }
         public IDbSet<Diagnosis> DiagnosisSet { get; set; }
         public IDbSet<DiagnosisSubType> DiagnosisSubTypeSet { get; set; }
         public IDbSet<Ethnicity> EthnicitySet { get; set; }

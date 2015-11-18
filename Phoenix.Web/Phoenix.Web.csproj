@@ -1035,6 +1035,7 @@
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Infrastructure\Validators\DiagnosisSubTypeViewModelValidator.cs" />
     <Compile Include="Infrastructure\Validators\DiagnosisViewModelValidator.cs" />
+    <Compile Include="Infrastructure\Validators\PersonRelationshipViewModelValidator.cs" />
     <Compile Include="Infrastructure\Validators\PersonViewModelValidator.cs" />
     <Compile Include="Models\DiagnosisSubTypeViewModel.cs" />
     <Compile Include="Models\DiagnosisViewModel.cs" />
@@ -1064,6 +1065,7 @@
     <Compile Include="Infrastructure\Validators\StockViewModelValidator.cs" />
     <Compile Include="Models\EthnicityViewModel.cs" />
     <Compile Include="Models\FamilyViewModel.cs" />
+    <Compile Include="Models\PersonRelationshipViewModel.cs" />
     <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Models\StockViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />

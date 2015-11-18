@@ -63,5 +63,12 @@ namespace Phoenix.Web.Infrastructure.Extensions
             person.EthnicityId = personVm.EthnicityID;
             person.FamilyId = personVm.FamilyID;
         }
+
+        public static void UpdatePersonRelationship(this PersonRelationship personRelationship, PersonRelationshipViewModel personRelationshipVM)
+        {
+            personRelationship.PersonId = personRelationshipVM.PersonId;
+            personRelationship.RelationWithPersonId = personRelationshipVM.RelationWithPersonId;
+            personRelationship.RelationshipType = personRelationshipVM.RelationshipType;
+        }
     }
 }
