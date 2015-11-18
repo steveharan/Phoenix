@@ -111,8 +111,6 @@
         }
 
         function updateFamily() {
-            alert('updateFamily');
-            console.log($scope.EditedFamily);
             if (!$scope.newFamily) {
                 apiService.post('/api/families/update/', $scope.EditedFamily,
                 updateFamilyCompleted,

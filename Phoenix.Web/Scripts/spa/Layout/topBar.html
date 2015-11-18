@@ -1,12 +1,11 @@
 ﻿<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Phoenix</a>
+            <a class="navbar-brand" ng-class="{ active: isMenuActive('/') }" href="#/">Phoenix</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li ng-class="{ active: isMenuActive('/') }"><a href="#/">Home</a></li>
-                <li ng-class="{ active: isMenuActive('/families') }"><a href="#/families/">Families</a></li>
+                <li ng-class="{ active: isMenuActive('/families') }"><a href="#/families/">Family Management</a></li>
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">Persons<span class="caret"></span></a>
                     <ul class="dropdown-menu">

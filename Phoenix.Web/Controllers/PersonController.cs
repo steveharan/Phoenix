@@ -29,8 +29,8 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpGet]
-        [Route("search/{page:int=0}/{pageSize=10}/{filter?}")]
-        public HttpResponseMessage Search(HttpRequestMessage request, int? page, int? pageSize, string filter = null)
+        [Route("search/{id:int}/{page:int=0}/{pageSize=10}/{filter?}")]
+        public HttpResponseMessage Search(HttpRequestMessage request, int id, int? page, int? pageSize, string filter = null)
         {
             int currentPage = page.Value;
             int currentPageSize = pageSize.Value;
@@ -45,8 +45,8 @@ namespace Phoenix.Web.Controllers
                 {
                     filter = filter.Trim().ToLower();
 
-                    persons = _personRepository.FindBy(c => c.SurName.ToLower().Contains(filter.ToLower())
-                                                       || c.FirstName.ToLower().Contains(filter.ToLower()))
+                    persons = _personRepository.FindBy(c => (c.SurName.ToLower().Contains(filter.ToLower())
+                                                          || c.FirstName.ToLower().Contains(filter.ToLower())) && (c.FamilyId == id) )
                         .OrderBy(c => c.SurName)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
@@ -62,7 +62,7 @@ namespace Phoenix.Web.Controllers
                 else
                 {
                     persons = _personRepository
-                        .GetAll()
+                        .FindBy(c => c.FamilyId == id)
                         .OrderBy(c => c.ID)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)

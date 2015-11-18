@@ -29,7 +29,7 @@
                 <div class="col-sm-6" ng-repeat="family in Families | filter:filterFamilies">
                     <div onmouseover="" style="cursor: pointer;" class="panel panel-default" >
                         <div class="panel-heading" style="font-weight:bolder;" >
-                            <strong>The {{family.FamilyName}} Family</strong><br />
+                            <strong>The {{family.FamilyName}} Family ({{family.Persons}} family members)</strong><br />
                         </div>
                         <div class="panel-warning" ng-click="callPersons(family)" onmouseover="" style="cursor: pointer;" >
                             <div class="table-responsive">
@@ -79,6 +79,7 @@
                     <th>Primary Ethnicity</th>
                     <th>Diagnosis</th>
                     <th>Diagnosis Subtype</th>
+                    <th>Members</th>
                 </tr>
                 <tr ng-click="callPersons(family)" ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
                     <td class="col-md-1">
@@ -96,6 +97,7 @@
                     <td>{{family.Ethnicity}}</td>
                     <td>{{family.Diagnosis}}</td>
                     <td>{{family.DiagnosisSubType}}</td>
+                    <td>{{family.Persons}}</td>
                 </tr>
             </table>
         </div>

@@ -17,6 +17,8 @@ namespace Phoenix.Data.Configurations
             Property(u => u.HeightCM).IsRequired();
             Property(u => u.WeightKG).IsRequired();
             Property(u => u.Deceased).IsRequired();
+            Property(u => u.DateFirstRegistered).IsRequired();
+            Property(u => u.Notes).IsRequired();
             Property(u => u.Adopted).IsRequired();
             Property(u => u.Twin).IsRequired();
             Property(u => u.EthnicityId).IsRequired();

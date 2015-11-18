@@ -89,6 +89,7 @@
 
         function familiesLoadCompleted(result) {
             $scope.Families = result.data.Items;
+            console.log('famloadcomp');
             console.log($scope.Families);
 
             $scope.page = result.data.Page;

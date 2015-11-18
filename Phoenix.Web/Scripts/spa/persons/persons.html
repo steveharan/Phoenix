@@ -72,6 +72,10 @@
                                         <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis SubType:</td>
                                         <td class="shortPadding"><i>{{person.DiagnosisSubType}}</i></td>
                                     </tr>
+                                    <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">Date Registered:</td>
+                                        <td class="shortPadding"><i>{{person.DateFirstRegistered | date:'mediumDate'}}</i></td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -102,6 +106,7 @@
                     <th>Primary Ethnicity</th>
                     <th>Diagnosis</th>
                     <th>Diagnosis Subtype</th>
+                    <th>Date Registered</th>
                 </tr>
                 <tr ng-repeat="person in Persons | filter:filterPersons" ng-class="{'selected':$index == selectedRow}">
                     <td class="col-md-1">
@@ -123,6 +128,7 @@
                     <td>{{person.Ethnicity}}</td>
                     <td>{{person.Diagnosis}}</td>
                     <td>{{person.DiagnosisSubType}}</td>
+                    <td>{{person.DateFirstRegistered | date:'mediumDate'}}</td>
                 </tr>
             </table>
         </div>

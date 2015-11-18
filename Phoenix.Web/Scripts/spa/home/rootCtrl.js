@@ -12,6 +12,7 @@
         $scope.logout = logout;
 
         $scope.isMenuActive = function (viewLocation) {
+            alert($location.path());
             var active = (viewLocation === $location.path());
             return active;
         };

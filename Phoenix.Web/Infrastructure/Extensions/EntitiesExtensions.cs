@@ -56,6 +56,8 @@ namespace Phoenix.Web.Infrastructure.Extensions
             person.WeightKG = personVm.WeightKG;
             person.HeightCM = personVm.HeightCM;
             person.Deceased = personVm.Deceased;
+            person.DateFirstRegistered = personVm.DateFirstRegistered;
+            person.Notes = personVm.Notes;
             person.DiagnosisId = personVm.DiagnosisID;
             person.DiagnosisSubTypeId = personVm.DiagnosisSubTypeID;
             person.EthnicityId = personVm.EthnicityID;

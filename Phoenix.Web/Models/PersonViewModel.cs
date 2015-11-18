@@ -20,6 +20,8 @@ namespace Phoenix.Web.Models
         public decimal HeightCM { get; set; }
         public decimal WeightKG { get; set; }
         public bool Deceased { get; set; }
+        public DateTime DateFirstRegistered { get; set; }
+        public string Notes { get; set; }
         public string Ethnicity { get; set; }
         public int EthnicityID { get; set; }
         public string Diagnosis { get; set; }

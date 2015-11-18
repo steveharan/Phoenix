@@ -22,6 +22,8 @@ namespace Phoenix.Web.Models
         public string DiagnosisSubType { get; set; }
         public int DiagnosisSubTypeID { get; set; }
         public bool Deleted { get; set; }
+        public int Persons { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var validator = new FamilyViewModelValidator();

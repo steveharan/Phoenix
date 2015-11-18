@@ -92,6 +92,11 @@
 
     isAuthenticated.$inject = ['membershipService', '$rootScope', '$location'];
 
+    $(".nav a").on("click", function () {
+        $(".nav").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
+
     function isAuthenticated(membershipService, $rootScope, $location) {
         if (!membershipService.isUserLoggedIn()) {
             $rootScope.previousState = $location.path();
