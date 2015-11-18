@@ -31,30 +31,50 @@
                 <div class="col-sm-6" ng-repeat="person in Persons | filter:filterPersons">
                     <div onmouseover="" style="cursor: pointer;" class="panel panel-default">
                         <div class="panel-heading" style="font-weight:bolder;">
-                            <strong>The {{family.FamilyName}} Family</strong><br />
+                            <strong>{{person.FirstName}} {{person.SurName}}</strong><br />
                         </div>
                         <div class="panel-warning" ng-click="callPersons(family)" onmouseover="" style="cursor: pointer;">
                             <div class="table-responsive">
                                 <table class="table table-condensed shortMargin">
                                     <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Date First Registered:</td>
-                                        <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
+                                        <td class="shortPadding" style="font-weight:bold;">Date Of Birth:</td>
+                                        <td class="shortPadding"><i>{{person.DateOfBirth | date:'mediumDate'}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">Height CM's:</td>
+                                        <td class="shortPadding"><i>{{person.HeightCM}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">Weight KG's:</td>
+                                        <td class="shortPadding"><i>{{person.HeightCM}}</i></td>
                                     </tr>
                                     <tr>
                                         <td class="shortPadding" style="font-weight:bold;">Primary Ethnicity:</td>
-                                        <td class="shortPadding"><i>{{family.Ethnicity}}</i></td>
+                                        <td class="shortPadding"><i>{{person.WeightKG}}</i></td>
                                     </tr>
                                     <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Notes:</td>
-                                        <td class="shortPadding"><i>{{family.Notes}}</i></td>
+                                        <td class="shortPadding" style="font-weight:bold;">Deceased:</td>
+                                        <td class="shortPadding"><i>{{person.Deceased}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">Twin:</td>
+                                        <td class="shortPadding"><i>{{person.Twin}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">Adopted:</td>
+                                        <td class="shortPadding"><i>{{person.Adopted}}</i></td>
                                     </tr>
                                     <tr>
                                         <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis:</td>
-                                        <td class="shortPadding"><i>{{family.Diagnosis}}</i></td>
+                                        <td class="shortPadding"><i>{{person.Ethnicity}}</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis:</td>
+                                        <td class="shortPadding"><i>{{person.Diagnosis}}</i></td>
                                     </tr>
                                     <tr>
                                         <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis SubType:</td>
-                                        <td class="shortPadding"><i>{{family.DiagnosisSubType}}</i></td>
+                                        <td class="shortPadding"><i>{{person.DiagnosisSubType}}</i></td>
                                     </tr>
                                 </table>
                             </div>
