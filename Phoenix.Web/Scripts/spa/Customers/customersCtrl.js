@@ -23,7 +23,7 @@
         $scope.showTableFormat = false;
 
         $scope.toggleView = function () {
-            $scope.showTableFormat = $scope.showTableFormat === false ? true : false;
+            $scope.showTableFormat = $scope.showTableFormat === true ? false : true;
         };
 
         function search(page) {

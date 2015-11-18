@@ -21,10 +21,10 @@
         $scope.updatePerson = updatePerson;
         $scope.deletePerson = deletePerson;
 
-        $scope.showTableFormat = false;
+        $scope.showTableFormat = true;
 
         $scope.toggleView = function () {
-            $scope.showTableFormat = $scope.showTableFormat === false ? true : false;
+            $scope.showTableFormat = $scope.showTableFormat === true ? false : true;
         };
 
         function search(page) {

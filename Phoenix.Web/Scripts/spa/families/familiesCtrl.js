@@ -22,10 +22,10 @@
         $scope.deleteFamily = deleteFamily;
         $scope.callPersons = callPersons;
         $scope.selectedFamily = {};
-        $scope.showTableFormat = false;
+        $scope.showTableFormat = true;
 
         $scope.toggleView = function () {
-            $scope.showTableFormat = $scope.showTableFormat === false ? true : false;
+            $scope.showTableFormat = $scope.showTableFormat === true ? false : true;
         };
 
         function callPersons(family) {
