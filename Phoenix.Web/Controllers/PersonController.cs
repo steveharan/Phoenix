@@ -16,16 +16,16 @@ using Phoenix.Data.Extensions;
 namespace Phoenix.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/families")]
-    public class FamilyController : ApiControllerBase
+    [RoutePrefix("api/persons")]
+    public class PersonController : ApiControllerBase
     {
-        private readonly IEntityBaseRepository<Family> _familyRepository;
+        private readonly IEntityBaseRepository<Person> _personRepository;
 
-        public FamilyController(IEntityBaseRepository<Family> familyRepository,
+        public PersonController(IEntityBaseRepository<Person> personRepository,
             IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork)
             : base(_errorsRepository, _unitOfWork)
         {
-            _familyRepository = familyRepository;
+            _personRepository = personRepository;
         }
 
         [HttpGet]
@@ -38,50 +38,51 @@ namespace Phoenix.Web.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                List<Family> families = null;
-                int totalFamilies = new int();
+                List<Person> persons = null;
+                int totalPersons = new int();
 
                 if (!string.IsNullOrEmpty(filter))
                 {
                     filter = filter.Trim().ToLower();
 
-                    families = _familyRepository.FindBy(c => c.FamilyName.ToLower().Contains(filter) 
-                                                        && c.Deleted == false)
-                        .OrderBy(c => c.FamilyName)
+                    persons = _personRepository.FindBy(c => c.SurName.ToLower().Contains(filter.ToLower())
+                                                       || c.FirstName.ToLower().Contains(filter.ToLower()))
+                        .OrderBy(c => c.SurName)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
                         .ToList();
 
-                    totalFamilies = _familyRepository
-                        .FindBy(c => c.FamilyName.ToLower().Contains(filter)
-                                                        && c.Deleted == false)
-                        .Where(c => c.FamilyName.ToLower().Contains(filter))
+                    totalPersons = _personRepository
+                        .FindBy(c => c.SurName.ToLower().Contains(filter.ToLower())
+                             || c.FirstName.ToLower().Contains(filter.ToLower()))
+                        .Where(c => c.SurName.ToLower().Contains(filter.ToLower())
+                             || c.FirstName.ToLower().Contains(filter.ToLower()))
                         .Count();
                 }
                 else
                 {
-                    families = _familyRepository
-                        .FindBy(c => c.Deleted == false)
+                    persons = _personRepository
+                        .GetAll()
                         .OrderBy(c => c.ID)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
                     .ToList();
 
-                    totalFamilies = _familyRepository
-                        .FindBy(c => c.Deleted == false).Count();
+                    totalPersons = _personRepository
+                        .GetAll().Count();
                 }
 
-                IEnumerable<FamilyViewModel> familiesVM = Mapper.Map<IEnumerable<Family>, IEnumerable<FamilyViewModel>>(families);
+                IEnumerable<PersonViewModel> personsVM = Mapper.Map<IEnumerable<Person>, IEnumerable<PersonViewModel>>(persons);
 
-                PaginationSet<FamilyViewModel> pagedSet = new PaginationSet<FamilyViewModel>()
+                PaginationSet<PersonViewModel> pagedSet = new PaginationSet<PersonViewModel>()
                 {
                     Page = currentPage,
-                    TotalCount = totalFamilies,
-                    TotalPages = (int)Math.Ceiling((decimal)totalFamilies / currentPageSize),
-                    Items = familiesVM
+                    TotalCount = totalPersons,
+                    TotalPages = (int)Math.Ceiling((decimal)totalPersons / currentPageSize),
+                    Items = personsVM
                 };
 
-                response = request.CreateResponse<PaginationSet<FamilyViewModel>>(HttpStatusCode.OK, pagedSet);
+                response = request.CreateResponse<PaginationSet<PersonViewModel>>(HttpStatusCode.OK, pagedSet);
 
                 return response;
             });
@@ -93,11 +94,11 @@ namespace Phoenix.Web.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                var family = _familyRepository.GetSingle(id);
+                var person = _personRepository.GetSingle(id);
 
-                FamilyViewModel familyVm = Mapper.Map<Family, FamilyViewModel>(family);
+                PersonViewModel personVM = Mapper.Map<Person, PersonViewModel>(person);
 
-                response = request.CreateResponse<FamilyViewModel>(HttpStatusCode.OK, familyVm);
+                response = request.CreateResponse<PersonViewModel>(HttpStatusCode.OK, personVM);
 
                 return response;
             });
@@ -105,7 +106,7 @@ namespace Phoenix.Web.Controllers
 
         [HttpPost]
         [Route("update")]
-        public HttpResponseMessage Update(HttpRequestMessage request, FamilyViewModel family)
+        public HttpResponseMessage Update(HttpRequestMessage request, PersonViewModel person)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -119,8 +120,8 @@ namespace Phoenix.Web.Controllers
                 }
                 else
                 {
-                    Family _family = _familyRepository.GetSingle(family.ID);
-                    _family.UpdateFamily(family);
+                    Person _person = _personRepository.GetSingle(person.ID);
+                    _person.UpdatePerson(person);
 
                     _unitOfWork.Commit();
 
@@ -133,7 +134,7 @@ namespace Phoenix.Web.Controllers
 
         [HttpPost]
         [Route("delete")]
-        public HttpResponseMessage Delete(HttpRequestMessage request, FamilyViewModel family)
+        public HttpResponseMessage Delete(HttpRequestMessage request, PersonViewModel person)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -147,16 +148,16 @@ namespace Phoenix.Web.Controllers
                 }
                 else
                 {
-                    var familyDb = _familyRepository.GetSingle(family.ID);
-                    if (familyDb == null)
-                        response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid family.");
+                    var personDb = _personRepository.GetSingle(person.ID);
+                    if (personDb == null)
+                        response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid person.");
                     else
                     {
-                        familyDb.UpdateFamily(family);
-                        _familyRepository.Delete(familyDb);
+                        personDb.UpdatePerson(person);
+                        _personRepository.Delete(personDb);
 
                         _unitOfWork.Commit();
-                        response = request.CreateResponse<FamilyViewModel>(HttpStatusCode.OK, family);
+                        response = request.CreateResponse<PersonViewModel>(HttpStatusCode.OK, person);
                     }
                 }
 
@@ -166,7 +167,7 @@ namespace Phoenix.Web.Controllers
 
         [HttpPost]
         [Route("create")]
-        public HttpResponseMessage Create(HttpRequestMessage request, FamilyViewModel family)
+        public HttpResponseMessage Create(HttpRequestMessage request, PersonViewModel person)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -180,15 +181,15 @@ namespace Phoenix.Web.Controllers
                 }
                 else
                 {
-                    Family newFamily = new Family();
-                    newFamily.UpdateFamily(family);
-                    _familyRepository.Add(newFamily);
+                    Person newPerson = new Person();
+                    newPerson.UpdatePerson(person);
+                    _personRepository.Add(newPerson);
 
                     _unitOfWork.Commit();
 
                     // Update view model
-                    family = Mapper.Map<Family, FamilyViewModel>(newFamily);
-                    response = request.CreateResponse<FamilyViewModel>(HttpStatusCode.Created, family);
+                    person = Mapper.Map<Person, PersonViewModel>(newPerson);
+                    response = request.CreateResponse<PersonViewModel>(HttpStatusCode.Created, person);
                 }
 
                 return response;

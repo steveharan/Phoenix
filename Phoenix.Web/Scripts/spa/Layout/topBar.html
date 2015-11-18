@@ -7,15 +7,14 @@
             <ul class="nav navbar-nav">
                 <li ng-class="{ active: isMenuActive('/') }"><a href="#/">Home</a></li>
                 <li ng-class="{ active: isMenuActive('/families') }"><a href="#/families/">Families</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Function 2 <span class="caret"></span></a>
+                <!--<li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Persons<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Function 2-1</a></li>
-                        <li><a href="#">Function 2-2</a></li>
-                        <li><a href="#">Function 2-3</a></li>
+                        <li><a href="#">Add</a></li>
+                        <li><a href="#">Search</a></li>
+                        <li><a href="#">Edit</a></li>
                     </ul>
-                </li>
-                <li><a href="#">Function 3</a></li>
+                </li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-href="#/login" ng-click="logout();" ng-if="!userData.isUserLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

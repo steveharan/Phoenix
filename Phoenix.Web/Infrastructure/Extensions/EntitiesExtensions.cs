@@ -45,5 +45,21 @@ namespace Phoenix.Web.Infrastructure.Extensions
             family.DiagnosisSubTypeId = familyVm.DiagnosisSubTypeID;
             family.Deleted = familyVm.Deleted;
         }
+
+        public static void UpdatePerson(this Person person, PersonViewModel personVm)
+        {
+            person.FirstName = personVm.FirstName;
+            person.SurName = personVm.SurName;
+            person.DateOfBirth = personVm.DateOfBirth;
+            person.Adopted = personVm.Adopted;
+            person.Twin = personVm.Twin;
+            person.WeightKG = personVm.WeightKG;
+            person.HeightCM = personVm.HeightCM;
+            person.Deceased = personVm.Deceased;
+            person.DiagnosisId = personVm.DiagnosisID;
+            person.DiagnosisSubTypeId = personVm.DiagnosisSubTypeID;
+            person.EthnicityId = personVm.EthnicityID;
+            person.FamilyId = personVm.FamilyID;
+        }
     }
 }

@@ -3,9 +3,9 @@
 
     app.controller('familiesCtrl', familiesCtrl);
 
-    familiesCtrl.$inject = ['$scope', '$modal', 'apiService', 'notificationService'];
+    familiesCtrl.$inject = ['$scope', '$rootScope', '$modal', 'apiService', 'notificationService', '$location'];
 
-    function familiesCtrl($scope, $modal, apiService, notificationService) {
+    function familiesCtrl($scope, $rootScope, $modal, apiService, notificationService, $location) {
         $scope.pageClass = 'page-families';
         $scope.loadingFamilies = true;
         $scope.page = 0;
@@ -20,12 +20,17 @@
         $scope.openEditDialog = openEditDialog;
         $scope.updateFamily = updateFamily;
         $scope.deleteFamily = deleteFamily;
-
+        $scope.callPersons = callPersons;
+        $scope.selectedFamily = {};
         $scope.showTableFormat = false;
 
         $scope.toggleView = function () {
             $scope.showTableFormat = $scope.showTableFormat === false ? true : false;
         };
+
+        function callPersons(family) {
+            $location.path("/persons/" + family.ID);
+        }
 
         function search(page) {
             page = page || 0;
@@ -43,13 +48,6 @@
             apiService.get('/api/families/search/', config,
             familiesLoadCompleted,
             familiesLoadFailed);
-        }
-
-        function deleteFamilyCompleted(response) {
-            if (confirm('Are you sure you want to delete this family?')) {
-                notificationService.displaySuccess('The family has been deleted');
-                clearSearch();
-            }
         }
 
         function updateFamilyLoadFailed(response) {

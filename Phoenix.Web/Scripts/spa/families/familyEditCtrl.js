@@ -3,9 +3,9 @@
 
     app.controller('familyEditCtrl', familyEditCtrl);
 
-    familyEditCtrl.$inject = ['$scope', '$modalInstance', '$timeout', 'apiService', 'notificationService'];
+    familyEditCtrl.$inject = ['$scope', '$modal', '$modalInstance', '$timeout', 'apiService', 'notificationService'];
 
-    function familyEditCtrl($scope, $modalInstance, $timeout, apiService, notificationService) {
+    function familyEditCtrl($scope, $modal,$modalInstance, $timeout, apiService, notificationService) {
         $scope.addOrEdit = setLable();
         function setLable() {
             if ($scope.EditedFamily.deleted) {
@@ -32,8 +32,24 @@
         };
         $scope.datepicker = {};
         $scope.ethnicities = [];
+        $scope.openPersonDialog = openPersonDialog;
 
         $scope.myDate = new Date();
+
+        function openPersonDialog(family) {
+            $scope.EditedFamily = family;
+            $modal.open({
+                templateUrl: 'scripts/spa/families/familyPersonsModal.html',
+                controller: 'familyPersonsCtrl',
+                backdrop: 'static',
+                scope: $scope,
+                windowClass: 'app-modal-window'
+            }).result.then(function ($scope) {
+                clearSearch();
+            }, function () {
+                clearSearch();
+            });
+        }
 
         function ethnicitiesLoadCompleted(response) {
             console.log(response.data);
@@ -95,6 +111,7 @@
         }
 
         function updateFamily() {
+            alert('updateFamily');
             console.log($scope.EditedFamily);
             if (!$scope.newFamily) {
                 apiService.post('/api/families/update/', $scope.EditedFamily,

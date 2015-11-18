@@ -51,6 +51,10 @@
                 templateUrl: "scripts/spa/rental/rental.html",
                 controller: "rentStatsCtrl"
             })
+            .when("/persons/:id", {
+                templateUrl: "scripts/spa/persons/persons.html",
+                controller: "personsCtrl"
+            })
             .when("/families", {
                 templateUrl: "scripts/spa/families/families.html",
                 controller: "familiesCtrl"

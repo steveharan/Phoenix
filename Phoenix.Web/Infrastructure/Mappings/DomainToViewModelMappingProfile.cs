@@ -38,6 +38,12 @@ namespace Phoenix.Web.Infrastructure.Mappings
                 .ForMember(vm => vm.Diagnosis, map => map.MapFrom(m => m.Diagnosis.Name))
                 .ForMember(vm => vm.DiagnosisSubType, map => map.MapFrom(m => m.DiagnosisSubType.Name));
 
+            Mapper.CreateMap<Person, PersonViewModel>()
+                .ForMember(vm => vm.FamilyName, map => map.MapFrom(m => m.Family.FamilyName))
+                .ForMember(vm => vm.Ethnicity, map => map.MapFrom(m => m.Ethnicity.EthnicityName))
+                .ForMember(vm => vm.Diagnosis, map => map.MapFrom(m => m.Diagnosis.Name))
+                .ForMember(vm => vm.DiagnosisSubType, map => map.MapFrom(m => m.DiagnosisSubType.Name));
+
             Mapper.CreateMap<Ethnicity, EthnicityViewModel>();
             Mapper.CreateMap<Diagnosis, DiagnosisViewModel>();
             Mapper.CreateMap<DiagnosisSubType, DiagnosisSubTypeViewModel>();
