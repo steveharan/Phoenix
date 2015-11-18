@@ -29,11 +29,11 @@
         <div class="panel-body" ng-hide="showTableFormat">
             <div class="row">
                 <div class="col-sm-6" ng-repeat="person in Persons | filter:filterPersons">
-                    <div onmouseover="" style="cursor: pointer;" class="panel panel-default">
+                    <div class="panel panel-default">
                         <div class="panel-heading" style="font-weight:bolder;">
                             <strong>{{person.FirstName}} {{person.SurName}}</strong><br />
                         </div>
-                        <div class="panel-warning" ng-click="callPersons(family)" onmouseover="" style="cursor: pointer;">
+                        <div class="panel-warning">
                             <div class="table-responsive">
                                 <table class="table table-condensed shortMargin">
                                     <tr>
@@ -42,10 +42,6 @@
                                     </tr>
                                     <tr>
                                         <td class="shortPadding" style="font-weight:bold;">Height CM's:</td>
-                                        <td class="shortPadding"><i>{{person.HeightCM}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Weight KG's:</td>
                                         <td class="shortPadding"><i>{{person.HeightCM}}</i></td>
                                     </tr>
                                     <tr>
@@ -92,6 +88,49 @@
             </div>
         </div>
 
+        <div class="panel-body" ng-hide="!showTableFormat">
+            <table class="table table-bordered table table-striped table-hover table-responsive" width="auto">
+                <tr>
+                    <th class="col-md-1"></th>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Height CM</th>
+                    <th>Weight KG</th>
+                    <th>Deceased</th>
+                    <th>Twin</th>
+                    <th>Adopted</th>
+                    <th>Primary Ethnicity</th>
+                    <th>Diagnosis</th>
+                    <th>Diagnosis Subtype</th>
+                </tr>
+                <tr ng-repeat="person in Persons | filter:filterPersons" ng-class="{'selected':$index == selectedRow}">
+                    <td class="col-md-1">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="updatePerson(person);">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"
+                                ng-click="deletePerson(person);">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                    <td><strong>{{person.FirstName}} {{person.SurName}}</strong></td>
+                    <td>{{person.DateOfBirth | date:'mediumDate'}}</td>
+                    <td>{{person.HeightCM}}</td>
+                    <td>{{person.WeightKG}}</td>
+                    <td>{{person.Deceased}}</td>
+                    <td>{{person.Twin}}</td>
+                    <td>{{person.Adopted}}</td>
+                    <td>{{person.Ethnicity}}</td>
+                    <td>{{person.Diagnosis}}</td>
+                    <td>{{person.DiagnosisSubType}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <div class="text-center">
+                <custom-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
+            </div>
+        </div>
 
     </div>
 </div>
