@@ -182,6 +182,7 @@
     <Content Include="Content\images\raty\star-on-big.png" />
     <Content Include="Content\images\raty\star-on.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="demo\CaseAddingLinkToItemTemplate.html" />
     <Content Include="demo\CaseAddingNewItemsToChartAtRuntime.html" />
     <Content Include="demo\CaseAdviserAndAssistantItemTypes.html" />
@@ -365,6 +366,10 @@
     <Content Include="demo\Tests.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bower_components\angular-animate\.bower.json" />
@@ -1021,6 +1026,10 @@
     <Content Include="Scripts\vendors\respond.src.js" />
     <Content Include="Scripts\vendors\toastr.js" />
     <Content Include="Scripts\vendors\ui-bootstrap-tpls-0.13.1.js" />
+    <Content Include="Scripts\vendors\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\vendors\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\vendors\ui-bootstrap.js" />
+    <Content Include="Scripts\vendors\ui-bootstrap.min.js" />
     <Content Include="Scripts\vendors\underscore.js" />
     <Content Include="Web.config" />
   </ItemGroup>

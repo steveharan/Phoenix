@@ -47,7 +47,7 @@ namespace Phoenix.Web.Controllers
 
                     families = _familyRepository.FindBy(c => c.FamilyName.ToLower().Contains(filter) 
                                                         && c.Deleted == false)
-                        .OrderBy(c => c.FamilyName)
+                        .OrderByDescending(c => c.FamilyName)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
                         .ToList();
@@ -62,7 +62,7 @@ namespace Phoenix.Web.Controllers
                 {
                     families = _familyRepository
                         .FindBy(c => c.Deleted == false)
-                        .OrderBy(c => c.ID)
+                        .OrderByDescending(c => c.FirstRegisteredDate)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
                     .ToList();

@@ -8,7 +8,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Families</h3>
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><strong>Latest Families</strong></h3>
             <div class="input-group">
                 <input id="inputSearchFamilies" type="search" ng-model="filterFamilies" class="form-control shortInputSearch" placeholder="Filter, search families..">
                 <div class="input-group-btn">
@@ -81,11 +81,11 @@
                     <th>Members</th>
                 </tr>
                 <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
-                    <td class="col-md-1">
-                        <button type="button" class="btn btn-default btn-sm" ng-click="updateFamily(family);">
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="updateFamily(family);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm" 
+                        <button type="button" class="btn btn-danger btn-sm" 
                                  ng-click="deleteFamily(family);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>

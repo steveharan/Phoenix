@@ -20,7 +20,6 @@ namespace Phoenix.Web.Controllers
     public class PersonsController : ApiControllerBase
     {
         private readonly IEntityBaseRepository<Person> _personRepository;
-        private readonly IEntityBaseRepository<PersonRelationship> _personRelatinshipRepository;
 
         public PersonsController(IEntityBaseRepository<Person> personRepository,
             IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork)
@@ -128,8 +127,8 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpPost]
-        [Route("update/{motherId:int}/{fatherId:int}")]
-        public HttpResponseMessage Update(HttpRequestMessage request, int motherId, int fatherId, PersonViewModel person)
+        [Route("update")]
+        public HttpResponseMessage Update(HttpRequestMessage request, PersonViewModel person)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -145,47 +144,9 @@ namespace Phoenix.Web.Controllers
                 {
                     Person _person = _personRepository.GetSingle(person.ID);
                     _person.UpdatePerson(person);
-
-                    PersonRelationship relationshipFather = new PersonRelationship()
-                    {
-                        PersonId = person.ID,
-                        person = _person,
-                        RelationWithPersonId = fatherId,
-                        RelationshipType = 1
-                    };
-                    _person.PersonRelationships.Add(relationshipFather);
-                    PersonRelationship relationshipMother = new PersonRelationship()
-                    {
-                        PersonId = person.ID,
-                        person = _person,
-                        RelationWithPersonId = motherId,
-                        RelationshipType = 2
-                    };
-                    _person.PersonRelationships.Add(relationshipMother);
-
                     _unitOfWork.Commit();
 
                     response = request.CreateResponse(HttpStatusCode.OK);
-
-                    // test
-
-                    //newMovie.UpdateMovie(movie);
-
-                    //for (int i = 0; i < movie.NumberOfStocks; i++)
-                    //{
-                    //    Stock stock = new Stock()
-                    //    {
-                    //        IsAvailable = true,
-                    //        Movie = newMovie,
-                    //        UniqueKey = Guid.NewGuid()
-                    //    };
-                    //    newMovie.Stocks.Add(stock);
-                    //}
-
-                    //_moviesRepository.Add(newMovie);
-
-                    //test
-                    
 
                 }
 
@@ -227,8 +188,8 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpPost]
-        [Route("create/{motherId:int}/{fatherId:int}")]
-        public HttpResponseMessage Create(HttpRequestMessage request, int motherId, int fatherId, PersonViewModel person)
+        [Route("create")]
+        public HttpResponseMessage Create(HttpRequestMessage request, PersonViewModel person)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -244,23 +205,6 @@ namespace Phoenix.Web.Controllers
                 {
                     Person newPerson = new Person();
                     newPerson.UpdatePerson(person);
-
-                    PersonRelationship relationshipFather = new PersonRelationship()
-                    {
-                        PersonId = person.ID,
-                        person = newPerson,
-                        RelationWithPersonId = fatherId,
-                        RelationshipType = 1
-                    };
-                    newPerson.PersonRelationships.Add(relationshipFather);
-                    PersonRelationship relationshipMother = new PersonRelationship()
-                    {
-                        PersonId = person.ID,
-                        person = newPerson,
-                        RelationWithPersonId = motherId,
-                        RelationshipType = 2
-                    };
-                    newPerson.PersonRelationships.Add(relationshipMother);
 
                     _personRepository.Add(newPerson);
 

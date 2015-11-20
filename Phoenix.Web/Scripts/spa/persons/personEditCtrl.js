@@ -129,13 +129,13 @@
 
         function updatePerson() {
             if (!$scope.newPerson) {
-                apiService.post('/api/persons/update/' + $scope.selectedMotherId + '/' + $scope.selectedFatherId, $scope.EditedPerson,
+                apiService.post('/api/persons/update', $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);
             }
             else {
                 $scope.EditedPerson.FamilyID = $routeParams.id;
-                apiService.post('/api/persons/create/' + $scope.selectedMotherId + '/' + $scope.selectedFatherId, $scope.EditedPerson,
+                apiService.post('/api/persons/create', $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);
             }

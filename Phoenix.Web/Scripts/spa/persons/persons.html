@@ -8,7 +8,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Family members for the {{FamilyName}} family</h3>
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><strong>Family members for the {{FamilyName}} family</strong></h3>
             <div class="input-group">
                 <input id="inputSearchPersons" type="search" ng-model="filterPersons" class="form-control shortInputSearch" placeholder="Filter, search people..">
                 <div class="input-group-btn">
@@ -94,9 +94,9 @@
         </div>
 
         <div class="panel-body" ng-hide="!showTableFormat">
-            <table class="table table-bordered table table-striped table-hover table-responsive" width="auto">
+            <table class="table table-bordered table table-striped table-hover table-responsive">
                 <tr>
-                    <th class="col-md-1"></th>
+                    <th></th>
                     <th>Name</th>
                     <th>DOB</th>
                     <th>Height CM</th>
@@ -104,24 +104,24 @@
                     <th>Deceased</th>
                     <th>Twin</th>
                     <th>Adopted</th>
-                    <th>Primary Ethnicity</th>
-                    <th>Diagnosis</th>
-                    <th>Diagnosis Subtype</th>
+                    <th class="col-xs-1">Primary Ethnicity</th>
+                    <th class="col-xs-1">Diagnosis</th>
+                    <th class="col-xs-1">Diagnosis Subtype</th>
                     <th>Date Registered</th>
                 </tr>
                 <tr ng-repeat="person in Persons | filter:filterPersons" ng-class="{'selected':$index == selectedRow}">
-                    <td class="col-xs-1">
-                        <button type="button" class="btn btn-default btn-sm" ng-click="updatePerson(person);">
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm"
+                        <button type="button" class="btn btn-warning btn-sm"
+                                ng-click="manageRelations(person);">
+                            <span class="glyphicon glyphicon-tree-conifer"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm"
                                 ng-click="deletePerson(person);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm"
-                                ng-click="manageRelations(person);">
-                            <span class="glyphicon glyphicon-tree-conifer"></span>
-                        </button>                    
                     </td>
                     <td><strong>{{person.FirstName}} {{person.SurName}}</strong></td>
                     <td>{{person.DateOfBirth | date:'mediumDate'}}</td>

@@ -3,9 +3,9 @@
 
     app.controller('personRelationshipsCtrl', personRelationshipsCtrl);
 
-    personRelationshipsCtrl.$inject = ['$scope', '$rootScope', '$modal', '$routeParams', 'apiService', 'notificationService'];
+    personRelationshipsCtrl.$inject = ['$scope', '$rootScope', '$modalInstance', '$modal', '$routeParams', 'apiService', 'notificationService'];
 
-    function personRelationshipsCtrl($scope, $rootScope, $modal, $routeParams, apiService, notificationService) {
+    function personRelationshipsCtrl($scope, $rootScope, $modalInstance, $modal, $routeParams, apiService, notificationService) {
         $scope.pageClass = 'page-persons';
         $scope.loadingPersons = true;
         $scope.page = 0;
@@ -19,6 +19,7 @@
         $scope.openEditDialog = openEditDialog;
         $scope.updatePerson = updatePerson;
         $scope.deletePerson = deletePerson;
+        $scope.cancel = cancel;
         $scope.addItem = addItem;
 
         $scope.data = {
@@ -147,7 +148,7 @@
             search();
         }
 
-        function cancelEdit() {
+        function cancel() {
             $scope.isEnabled = false;
             $modalInstance.dismiss();
         }

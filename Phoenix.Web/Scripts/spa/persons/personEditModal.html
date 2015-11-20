@@ -122,42 +122,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <label for="mothers">Select Mother</label>
-                            <angucomplete-alt id="mothers"
-                                              placeholder="Search Mother"
-                                              pause="200"
-                                              selected-object="selectedMother"
-                                              input-changed="selectionChanged"
-                                              remote-url="/api/persons/{{EditedPerson.FamilyID}}?filter="
-                                              remote-url-data-field=""
-                                              title-field="FirstName,SurName"
-                                              description-field="FamilyName"
-                                              input-class="form-control form-control-small"
-                                              match-class="red"
-                                              text-searching="Searching for mother.."
-                                              text-no-results="No people found in this family matching your filter." />
-                        </div>
-                        <div class="col-md-5">
-                            <label for="fethers">Select Father</label>
-                            <angucomplete-alt id="fathers"
-                                              placeholder="Search Father"
-                                              pause="200"
-                                              selected-object="selectedFather"
-                                              input-changed="selectionChanged"
-                                              remote-url="/api/persons/{{EditedPerson.FamilyID}}?filter="
-                                              remote-url-data-field=""
-                                              title-field="FirstName,SurName"
-                                              description-field="FamilyName"
-                                              input-class="form-control form-control-small"
-                                              match-class="red"
-                                              text-searching="Searching for father.."
-                                              text-no-results="No people found in this family matching your filter." />
-                        </div>
-                    </div>
-                </div>
             </div>
         </form>
     </div>

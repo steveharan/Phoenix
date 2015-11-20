@@ -117,10 +117,6 @@
                 updateFamilyLoadFailed);
             }
             else {
-                console.log('create fam');
-
-                console.log($scope.EditedFamily);
-
                 apiService.post('/api/families/create', $scope.EditedFamily,
                 updateFamilyCompleted,
                 updateFamilyLoadFailed);
