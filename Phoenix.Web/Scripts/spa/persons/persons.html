@@ -6,14 +6,17 @@
 </style>
 
 <div class="row">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Family members for the {{FamilyName}} family...</h3>
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Family members for the {{FamilyName}} family</h3>
             <div class="input-group">
                 <input id="inputSearchPersons" type="search" ng-model="filterPersons" class="form-control shortInputSearch" placeholder="Filter, search people..">
                 <div class="input-group-btn">
-                    <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
-                    <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <button class="btn btn-info" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-info" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <button class="btn btn-info" ng-click="updatePerson();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="!showTableFormat"><i class="glyphicon glyphicon-tasks"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="showTableFormat"><i class="glyphicon glyphicon-calendar"></i></button>
                 </div>
 
             </div>
@@ -21,11 +24,6 @@
                 <person-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></person-pager>
             </div>
         </div>
-
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</button>
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</button>
-        <button class="btn btn-primary btn-xs" ng-click="updatePerson();">Add Person<i class="fa fa-plus pull-right"></i></button>
-
         <div class="panel-body" ng-hide="showTableFormat">
             <div class="row">
                 <div class="col-sm-6" ng-repeat="person in Persons | filter:filterPersons">
@@ -112,7 +110,7 @@
                     <th>Date Registered</th>
                 </tr>
                 <tr ng-repeat="person in Persons | filter:filterPersons" ng-class="{'selected':$index == selectedRow}">
-                    <td class="col-md-1">
+                    <td class="col-xs-1">
                         <button type="button" class="btn btn-default btn-sm" ng-click="updatePerson(person);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
@@ -120,6 +118,10 @@
                                 ng-click="deletePerson(person);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
+                        <button type="button" class="btn btn-default btn-sm"
+                                ng-click="manageRelations(person);">
+                            <span class="glyphicon glyphicon-tree-conifer"></span>
+                        </button>                    
                     </td>
                     <td><strong>{{person.FirstName}} {{person.SurName}}</strong></td>
                     <td>{{person.DateOfBirth | date:'mediumDate'}}</td>

@@ -20,6 +20,7 @@ namespace Phoenix.Web.Models
         public decimal HeightCM { get; set; }
         public decimal WeightKG { get; set; }
         public bool Deceased { get; set; }
+        public DateTime? DateDeceased { get; set; }
         public DateTime FirstRegisteredDate { get; set; }
         public string Notes { get; set; }
         public string Ethnicity { get; set; }
@@ -31,6 +32,10 @@ namespace Phoenix.Web.Models
         public int FamilyID { get; set; }
         public string FamilyName { get; set; }
         public bool Deleted { get; set; }
+        public int FatherID { get; set; }
+        public string FatherName { get; set; }
+        public int MotherID { get; set; }
+        public string MotherName { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -8,6 +8,8 @@ namespace Phoenix.Entities
 {
     public class Person : IEntityBase
     {
+        public Person() { PersonRelationships = new List<PersonRelationship>(); }
+
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string SurName { get; set; }
@@ -17,6 +19,7 @@ namespace Phoenix.Entities
         public decimal HeightCM { get; set; }
         public decimal WeightKG { get; set; }
         public bool Deceased { get; set; }
+        public DateTime? DateDeceased { get; set; }
         public DateTime FirstRegisteredDate { get; set; }
         public string Notes { get; set; }
         public int FamilyId { get; set; }
@@ -28,5 +31,7 @@ namespace Phoenix.Entities
         public int? EthnicityId { get; set; }
         public virtual Ethnicity Ethnicity { get; set; }
         public bool Deleted { get; set; }
+        public virtual ICollection<PersonRelationship> PersonRelationships { get; set; }
+
     }
 }

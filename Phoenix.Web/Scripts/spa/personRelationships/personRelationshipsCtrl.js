@@ -1,26 +1,63 @@
 ﻿(function (app) {
     'use strict';
 
-    app.controller('personsCtrl', personsCtrl);
+    app.controller('personRelationshipsCtrl', personRelationshipsCtrl);
 
-    personsCtrl.$inject = ['$scope', '$rootScope', '$modal', '$routeParams', 'apiService', 'notificationService'];
+    personRelationshipsCtrl.$inject = ['$scope', '$rootScope', '$modal', '$routeParams', 'apiService', 'notificationService'];
 
-    function personsCtrl($scope, $rootScope, $modal, $routeParams, apiService, notificationService) {
+    function personRelationshipsCtrl($scope, $rootScope, $modal, $routeParams, apiService, notificationService) {
         $scope.pageClass = 'page-persons';
         $scope.loadingPersons = true;
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.Persons = [];
-
-        $scope.search = search;
-        $scope.clearSearch = clearSearch;
+        $scope.Relationships = [];
+        $scope.RelationshipID = 0;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.openEditDialog = openEditDialog;
         $scope.updatePerson = updatePerson;
         $scope.deletePerson = deletePerson;
-        $scope.manageRelations = manageRelations;
+        $scope.addItem = addItem;
+
+        $scope.data = {
+            availableOptions: [
+              { id: '0', name: '-- Select --' },
+              { id: '1', name: 'Father' },
+              { id: '2', name: 'Mother' },
+            ],
+            selectedOption: { id: '0', name: '-- Select --' } 
+        };
+
+        // To store the selected parents of this person that were typed in using auto complete.
+        $scope.selectedPersonId = -1;
+        $scope.selectedPerson = selectedPerson;
+
+        function selectedPerson($item) {
+            if ($item) {
+                $scope.selectedPersonId = $item.originalObject.ID;
+                $scope.selectedPersonName = $item.title;
+                $scope.isEnabled = true;
+            }
+            else {
+                $scope.selectedPersonId = -1;
+                $scope.isEnabled = false;
+            }
+        }
+
+        function addItem(index) {
+            $scope.Relationships.push({
+                relationshipPersonId: $scope.selectedPersonId,
+                relationshipName: $scope.selectedPersonName,
+                relationshipTypeId: $scope.data.selectedOption.id,
+                relationshipTypeName: $scope.data.selectedOption.name
+            });
+            $scope.selectedPersonName = "";
+            $scope.RelationshipID = "";
+            $scope.data.selectedOption.id = "0";
+            $scope.$broadcast('angucomplete-alt:clearInput');
+        }
 
         $scope.showTableFormat = true;
 
@@ -68,22 +105,6 @@
             openEditDialog(person);
         }
 
-        function manageRelations(person) {
-            $scope.EditedPerson = person;
-            $modal.open({
-                templateUrl: 'scripts/spa/personRelationships/personRelationshipsModal.html',
-                controller: 'personRelationshipsCtrl',
-                backdrop: 'static',
-                scope: $scope,
-                keyboard: 'true',
-                windowClass: 'app-modal-window'
-            }).result.then(function ($scope) {
-                clearSearch();
-            }, function () {
-                clearSearch();
-            });
-        }
-
         function openEditDialog(person) {
             $scope.EditedPerson = person;
             $modal.open({
@@ -124,6 +145,11 @@
         function clearSearch() {
             $scope.filterPersons = '';
             search();
+        }
+
+        function cancelEdit() {
+            $scope.isEnabled = false;
+            $modalInstance.dismiss();
         }
 
         $scope.search();

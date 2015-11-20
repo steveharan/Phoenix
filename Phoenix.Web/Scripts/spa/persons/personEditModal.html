@@ -62,32 +62,28 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-3 selectContainer">
-                            <label class="control-label" for="Notes">Weight KG</label>
+                            <label class="control-label" for="weightKg">Weight KG</label>
                             <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.WeightKG" name="weightKg" id="weighKg" placeholder="Weight in KG"
                                    validate-on="blur" required required-message="'Weight is required'">
                         </div>
                         <div class="col-xs-3 selectContainer">
-                            <label class="control-label" for="Notes">Height CM</label>
+                            <label class="control-label" for="heightCm">Height CM</label>
                             <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.HeightCM" name="heightCm" id="heightCm" placeholder="Height in CM"
                                    validate-on="blur" required required-message="'Height is required'">
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-1 selectContainer">
-                            <label class="control-label" for="Notes">Adopted</label>
-                            <input type="checkbox" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Adopted" name="adopted" id="adopted"
+                        <div class="col-xs-1">
+                            <label class="checkbox" for="adopted">Adopted</label>
+                            <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Adopted" name="adopted" id="adopted"
                                    validate-on="blur">
                         </div>
                         <div class="col-xs-1 selectContainer">
-                            <label class="control-label" for="Notes">Twin</label>
-                            <input type="checkbox" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Twin" name="twin" id="twin"
+                            <label class="checkbox" for="twin">Twin</label>
+                            <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Twin" name="twin" id="twin"
                                    validate-on="blur">
                         </div>
                         <div class="col-xs-1 selectContainer">
-                            <label class="control-label" for="Notes">Deceased</label>
-                            <input type="checkbox" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Deceased" name="deceased" id="deceased"
+                            <label class="checkbox" for="Notes">Deceased</label>
+                            <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Deceased" name="deceased" id="deceased"
                                    validate-on="blur">
                         </div>
                     </div>
@@ -126,16 +122,52 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="mothers">Select Mother</label>
+                            <angucomplete-alt id="mothers"
+                                              placeholder="Search Mother"
+                                              pause="200"
+                                              selected-object="selectedMother"
+                                              input-changed="selectionChanged"
+                                              remote-url="/api/persons/{{EditedPerson.FamilyID}}?filter="
+                                              remote-url-data-field=""
+                                              title-field="FirstName,SurName"
+                                              description-field="FamilyName"
+                                              input-class="form-control form-control-small"
+                                              match-class="red"
+                                              text-searching="Searching for mother.."
+                                              text-no-results="No people found in this family matching your filter." />
+                        </div>
+                        <div class="col-md-5">
+                            <label for="fethers">Select Father</label>
+                            <angucomplete-alt id="fathers"
+                                              placeholder="Search Father"
+                                              pause="200"
+                                              selected-object="selectedFather"
+                                              input-changed="selectionChanged"
+                                              remote-url="/api/persons/{{EditedPerson.FamilyID}}?filter="
+                                              remote-url-data-field=""
+                                              title-field="FirstName,SurName"
+                                              description-field="FamilyName"
+                                              input-class="form-control form-control-small"
+                                              match-class="red"
+                                              text-searching="Searching for father.."
+                                              text-no-results="No people found in this family matching your filter." />
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
+</div>
 
-    <div class="panel-footer clearfix">
-        <div class="pull-right">
-            <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
-            <button type="button" class="btn btn-primary" ng-show="!newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Update</button>
-            <button type="button" class="btn btn-primary" ng-show="newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Add</button>
-            <button type="button" class="btn btn-primary" ng-show="EditedPerson.deleted" ng-click="updatePerson()">Delete</button>
-        </div>
+<div class="panel-footer clearfix">
+    <div class="pull-right">
+        <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-show="!newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Update</button>
+        <button type="button" class="btn btn-primary" ng-show="newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Add</button>
+        <button type="button" class="btn btn-primary" ng-show="EditedPerson.deleted" ng-click="updatePerson()">Delete</button>
     </div>
 </div>

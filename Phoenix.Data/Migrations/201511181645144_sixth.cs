@@ -7,12 +7,14 @@ namespace Phoenix.Data.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Person", "Deleted", c => c.Boolean());
+            AddColumn("dbo.Person", "DateDeceased", c => c.DateTime(nullable: false));
+            AlterColumn("dbo.Person", "Deleted", c => c.Boolean());
         }
         
         public override void Down()
         {
             AlterColumn("dbo.Person", "Deleted", c => c.Boolean(nullable: false));
+            DropColumn("dbo.Person", "DateDeceased");
         }
     }
 }

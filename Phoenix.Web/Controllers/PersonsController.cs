@@ -15,18 +15,41 @@ using Phoenix.Data.Extensions;
 
 namespace Phoenix.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [RoutePrefix("api/persons")]
-    public class PersonController : ApiControllerBase
+    public class PersonsController : ApiControllerBase
     {
         private readonly IEntityBaseRepository<Person> _personRepository;
+        private readonly IEntityBaseRepository<PersonRelationship> _personRelatinshipRepository;
 
-        public PersonController(IEntityBaseRepository<Person> personRepository,
+        public PersonsController(IEntityBaseRepository<Person> personRepository,
             IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork)
             : base(_errorsRepository, _unitOfWork)
         {
             _personRepository = personRepository;
         }
+        [HttpGet]
+        [Route("{id:int}")]
+        public HttpResponseMessage Get(HttpRequestMessage request, int? id, string filter)
+        {
+            filter = filter.ToLower().Trim();
+
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var persons = _personRepository.FindBy(p => p.FamilyId == id && p.Deleted == false)
+                    .Where(p => p.FirstName.ToLower().Contains(filter) ||
+                    p.SurName.ToLower().Contains(filter)).ToList();
+
+                var personsVm = Mapper.Map<IEnumerable<Person>, IEnumerable<PersonViewModel>>(persons);
+
+                response = request.CreateResponse<IEnumerable<PersonViewModel>>(HttpStatusCode.OK, personsVm);
+
+                return response;
+            });
+        }
+
 
         [HttpGet]
         [Route("search/{id:int}/{page:int=0}/{pageSize=10}/{filter?}")]
@@ -105,8 +128,8 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpPost]
-        [Route("update")]
-        public HttpResponseMessage Update(HttpRequestMessage request, PersonViewModel person)
+        [Route("update/{motherId:int}/{fatherId:int}")]
+        public HttpResponseMessage Update(HttpRequestMessage request, int motherId, int fatherId, PersonViewModel person)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -123,9 +146,47 @@ namespace Phoenix.Web.Controllers
                     Person _person = _personRepository.GetSingle(person.ID);
                     _person.UpdatePerson(person);
 
+                    PersonRelationship relationshipFather = new PersonRelationship()
+                    {
+                        PersonId = person.ID,
+                        person = _person,
+                        RelationWithPersonId = fatherId,
+                        RelationshipType = 1
+                    };
+                    _person.PersonRelationships.Add(relationshipFather);
+                    PersonRelationship relationshipMother = new PersonRelationship()
+                    {
+                        PersonId = person.ID,
+                        person = _person,
+                        RelationWithPersonId = motherId,
+                        RelationshipType = 2
+                    };
+                    _person.PersonRelationships.Add(relationshipMother);
+
                     _unitOfWork.Commit();
 
                     response = request.CreateResponse(HttpStatusCode.OK);
+
+                    // test
+
+                    //newMovie.UpdateMovie(movie);
+
+                    //for (int i = 0; i < movie.NumberOfStocks; i++)
+                    //{
+                    //    Stock stock = new Stock()
+                    //    {
+                    //        IsAvailable = true,
+                    //        Movie = newMovie,
+                    //        UniqueKey = Guid.NewGuid()
+                    //    };
+                    //    newMovie.Stocks.Add(stock);
+                    //}
+
+                    //_moviesRepository.Add(newMovie);
+
+                    //test
+                    
+
                 }
 
                 return response;
@@ -166,8 +227,8 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpPost]
-        [Route("create")]
-        public HttpResponseMessage Create(HttpRequestMessage request, PersonViewModel person)
+        [Route("create/{motherId:int}/{fatherId:int}")]
+        public HttpResponseMessage Create(HttpRequestMessage request, int motherId, int fatherId, PersonViewModel person)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -183,6 +244,24 @@ namespace Phoenix.Web.Controllers
                 {
                     Person newPerson = new Person();
                     newPerson.UpdatePerson(person);
+
+                    PersonRelationship relationshipFather = new PersonRelationship()
+                    {
+                        PersonId = person.ID,
+                        person = newPerson,
+                        RelationWithPersonId = fatherId,
+                        RelationshipType = 1
+                    };
+                    newPerson.PersonRelationships.Add(relationshipFather);
+                    PersonRelationship relationshipMother = new PersonRelationship()
+                    {
+                        PersonId = person.ID,
+                        person = newPerson,
+                        RelationWithPersonId = motherId,
+                        RelationshipType = 2
+                    };
+                    newPerson.PersonRelationships.Add(relationshipMother);
+
                     _personRepository.Add(newPerson);
 
                     _unitOfWork.Commit();

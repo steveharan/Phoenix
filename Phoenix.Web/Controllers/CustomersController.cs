@@ -15,7 +15,7 @@ using Phoenix.Data.Extensions;
 
 namespace Phoenix.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [RoutePrefix("api/customers")]
     public class CustomersController : ApiControllerBase
     {

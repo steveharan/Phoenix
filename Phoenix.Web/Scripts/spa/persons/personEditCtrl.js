@@ -14,6 +14,7 @@
             else {
                 if ($scope.newPerson) {
                     $scope.EditedPerson = {};
+                    $scope.EditedPerson.FamilyID = $routeParams.id;
                     return 'Add New';
                 }
                 else {
@@ -32,11 +33,40 @@
             formatYear: 'yy',
             startingDay: 1
         };
+
         $scope.datepicker = {};
         $scope.datepicker2 = {};
         $scope.ethnicities = [];
 
+        // To store the selected parents of this person that were typed in using auto complete.
+        $scope.selectedFatherId = -1;
+        $scope.selectedMotherId = -1;
+        $scope.selectedMother = selectedMother;
+        $scope.selectedFather = selectedFather;
+
         $scope.myDate = new Date();
+
+        function selectedMother($item) {
+            if ($item) {
+                $scope.selectedMotherId = $item.originalObject.ID;
+                $scope.isEnabled = true;
+            }
+            else {
+                $scope.selectedMotherId = -1;
+                $scope.isEnabled = false;
+            }
+        }
+
+        function selectedFather($item) {
+            if ($item) {
+                $scope.selectedFatherId = $item.originalObject.ID;
+                $scope.isEnabled = true;
+            }
+            else {
+                $scope.selectedFatherId = -1;
+                $scope.isEnabled = false;
+            }
+        }
 
         function ethnicitiesLoadCompleted(response) {
             console.log(response.data);
@@ -99,16 +129,13 @@
 
         function updatePerson() {
             if (!$scope.newPerson) {
-                apiService.post('/api/persons/update/', $scope.EditedPerson,
+                apiService.post('/api/persons/update/' + $scope.selectedMotherId + '/' + $scope.selectedFatherId, $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);
             }
             else {
                 $scope.EditedPerson.FamilyID = $routeParams.id;
-                console.log('create person - editedperson is');
-                console.log($scope.EditedPerson);
-                console.log('create person - editedperson above');
-                apiService.post('/api/persons/create', $scope.EditedPerson,
+                apiService.post('/api/persons/create/' + $scope.selectedMotherId + '/' + $scope.selectedFatherId, $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);
             }

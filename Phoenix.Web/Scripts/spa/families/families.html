@@ -6,28 +6,27 @@
 </style>
 
 <div class="row">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading clearfix">
             <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Families</h3>
             <div class="input-group">
                 <input id="inputSearchFamilies" type="search" ng-model="filterFamilies" class="form-control shortInputSearch" placeholder="Filter, search families..">
                 <div class="input-group-btn">
-                    <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
-                    <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <button class="btn btn-info" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-info" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <button class="btn btn-info" ng-click="updateFamily();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="!showTableFormat"><i class="glyphicon glyphicon-tasks"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="showTableFormat"><i class="glyphicon glyphicon-calendar"></i></button>
                 </div>
-
             </div>
             <div class="text-center">
                 <family-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></family-pager>
             </div>
         </div>
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</button>
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</button>
-        <button class="btn btn-primary btn-xs" ng-click="updateFamily();">Add Family<i class="fa fa-plus pull-right"></i></button>
         <div class="panel-body" ng-hide="showTableFormat">
             <div class="row">
                 <div class="col-sm-6" ng-repeat="family in Families | filter:filterFamilies">
-                    <div onmouseover="" style="cursor: pointer;" class="panel panel-default" >
+                    <div class="panel panel-default" >
                         <div class="panel-heading" style="font-weight:bolder;" >
                             <strong>The {{family.FamilyName}} Family ({{family.Persons}} family members)</strong><br />
                         </div>
@@ -69,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <div onmouseover="" style="cursor: pointer;" class="panel-body" ng-hide="!showTableFormat">
+        <div class="panel-body" ng-hide="!showTableFormat">
             <table class="table table-bordered table table-striped table-hover table-responsive" width="auto">
                 <tr>
                     <th class="col-md-1"></th>
@@ -81,7 +80,7 @@
                     <th>Diagnosis Subtype</th>
                     <th>Members</th>
                 </tr>
-                <tr ng-click="callPersons(family)" ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
+                <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
                     <td class="col-md-1">
                         <button type="button" class="btn btn-default btn-sm" ng-click="updateFamily(family);">
                             <span class="glyphicon glyphicon-edit"></span>
@@ -91,13 +90,13 @@
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
-                    <td><strong>{{family.FamilyName}}</strong></td>
-                    <td>{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
-                    <td>{{family.Notes}}</td>
-                    <td>{{family.Ethnicity}}</td>
-                    <td>{{family.Diagnosis}}</td>
-                    <td>{{family.DiagnosisSubType}}</td>
-                    <td>{{family.Persons}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)"><strong>{{family.FamilyName}}</strong></td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Notes}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Ethnicity}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Diagnosis}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.DiagnosisSubType}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Persons}}</td>
                 </tr>
             </table>
         </div>

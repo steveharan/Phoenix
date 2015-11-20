@@ -65,6 +65,7 @@ namespace Phoenix.Web.App_Start
                 "~/Scripts/spa/families/familiesCtrl.js",
                 "~/Scripts/spa/families/familyEditCtrl.js",
                 "~/Scripts/spa/persons/personsCtrl.js",
+                "~/Scripts/spa/personRelationships/personRelationshipsCtrl.js",
                 "~/Scripts/spa/persons/personEditCtrl.js"
                 ));
 

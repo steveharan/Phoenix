@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+</body>
+</html>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Relationships for {{EditedPerson.FirstName}} {{EditedPerson.SurName}}
+    </div>
+
+    <div class="panel-body">
+        <form role="form" novalidate angular-validator name="managerRelationshipsForm" angular-validator-submit="Register()">
+            <table class="table table-bordered table table-striped table-hover table-responsive">
+                <tr>
+                    <th class="col-md-1"></th>
+                    <th>Relation With</th>
+                    <th>Relation Type</th>
+                </tr>
+                <tr>
+                    <td class="col-xs-1">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="addItem();">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <angucomplete-alt id="person"
+                                          placeholder="Search Person"
+                                          pause="200"
+                                          selected-object="selectedPerson"
+                                          input-changed="selectionChanged"
+                                          remote-url="/api/persons/{{EditedPerson.FamilyID}}?filter="
+                                          remote-url-data-field=""
+                                          title-field="FirstName,SurName"
+                                          description-field="FamilyName"
+                                          input-class="form-control form-control-small"
+                                          match-class="red"
+                                          text-searching="Searching for person.."
+                                          text-no-results="No people found in this family matching your filter." />
+                    </td>
+                    <td>
+                        <select class="form-control black" name="mySelect" id="mySelect"
+                                ng-options="option.name for option in data.availableOptions track by option.id"
+                                ng-model="data.selectedOption"></select>
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-bordered table table-striped table-hover table-responsive">
+                <tr>
+                    <th>Relationship with</th>
+                    <th>Relationship type</th>
+                </tr>
+                <tr  ng-repeat="relation in Relationships" ng-class="{'selected':$index == selectedRow}">
+                    <td>{{relation.relationshipName}}</td>
+                    <td>{{relation.relationshipTypeName}}</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div class="panel-footer clearfix">
+    <div class="pull-right">
+        <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="updatePerson()">Save</button>
+    </div>
+</div>

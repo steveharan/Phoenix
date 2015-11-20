@@ -129,6 +129,10 @@
     <Compile Include="Migrations\201511181645144_sixth.Designer.cs">
       <DependentUpon>201511181645144_sixth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511201220596_seventh.cs" />
+    <Compile Include="Migrations\201511201220596_seventh.Designer.cs">
+      <DependentUpon>201511201220596_seventh.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhoenixContext.cs" />
     <Compile Include="Phoenix\Data\Repositories\IEntityBaseRepository.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
@@ -173,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511181645144_sixth.resx">
       <DependentUpon>201511181645144_sixth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511201220596_seventh.resx">
+      <DependentUpon>201511201220596_seventh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
