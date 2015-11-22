@@ -3,9 +3,9 @@
 
     app.controller('customerEditCtrl', customerEditCtrl);
 
-    customerEditCtrl.$inject = ['$scope', '$modalInstance', '$timeout', 'apiService', 'notificationService'];
+    customerEditCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout', 'apiService', 'notificationService'];
 
-    function customerEditCtrl($scope, $modalInstance, $timeout, apiService, notificationService) {
+    function customerEditCtrl($scope, $uibModalInstance, $timeout, apiService, notificationService) {
 
         $scope.addOrEdit = setLable();
 
@@ -47,7 +47,7 @@
         function updateCustomerCompleted(response) {
             notificationService.displaySuccess($scope.EditedCustomer.FirstName + ' ' + $scope.EditedCustomer.LastName + ' has been updated');
             $scope.EditedCustomer = {};
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         function updateCustomerLoadFailed(response) {
@@ -56,7 +56,7 @@
 
         function cancelEdit() {
             $scope.isEnabled = false;
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         function openDatePicker($event) {
@@ -68,7 +68,7 @@
             });
 
             $timeout(function () {
-                $('ul[datepicker-popup-wrap]').css('z-index', '10000');
+                $('ul[uib-datepicker-popup-wrap]').css('z-index', '10000');
             }, 100);
 
         };

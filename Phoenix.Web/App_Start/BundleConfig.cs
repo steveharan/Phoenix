@@ -15,13 +15,14 @@ namespace Phoenix.Web.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/vendors").Include(
                 "~/Scripts/Vendors/jquery.js",
-                "~/Scripts/Vendors/bootstrap.js",
+                "~/Scripts/bootstrap.js",
                 "~/Scripts/Vendors/toastr.js",
                 "~/Scripts/Vendors/jquery.raty.js",
                 "~/Scripts/Vendors/respond.src.js",
-                "~/Scripts/Vendors/angular.js",
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-animate.js",
                 "~/Scripts/Vendors/angular-route.js",
-                "~/Scripts/Vendors/angular-cookies.js",
+                "~/Scripts/angular-cookies.js",
                 "~/Scripts/Vendors/angular-validator.js",
                 "~/Scripts/Vendors/angular-base64.js",
                 "~/Scripts/Vendors/angular-file-upload.js",
@@ -78,7 +79,8 @@ namespace Phoenix.Web.App_Start
                 "~/content/css/morris.css",
                 "~/content/css/toastr.css",
                 "~/content/css/jquery.fancybox.css",
-                "~/content/css/loading-bar.css"
+                "~/content/css/loading-bar.css",
+                "~/content/css/animate.css"
                 ));
 
             BundleTable.EnableOptimizations = false;

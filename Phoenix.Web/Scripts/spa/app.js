@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('phoenix', ['common.core', 'common.ui', 'ui.bootstrap'])
+    angular.module('phoenix', ['common.core', 'common.ui', 'ngAnimate', 'ui.bootstrap'])
         .config(config)
         .run(run);
 

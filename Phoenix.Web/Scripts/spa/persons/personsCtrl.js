@@ -3,9 +3,9 @@
 
     app.controller('personsCtrl', personsCtrl);
 
-    personsCtrl.$inject = ['$scope', '$rootScope', '$modal', '$routeParams', 'apiService', 'notificationService'];
+    personsCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService'];
 
-    function personsCtrl($scope, $rootScope, $modal, $routeParams, apiService, notificationService) {
+    function personsCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService) {
         $scope.pageClass = 'page-persons';
         $scope.loadingPersons = true;
         $scope.page = 0;
@@ -70,7 +70,7 @@
 
         function manageRelations(person) {
             $scope.EditedPerson = person;
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/personRelationships/personRelationshipsModal.html',
                 controller: 'personRelationshipsCtrl',
                 backdrop: 'static',
@@ -86,7 +86,7 @@
 
         function openEditDialog(person) {
             $scope.EditedPerson = person;
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/persons/personEditModal.html',
                 controller: 'personEditCtrl',
                 backdrop: 'static',

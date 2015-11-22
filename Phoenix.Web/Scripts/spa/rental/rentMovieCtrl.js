@@ -3,9 +3,9 @@
 
     app.controller('rentMovieCtrl', rentMovieCtrl);
 
-    rentMovieCtrl.$inject = ['$scope', '$modalInstance', '$location', 'apiService', 'notificationService'];
+    rentMovieCtrl.$inject = ['$scope', '$uibModalInstance', '$location', 'apiService', 'notificationService'];
 
-    function rentMovieCtrl($scope, $modalInstance, $location, apiService, notificationService) {
+    function rentMovieCtrl($scope, $uibModalInstance, $location, apiService, notificationService) {
 
         $scope.Title = $scope.movie.Title;
         $scope.loadStockItems = loadStockItems;
@@ -44,7 +44,7 @@
 
         function rentMovieSucceeded(response) {
             notificationService.displaySuccess('Rental completed successfully');
-            $modalInstance.close();
+            $uibModalInstance.close();
         }
 
         function rentMovieFailed(response) {
@@ -55,7 +55,7 @@
             $scope.stockItems = [];
             $scope.selectedCustomer = -1;
             $scope.isEnabled = false;
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         function selectCustomer($item) {

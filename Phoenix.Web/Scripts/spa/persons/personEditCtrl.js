@@ -3,9 +3,9 @@
 
     app.controller('personEditCtrl', personEditCtrl);
 
-    personEditCtrl.$inject = ['$scope', '$modal', '$routeParams', '$modalInstance', '$timeout', 'apiService', 'notificationService'];
+    personEditCtrl.$inject = ['$scope', '$uibModal', '$routeParams', '$uibModalInstance', '$timeout', 'apiService', 'notificationService'];
 
-    function personEditCtrl($scope, $modal, $routeParams, $modalInstance, $timeout, apiService, notificationService) {
+    function personEditCtrl($scope, $uibModal, $routeParams, $uibModalInstance, $timeout, apiService, notificationService) {
         $scope.addOrEdit = setLable();
         function setLable() {
             if ($scope.EditedPerson.deleted) {
@@ -151,7 +151,7 @@
                 notificationService.displaySuccess($scope.EditedPerson.FirstName + ' updated');
             }
             $scope.EditedPerson = {};
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         function updatePersonLoadFailed(response) {
@@ -161,7 +161,7 @@
 
         function cancelEdit() {
             $scope.isEnabled = false;
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         function openDatePicker($event) {
@@ -174,7 +174,7 @@
             });
 
             $timeout(function () {
-                $('ul[datepicker-popup-wrap]').css('z-index', '10000');
+                $('ul[uib-datepicker-popup-wrap]').css('z-index', '10000');
             }, 100);
         };
 
@@ -188,7 +188,7 @@
             });
 
             $timeout(function () {
-                $('ul[datepicker-popup-wrap]').css('z-index', '10000');
+                $('ul[uib-datepicker-popup-wrap]').css('z-index', '10000');
             }, 100);
 
         };

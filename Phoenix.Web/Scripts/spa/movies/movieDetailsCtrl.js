@@ -3,9 +3,9 @@
 
     app.controller('movieDetailsCtrl', movieDetailsCtrl);
 
-    movieDetailsCtrl.$inject = ['$scope', '$location', '$routeParams', '$modal', 'apiService', 'notificationService'];
+    movieDetailsCtrl.$inject = ['$scope', '$location', '$routeParams', '$uibModal', 'apiService', 'notificationService'];
 
-    function movieDetailsCtrl($scope, $location, $routeParams, $modal, apiService, notificationService) {
+    function movieDetailsCtrl($scope, $location, $routeParams, $uibModal, apiService, notificationService) {
         $scope.pageClass = 'page-movies';
         $scope.movie = {};
         $scope.loadingMovie = true;
@@ -88,7 +88,7 @@
         }
 
         function openRentDialog() {
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/rental/rentMovieModal.html',
                 controller: 'rentMovieCtrl',
                 scope: $scope

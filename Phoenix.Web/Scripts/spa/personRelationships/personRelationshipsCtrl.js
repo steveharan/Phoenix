@@ -3,9 +3,9 @@
 
     app.controller('personRelationshipsCtrl', personRelationshipsCtrl);
 
-    personRelationshipsCtrl.$inject = ['$scope', '$rootScope', '$modalInstance', '$modal', '$routeParams', 'apiService', 'notificationService'];
+    personRelationshipsCtrl.$inject = ['$scope', '$rootScope', '$uibModalInstance', '$uibModal', '$routeParams', 'apiService', 'notificationService'];
 
-    function personRelationshipsCtrl($scope, $rootScope, $modalInstance, $modal, $routeParams, apiService, notificationService) {
+    function personRelationshipsCtrl($scope, $rootScope, $uibModalInstance, $uibModal, $routeParams, apiService, notificationService) {
         $scope.pageClass = 'page-persons';
         $scope.loadingPersons = true;
         $scope.page = 0;
@@ -108,7 +108,7 @@
 
         function openEditDialog(person) {
             $scope.EditedPerson = person;
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/persons/personEditModal.html',
                 controller: 'personEditCtrl',
                 backdrop: 'static',
@@ -150,7 +150,7 @@
 
         function cancel() {
             $scope.isEnabled = false;
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         $scope.search();

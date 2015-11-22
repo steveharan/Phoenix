@@ -3,9 +3,9 @@
 
     app.controller('customersCtrl', customersCtrl);
 
-    customersCtrl.$inject = ['$scope', '$modal', 'apiService', 'notificationService'];
+    customersCtrl.$inject = ['$scope', '$uibModal', 'apiService', 'notificationService'];
 
-    function customersCtrl($scope, $modal, apiService, notificationService) {
+    function customersCtrl($scope, $uibModal, apiService, notificationService) {
 
         $scope.pageClass = 'page-customers';
         $scope.loadingCustomers = true;
@@ -53,7 +53,7 @@
                 $scope.newCustomer = false;
             }
             $scope.EditedCustomer = customer;
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/customers/editCustomerModal.html',
                 controller: 'customerEditCtrl',
                 scope: $scope

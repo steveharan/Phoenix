@@ -3,9 +3,9 @@
 
     app.controller('familiesCtrl', familiesCtrl);
 
-    familiesCtrl.$inject = ['$scope', '$rootScope', '$modal', 'apiService', 'notificationService', '$location'];
+    familiesCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'apiService', 'notificationService', '$location'];
 
-    function familiesCtrl($scope, $rootScope, $modal, apiService, notificationService, $location) {
+    function familiesCtrl($scope, $rootScope, $uibModal, apiService, notificationService, $location) {
         $scope.pageClass = 'page-families';
         $scope.loadingFamilies = true;
         $scope.page = 0;
@@ -14,6 +14,8 @@
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
+
+        $scope.isCollapsed = false;
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
@@ -74,7 +76,7 @@
 
         function openEditDialog(family) {
             $scope.EditedFamily = family;
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/families/familyEditModal.html',
                 controller: 'familyEditCtrl',
                 backdrop: 'static',

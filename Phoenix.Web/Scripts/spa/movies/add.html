@@ -76,7 +76,7 @@
                         <div class="col-xs-6">
                             <label class="control-label">Release Date</label>
                             <p class="input-group">
-                                <input type="text" class="form-control" name="dateReleased" datepicker-popup="{{format}}" ng-model="movie.ReleaseDate" is-open="datepicker.opened" datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                <input type="text" class="form-control" name="dateReleased" uib-datepicker-popup="{{format}}" ng-model="movie.ReleaseDate" is-open="datepicker.opened" datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
                                        validate-on="blur" required required-message="'Date Released is required'" />
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>

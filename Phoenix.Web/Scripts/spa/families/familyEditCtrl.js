@@ -3,9 +3,9 @@
 
     app.controller('familyEditCtrl', familyEditCtrl);
 
-    familyEditCtrl.$inject = ['$scope', '$modal', '$modalInstance', '$timeout', 'apiService', 'notificationService'];
+    familyEditCtrl.$inject = ['$scope', '$uibModal', '$uibModalInstance', '$timeout', 'apiService', 'notificationService'];
 
-    function familyEditCtrl($scope, $modal,$modalInstance, $timeout, apiService, notificationService) {
+    function familyEditCtrl($scope, $uibModal, $uibModalInstance, $timeout, apiService, notificationService) {
         $scope.addOrEdit = setLable();
         function setLable() {
             if ($scope.EditedFamily.deleted) {
@@ -38,7 +38,7 @@
 
         function openPersonDialog(family) {
             $scope.EditedFamily = family;
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/families/familyPersonsModal.html',
                 controller: 'familyPersonsCtrl',
                 backdrop: 'static',
@@ -133,7 +133,7 @@
                 notificationService.displaySuccess('The ' + $scope.EditedFamily.FamilyName + ' family has been updated');
             }
             $scope.EditedFamily = {};
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         function updateFamilyLoadFailed(response) {
@@ -143,7 +143,7 @@
 
         function cancelEdit() {
             $scope.isEnabled = false;
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
         }
 
         function openDatePicker($event) {
@@ -155,7 +155,7 @@
             });
 
             $timeout(function () {
-                $('ul[datepicker-popup-wrap]').css('z-index', '10000');
+                $('ul[uib-datepicker-popup-wrap]').css('z-index', '10000');
             }, 100);
 
         };

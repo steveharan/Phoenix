@@ -18,16 +18,11 @@
         <form role="form" novalidate angular-validator name="managerRelationshipsForm" angular-validator-submit="Register()">
             <table class="table table-bordered table table-striped table-hover table-responsive">
                 <tr>
-                    <th class="col-md-1"></th>
                     <th>Relation With</th>
                     <th>Relation Type</th>
+                    <th class="col-md-1"></th>
                 </tr>
                 <tr>
-                    <td class="col-xs-1">
-                        <button type="button" class="btn btn-default btn-sm" ng-click="addItem();">
-                            <span class="glyphicon glyphicon-plus-sign"></span>
-                        </button>
-                    </td>
                     <td>
                         <angucomplete-alt id="person"
                                           placeholder="Search Person"
@@ -47,6 +42,11 @@
                         <select class="form-control black" name="mySelect" id="mySelect"
                                 ng-options="option.name for option in data.availableOptions track by option.id"
                                 ng-model="data.selectedOption"></select>
+                    </td>
+                    <td class="col-xs-1">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="addItem();">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
                     </td>
                 </tr>
             </table>
