@@ -26,6 +26,24 @@
         $scope.updatePerson = updatePerson;
         $scope.GetDiagnosisSubType = GetDiagnosisSubType;
 
+        if ($scope.EditedPerson.Gender == 'M')
+        {
+            $scope.GenderName = 'Male';
+        }
+        else
+        {
+            $scope.GenderName = 'Female';
+        }
+
+        $scope.data = {
+            availableOptions: [
+              { id: '0', name: '-- Select --' },
+              { id: 'M', name: 'Male' },
+              { id: 'F', name: 'Female' },
+            ],
+            selectedOption: { id: $scope.EditedPerson.Gender, name: $scope.GenderName }
+        };
+
         $scope.openDatePicker = openDatePicker;
         $scope.openDatePicker2 = openDatePicker2;
 
@@ -129,6 +147,8 @@
 
         function updatePerson() {
             if (!$scope.newPerson) {
+                $scope.EditedPerson.Gender = $scope.data.selectedOption.id,
+                console.log('Gender = ' + $scope.data.selectedOption.id);
                 apiService.post('/api/persons/update', $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);
@@ -137,6 +157,8 @@
                 var now = new Date();
                 $scope.EditedPerson.FamilyID = $routeParams.id;
                 $scope.EditedPerson.DateDeceased = now;
+                $scope.EditedPerson.Gender = $scope.data.selectedOption.id,
+                console.log('Gender = ' + $scope.data.selectedOption.id);
                 apiService.post('/api/persons/create', $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);

@@ -137,9 +137,12 @@ namespace Phoenix.Web.Controllers
         [Route("createall")]
         public HttpResponseMessage CreateAll(HttpRequestMessage request, IEnumerable<PersonRelationshipViewModel> personRelationships)
         {
+            var personId = personRelationships.FirstOrDefault().PersonId;
             List<PersonRelationship> oldPersonRelationships = null;
 
-            oldPersonRelationships = _personRelationshipRepository.FindBy(r => (r.PersonId == 2)).ToList();
+            oldPersonRelationships = _personRelationshipRepository
+                .FindBy(r => (r.PersonId == personId))
+                .ToList();
 
             foreach (var oldPersonRelationship in oldPersonRelationships)
             {
