@@ -7,7 +7,7 @@
 
     function personRelationshipsCtrl($scope, $rootScope, $uibModalInstance, $uibModal, $routeParams, apiService, notificationService) {
         $scope.pageClass = 'page-persons';
-        $scope.loadingPersons = true;
+        $scope.loadingPersonRelationships = true;
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.Persons = [];
@@ -16,9 +16,7 @@
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
-        $scope.openEditDialog = openEditDialog;
-        $scope.updatePerson = updatePerson;
-        $scope.deletePerson = deletePerson;
+        $scope.updatePersonRelationships = updatePersonRelationships;
         $scope.cancel = cancel;
         $scope.addItem = addItem;
 
@@ -48,11 +46,14 @@
         }
 
         function addItem(index) {
+            console.log('scope on add item');
+            console.log($scope);
             $scope.Relationships.push({
-                relationshipPersonId: $scope.selectedPersonId,
-                relationshipName: $scope.selectedPersonName,
-                relationshipTypeId: $scope.data.selectedOption.id,
-                relationshipTypeName: $scope.data.selectedOption.name
+                relationWithPersonId: $scope.selectedPersonId,
+                personId: $scope.$parent.EditedPerson.ID,
+                RelationshipName: $scope.selectedPersonName,
+                RelationshipTypeId: $scope.data.selectedOption.id,
+                RelationshipTypeName: $scope.data.selectedOption.name
             });
             $scope.selectedPersonName = "";
             $scope.RelationshipID = "";
@@ -60,86 +61,58 @@
             $scope.$broadcast('angucomplete-alt:clearInput');
         }
 
-        $scope.showTableFormat = true;
-
-        $scope.toggleView = function () {
-            $scope.showTableFormat = $scope.showTableFormat === true ? false : true;
-        };
-
-        function search(page) {
-            page = page || 0;
-
-            $scope.loadingPersons = true;
-
-            var config = {
-                params: {
-                    page: page,
-                    pageSize: 10,
-                    filter: $scope.filterPersons
-                }
-            };
-
-            apiService.get('/api/persons/search/' + $routeParams.id, config,
-            personsLoadCompleted,
-            personsLoadFailed);
-        }
-
         function updatePersonLoadFailed(response) {
             console.log(response);
             notificationService.displayError(response.data);
         }
 
-        function deletePerson(person) {
-            person.deleted = true;
-            openEditDialog(person);
+        function updatePersonRelationships() {
+            console.log('$scope.Relationships');
+            console.log($scope.Relationships);
+            apiService.post('/api/personRelationships/createall', $scope.Relationships,
+            updatePersonRelationshipCompleted,
+            updatePersonRelationshipFailed);
         }
 
-        function updatePerson(person) {
-            if (person == null) {
-                $scope.newPerson = true;
-                person = {};
-            }
-            else {
-                $scope.newPerson = false;
-            }
-            person.deleted = false;
-            openEditDialog(person);
-        }
-
-        function openEditDialog(person) {
-            $scope.EditedPerson = person;
-            $uibModal.open({
-                templateUrl: 'scripts/spa/persons/personEditModal.html',
-                controller: 'personEditCtrl',
-                backdrop: 'static',
-                scope: $scope,
-                keyboard: 'true',
-                windowClass: 'app-modal-window'
-            }).result.then(function ($scope) {
-                clearSearch();
-            }, function () {
-                clearSearch();
-            });
-        }
-
-        function personsLoadCompleted(result) {
-            $scope.Persons = result.data.Items;
-            console.log('personloadcomplete');
-            console.log($scope.Persons);
-            $scope.FamilyName = $scope.Persons[0].FamilyName;
+        function updatePersonRelationshipCompleted(response) {
             console.log($scope);
+            notificationService.displaySuccess('Success');
+            $uibModalInstance.dismiss();
+        }
+
+        function updatePersonRelationshipFailed(response) {
+            console.log(response);
+            notificationService.displayError(response.data);
+        }
+
+        function search(page) {
+            page = page || 0;
+
+            $scope.loadingPersonRelationships = true;
+
+            apiService.get('/api/personRelationships/' + $scope.$parent.EditedPerson.ID, null,
+            personRelationshipsLoadCompleted,
+            personRelationshipsLoadFailed);
+        }
+
+        function personRelationshipsLoadCompleted(result) {
+            console.log('personRelationshipsLoadCompleted - result');
+            console.log(result.data);
+            $scope.Relationships = result.data;
+            console.log('$scope.Relationships');
+            console.log($scope.Relationships);
 
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;
             $scope.totalCount = result.data.TotalCount;
-            $scope.loadingPersons = false;
+            $scope.loadingPersonRelationships = false;
 
             if ($scope.filterPersons && $scope.filterPersons.length) {
                 notificationService.displayInfo(result.data.Items.length + ' people found');
             }
         }
 
-        function personsLoadFailed(response) {
+        function personRelationshipsLoadFailed(response) {
             notificationService.displayError(response.data);
         }
 

@@ -105,33 +105,9 @@
     <Compile Include="Extensions\FamilyExtensions.cs" />
     <Compile Include="Extensions\StockExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
-    <Compile Include="Migrations\201511161128375_InitialMigration.cs" />
-    <Compile Include="Migrations\201511161128375_InitialMigration.Designer.cs">
-      <DependentUpon>201511161128375_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511170916127_second.cs" />
-    <Compile Include="Migrations\201511170916127_second.Designer.cs">
-      <DependentUpon>201511170916127_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511181114051_third.cs" />
-    <Compile Include="Migrations\201511181114051_third.Designer.cs">
-      <DependentUpon>201511181114051_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511181349532_fourth.cs" />
-    <Compile Include="Migrations\201511181349532_fourth.Designer.cs">
-      <DependentUpon>201511181349532_fourth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511181627166_fifth.cs" />
-    <Compile Include="Migrations\201511181627166_fifth.Designer.cs">
-      <DependentUpon>201511181627166_fifth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511181645144_sixth.cs" />
-    <Compile Include="Migrations\201511181645144_sixth.Designer.cs">
-      <DependentUpon>201511181645144_sixth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511201220596_seventh.cs" />
-    <Compile Include="Migrations\201511201220596_seventh.Designer.cs">
-      <DependentUpon>201511201220596_seventh.cs</DependentUpon>
+    <Compile Include="Migrations\201511230954087_initial.cs" />
+    <Compile Include="Migrations\201511230954087_initial.Designer.cs">
+      <DependentUpon>201511230954087_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="PhoenixContext.cs" />
     <Compile Include="Phoenix\Data\Repositories\IEntityBaseRepository.cs" />
@@ -160,26 +136,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511161128375_InitialMigration.resx">
-      <DependentUpon>201511161128375_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511170916127_second.resx">
-      <DependentUpon>201511170916127_second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511181114051_third.resx">
-      <DependentUpon>201511181114051_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511181349532_fourth.resx">
-      <DependentUpon>201511181349532_fourth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511181627166_fifth.resx">
-      <DependentUpon>201511181627166_fifth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511181645144_sixth.resx">
-      <DependentUpon>201511181645144_sixth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511201220596_seventh.resx">
-      <DependentUpon>201511201220596_seventh.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511230954087_initial.resx">
+      <DependentUpon>201511230954087_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

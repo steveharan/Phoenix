@@ -56,8 +56,8 @@
                     <th>Relationship type</th>
                 </tr>
                 <tr  ng-repeat="relation in Relationships" ng-class="{'selected':$index == selectedRow}">
-                    <td>{{relation.relationshipName}}</td>
-                    <td>{{relation.relationshipTypeName}}</td>
+                    <td>{{relation.RelationshipName}}</td>
+                    <td>{{relation.RelationshipTypeName}}</td>
                 </tr>
             </table>
         </form>
@@ -67,6 +67,6 @@
 <div class="panel-footer clearfix">
     <div class="pull-right">
         <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+        <button type="button" class="btn btn-primary" ng-click="updatePersonRelationships()">Save</button>
     </div>
 </div>

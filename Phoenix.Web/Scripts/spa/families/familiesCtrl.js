@@ -26,6 +26,12 @@
         $scope.selectedFamily = {};
         $scope.showTableFormat = true;
 
+        $scope.dynamicPopover = {
+            content: 'Hello, World!',
+            templateUrl: 'myPopoverTemplate.html',
+            title: 'Title'
+        };
+
         $scope.toggleView = function () {
             $scope.showTableFormat = $scope.showTableFormat === true ? false : true;
         };

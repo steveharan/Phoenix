@@ -71,13 +71,14 @@ namespace Phoenix.Web.Infrastructure.Extensions
             person.EthnicityId = personVm.EthnicityID;
             person.FamilyId = personVm.FamilyID;
             person.Deleted = personVm.Deleted;
+            person.Gender = personVm.Gender;
         }
 
         public static void UpdatePersonRelationship(this PersonRelationship personRelationship, PersonRelationshipViewModel personRelationshipVM)
         {
             personRelationship.PersonId = personRelationshipVM.PersonId;
             personRelationship.RelationWithPersonId = personRelationshipVM.RelationWithPersonId;
-            personRelationship.RelationshipType = personRelationshipVM.RelationshipType;
+            personRelationship.RelationshipTypeId = personRelationshipVM.RelationshipTypeId;
         }
     }
 }

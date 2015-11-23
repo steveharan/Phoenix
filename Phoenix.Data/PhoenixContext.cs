@@ -33,6 +33,7 @@ namespace Phoenix.Data
         public IDbSet<Diagnosis> DiagnosisSet { get; set; }
         public IDbSet<DiagnosisSubType> DiagnosisSubTypeSet { get; set; }
         public IDbSet<Ethnicity> EthnicitySet { get; set; }
+        public IDbSet<RelationshipType> RelationshipTypeSet { get; set; }
         public IDbSet<Error> ErrorSet { get; set; }
         #endregion
 
@@ -58,5 +59,7 @@ namespace Phoenix.Data
             modelBuilder.Configurations.Add(new DiagnosisConfiguration());
             modelBuilder.Configurations.Add(new DiagnosisSubTypeConfiguration());
         }
+
+        //public System.Data.Entity.DbSet<Phoenix.Web.Models.PersonRelationshipViewModel> PersonRelationshipViewModels { get; set; }
     }
 }

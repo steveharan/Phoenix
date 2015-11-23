@@ -22,10 +22,12 @@ namespace Phoenix.Web.Controllers
         private readonly IEntityBaseRepository<Ethnicity> _ethnicityRepository;
         private readonly IEntityBaseRepository<Diagnosis> _diagnosisRepository;
         private readonly IEntityBaseRepository<DiagnosisSubType> _diagnosisSubTypeRepository;
+        private readonly IEntityBaseRepository<RelationshipType> _relationshipTypeRepository;
 
         public DataController(IEntityBaseRepository<Ethnicity> ethnicityRepository, 
                                 IEntityBaseRepository<Diagnosis> diagnosisRepository,
                                 IEntityBaseRepository<DiagnosisSubType> diagnosisSubTypeRepository,
+                                IEntityBaseRepository<RelationshipType> relationshipTypeRepository,
                                 IEntityBaseRepository<Error> _errorsRepository, 
                                 IUnitOfWork _unitOfWork)
                                 : base(_errorsRepository, _unitOfWork)
@@ -33,6 +35,27 @@ namespace Phoenix.Web.Controllers
             _ethnicityRepository = ethnicityRepository;
             _diagnosisRepository = diagnosisRepository;
             _diagnosisSubTypeRepository = diagnosisSubTypeRepository;
+        }
+
+        [HttpGet]
+        [Route("relationhipType")]
+        public HttpResponseMessage ListRelationshipType(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<RelationshipType> relationshipType = null;
+                relationshipType = _relationshipTypeRepository.GetAll()
+                    .OrderBy(c => c.ID)
+                    .ToList();
+
+                IEnumerable<RelationshipTypeViewModel> relationshipTypeVM = Mapper.Map<IEnumerable<RelationshipType>,
+                    IEnumerable<RelationshipTypeViewModel>>(relationshipType);
+
+                response = request.CreateResponse<IEnumerable<RelationshipTypeViewModel>>(HttpStatusCode.OK, relationshipTypeVM);
+
+                return response;
+            });
         }
 
         [HttpGet]

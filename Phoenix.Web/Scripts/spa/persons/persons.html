@@ -111,14 +111,20 @@
                 </tr>
                 <tr ng-repeat="person in Persons | filter:filterPersons" ng-class="{'selected':$index == selectedRow}">
                     <td>
-                        <button type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
+                        <button uib-popover="Click to edit {{person.FirstName}}" popover-trigger="mouseenter"
+                                popover-placement="right"
+                                type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
-                        <button type="button" class="btn btn-warning btn-sm"
+                        <button uib-popover="Click to manage family relationships for {{person.FirstName}}" popover-trigger="mouseenter"
+                                popover-placement="right"
+                                type="button" class="btn btn-warning btn-sm"
                                 ng-click="manageRelations(person);">
                             <span class="glyphicon glyphicon-tree-conifer"></span>
                         </button>
-                        <button type="button" class="btn btn-danger btn-sm"
+                        <button uib-popover="Click to delete {{person.FirstName}}" popover-trigger="mouseenter"
+                                popover-placement="right"
+                                type="button" class="btn btn-danger btn-sm"
                                 ng-click="deletePerson(person);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>

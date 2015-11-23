@@ -13,6 +13,7 @@ namespace Phoenix.Entities
         public int RelationWithPersonId { get; set; }
         public virtual Person person { get; set; }
         public virtual Person relationWithPerson { get; set; }
-        public int RelationshipType { get; set; }
+        public int RelationshipTypeId { get; set; }
+        public virtual RelationshipType RelationshipType { get; set; }
     }
 }

@@ -47,9 +47,12 @@ namespace Phoenix.Web.Infrastructure.Mappings
 
             Mapper.CreateMap<PersonRelationship, PersonRelationshipViewModel>()
                 .ForMember(vm => vm.PersonId, map => map.MapFrom(m => m.PersonId))
-                .ForMember(vm => vm.RelationWithPersonId, map => map.MapFrom(m => m.PersonId));
+                .ForMember(vm => vm.RelationshipTypeName, map => map.MapFrom(m => m.RelationshipType.RelationshipTypeName))
+                .ForMember(vm => vm.RelationshipName, map => map.MapFrom(m => (m.relationWithPerson.FirstName + " " + m.relationWithPerson.SurName)))
+                .ForMember(vm => vm.RelationWithPersonId, map => map.MapFrom(m => m.relationWithPerson.ID));
 
             Mapper.CreateMap<Ethnicity, EthnicityViewModel>();
+            Mapper.CreateMap<RelationshipType, RelationshipTypeViewModel>();
             Mapper.CreateMap<Diagnosis, DiagnosisViewModel>();
             Mapper.CreateMap<DiagnosisSubType, DiagnosisSubTypeViewModel>();
 

@@ -61,6 +61,11 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
+                        <div class="col-xs-1 selectContainer">
+                            <label class="control-label" for="gender">Gender</label>
+                            <input type="text" class="form-control" ng-disabled="EditedPerson.gender" ng-model="EditedPerson.Gender" name="gender" id="gender" placeholder="M or F"
+                                   validate-on="blur" required required-message="'Gender is required'">
+                        </div>
                         <div class="col-xs-3 selectContainer">
                             <label class="control-label" for="weightKg">Weight KG</label>
                             <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.WeightKG" name="weightKg" id="weighKg" placeholder="Weight in KG"

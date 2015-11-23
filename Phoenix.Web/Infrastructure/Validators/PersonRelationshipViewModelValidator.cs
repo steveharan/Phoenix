@@ -15,7 +15,7 @@ namespace Phoenix.Web.Infrastructure.Validators
                 .WithMessage("Please select person.");
             RuleFor(r => r.RelationWithPersonId).NotEmpty()
                 .WithMessage("Please the person having relationship with.");
-            RuleFor(r => r.RelationshipType).NotEmpty()
+            RuleFor(r => r.RelationshipTypeId).NotEmpty()
                 .WithMessage("Please select relationship type.");
         }
     }

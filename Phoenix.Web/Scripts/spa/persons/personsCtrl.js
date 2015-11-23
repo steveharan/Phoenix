@@ -70,6 +70,8 @@
 
         function manageRelations(person) {
             $scope.EditedPerson = person;
+            console.log('scope before modal call');
+            console.log($scope);
             $uibModal.open({
                 templateUrl: 'scripts/spa/personRelationships/personRelationshipsModal.html',
                 controller: 'personRelationshipsCtrl',
@@ -102,8 +104,6 @@
 
         function personsLoadCompleted(result) {
             $scope.Persons = result.data.Items;
-            console.log('personloadcomplete');
-            console.log($scope.Persons);
             $scope.FamilyName = $scope.Persons[0].FamilyName;
             console.log($scope);
 

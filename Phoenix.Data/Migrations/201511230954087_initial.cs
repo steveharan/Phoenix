@@ -3,7 +3,7 @@ namespace Phoenix.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -45,10 +45,15 @@ namespace Phoenix.Data.Migrations
                         HeightCM = c.Decimal(nullable: false, precision: 18, scale: 2),
                         WeightKG = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Deceased = c.Boolean(nullable: false),
+                        DateDeceased = c.DateTime(nullable: false),
+                        FirstRegisteredDate = c.DateTime(nullable: false),
+                        Gender = c.String(nullable: false),
+                        Notes = c.String(nullable: false),
                         FamilyId = c.Int(nullable: false),
                         DiagnosisId = c.Int(),
                         DiagnosisSubTypeId = c.Int(),
                         EthnicityId = c.Int(nullable: false),
+                        Deleted = c.Boolean(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Diagnosis", t => t.DiagnosisId)
@@ -90,17 +95,46 @@ namespace Phoenix.Data.Migrations
                         Notes = c.String(nullable: false, maxLength: 100),
                         FamilyName = c.String(nullable: false, maxLength: 30),
                         EthnicityID = c.Int(nullable: false),
-                        DiagnosisId = c.Int(),
+                        DiagnosisID = c.Int(),
                         DiagnosisSubTypeId = c.Int(),
                         Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Diagnosis", t => t.DiagnosisId)
+                .ForeignKey("dbo.Diagnosis", t => t.DiagnosisID)
                 .ForeignKey("dbo.DiagnosisSubType", t => t.DiagnosisSubTypeId)
                 .ForeignKey("dbo.Ethnicity", t => t.EthnicityID)
                 .Index(t => t.EthnicityID)
-                .Index(t => t.DiagnosisId)
+                .Index(t => t.DiagnosisID)
                 .Index(t => t.DiagnosisSubTypeId);
+            
+            CreateTable(
+                "dbo.PersonRelationship",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        PersonId = c.Int(nullable: false),
+                        RelationWithPersonId = c.Int(nullable: false),
+                        RelationshipTypeId = c.Int(nullable: false),
+                        Person_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Person", t => t.PersonId)
+                .ForeignKey("dbo.RelationshipType", t => t.RelationshipTypeId)
+                .ForeignKey("dbo.Person", t => t.RelationWithPersonId)
+                .ForeignKey("dbo.Person", t => t.Person_ID)
+                .Index(t => t.PersonId)
+                .Index(t => t.RelationWithPersonId)
+                .Index(t => t.RelationshipTypeId)
+                .Index(t => t.Person_ID);
+            
+            CreateTable(
+                "dbo.RelationshipType",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        RelationshipTypeName = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.Error",
@@ -216,11 +250,15 @@ namespace Phoenix.Data.Migrations
             DropForeignKey("dbo.Rental", "StockId", "dbo.Stock");
             DropForeignKey("dbo.Stock", "MovieId", "dbo.Movie");
             DropForeignKey("dbo.Movie", "GenreId", "dbo.Genre");
+            DropForeignKey("dbo.PersonRelationship", "Person_ID", "dbo.Person");
+            DropForeignKey("dbo.PersonRelationship", "RelationWithPersonId", "dbo.Person");
+            DropForeignKey("dbo.PersonRelationship", "RelationshipTypeId", "dbo.RelationshipType");
+            DropForeignKey("dbo.PersonRelationship", "PersonId", "dbo.Person");
             DropForeignKey("dbo.Person", "EthnicityId", "dbo.Ethnicity");
             DropForeignKey("dbo.Person", "FamilyId", "dbo.Family");
             DropForeignKey("dbo.Family", "EthnicityID", "dbo.Ethnicity");
             DropForeignKey("dbo.Family", "DiagnosisSubTypeId", "dbo.DiagnosisSubType");
-            DropForeignKey("dbo.Family", "DiagnosisId", "dbo.Diagnosis");
+            DropForeignKey("dbo.Family", "DiagnosisID", "dbo.Diagnosis");
             DropForeignKey("dbo.Person", "DiagnosisSubTypeId", "dbo.DiagnosisSubType");
             DropForeignKey("dbo.DiagnosisSubType", "DiagnosisId", "dbo.Diagnosis");
             DropForeignKey("dbo.Person", "DiagnosisId", "dbo.Diagnosis");
@@ -229,8 +267,12 @@ namespace Phoenix.Data.Migrations
             DropIndex("dbo.Rental", new[] { "StockId" });
             DropIndex("dbo.Stock", new[] { "MovieId" });
             DropIndex("dbo.Movie", new[] { "GenreId" });
+            DropIndex("dbo.PersonRelationship", new[] { "Person_ID" });
+            DropIndex("dbo.PersonRelationship", new[] { "RelationshipTypeId" });
+            DropIndex("dbo.PersonRelationship", new[] { "RelationWithPersonId" });
+            DropIndex("dbo.PersonRelationship", new[] { "PersonId" });
             DropIndex("dbo.Family", new[] { "DiagnosisSubTypeId" });
-            DropIndex("dbo.Family", new[] { "DiagnosisId" });
+            DropIndex("dbo.Family", new[] { "DiagnosisID" });
             DropIndex("dbo.Family", new[] { "EthnicityID" });
             DropIndex("dbo.DiagnosisSubType", new[] { "DiagnosisId" });
             DropIndex("dbo.Person", new[] { "EthnicityId" });
@@ -245,6 +287,8 @@ namespace Phoenix.Data.Migrations
             DropTable("dbo.Movie");
             DropTable("dbo.Genre");
             DropTable("dbo.Error");
+            DropTable("dbo.RelationshipType");
+            DropTable("dbo.PersonRelationship");
             DropTable("dbo.Family");
             DropTable("dbo.Ethnicity");
             DropTable("dbo.DiagnosisSubType");

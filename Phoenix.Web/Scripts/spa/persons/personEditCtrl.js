@@ -15,7 +15,7 @@
                 if ($scope.newPerson) {
                     $scope.EditedPerson = {};
                     $scope.EditedPerson.FamilyID = $routeParams.id;
-                    return 'Add New';
+                    return 'Add New Family Member';
                 }
                 else {
                     return 'Edit';
@@ -134,7 +134,9 @@
                 updatePersonLoadFailed);
             }
             else {
+                var now = new Date();
                 $scope.EditedPerson.FamilyID = $routeParams.id;
+                $scope.EditedPerson.DateDeceased = now;
                 apiService.post('/api/persons/create', $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);

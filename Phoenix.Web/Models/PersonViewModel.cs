@@ -21,6 +21,7 @@ namespace Phoenix.Web.Models
         public decimal WeightKG { get; set; }
         public bool Deceased { get; set; }
         public DateTime? DateDeceased { get; set; }
+        public string Gender { get; set; }
         public DateTime FirstRegisteredDate { get; set; }
         public string Notes { get; set; }
         public string Ethnicity { get; set; }

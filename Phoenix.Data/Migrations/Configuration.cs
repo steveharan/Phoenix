@@ -17,32 +17,24 @@ namespace Phoenix.Data.Migrations
 
         protected override void Seed(PhoenixContext context)
         {
-            //  create genres
-            context.GenreSet.AddOrUpdate(g => g.Name, GenerateGenres());
-
-            // create movies
-            context.MovieSet.AddOrUpdate(m => m.Title, GenerateMovies());
-
-            //// create stocks
-            context.StockSet.AddOrUpdate(GenerateStocks());
-
-            // create customers
-            context.CustomerSet.AddOrUpdate(GenerateCustomers());
-
-            // create roles
-            context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
 
             // create Phoenix stuff
             context.DiagnosisSet.AddOrUpdate(GenerateDiagnosis());
             context.DiagnosisSubTypeSet.AddOrUpdate(GenerateDiagnosisSubType());
 
+            context.EthnicitySet.AddOrUpdate(GenerateEthnicity());
             context.FamilySet.AddOrUpdate(GenerateFamilies());
 
             context.PersonSet.AddOrUpdate(GeneratePersons());
 
-            context.EthnicitySet.AddOrUpdate(GenerateEthnicity());
 
-            // username: chsakell, password: homecinema
+            context.RelationshipTypeSet.AddOrUpdate(GenerateRelationTypes());
+
+
+            // create roles
+            context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
+            //username: chsakell, password:
+            //homecinema
             context.UserSet.AddOrUpdate(u => u.Email, new User[]{
                 new User()
                 {
@@ -55,13 +47,12 @@ namespace Phoenix.Data.Migrations
                 }
             });
 
-            // // create user-admin for chsakell
             context.UserRoleSet.AddOrUpdate(new UserRole[] {
-                new UserRole() {
-                    RoleId = 1, // admin
-                    UserId = 1  // chsakell
-                }
-            });
+                    new UserRole() {
+                        RoleId = 1, // admin
+                        UserId = 1  // chsakell
+                    }
+                });
         }
 
         private Genre[] GenerateGenres()
@@ -100,6 +91,22 @@ namespace Phoenix.Data.Migrations
                 }
             };
             return ethnicity;
+        }
+
+        private RelationshipType[] GenerateRelationTypes()
+        {
+            RelationshipType[] types = new RelationshipType[]
+            {
+                new RelationshipType()
+                {
+                    RelationshipTypeName = "Father"
+                },
+                new RelationshipType()
+                {
+                    RelationshipTypeName = "Mother"
+                }
+            };
+            return types;
         }
 
         private Diagnosis[] GenerateDiagnosis()
@@ -191,6 +198,8 @@ namespace Phoenix.Data.Migrations
                     HeightCM = 200,
                     WeightKG = 76,
                     Deceased = false,
+                    DateDeceased = DateTime.Now,
+                    Gender = "M",
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "Notes",
                     EthnicityId = 1,
@@ -209,6 +218,8 @@ namespace Phoenix.Data.Migrations
                     HeightCM = 100,
                     WeightKG = 30,
                     Deceased = false,
+                    DateDeceased = DateTime.Now,
+                    Gender = "M",
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "Notes",
                     EthnicityId = 1, 

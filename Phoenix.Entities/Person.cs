@@ -21,6 +21,7 @@ namespace Phoenix.Entities
         public bool Deceased { get; set; }
         public DateTime? DateDeceased { get; set; }
         public DateTime FirstRegisteredDate { get; set; }
+        public string Gender { get; set; }
         public string Notes { get; set; }
         public int FamilyId { get; set; }
         public virtual Family Family { get; set; }

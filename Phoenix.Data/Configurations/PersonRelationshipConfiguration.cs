@@ -13,7 +13,7 @@ namespace Phoenix.Data.Configurations
         {
             Property(u => u.PersonId).IsRequired();
             Property(u => u.RelationWithPersonId).IsRequired();
-            Property(u => u.RelationshipType).IsRequired();
+            Property(u => u.RelationshipTypeId).IsRequired();
         }
     }
 }

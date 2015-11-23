@@ -19,6 +19,8 @@ namespace Phoenix.Web.Infrastructure.Validators
                 .WithMessage("Please enter the date of birth.");
             RuleFor(r => r.EthnicityID).NotEmpty()
                 .WithMessage("Please select the ethnicity.");
+            RuleFor(r => r.Gender).NotEmpty()
+                .WithMessage("Please select gender");
         }
     }
 }

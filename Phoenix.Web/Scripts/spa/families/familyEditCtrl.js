@@ -14,7 +14,7 @@
             else {
                 if ($scope.newFamily) {
                     $scope.EditedFamily = {};
-                    return 'Add New';
+                    return 'Add New Family';
                 }
                 else {
                     return 'Edit';
