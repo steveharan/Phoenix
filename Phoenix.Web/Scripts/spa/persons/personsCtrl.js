@@ -3,9 +3,9 @@
 
     app.controller('personsCtrl', personsCtrl);
 
-    personsCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService'];
+    personsCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService', '$location'];
 
-    function personsCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService) {
+    function personsCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService, $location) {
         $scope.pageClass = 'page-persons';
         $scope.loadingPersons = true;
         $scope.page = 0;
@@ -14,13 +14,11 @@
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
-
-        $scope.search = search;
-        $scope.clearSearch = clearSearch;
         $scope.openEditDialog = openEditDialog;
         $scope.updatePerson = updatePerson;
         $scope.deletePerson = deletePerson;
         $scope.manageRelations = manageRelations;
+        $scope.callFamilyTree = callFamilyTree;
 
         $scope.showTableFormat = true;
 
@@ -105,6 +103,7 @@
         function personsLoadCompleted(result) {
             $scope.Persons = result.data.Items;
             $scope.FamilyName = $scope.Persons[0].FamilyName;
+            $scope.FamilyId = $scope.Persons[0].FamilyID
             console.log($scope);
 
             $scope.page = result.data.Page;
@@ -125,6 +124,11 @@
             $scope.filterPersons = '';
             search();
         }
+
+        function callFamilyTree(person) {
+            $location.path("/familyTree/" + $scope.FamilyId);
+        }
+
 
         $scope.search();
 

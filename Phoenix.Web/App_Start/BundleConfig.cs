@@ -15,6 +15,7 @@ namespace Phoenix.Web.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/vendors").Include(
                 "~/Scripts/Vendors/jquery.js",
+                "~/Scripts/Vendors/jquery-ui-1.11.4/jquery-ui.min.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/Vendors/toastr.js",
                 "~/Scripts/Vendors/jquery.raty.js",
@@ -34,7 +35,8 @@ namespace Phoenix.Web.App_Start
                 "~/Scripts/Vendors/morris.js",
                 "~/Scripts/Vendors/jquery.fancybox.js",
                 "~/Scripts/Vendors/jquery.fancybox-media.js",
-                "~/Scripts/Vendors/loading-bar.js"
+                "~/Scripts/Vendors/loading-bar.js",
+                "~/Scripts/Vendors/primitives.min.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
@@ -68,7 +70,8 @@ namespace Phoenix.Web.App_Start
                 "~/Scripts/spa/families/familyEditCtrl.js",
                 "~/Scripts/spa/persons/personsCtrl.js",
                 "~/Scripts/spa/personRelationships/personRelationshipsCtrl.js",
-                "~/Scripts/spa/persons/personEditCtrl.js"
+                "~/Scripts/spa/persons/personEditCtrl.js",
+                "~/Scripts/spa/familyTree/familyTreeCtrl.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -80,7 +83,8 @@ namespace Phoenix.Web.App_Start
                 "~/content/css/toastr.css",
                 "~/content/css/jquery.fancybox.css",
                 "~/content/css/loading-bar.css",
-                "~/content/css/animate.css"
+                "~/content/css/animate.css",
+                "~/content/css/primitives.latest.css"
                 ));
 
             BundleTable.EnableOptimizations = false;

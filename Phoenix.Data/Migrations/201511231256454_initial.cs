@@ -8,22 +8,6 @@ namespace Phoenix.Data.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Customer",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(nullable: false, maxLength: 100),
-                        LastName = c.String(nullable: false, maxLength: 100),
-                        Email = c.String(nullable: false, maxLength: 200),
-                        IdentityCard = c.String(nullable: false, maxLength: 50),
-                        UniqueKey = c.Guid(nullable: false),
-                        DateOfBirth = c.DateTime(nullable: false),
-                        Mobile = c.String(maxLength: 10),
-                        RegistrationDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
                 "dbo.Diagnosis",
                 c => new
                     {
@@ -112,20 +96,17 @@ namespace Phoenix.Data.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        PersonId = c.Int(nullable: false),
+                        RelationshipFromPersonId = c.Int(nullable: false),
                         RelationWithPersonId = c.Int(nullable: false),
                         RelationshipTypeId = c.Int(nullable: false),
-                        Person_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Person", t => t.PersonId)
+                .ForeignKey("dbo.Person", t => t.RelationshipFromPersonId)
                 .ForeignKey("dbo.RelationshipType", t => t.RelationshipTypeId)
                 .ForeignKey("dbo.Person", t => t.RelationWithPersonId)
-                .ForeignKey("dbo.Person", t => t.Person_ID)
-                .Index(t => t.PersonId)
+                .Index(t => t.RelationshipFromPersonId)
                 .Index(t => t.RelationWithPersonId)
-                .Index(t => t.RelationshipTypeId)
-                .Index(t => t.Person_ID);
+                .Index(t => t.RelationshipTypeId);
             
             CreateTable(
                 "dbo.RelationshipType",
@@ -146,63 +127,6 @@ namespace Phoenix.Data.Migrations
                         DateCreated = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.Genre",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 50),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.Movie",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false, maxLength: 100),
-                        Description = c.String(nullable: false, maxLength: 2000),
-                        Image = c.String(),
-                        GenreId = c.Int(nullable: false),
-                        Director = c.String(nullable: false, maxLength: 100),
-                        Writer = c.String(nullable: false, maxLength: 50),
-                        Producer = c.String(nullable: false, maxLength: 50),
-                        ReleaseDate = c.DateTime(nullable: false),
-                        Rating = c.Byte(nullable: false),
-                        TrailerURI = c.String(maxLength: 200),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Genre", t => t.GenreId)
-                .Index(t => t.GenreId);
-            
-            CreateTable(
-                "dbo.Stock",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        MovieId = c.Int(nullable: false),
-                        UniqueKey = c.Guid(nullable: false),
-                        IsAvailable = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Movie", t => t.MovieId)
-                .Index(t => t.MovieId);
-            
-            CreateTable(
-                "dbo.Rental",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        CustomerId = c.Int(nullable: false),
-                        StockId = c.Int(nullable: false),
-                        RentalDate = c.DateTime(nullable: false),
-                        ReturnedDate = c.DateTime(),
-                        Status = c.String(nullable: false, maxLength: 10),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Stock", t => t.StockId)
-                .Index(t => t.StockId);
             
             CreateTable(
                 "dbo.Role",
@@ -247,13 +171,9 @@ namespace Phoenix.Data.Migrations
         {
             DropForeignKey("dbo.UserRole", "UserId", "dbo.User");
             DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
-            DropForeignKey("dbo.Rental", "StockId", "dbo.Stock");
-            DropForeignKey("dbo.Stock", "MovieId", "dbo.Movie");
-            DropForeignKey("dbo.Movie", "GenreId", "dbo.Genre");
-            DropForeignKey("dbo.PersonRelationship", "Person_ID", "dbo.Person");
             DropForeignKey("dbo.PersonRelationship", "RelationWithPersonId", "dbo.Person");
             DropForeignKey("dbo.PersonRelationship", "RelationshipTypeId", "dbo.RelationshipType");
-            DropForeignKey("dbo.PersonRelationship", "PersonId", "dbo.Person");
+            DropForeignKey("dbo.PersonRelationship", "RelationshipFromPersonId", "dbo.Person");
             DropForeignKey("dbo.Person", "EthnicityId", "dbo.Ethnicity");
             DropForeignKey("dbo.Person", "FamilyId", "dbo.Family");
             DropForeignKey("dbo.Family", "EthnicityID", "dbo.Ethnicity");
@@ -264,13 +184,9 @@ namespace Phoenix.Data.Migrations
             DropForeignKey("dbo.Person", "DiagnosisId", "dbo.Diagnosis");
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserRole", new[] { "UserId" });
-            DropIndex("dbo.Rental", new[] { "StockId" });
-            DropIndex("dbo.Stock", new[] { "MovieId" });
-            DropIndex("dbo.Movie", new[] { "GenreId" });
-            DropIndex("dbo.PersonRelationship", new[] { "Person_ID" });
             DropIndex("dbo.PersonRelationship", new[] { "RelationshipTypeId" });
             DropIndex("dbo.PersonRelationship", new[] { "RelationWithPersonId" });
-            DropIndex("dbo.PersonRelationship", new[] { "PersonId" });
+            DropIndex("dbo.PersonRelationship", new[] { "RelationshipFromPersonId" });
             DropIndex("dbo.Family", new[] { "DiagnosisSubTypeId" });
             DropIndex("dbo.Family", new[] { "DiagnosisID" });
             DropIndex("dbo.Family", new[] { "EthnicityID" });
@@ -282,10 +198,6 @@ namespace Phoenix.Data.Migrations
             DropTable("dbo.User");
             DropTable("dbo.UserRole");
             DropTable("dbo.Role");
-            DropTable("dbo.Rental");
-            DropTable("dbo.Stock");
-            DropTable("dbo.Movie");
-            DropTable("dbo.Genre");
             DropTable("dbo.Error");
             DropTable("dbo.RelationshipType");
             DropTable("dbo.PersonRelationship");
@@ -294,7 +206,6 @@ namespace Phoenix.Data.Migrations
             DropTable("dbo.DiagnosisSubType");
             DropTable("dbo.Person");
             DropTable("dbo.Diagnosis");
-            DropTable("dbo.Customer");
         }
     }
 }

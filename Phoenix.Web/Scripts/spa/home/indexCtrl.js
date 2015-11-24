@@ -16,13 +16,13 @@
         $scope.loadData = loadData;
 
         function loadData() {
-            apiService.get('/api/movies/latest', null,
-                        moviesLoadCompleted,
-                        moviesLoadFailed);
+            //apiService.get('/api/movies/latest', null,
+            //            moviesLoadCompleted,
+            //            moviesLoadFailed);
 
-            apiService.get("/api/genres/", null,
-                genresLoadCompleted,
-                genresLoadFailed);
+            //apiService.get("/api/genres/", null,
+            //    genresLoadCompleted,
+            //    genresLoadFailed);
         }
 
         function moviesLoadCompleted(result) {

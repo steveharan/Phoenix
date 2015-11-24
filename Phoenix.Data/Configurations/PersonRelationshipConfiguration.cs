@@ -11,7 +11,7 @@ namespace Phoenix.Data.Configurations
     {
         public PersonRelationshipConfiguration()
         {
-            Property(u => u.PersonId).IsRequired();
+            Property(u => u.RelationshipFromPersonId).IsRequired();
             Property(u => u.RelationWithPersonId).IsRequired();
             Property(u => u.RelationshipTypeId).IsRequired();
         }

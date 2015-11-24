@@ -28,7 +28,7 @@
                    new primitives.orgdiagram.ItemConfig({
                        id: 0,
                        parent: null,
-                       title: "Scott Aasrud",
+                       title: "Steve Aasrud",
                        description: "Root",
                        phone: "1 (416) 001-4567",
                        email: "scott.aasrud@mail.com",
@@ -48,7 +48,7 @@
                    new primitives.orgdiagram.ItemConfig({
                        id: 2,
                        parent: 0,
-                       title: "Joao Stuger",
+                       title: "Tony Haran",
                        description: "Right",
                        phone: "1 (416) 003-4567",
                        email: "joao.stuger@mail.com",
@@ -58,13 +58,33 @@
                    new primitives.orgdiagram.ItemConfig({
                        id: 3,
                        parent: 2,
-                       title: "Hidden Node",
+                       title: "Wendy Allen",
                        phone: "1 (416) 004-4567",
                        email: "hidden.node@mail.com",
                        description: "Dotted Node",
                        image: "demo/images/photos/e.png",
                        itemTitleColor: primitives.common.Colors.PaleVioletRed
-                   })
+                   }),
+                    new primitives.orgdiagram.ItemConfig({
+                        id: 4,
+                        parent: [2,5],
+                        title: "Steve Hara",
+                        phone: "1 (416) 004-4567",
+                        email: "hidden.node@mail.com",
+                        description: "Dotted Node",
+                        image: "demo/images/photos/e.png",
+                        itemTitleColor: primitives.common.Colors.PaleVioletRed
+                    }),
+                    new primitives.orgdiagram.ItemConfig({
+                        id: 5,
+                        parent: 0,
+                        title: "Patricia Haran",
+                        phone: "1 (416) 004-4567",
+                        email: "hidden.node@mail.com",
+                        description: "Dotted Node",
+                        image: "demo/images/photos/e.png",
+                        itemTitleColor: primitives.common.Colors.PaleVioletRed
+                    })
                ];
 
                options.items = items;
@@ -75,6 +95,7 @@
                options.defaultTemplateName = "contactTemplate";
 
                $scope.myOptions = options;
+               console.log($scope.myOptions);
 
                $scope.setCursorItem = function (item) {
                    $scope.myOptions.cursorItem = item;

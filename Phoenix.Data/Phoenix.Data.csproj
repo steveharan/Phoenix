@@ -87,27 +87,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\CustomerConfiguration.cs" />
     <Compile Include="Configurations\DiagnosisConfiguration.cs" />
     <Compile Include="Configurations\DiagnosisSubTypeConfiguration.cs" />
     <Compile Include="Configurations\EntityBaseConfiguration.cs" />
     <Compile Include="Configurations\FamilyConfiguration.cs" />
-    <Compile Include="Configurations\GenreConfiguration.cs" />
-    <Compile Include="Configurations\MovieConfiguration.cs" />
     <Compile Include="Configurations\PersonConfiguration.cs" />
     <Compile Include="Configurations\PersonRelationshipConfiguration.cs" />
-    <Compile Include="Configurations\RentalConfiguration.cs" />
     <Compile Include="Configurations\RoleConfiguration.cs" />
-    <Compile Include="Configurations\StockConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Configurations\UserRoleConfiguration.cs" />
-    <Compile Include="Extensions\CustomerExtensions.cs" />
     <Compile Include="Extensions\FamilyExtensions.cs" />
-    <Compile Include="Extensions\StockExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
-    <Compile Include="Migrations\201511230954087_initial.cs" />
-    <Compile Include="Migrations\201511230954087_initial.Designer.cs">
-      <DependentUpon>201511230954087_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201511231256454_initial.cs" />
+    <Compile Include="Migrations\201511231256454_initial.Designer.cs">
+      <DependentUpon>201511231256454_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="PhoenixContext.cs" />
     <Compile Include="Phoenix\Data\Repositories\IEntityBaseRepository.cs" />
@@ -136,8 +129,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511230954087_initial.resx">
-      <DependentUpon>201511230954087_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511231256454_initial.resx">
+      <DependentUpon>201511231256454_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

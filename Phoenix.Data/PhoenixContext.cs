@@ -7,6 +7,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 
 namespace Phoenix.Data
 {
@@ -22,11 +25,6 @@ namespace Phoenix.Data
         public IDbSet<User> UserSet { get; set; }
         public IDbSet<Role> RoleSet { get; set; }
         public IDbSet<UserRole> UserRoleSet { get; set; }
-        public IDbSet<Movie> MovieSet { get; set; }
-        public IDbSet<Genre> GenreSet { get; set; }
-        public IDbSet<Stock> StockSet { get; set; }
-        public IDbSet<Customer> CustomerSet { get; set; }
-        public IDbSet<Rental> RentalSet { get; set; }
         public IDbSet<Family> FamilySet { get; set; }
         public IDbSet<Person> PersonSet { get; set; }
         public IDbSet<PersonRelationship> PersonRelationshipSet { get; set; }
@@ -49,17 +47,10 @@ namespace Phoenix.Data
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
             modelBuilder.Configurations.Add(new RoleConfiguration());
-            modelBuilder.Configurations.Add(new CustomerConfiguration());
-            modelBuilder.Configurations.Add(new MovieConfiguration());
-            modelBuilder.Configurations.Add(new GenreConfiguration());
-            modelBuilder.Configurations.Add(new StockConfiguration());
-            modelBuilder.Configurations.Add(new RentalConfiguration());
             modelBuilder.Configurations.Add(new FamilyConfiguration());
             modelBuilder.Configurations.Add(new PersonConfiguration());
             modelBuilder.Configurations.Add(new DiagnosisConfiguration());
             modelBuilder.Configurations.Add(new DiagnosisSubTypeConfiguration());
         }
-
-        //public System.Data.Entity.DbSet<Phoenix.Web.Models.PersonRelationshipViewModel> PersonRelationshipViewModels { get; set; }
     }
 }

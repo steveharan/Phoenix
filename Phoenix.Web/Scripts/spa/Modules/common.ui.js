@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('common.ui', ['ngAnimate', 'ui.bootstrap', 'chieffancypants.loadingBar']);
+    angular.module('common.ui', ['ngAnimate', 'BasicPrimitives', 'ui.bootstrap', 'chieffancypants.loadingBar']);
 
 })();

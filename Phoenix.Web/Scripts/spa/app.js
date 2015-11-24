@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('phoenix', ['common.core', 'common.ui', 'ngAnimate', 'ui.bootstrap'])
+    angular.module('phoenix', ['common.core', 'common.ui', 'ngAnimate', 'BasicPrimitives', 'ui.bootstrap'])
         .config(config)
         .run(run);
 
@@ -62,6 +62,10 @@
             .when("/families", {
                 templateUrl: "scripts/spa/families/families.html",
                 controller: "familiesCtrl"
+            })
+            .when("/familyTree/:id", {
+                templateUrl: "scripts/spa/familyTree/familyTree.html",
+                controller: "familyTreeCtrl"
             }).otherwise({ redirectTo: "/" });
     }
 

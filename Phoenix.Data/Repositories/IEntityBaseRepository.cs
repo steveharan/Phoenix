@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
 
 namespace Phoenix.Data.Repositories
 {
@@ -15,6 +16,7 @@ namespace Phoenix.Data.Repositories
         IQueryable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties);
         IQueryable<T> All { get; }
         IQueryable<T> GetAll();
+        DbRawSqlQuery<T> CallSP();
         T GetSingle(int id);
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
         void Add(T entity);

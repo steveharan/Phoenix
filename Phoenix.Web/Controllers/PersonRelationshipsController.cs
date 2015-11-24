@@ -20,12 +20,15 @@ namespace Phoenix.Web.Controllers
     public class PersosRelationshipController : ApiControllerBase
     {
         private readonly IEntityBaseRepository<PersonRelationship> _personRelationshipRepository;
+        private readonly IEntityBaseRepository<Person> _personRepository;
 
         public PersosRelationshipController(IEntityBaseRepository<PersonRelationship> personRelationshipRepository,
+            IEntityBaseRepository<Person> personRepository,
             IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork)
             : base(_errorsRepository, _unitOfWork)
         {
             _personRelationshipRepository = personRelationshipRepository;
+            _personRepository = personRepository;
         }
         /// <summary>
         /// Get relationships for a given person
@@ -41,7 +44,7 @@ namespace Phoenix.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var personRelationships = _personRelationshipRepository.FindBy(p => p.PersonId == id).ToList();
+                var personRelationships = _personRelationshipRepository.FindBy(p => p.RelationshipFromPersonId == id).ToList();
 
                 var personsRelationshipsVm = Mapper.Map<IEnumerable<PersonRelationship>, IEnumerable<PersonRelationshipViewModel>>(personRelationships);
 
@@ -50,6 +53,86 @@ namespace Phoenix.Web.Controllers
                 return response;
             });
         }
+
+        [HttpGet]
+        [Route("search/{id:int}")]
+        public HttpResponseMessage Search(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<Person> Persons = null;
+                List<FamilyTree> familyTrees = new List<FamilyTree>();               
+
+                Persons = _personRepository
+                    .FindBy(c => c.FamilyId == id && c.Deleted == false)
+                    .ToList();
+
+                int FatherId = 0;
+                int MotherId = 0;
+                foreach (var person in Persons)
+                {
+                    FamilyTree familyTree = new FamilyTree();
+                    familyTree.Id = person.ID;
+                    familyTree.Title = person.FirstName + " " + person.SurName;
+                    familyTree.Label = person.SurName;
+                    FatherId = 0;
+                    MotherId = 0;
+                    foreach (var relationship in person.PersonRelationships)
+                    {
+                        if (relationship.RelationshipTypeId == 1)
+                        {
+                            FatherId = relationship.relationWithPerson.ID;
+                            familyTree.Description = "Father";
+                        }
+                        else
+                        {
+                            MotherId = relationship.relationWithPerson.ID;
+                            familyTree.Description = "Mother";
+                        }
+                    }
+                    if (FatherId == 0 && MotherId == 0)
+                    {
+                        familyTree.Parents = "[]";
+                    }
+                    else
+                    {
+                        if (FatherId != 0 && MotherId != 0)
+                        {
+                            familyTree.Parents = "[" + FatherId + ", " + MotherId + "]";
+                        }
+                        else
+                        {
+                            if (FatherId != 0)
+                            {
+                                familyTree.Parents = "[" + FatherId + "]";
+                            }
+                            if (MotherId != 0)
+                            {
+                                familyTree.Parents = "[" + MotherId + "]";
+                            }
+                        }
+                    }
+
+                    familyTrees.Add(familyTree);
+                }
+
+                IEnumerable<FamilyTreeViewModel> treeVM = Mapper.Map<IEnumerable<FamilyTree>, IEnumerable<FamilyTreeViewModel>>(familyTrees);
+
+                PaginationSet<FamilyTreeViewModel> pagedSet = new PaginationSet<FamilyTreeViewModel>()
+                {
+                    Page = 1,
+                    TotalCount = 10,
+                    TotalPages = (int)Math.Ceiling((decimal)100 / 10),
+                    Items = treeVM
+                };
+
+                response = request.CreateResponse<PaginationSet<FamilyTreeViewModel>>(HttpStatusCode.OK, pagedSet);
+
+                return response;
+            });
+        }
+
 
         /// <summary>
         /// Get a single relationship row
@@ -141,7 +224,7 @@ namespace Phoenix.Web.Controllers
             List<PersonRelationship> oldPersonRelationships = null;
 
             oldPersonRelationships = _personRelationshipRepository
-                .FindBy(r => (r.PersonId == personId))
+                .FindBy(r => (r.RelationshipFromPersonId == personId))
                 .ToList();
 
             foreach (var oldPersonRelationship in oldPersonRelationships)

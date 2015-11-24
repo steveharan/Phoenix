@@ -40,6 +40,14 @@ namespace Phoenix.Data.Repositories
             return DbContext.Set<T>();
         }
 
+        public virtual DbRawSqlQuery<T> CallSp()
+        {
+            var param1 = "";
+            return DbContext.Database.SqlQuery<T>(
+                "mySpName @param1",
+                new SqlParameter("param1", param1));
+        }
+
         public virtual IQueryable<T> All
         {
             get
@@ -84,6 +92,11 @@ namespace Phoenix.Data.Repositories
         public T GetSingle(int id)
         {
             return GetAll().FirstOrDefault(x => x.ID == id);
+        }
+
+        public DbRawSqlQuery<T> CallSP()
+        {
+            throw new NotImplementedException();
         }
     }
 }
