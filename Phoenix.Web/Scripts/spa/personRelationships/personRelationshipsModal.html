@@ -20,7 +20,7 @@
                 <tr>
                     <th>Relation With</th>
                     <th>Relation Type</th>
-                    <th class="col-md-1"></th>
+                    <th class="col-md-1">Add</th>
                 </tr>
                 <tr>
                     <td>
@@ -52,10 +52,16 @@
             </table>
             <table class="table table-bordered table table-striped table-hover table-responsive">
                 <tr>
+                    <th class="col-md-1">Remove</th>
                     <th>Relationship with</th>
                     <th>Relationship type</th>
                 </tr>
                 <tr  ng-repeat="relation in Relationships" ng-class="{'selected':$index == selectedRow}">
+                    <td>
+                        <button type="button" class="btn btn-default btn-sm" ng-click="delItem();">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
                     <td>{{relation.RelationshipName}}</td>
                     <td>{{relation.RelationshipTypeName}}</td>
                 </tr>

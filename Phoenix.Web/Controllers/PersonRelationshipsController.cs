@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Phoenix.Web.Infrastructure.Extensions;
 using Phoenix.Data.Extensions;
+using Phoenix.Web.Common;
 
 namespace Phoenix.Web.Controllers
 {
@@ -36,6 +37,7 @@ namespace Phoenix.Web.Controllers
         /// <param name="request">The request object</param>
         /// <param name="id">Person id, to get relationships for</param>
         /// <returns></returns>
+
         [HttpGet]
         [Route("{id:int}")]
         public HttpResponseMessage Get(HttpRequestMessage request, int? id)
@@ -55,14 +57,39 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpGet]
-        [Route("search/{id:int}")]
-        public HttpResponseMessage Search(HttpRequestMessage request, int id)
+        [Route("search/{id:int}/{page:int=0}/{pageSize=10}/{filter?}")]
+        public HttpResponseMessage Search(HttpRequestMessage request, int id, int? page, int? pageSize, string filter = null)
+        {
+            int currentPage = page.Value;
+            int currentPageSize = pageSize.Value;
+
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<PersonRelationship> personRelationships = null;
+
+                personRelationships = _personRelationshipRepository
+                        .FindBy(c => c.ID == id)
+                        .ToList();
+
+                IEnumerable<PersonRelationshipViewModel> personRelationshipsVM = Mapper.Map<IEnumerable<PersonRelationship>, IEnumerable<PersonRelationshipViewModel>>(personRelationships);
+
+                response = request.CreateResponse<IEnumerable<PersonRelationshipViewModel>>(HttpStatusCode.OK, personRelationshipsVM);
+
+                return response;
+            });
+        }
+
+
+        [HttpGet]
+        [Route("getfamilytree/{id:int}")]
+        public HttpResponseMessage GetFamilyTree(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
                 List<Person> Persons = null;
-                List<FamilyTree> familyTrees = new List<FamilyTree>();               
+                List<FamilyTree> familyTrees = new List<FamilyTree>();
 
                 Persons = _personRepository
                     .FindBy(c => c.FamilyId == id && c.Deleted == false)
@@ -70,52 +97,8 @@ namespace Phoenix.Web.Controllers
 
                 int FatherId = 0;
                 int MotherId = 0;
-                foreach (var person in Persons)
-                {
-                    FamilyTree familyTree = new FamilyTree();
-                    familyTree.Id = person.ID;
-                    familyTree.Title = person.FirstName + " " + person.SurName;
-                    familyTree.Label = person.SurName;
-                    FatherId = 0;
-                    MotherId = 0;
-                    foreach (var relationship in person.PersonRelationships)
-                    {
-                        if (relationship.RelationshipTypeId == 1)
-                        {
-                            FatherId = relationship.relationWithPerson.ID;
-                            familyTree.Description = "Father";
-                        }
-                        else
-                        {
-                            MotherId = relationship.relationWithPerson.ID;
-                            familyTree.Description = "Mother";
-                        }
-                    }
-                    if (FatherId == 0 && MotherId == 0)
-                    {
-                        familyTree.Parents = "[]";
-                    }
-                    else
-                    {
-                        if (FatherId != 0 && MotherId != 0)
-                        {
-                            familyTree.Parents = "[" + FatherId + ", " + MotherId + "]";
-                        }
-                        else
-                        {
-                            if (FatherId != 0)
-                            {
-                                familyTree.Parents = "[" + FatherId + "]";
-                            }
-                            if (MotherId != 0)
-                            {
-                                familyTree.Parents = "[" + MotherId + "]";
-                            }
-                        }
-                    }
 
-                    familyTrees.Add(familyTree);
-                }
+                PopulateFamilyStructure(Persons, familyTrees, ref FatherId, ref MotherId);
 
                 IEnumerable<FamilyTreeViewModel> treeVM = Mapper.Map<IEnumerable<FamilyTree>, IEnumerable<FamilyTreeViewModel>>(familyTrees);
 
@@ -131,6 +114,57 @@ namespace Phoenix.Web.Controllers
 
                 return response;
             });
+        }
+
+        private static void PopulateFamilyStructure(List<Person> Persons, List<FamilyTree> familyTrees, ref int FatherId, ref int MotherId)
+        {
+            var count = 1;
+            foreach (var person in Persons)
+            {
+                FamilyTree familyTree = new FamilyTree();
+                familyTree.Id = person.ID;
+                familyTree.seqId = count;
+                familyTree.Title = person.FirstName + " " + person.SurName;
+                familyTree.Label = person.SurName;
+                FatherId = 0;
+                MotherId = 0;
+                foreach (var relationship in person.PersonRelationships)
+                {
+                    if (relationship.RelationshipTypeId == (int)RelationType.Father)
+                    {
+                        FatherId = relationship.relationWithPerson.ID;
+                    }
+                    else
+                    {
+                        MotherId = relationship.relationWithPerson.ID;
+                    }
+                }
+                if (FatherId == 0 && MotherId == 0)
+                {
+                    familyTree.Parents = "[]";
+                }
+                else
+                {
+                    if (FatherId != 0 && MotherId != 0)
+                    {
+                        familyTree.Parents = "[" + FatherId + ", " + MotherId + "]";
+                    }
+                    else
+                    {
+                        if (FatherId != 0)
+                        {
+                            familyTree.Parents = "[" + FatherId + "]";
+                        }
+                        if (MotherId != 0)
+                        {
+                            familyTree.Parents = "[" + MotherId + "]";
+                        }
+                    }
+                }
+
+                familyTrees.Add(familyTree);
+                count++;
+            }
         }
 
 

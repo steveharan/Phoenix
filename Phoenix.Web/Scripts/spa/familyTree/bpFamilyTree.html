@@ -1,0 +1,8 @@
+﻿<p>Here is example of syncronized content between ngRepeat directive and bpOrgDiagram directive.</p>
+<p>Cursor: {{myOptions.cursorItem}}</p>
+<p>Highlight: {{myOptions.highlightItem}}</p>
+<p>Message: {{Message}}</p>
+{{myOptions}}
+<div id="centerpanel" style="overflow: hidden; padding: 0px; margin: 0px; border: 0px;">
+    <div bp-fam-diagram data-options="myOptions" data-on-highlight-changed="onMyHighlightChanged()" data-on-cursor-changed="onMyCursorChanged()" style="width: 800px; height: 600px; border-style: dotted; border-width: 1px;"></div>
+</div>

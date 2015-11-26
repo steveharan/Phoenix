@@ -193,6 +193,15 @@
     <Content Include="Content\images\raty\star-on.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="d3demo\dndTree.js" />
+    <Content Include="d3demo\index.html" />
+    <Content Include="demopedd3\basic-long-names.html" />
+    <Content Include="demopedd3\basic.html" />
+    <Content Include="demopedd3\descendants-oop.html" />
+    <Content Include="demopedd3\descendants.html" />
+    <Content Include="demopedd3\expandable.html" />
+    <Content Include="demopedd3\generate-family.js" />
+    <Content Include="demopedd3\transitions.html" />
     <Content Include="demo\CaseAddingLinkToItemTemplate.html" />
     <Content Include="demo\CaseAddingNewItemsToChartAtRuntime.html" />
     <Content Include="demo\CaseAdviserAndAssistantItemTypes.html" />
@@ -257,6 +266,7 @@
     <Content Include="demo\demo\bootstrap\img\glyphicons-halflings.png" />
     <Content Include="demo\demo\bootstrap\js\bootstrap.js" />
     <Content Include="demo\demo\bootstrap\js\bootstrap.min.js" />
+    <Content Include="demo\bpangfam.html" />
     <Content Include="demo\demo\codemirror\codemirror.css" />
     <Content Include="demo\demo\codemirror\codemirror.js" />
     <Content Include="demo\demo\codemirror\docs.css" />
@@ -471,6 +481,13 @@
     <Content Include="demo\demo\codemirror\LICENSE" />
     <Content Include="demo\license.pdf" />
     <Content Include="demo\phantomjs\family.pdf" />
+    <Content Include="d3demo\flare.json" />
+    <Content Include="demopedd3\data\4gens.json" />
+    <Content Include="demopedd3\data\4gensLongNames.json" />
+    <Content Include="demopedd3\data\8gens.json" />
+    <Content Include="demopedd3\LICENSE" />
+    <Content Include="demopedd3\package.json" />
+    <Content Include="demopedd3\README.md" />
     <None Include="Properties\PublishProfiles\phoenixsh.pubxml" />
     <Content Include="Scripts\bower_components\materialize\font\material-design-icons\Material-Design-Icons.eot" />
     <Content Include="Scripts\bower_components\materialize\font\material-design-icons\Material-Design-Icons.ttf" />
@@ -994,6 +1011,8 @@
     <Content Include="Scripts\spa\families\familyEditModal.html" />
     <Content Include="Scripts\spa\families\families.html" />
     <Content Include="Scripts\spa\families\familiesCtrl.js" />
+    <Content Include="Scripts\spa\familyTree\bpFamilyTree.html" />
+    <Content Include="Scripts\spa\familyTree\bpFamilyTreeCtrl.js" />
     <Content Include="Scripts\spa\familyTree\familyTree.html" />
     <Content Include="Scripts\spa\familyTree\familyTreeCtrl.js" />
     <Content Include="Scripts\spa\home\Index.html" />
@@ -1088,6 +1107,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\FamilyController.cs" />

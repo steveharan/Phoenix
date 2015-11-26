@@ -19,6 +19,7 @@
         $scope.updatePersonRelationships = updatePersonRelationships;
         $scope.cancel = cancel;
         $scope.addItem = addItem;
+        $scope.delItem = delItem;
 
         $scope.data = {
             availableOptions: [
@@ -46,8 +47,6 @@
         }
 
         function addItem(index) {
-            console.log('scope on add item');
-            console.log($scope);
             $scope.Relationships.push({
                 relationWithPersonId: $scope.selectedPersonId,
                 personId: $scope.$parent.EditedPerson.ID,
@@ -59,6 +58,10 @@
             $scope.RelationshipID = "";
             $scope.data.selectedOption.id = "0";
             $scope.$broadcast('angucomplete-alt:clearInput');
+        }
+
+        function delItem(index) {
+            $scope.Relationships.splice(index, 1);
         }
 
         function updatePersonLoadFailed(response) {

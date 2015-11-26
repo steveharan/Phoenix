@@ -18,7 +18,7 @@
 
         function personsRealtionshipsLoadCompleted(result) {
             console.log('tree load complete');
-            console.log(result);
+            console.log(result.data.Items);
             $scope.jsonResult = angular.toJson(result.data.Items).toLowerCase();
             console.log($scope.jsonResult);
             $scope.loadingPersons = false;
@@ -53,6 +53,15 @@
                 { id: 14, spouses: [13], title: "Mari Jose Future Husband", label: "Mari Jose Husband", description: "Desc" }
 
         ];
+
+    //    var items = [
+    //        { "id": 1, "parents": "[5]", "title": "steve haran", "label": "haran", "description": "father" },
+    //        { "id": 2, "parents": "[1, 3]", "title": "pablo haran", "label": "haran", "description": "mother" },
+    //        { "id": 3, "parents": "[]", "title": "maite tome esteban", "label": "tome esteban", "description": null },
+    //        { "id": 4, "parents": "[1, 3]", "title": "elena haran tome", "label": "haran tome", "description": "mother" },
+    //        { "id": 5, "parents": "[]", "title": "anthony haran", "label": "haran", "description": null },
+    //        { "id": 6, spouses: [5], "title": "patricia haran", "label": "haran", "description": null }
+    //];
 
         options.items = items;
         options.cursorItem = 2;

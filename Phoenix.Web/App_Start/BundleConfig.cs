@@ -71,7 +71,8 @@ namespace Phoenix.Web.App_Start
                 "~/Scripts/spa/persons/personsCtrl.js",
                 "~/Scripts/spa/personRelationships/personRelationshipsCtrl.js",
                 "~/Scripts/spa/persons/personEditCtrl.js",
-                "~/Scripts/spa/familyTree/familyTreeCtrl.js"
+                "~/Scripts/spa/familyTree/familyTreeCtrl.js",
+                "~/Scripts/spa/familyTree/bpFamilyTreeCtrl.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

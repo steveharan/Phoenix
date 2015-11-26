@@ -11,10 +11,11 @@ namespace Phoenix.Web.Models
     [Bind(Exclude = "UniqueKey")]
     public class FamilyTreeViewModel
     {
-        public int Id { get; set; }
-        public string Parents { get; set; }
-        public string Title { get; set; }
-        public string Label { get; set; }
-        public string Description { get; set; }
+        // lower case required for the receiving ajax call
+        public int id { get; set; }
+        public string parents { get; set; }
+        public string title { get; set; }
+        public string label { get; set; }
+        public string description { get; set; }
     }
 }

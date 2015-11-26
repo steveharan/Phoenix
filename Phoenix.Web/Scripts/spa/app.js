@@ -64,8 +64,10 @@
                 controller: "familiesCtrl"
             })
             .when("/familyTree/:id", {
-                templateUrl: "scripts/spa/familyTree/familyTree.html",
-                controller: "familyTreeCtrl"
+                //templateUrl: "scripts/spa/familyTree/familyTree.html",
+                //controller: "familyTreeCtrl"
+                templateUrl: "scripts/spa/familyTree/bpFamilyTree.html",
+                controller: "bpFamilyTreeCtrl"
             }).otherwise({ redirectTo: "/" });
     }
 
