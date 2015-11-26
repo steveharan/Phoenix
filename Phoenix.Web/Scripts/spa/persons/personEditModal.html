@@ -20,6 +20,15 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-5">
+                            <label class="control-label" for="nhsNumber">NHS Number</label>
+                            <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.NhsNumber" name="nhsNumber" id="nhsNumber" placeholder="NHS Number"
+                                   validate-on="blur" required required-message="'NHS Number is required'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-5">
                             <label class="control-label" for="firstName">First Name</label>
                             <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.FirstName" name="firstName" id="firstName" placeholder="First Name"
                                    validate-on="blur" required required-message="'First Name is required'">
@@ -77,6 +86,10 @@
                             <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.HeightCM" name="heightCm" id="heightCm" placeholder="Height in CM"
                                    validate-on="blur" required required-message="'Height is required'">
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-xs-1">
                             <label class="checkbox" for="adopted">Adopted</label>
                             <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Adopted" name="adopted" id="adopted"
@@ -91,6 +104,17 @@
                             <label class="checkbox" for="Notes">Deceased</label>
                             <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Deceased" name="deceased" id="deceased"
                                    validate-on="blur">
+                        </div>
+                        <div ng-show="EditedPerson.Deceased" class="col-xs-5 selectContainer">
+                            <label class="control-label" for="dateOfBirth">Date Deceased</label>
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="deceasedDate" uib-datepicker-popup="{{format}}" ng-model="EditedPerson.DateDeceased" is-open="datepicker3.opened"
+                                       datepicker-options="dateOptions" ng-disabled="EditedPerson.deleted" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                       validate-on="blur" required required-message="'Deceased Date is required'" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="EditedPerson.deleted" ng-click="openDatePicker3($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -131,13 +155,13 @@
             </div>
         </form>
     </div>
-</div>
 
-<div class="panel-footer clearfix">
-    <div class="pull-right">
-        <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-show="!newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Update</button>
-        <button type="button" class="btn btn-primary" ng-show="newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Add</button>
-        <button type="button" class="btn btn-primary" ng-show="EditedPerson.deleted" ng-click="updatePerson()">Delete</button>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
+            <button type="button" class="btn btn-primary" ng-show="!newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Update</button>
+            <button type="button" class="btn btn-primary" ng-show="newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Add</button>
+            <button type="button" class="btn btn-primary" ng-show="EditedPerson.deleted" ng-click="updatePerson()">Delete</button>
+        </div>
     </div>
 </div>

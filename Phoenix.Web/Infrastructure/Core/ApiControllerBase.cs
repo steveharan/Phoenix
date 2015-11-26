@@ -42,12 +42,12 @@ namespace Phoenix.Web.Infrastructure.Core
             catch (DbUpdateException ex)
             {
                 LogError(ex);
-                response = request.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
+                response = request.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.InnerException.Message);
             }
             catch (Exception ex)
             {
                 LogError(ex);
-                response = request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                response = request.CreateResponse(HttpStatusCode.InternalServerError, ex.InnerException.Message);
             }
 
             return response;
@@ -58,7 +58,7 @@ namespace Phoenix.Web.Infrastructure.Core
             {
                 Error _error = new Error()
                 {
-                    Message = ex.Message,
+                    Message = ex.InnerException.InnerException.Message,
                     StackTrace = ex.StackTrace,
                     DateCreated = DateTime.Now
                 };
@@ -66,7 +66,7 @@ namespace Phoenix.Web.Infrastructure.Core
                 _errorsRepository.Add(_error);
                 _unitOfWork.Commit();
             }
-            catch { }
+            catch(Exception ex2) { }
         }
     }
 }

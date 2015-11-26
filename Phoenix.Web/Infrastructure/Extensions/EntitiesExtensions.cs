@@ -15,13 +15,28 @@ namespace Phoenix.Web.Infrastructure.Extensions
             family.FirstRegisteredDate = familyVm.FirstRegisteredDate;
             family.Notes = familyVm.Notes;
             family.EthnicityID = familyVm.EthnicityID;
+            if (familyVm.DiagnosisID == 0)
+            {
+                familyVm.DiagnosisID = null;
+            }
+            if (familyVm.DiagnosisSubTypeID == 0)
+            {
+                familyVm.DiagnosisSubTypeID = null;
+            }
             family.DiagnosisID = familyVm.DiagnosisID;
             family.DiagnosisSubTypeId = familyVm.DiagnosisSubTypeID;
             family.Deleted = familyVm.Deleted;
+            Random rnd = new Random();
+            int number = rnd.Next(1000, 1000000);
+            if (family.FamilyIdentifier == null)
+            {
+                family.FamilyIdentifier = "F" + number.ToString();
+            }
         }
 
         public static void UpdatePerson(this Person person, PersonViewModel personVm)
         {
+            person.NhsNumber = personVm.NhsNumber;
             person.FirstName = personVm.FirstName;
             person.SurName = personVm.SurName;
             person.DateOfBirth = personVm.DateOfBirth;
@@ -32,7 +47,7 @@ namespace Phoenix.Web.Infrastructure.Extensions
             person.Deceased = personVm.Deceased;
             if (personVm.DateDeceased == null)
             {
-                person.DateDeceased = DateTime.Now;
+                person.DateDeceased = DateTime.MinValue;
             }
             else
             {
@@ -40,6 +55,14 @@ namespace Phoenix.Web.Infrastructure.Extensions
             }
             person.FirstRegisteredDate = personVm.FirstRegisteredDate;
             person.Notes = personVm.Notes;
+            if (personVm.DiagnosisID == 0)
+            {
+                personVm.DiagnosisID = null;
+            }
+            if (personVm.DiagnosisSubTypeID == 0)
+            {
+                personVm.DiagnosisSubTypeID = null;
+            }
             person.DiagnosisId = personVm.DiagnosisID;
             person.DiagnosisSubTypeId = personVm.DiagnosisSubTypeID;
             person.EthnicityId = personVm.EthnicityID;

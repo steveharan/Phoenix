@@ -13,6 +13,7 @@ namespace Phoenix.Data.Configurations
         {
             Property(u => u.FirstName).IsRequired().HasMaxLength(30);
             Property(u => u.SurName).IsRequired().HasMaxLength(30);
+            Property(u => u.NhsNumber).IsRequired().HasMaxLength(50);
             Property(u => u.DateOfBirth).IsRequired();
             Property(u => u.HeightCM).IsRequired();
             Property(u => u.WeightKG).IsRequired();

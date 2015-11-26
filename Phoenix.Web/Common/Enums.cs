@@ -8,6 +8,7 @@ namespace Phoenix.Web.Common
     public enum RelationType
     {
         Father = 1,
-        Mother = 2
+        Mother = 2,
+        Spouse = 3
     }
 }

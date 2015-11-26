@@ -46,6 +46,7 @@
 
         $scope.openDatePicker = openDatePicker;
         $scope.openDatePicker2 = openDatePicker2;
+        $scope.openDatePicker3 = openDatePicker3;
 
         $scope.dateOptions = {
             formatYear: 'yy',
@@ -54,6 +55,7 @@
 
         $scope.datepicker = {};
         $scope.datepicker2 = {};
+        $scope.datepicker3 = {};
         $scope.ethnicities = [];
 
         // To store the selected parents of this person that were typed in using auto complete.
@@ -209,6 +211,21 @@
 
             $timeout(function () {
                 $scope.datepicker2.opened = true;
+            });
+
+            $timeout(function () {
+                $('ul[uib-datepicker-popup-wrap]').css('z-index', '10000');
+            }, 100);
+
+        };
+
+        function openDatePicker3($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.datepicker.opened = false;
+
+            $timeout(function () {
+                $scope.datepicker3.opened = true;
             });
 
             $timeout(function () {

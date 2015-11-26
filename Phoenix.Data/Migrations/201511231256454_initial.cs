@@ -21,6 +21,7 @@ namespace Phoenix.Data.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
+                        NhsNumber = c.String(nullable: false, maxLength: 50),
                         FirstName = c.String(nullable: false, maxLength: 30),
                         SurName = c.String(nullable: false, maxLength: 30),
                         DateOfBirth = c.DateTime(nullable: false),
@@ -82,6 +83,7 @@ namespace Phoenix.Data.Migrations
                         DiagnosisID = c.Int(),
                         DiagnosisSubTypeId = c.Int(),
                         Deleted = c.Boolean(nullable: false),
+                        FamilyIdentifier = c.String(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Diagnosis", t => t.DiagnosisID)

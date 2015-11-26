@@ -19,40 +19,36 @@ namespace Phoenix.Data.Migrations
         {
 
             // create Phoenix stuff
-            context.DiagnosisSet.AddOrUpdate(GenerateDiagnosis());
-            context.DiagnosisSubTypeSet.AddOrUpdate(GenerateDiagnosisSubType());
+            //context.DiagnosisSet.AddOrUpdate(GenerateDiagnosis());
+            //context.DiagnosisSubTypeSet.AddOrUpdate(GenerateDiagnosisSubType());
+            //context.EthnicitySet.AddOrUpdate(GenerateEthnicity());
 
-            context.EthnicitySet.AddOrUpdate(GenerateEthnicity());
-            context.FamilySet.AddOrUpdate(GenerateFamilies());
+            //context.FamilySet.AddOrUpdate(GenerateFamilies());
 
-            context.PersonSet.AddOrUpdate(GeneratePersons());
-
-
-            context.RelationshipTypeSet.AddOrUpdate(GenerateRelationTypes());
+            //context.PersonSet.AddOrUpdate(GeneratePersons());
 
 
-            // create roles
+            //context.RelationshipTypeSet.AddOrUpdate(GenerateRelationTypes());
+
             context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
-            //username: chsakell, password:
-            //homecinema
-            context.UserSet.AddOrUpdate(u => u.Email, new User[]{
-                new User()
-                {
-                    Email="chsakells.blog@gmail.com",
-                    Username="chsakell",
-                    HashedPassword ="XwAQoiq84p1RUzhAyPfaMDKVgSwnn80NCtsE8dNv3XI=",
-                    Salt = "mNKLRbEFCH8y1xIyTXP4qA==",
-                    IsLocked = false,
-                    DateCreated = DateTime.Now
-                }
-            });
+            //context.UserSet.AddOrUpdate(u => u.Email, new User[]{
+            //    new User()
+            //    {
+            //        Email="chsakells.blog@gmail.com",
+            //        Username="chsakell",
+            //        HashedPassword ="XwAQoiq84p1RUzhAyPfaMDKVgSwnn80NCtsE8dNv3XI=",
+            //        Salt = "mNKLRbEFCH8y1xIyTXP4qA==",
+            //        IsLocked = false,
+            //        DateCreated = DateTime.Now
+            //    }
+            //});
 
-            context.UserRoleSet.AddOrUpdate(new UserRole[] {
-                    new UserRole() {
-                        RoleId = 1, // admin
-                        UserId = 1  // chsakell
-                    }
-                });
+            //context.UserRoleSet.AddOrUpdate(new UserRole[] {
+            //        new UserRole() {
+            //            RoleId = 1, // admin
+            //            UserId = 1  // chsakell
+            //        }
+            //    });
         }
 
         private Ethnicity[] GenerateEthnicity()
@@ -90,6 +86,10 @@ namespace Phoenix.Data.Migrations
                 new RelationshipType()
                 {
                     RelationshipTypeName = "Mother"
+                },
+                new RelationshipType()
+                {
+                    RelationshipTypeName = "Spouse"
                 }
             };
             return types;
@@ -151,9 +151,8 @@ namespace Phoenix.Data.Migrations
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A nice family",
                     EthnicityID = 1,
-                    DiagnosisID = 1,
-                    DiagnosisSubTypeId = 1,
-                    Deleted = false
+                    Deleted = false,
+                    FamilyIdentifier = "F123456"
                 },
                 new Family()
                 {
@@ -161,9 +160,8 @@ namespace Phoenix.Data.Migrations
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "A great family",
                     EthnicityID = 2,
-                    DiagnosisID = 1,
-                    DiagnosisSubTypeId = 2,
-                    Deleted = false
+                    Deleted = false,
+                    FamilyIdentifier = "F123546"
                 }
             };
 
@@ -176,6 +174,7 @@ namespace Phoenix.Data.Migrations
             {
                 new Person()
                 {
+                    NhsNumber = "ABC123ZXC",
                     FirstName = "Steve",
                     SurName = "Haran",
                     DateOfBirth = DateTime.Now,
@@ -184,18 +183,17 @@ namespace Phoenix.Data.Migrations
                     HeightCM = 200,
                     WeightKG = 76,
                     Deceased = false,
-                    DateDeceased = DateTime.Now,
+                    DateDeceased = null,
                     Gender = "M",
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "Notes",
                     EthnicityId = 1,
-                    FamilyId = 1,
-                    DiagnosisId = 1,
-                    DiagnosisSubTypeId = 2,
+                    FamilyId = 2,
                     Deleted = false
                 },
                 new Person()
                 {
+                    NhsNumber = "BBC133ZXC",
                     FirstName = "Pablo",
                     SurName = "Haran",
                     DateOfBirth = DateTime.Now,
@@ -204,14 +202,12 @@ namespace Phoenix.Data.Migrations
                     HeightCM = 100,
                     WeightKG = 30,
                     Deceased = false,
-                    DateDeceased = DateTime.Now,
+                    DateDeceased = null,
                     Gender = "M",
                     FirstRegisteredDate = DateTime.Now,
                     Notes = "Notes",
                     EthnicityId = 1, 
-                    FamilyId = 1,
-                    DiagnosisId = 1,
-                    DiagnosisSubTypeId = 1,
+                    FamilyId = 2,
                     Deleted = false
                 }
             };

@@ -21,6 +21,6 @@ namespace Phoenix.Entities
         public virtual DiagnosisSubType DiagnosisSubType { get; set; }
         public bool Deleted { get; set; }
         public virtual ICollection<Person> Persons { get; set; }
-
+        public string FamilyIdentifier { get; set; }
     }
 }

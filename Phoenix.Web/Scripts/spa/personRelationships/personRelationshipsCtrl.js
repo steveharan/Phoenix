@@ -26,6 +26,7 @@
               { id: '0', name: '-- Select --' },
               { id: '1', name: 'Father' },
               { id: '2', name: 'Mother' },
+              { id: '3', name: 'Spouse' }
             ],
             selectedOption: { id: '0', name: '-- Select --' } 
         };
