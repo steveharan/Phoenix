@@ -251,10 +251,11 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpPost]
-        [Route("createall")]
-        public HttpResponseMessage CreateAll(HttpRequestMessage request, IEnumerable<PersonRelationshipViewModel> personRelationships)
+        [Route("createall/{id:int}")]
+        public HttpResponseMessage CreateAll(HttpRequestMessage request, IEnumerable<PersonRelationshipViewModel> personRelationships, int id)
         {
-            var personId = personRelationships.FirstOrDefault().PersonId;
+            //var personId = personRelationships.FirstOrDefault().PersonId;
+            var personId = id;
             List<PersonRelationship> oldPersonRelationships = null;
 
             oldPersonRelationships = _personRelationshipRepository

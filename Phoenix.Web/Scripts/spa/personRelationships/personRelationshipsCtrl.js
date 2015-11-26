@@ -72,7 +72,7 @@
         function updatePersonRelationships() {
             console.log('$scope.Relationships');
             console.log($scope.Relationships);
-            apiService.post('/api/personRelationships/createall', $scope.Relationships,
+            apiService.post('/api/personRelationships/createall/' + $scope.$parent.EditedPerson.ID, $scope.Relationships,
             updatePersonRelationshipCompleted,
             updatePersonRelationshipFailed);
         }
