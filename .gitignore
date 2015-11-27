@@ -57,3 +57,5 @@ Phoenix.Data/obj/Debug/Phoenix.Data.pdb
 *.pdb
 *.pdb
 *.dll
+*.cache
+*.pdb
