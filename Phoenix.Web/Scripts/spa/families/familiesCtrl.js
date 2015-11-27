@@ -3,9 +3,31 @@
 
     app.controller('familiesCtrl', familiesCtrl);
 
-    familiesCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'apiService', 'notificationService', '$location'];
+    familiesCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'apiService', 'notificationService', '$location', '$log'];
 
     function familiesCtrl($scope, $rootScope, $uibModal, apiService, notificationService, $location) {
+
+        $scope.items = [
+          'The first choice!',
+          'And another choice for you.',
+          'but wait! A third!'
+        ];
+
+        $scope.status = {
+            isopen: false
+        };
+
+        $scope.toggled = function (open) {
+            alert('toggle');
+            $log.log('Dropdown is now: ', open);
+        };
+
+        $scope.toggleDropdown = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.status.isopen = !$scope.status.isopen;
+        };
+
         $scope.pageClass = 'page-families';
         $scope.loadingFamilies = true;
         $scope.page = 0;

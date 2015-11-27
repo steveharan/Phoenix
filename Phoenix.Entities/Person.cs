@@ -11,6 +11,7 @@ namespace Phoenix.Entities
         public Person() { PersonRelationships = new List<PersonRelationship>(); }
 
         public int ID { get; set; }
+        public string NhsNumber { get; set; }
         public string FirstName { get; set; }
         public string SurName { get; set; }
         public DateTime DateOfBirth { get; set; }

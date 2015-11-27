@@ -45,6 +45,10 @@
                             <div class="table-responsive">
                                 <table class="table table-condensed shortMargin">
                                     <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">Family Reference Number:</td>
+                                        <td class="shortPadding"><i>{{family.FamilyIdentifier}}</i></td>
+                                    </tr>
+                                    <tr>
                                         <td class="shortPadding" style="font-weight:bold;">Date First Registered:</td>
                                         <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
                                     </tr>
@@ -84,6 +88,7 @@
                 <tr>
                     <th class="col-md-1"></th>
                     <th>Family Name</th>
+                    <th>Reference</th>
                     <th>First Registered</th>
                     <th>Notes</th>
                     <th>Primary Ethnicity</th>
@@ -104,6 +109,7 @@
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">
                         <strong>{{family.FamilyName}}</strong>
                     </td>
+                    <td>{{family.FamilyIdentifier}}</td>
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Notes}}</td>
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Ethnicity}}</td>

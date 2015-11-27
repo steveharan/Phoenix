@@ -35,6 +35,10 @@
                             <div class="table-responsive">
                                 <table class="table table-condensed shortMargin">
                                     <tr>
+                                        <td class="shortPadding" style="font-weight:bold;">NHS Number:</td>
+                                        <td class="shortPadding"><i>{{person.NhsNumber}}</i></td>
+                                    </tr>
+                                    <tr>
                                         <td class="shortPadding" style="font-weight:bold;">Date Of Birth:</td>
                                         <td class="shortPadding"><i>{{person.DateOfBirth | date:'mediumDate'}}</i></td>
                                     </tr>
@@ -135,12 +139,12 @@
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
-                    <td><span uib-popover="Some info" popover-title="{{person.FirstName}}"  popover-trigger="mouseenter">{{person.FirstName}} {{person.SurName}}</span></td>
+                    <td><span uib-popover="NHS No. {{person.NhsNumber}}" popover-title="{{person.FirstName}}"  popover-trigger="mouseenter">{{person.FirstName}} {{person.SurName}}</span></td>
                     <td>{{person.DateOfBirth | date:'mediumDate'}}</td>
                     <td>{{person.Gender}}</td>
                     <td>{{person.HeightCM}}</td>
                     <td>{{person.WeightKG}}</td>
-                    <td style="text-align:center;" ng-show="person.Deceased" class="shortPadding"><input type="checkbox" disabled="disabled" checked="checked" /></td>
+                    <td style="text-align:center;" ng-show="person.Deceased" class="shortPadding"><span uib-popover="{{person.DateDeceased | date:'mediumDate'}}" popover-title="Date {{person.FirstName}} Deceased"  popover-trigger="mouseenter"><input type="checkbox" disabled="disabled" checked="checked" /></span></td>
                     <td style="text-align:center;" ng-show="!person.Deceased" class="shortPadding"><input type="checkbox" disabled="disabled" /></td>
                     <td style="text-align:center;" ng-show="person.Twin" class="shortPadding"><input type="checkbox" disabled="disabled" checked="checked" /></td>
                     <td style="text-align:center;" ng-show="!person.Twin" class="shortPadding"><input type="checkbox" disabled="disabled" /></td>

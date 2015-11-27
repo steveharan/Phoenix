@@ -12,6 +12,7 @@ namespace Phoenix.Web.Models
     public class PersonViewModel : IValidatableObject
     {
         public int ID { get; set; }
+        public string NhsNumber { get; set; }
         public string FirstName { get; set; }
         public string SurName { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -27,9 +28,9 @@ namespace Phoenix.Web.Models
         public string Ethnicity { get; set; }
         public int EthnicityID { get; set; }
         public string Diagnosis { get; set; }
-        public int DiagnosisID { get; set; }
+        public int? DiagnosisID { get; set; }
         public string DiagnosisSubType { get; set; }
-        public int DiagnosisSubTypeID { get; set; }
+        public int? DiagnosisSubTypeID { get; set; }
         public int FamilyID { get; set; }
         public string FamilyName { get; set; }
         public bool Deleted { get; set; }

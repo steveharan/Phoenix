@@ -17,6 +17,7 @@ namespace Phoenix.Data.Configurations
             Property(u => u.EthnicityID).IsRequired();
             Property(u => u.DiagnosisID).IsOptional();
             Property(u => u.DiagnosisSubTypeId).IsOptional();
+            Property(u => u.FamilyIdentifier).IsOptional();
         }
     }
 }
