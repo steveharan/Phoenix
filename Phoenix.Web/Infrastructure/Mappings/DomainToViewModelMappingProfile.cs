@@ -20,7 +20,8 @@ namespace Phoenix.Web.Infrastructure.Mappings
         protected override void Configure()
         {
             Mapper.CreateMap<Family, FamilyViewModel>()
-                .ForMember(vm => vm.Persons, map => map.MapFrom(m => m.Persons.Count()))
+                //.ForMember(vm => vm.Persons, map => map.MapFrom(m => m.Persons.Count))
+                .ForMember(vm => vm.Persons, map => map.MapFrom(m => m.Persons.Count(p => p.Deleted==false)))
                 .ForMember(vm => vm.Ethnicity, map => map.MapFrom(m => m.Ethnicity.EthnicityName))
                 .ForMember(vm => vm.Diagnosis, map => map.MapFrom(m => m.Diagnosis.Name))
                 .ForMember(vm => vm.DiagnosisSubType, map => map.MapFrom(m => m.DiagnosisSubType.Name));

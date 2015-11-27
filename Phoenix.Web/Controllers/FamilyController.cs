@@ -45,7 +45,7 @@ namespace Phoenix.Web.Controllers
                 {
                     filter = filter.Trim().ToLower();
 
-                    families = _familyRepository.FindBy(c => c.FamilyName.ToLower().Contains(filter) 
+                    families = _familyRepository.FindBy(c => (c.FamilyName.ToLower().Contains(filter))
                                                         && c.Deleted == false)
                         .OrderByDescending(c => c.FamilyName)
                         .Skip(currentPage * currentPageSize)
@@ -55,8 +55,7 @@ namespace Phoenix.Web.Controllers
                     totalFamilies = _familyRepository
                         .FindBy(c => c.FamilyName.ToLower().Contains(filter)
                                                         && c.Deleted == false)
-                        .Where(c => c.FamilyName.ToLower().Contains(filter))
-                        .Count();
+                        .Count(c => c.FamilyName.ToLower().Contains(filter));
                 }
                 else
                 {
