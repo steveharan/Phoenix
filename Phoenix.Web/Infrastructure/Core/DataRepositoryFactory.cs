@@ -10,7 +10,7 @@ using Phoenix.Web.Infrastructure.Extensions;
 using System.Net.Http;
 using Phoenix.Entities;
 
-namespace HomeCinema.Web.Infrastructure.Core
+namespace Phoenix.Web.Infrastructure.Core
 {
     public class DataRepositoryFactory : IDataRepositoryFactory
     {

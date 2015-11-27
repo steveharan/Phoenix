@@ -1,8 +1,41 @@
-﻿<p>Here is example of syncronized content between ngRepeat directive and bpOrgDiagram directive.</p>
+﻿<!--<p>Here is example of syncronized content between ngRepeat directive and bpOrgDiagram directive.</p>
 <p>Cursor: {{myOptions.cursorItem}}</p>
 <p>Highlight: {{myOptions.highlightItem}}</p>
-<p>Message: {{Message}}</p>
-{{myOptions}}
-<div id="centerpanel" style="overflow: hidden; padding: 0px; margin: 0px; border: 0px;">
-    <div bp-fam-diagram data-options="myOptions" data-on-highlight-changed="onMyHighlightChanged()" data-on-cursor-changed="onMyCursorChanged()" style="width: 800px; height: 600px; border-style: dotted; border-width: 1px;"></div>
+<p>Message: {{Message}}</p>-->
+
+<style>
+    .selected {
+        background-color: dodgerblue;
+        color: white;
+    }
+</style>
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><strong>Latest Families</strong></h3>
+            <div class="input-group">
+                <input id="inputSearchFamilies" type="search" ng-model="filterFamilies" class="form-control shortInputSearch" placeholder="Filter, search families..">
+                <div class="input-group-btn">
+                    <button class="btn btn-info" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-info" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <button class="btn btn-info" ng-click="updateFamily();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="!showTableFormat"><i class="glyphicon glyphicon-tasks"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="showTableFormat"><i class="glyphicon glyphicon-calendar"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <button uib-popover="Add child to selected" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="addrelation(myOptions.cursorItem);">
+                    <span>Add Child To Selected Person</span>
+                </button>
+            </div>
+            <div class="row">
+                <!--<div id="centerpanel" style="overflow: hidden; padding: 0px; margin: 0px; border: 0px;">-->
+                    <div bp-fam-diagram data-options="myOptions" data-on-highlight-changed="onMyHighlightChanged()" data-on-cursor-changed="onMyCursorChanged()" style="width: 100%; height: 800px; border-style: none; border-width: 1px;"></div>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
 </div>

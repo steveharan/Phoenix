@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Phoenix.Web.Infrastructure.Extensions;
-using HomeCinema.Web.Infrastructure.Core;
+using Phoenix.Web.Infrastructure.Core;
 
 namespace Phoenix.Web.Infrastructure.Core
 {

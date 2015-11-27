@@ -8,6 +8,7 @@
     function personEditCtrl($scope, $uibModal, $routeParams, $uibModalInstance, $timeout, apiService, notificationService) {
         $scope.addOrEdit = setLable();
         function setLable() {
+            console.log($scope);
             if ($scope.EditedPerson.deleted) {
                 return 'PLEASE CONFIRM DELETE FOR ';
             }
