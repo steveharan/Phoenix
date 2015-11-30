@@ -205,6 +205,12 @@
             angular.forEach(result.data.Items, function (value, key) {
                 objParents = angular.fromJson(value.parents);
                 objSpouses = angular.fromJson(value.spouses);
+                var colour = "";
+                if (value.gender == 'F') {
+                    colour = primitives.common.Colors.LavenderBlush;
+                } else {
+                    colour = primitives.common.Colors.RoyalBlue;
+                }
 
                 apiItem = new primitives.famdiagram.ItemConfig({
                     id: value.id,
@@ -212,7 +218,9 @@
                     description: value.description,
                     parents: objParents,
                     spouses: objSpouses,
-                    itemTitleColor: primitives.common.Colors.RoyalBlue,
+                    itemTitleColor: colour,
+                    groupTitle: value.gender,
+                    groupTitleColor: colour,
                     deceased: value.deceased,
                     gender: value.gender
                 });

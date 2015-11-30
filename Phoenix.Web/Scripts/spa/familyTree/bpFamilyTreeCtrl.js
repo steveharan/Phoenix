@@ -25,8 +25,6 @@
                 windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
             }, function () {
-                console.log('after add person');
-                console.log($rootScope);
                 var id = $rootScope.NewlyCreatedPerson.PersonID;
                 var index = $scope.myOptions.items.length + 1;
                 var objParent = [];
@@ -43,7 +41,7 @@
                     id: id,
                     parents: objParent,
                     spouses: objSpouse,
-                    title: $rootScope.NewlyCreatedPerson.SurName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
+                    title: $rootScope.NewlyCreatedPerson.FirstName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
                     description: $rootScope.NewlyCreatedPerson.Notes
                 }));
             });
@@ -237,12 +235,13 @@
 
                 element.on('$destroy', function () {
                     /* destroy items scopes */
-                    for (var index = 0; index < scopes.length; index++) {
-                        itemScopes[index].$destroy();
-                    }
+                    //console.log('length is ' + itemScopes.length);
+                    //for (var index = 0; index < itemScopes.length; index++) {
+                    //    itemScopes[index].$destroy();
+                    //}
 
                     /* destory jQuery UI widget instance */
-                    chart.remove();
+//                    chart.remove();
                 });
             };
 
@@ -250,7 +249,7 @@
                 scope: {
                     options: '=options',
                     onCursorChanged: '&onCursorChanged',
-                    onHighlightChanged: '&onHighlightChanged',
+                    onHighlightChanged: '&onHighlightChanged'
                 },
                 link: link
             };
