@@ -18,6 +18,16 @@
         <form role="form" novalidate angular-validator name="addPersonForm" angular-validator-submit="Register()">
             <div class="">
                 <div class="form-group">
+                    <div class="row" ng-show="addRelationToPersonId">
+                        <div class="col-xs-5">
+                            <label class="control-label" for="relationshipTypeId">Type of Relationship</label>
+                            <select class="form-control black" name="mySelect" id="mySelect"
+                                    ng-options="option.name for option in relations.availableOptions track by option.id"
+                                    ng-model="relations.selectedOption"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="row">
                         <div class="col-xs-5">
                             <label class="control-label" for="nhsNumber">NHS Number</label>

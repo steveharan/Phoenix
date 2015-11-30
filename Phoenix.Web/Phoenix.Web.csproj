@@ -1005,6 +1005,7 @@
     <Content Include="Scripts\spa\families\familyEditModal.html" />
     <Content Include="Scripts\spa\families\families.html" />
     <Content Include="Scripts\spa\families\familiesCtrl.js" />
+    <Content Include="Scripts\spa\familyTree\orgdiagram.html" />
     <Content Include="Scripts\spa\familyTree\bpFamilyTree.html" />
     <Content Include="Scripts\spa\familyTree\bpFamilyTreeCtrl.js" />
     <Content Include="Scripts\spa\familyTree\familyTree.html" />

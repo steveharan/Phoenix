@@ -20,12 +20,14 @@ namespace Phoenix.Web.Controllers
     public class PersonsController : ApiControllerBase
     {
         private readonly IEntityBaseRepository<Person> _personRepository;
+        private readonly IEntityBaseRepository<PersonRelationship> _personRelationshipRepository;
 
-        public PersonsController(IEntityBaseRepository<Person> personRepository,
+        public PersonsController(IEntityBaseRepository<Person> personRepository, IEntityBaseRepository<PersonRelationship> personRelationshipRepository,
             IEntityBaseRepository<Error> _errorsRepository, IUnitOfWork _unitOfWork)
             : base(_errorsRepository, _unitOfWork)
         {
             _personRepository = personRepository;
+            _personRelationshipRepository = personRelationshipRepository;
         }
         [HttpGet]
         [Route("{id:int}")]
@@ -191,8 +193,8 @@ namespace Phoenix.Web.Controllers
         }
 
         [HttpPost]
-        [Route("create")]
-        public HttpResponseMessage Create(HttpRequestMessage request, PersonViewModel person)
+        [Route("create/{parentId:int?}/{relationTypeId:int?}")]
+        public HttpResponseMessage Create(HttpRequestMessage request, PersonViewModel person, int parentId = -1, int relationTypeId = -1)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -216,6 +218,18 @@ namespace Phoenix.Web.Controllers
                     // Update view model
                     person = Mapper.Map<Person, PersonViewModel>(newPerson);
                     response = request.CreateResponse<PersonViewModel>(HttpStatusCode.Created, person);
+                }
+
+                if (parentId > -1)
+                {
+                    PersonRelationship personRelationship = new PersonRelationship();
+                    personRelationship.RelationshipFromPersonId = person.ID;
+                    personRelationship.RelationWithPersonId = (int)parentId;
+                    personRelationship.RelationshipTypeId = relationTypeId;
+
+                    _personRelationshipRepository.Add(personRelationship);
+
+                    _unitOfWork.Commit();
                 }
 
                 return response;

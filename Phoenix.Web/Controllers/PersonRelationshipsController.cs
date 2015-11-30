@@ -97,8 +97,9 @@ namespace Phoenix.Web.Controllers
 
                 int FatherId = 0;
                 int MotherId = 0;
+                int SpouseId = 0;
 
-                PopulateFamilyStructure(Persons, familyTrees, ref FatherId, ref MotherId);
+                PopulateFamilyStructure(Persons, familyTrees, ref FatherId, ref MotherId, ref SpouseId);
 
                 IEnumerable<FamilyTreeViewModel> treeVM = Mapper.Map<IEnumerable<FamilyTree>, IEnumerable<FamilyTreeViewModel>>(familyTrees);
 
@@ -116,7 +117,7 @@ namespace Phoenix.Web.Controllers
             });
         }
 
-        private static void PopulateFamilyStructure(List<Person> Persons, List<FamilyTree> familyTrees, ref int FatherId, ref int MotherId)
+        private static void PopulateFamilyStructure(List<Person> Persons, List<FamilyTree> familyTrees, ref int FatherId, ref int MotherId, ref int SpouseId)
         {
             var count = 1;
             foreach (var person in Persons)
@@ -126,24 +127,36 @@ namespace Phoenix.Web.Controllers
                 familyTree.seqId = count;
                 familyTree.Title = person.FirstName + " " + person.SurName;
                 familyTree.Label = person.SurName;
+                familyTree.Deceased = person.Deceased;
+                familyTree.Gender = person.Gender;
                 FatherId = 0;
                 MotherId = 0;
+                SpouseId = 0;
                 foreach (var relationship in person.PersonRelationships)
                 {
                     if (relationship.RelationshipTypeId == (int)RelationType.Father)
                     {
                         FatherId = relationship.relationWithPerson.ID;
                     }
-                    else
+                    else if (relationship.RelationshipTypeId == (int) RelationType.Mother)
                     {
                         MotherId = relationship.relationWithPerson.ID;
                     }
+                    else // spouse
+                    {
+                        SpouseId = relationship.relationWithPerson.ID;
+                    }
                 }
+                if (SpouseId != 0)
+                {
+                    familyTree.Spouses = "[" + SpouseId + "]";
+                }
+
                 if (FatherId == 0 && MotherId == 0)
                 {
                     familyTree.Parents = "[]";
                 }
-                else
+                else 
                 {
                     if (FatherId != 0 && MotherId != 0)
                     {
@@ -271,14 +284,14 @@ namespace Phoenix.Web.Controllers
             HttpResponseMessage response = new HttpResponseMessage();
             foreach (var personRelationship in personRelationships)
             {
-                response = Create(request, personRelationship);
+                response = CreateRelationship(request, personRelationship);
             }
             return response;
         }
 
         [HttpPost]
         [Route("create")]
-        public HttpResponseMessage Create(HttpRequestMessage request, PersonRelationshipViewModel personRelationship)
+        public HttpResponseMessage CreateRelationship(HttpRequestMessage request, PersonRelationshipViewModel personRelationship)
         {
             return CreateHttpResponse(request, () =>
             {

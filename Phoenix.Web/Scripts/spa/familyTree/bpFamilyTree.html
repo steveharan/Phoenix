@@ -26,15 +26,32 @@
             </div>
         </div>
         <div class="panel-body">
-            <div class="row">
+            <div class="row" ng-show="myOptions.cursorItem == 0">
+                <button disabled uib-popover="Add child to selected" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="addrelation(myOptions.cursorItem);">
+                    <span>Add Child</span>
+                </button>
+                <button disabled uib-popover="Add child to selected" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="addrelation(myOptions.cursorItem);">
+                    <span>Add Parent</span>
+                </button>
+                <button disabled uib-popover="Add child to selected" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="addrelation(myOptions.cursorItem);">
+                    <span>Add Spouse</span>
+                </button>
+            </div>
+            <div class="row" ng-show="myOptions.cursorItem > 0">
                 <button uib-popover="Add child to selected" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="addrelation(myOptions.cursorItem);">
-                    <span>Add Child To Selected Person</span>
+                    <span>Add Child</span>
+                </button>
+                <button uib-popover="Add child to selected" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="addrelation(myOptions.cursorItem);">
+                    <span>Add Parent</span>
+                </button>
+                <button uib-popover="Add child to selected" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="addrelation(myOptions.cursorItem);">
+                    <span>Add Spouse</span>
                 </button>
             </div>
             <div class="row">
-                <!--<div id="centerpanel" style="overflow: hidden; padding: 0px; margin: 0px; border: 0px;">-->
-                    <div bp-fam-diagram data-options="myOptions" data-on-highlight-changed="onMyHighlightChanged()" data-on-cursor-changed="onMyCursorChanged()" style="width: 100%; height: 800px; border-style: none; border-width: 1px;"></div>
-                <!--</div>-->
+                <div id="centerpanel" style="overflow: hidden; padding: 0px; margin: 0px; border: 0px;">
+                    <div bp-fam-diagram data-options="myOptions" data-on-highlight-changed="onMyHighlightChanged()" data-on-cursor-changed="onMyCursorChanged()" style="width: 100%; height: 800px; border-style: dashed; border-width: 1px;"></div>
+                </div>
             </div>
         </div>
     </div>

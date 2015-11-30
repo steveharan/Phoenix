@@ -3,9 +3,9 @@
 
     app.controller('personEditCtrl', personEditCtrl);
 
-    personEditCtrl.$inject = ['$scope', '$uibModal', '$routeParams', '$uibModalInstance', '$timeout', 'apiService', 'notificationService'];
+    personEditCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', '$uibModalInstance', '$timeout', 'apiService', 'notificationService'];
 
-    function personEditCtrl($scope, $uibModal, $routeParams, $uibModalInstance, $timeout, apiService, notificationService) {
+    function personEditCtrl($scope, $rootScope, $uibModal, $routeParams, $uibModalInstance, $timeout, apiService, notificationService) {
         $scope.addOrEdit = setLable();
         function setLable() {
             console.log($scope);
@@ -43,6 +43,16 @@
               { id: 'F', name: 'Female' },
             ],
             selectedOption: { id: $scope.EditedPerson.Gender, name: $scope.GenderName }
+        };
+
+        $scope.relations = {
+            availableOptions: [
+              { id: '0', name: '-- Select --' },
+              { id: '1', name: 'Father' },
+              { id: '2', name: 'Mother' },
+              { id: '3', name: 'Spouse' }
+            ],
+            selectedOption: { id: '0', name: '-- Select --' }
         };
 
         $scope.openDatePicker = openDatePicker;
@@ -151,7 +161,6 @@
         function updatePerson() {
             if (!$scope.newPerson) {
                 $scope.EditedPerson.Gender = $scope.data.selectedOption.id,
-                console.log('Gender = ' + $scope.data.selectedOption.id);
                 apiService.post('/api/persons/update', $scope.EditedPerson,
                 updatePersonCompleted,
                 updatePersonLoadFailed);
@@ -160,24 +169,31 @@
                 var now = new Date();
                 $scope.EditedPerson.FamilyID = $routeParams.id;
                 $scope.EditedPerson.DateDeceased = now;
-                $scope.EditedPerson.Gender = $scope.data.selectedOption.id,
-                console.log('Gender = ' + $scope.data.selectedOption.id);
-                apiService.post('/api/persons/create', $scope.EditedPerson,
-                updatePersonCompleted,
-                updatePersonLoadFailed);
+                $scope.EditedPerson.Gender = $scope.data.selectedOption.id;
+                if ($scope.addRelationToPersonId != null) {
+                    apiService.post('/api/persons/create/' + $scope.addRelationToPersonId + '/' + $scope.relations.selectedOption.id, $scope.EditedPerson,
+                        updatePersonCompleted,
+                        updatePersonLoadFailed);
+                } else {
+                    apiService.post('/api/persons/create/', $scope.EditedPerson,
+                        updatePersonCompleted,
+                        updatePersonLoadFailed);
+
+                };
             }
         }
 
         function updatePersonCompleted(response) {
-            console.log('updatePersonCompleted Scope');
-            console.log($scope);
             if ($scope.EditedPerson.deleted) {
                 notificationService.displaySuccess($scope.EditedPerson.FirstName + ' deleted');
             }
             else {
                 notificationService.displaySuccess($scope.EditedPerson.FirstName + ' updated');
             }
-            $scope.EditedPerson = {};
+            //$scope.EditedPerson = {};
+            $rootScope.NewlyCreatedPerson = $scope.EditedPerson;
+            $rootScope.NewlyCreatedPerson.PersonID = response.data.ID;
+            $rootScope.NewlyCreatedPerson.RelationshipTypeId = $scope.relations.selectedOption.id;
             $uibModalInstance.dismiss();
         }
 

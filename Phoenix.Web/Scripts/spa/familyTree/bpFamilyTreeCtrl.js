@@ -12,7 +12,8 @@
         $scope.addrelation = addrelation;
  
         function addrelation(personId) {
-            // load the person
+            // pass the personid that we are adding a person to
+            $scope.addRelationToPersonId = personId;;
             var person = "";
             $scope.EditedPerson = person;
             $scope.newPerson = true;
@@ -23,70 +24,89 @@
                 scope: $scope,
                 windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
-                clearSearch();
             }, function () {
-                clearSearch();
+                console.log('after add person');
+                console.log($rootScope);
+                var id = $rootScope.NewlyCreatedPerson.PersonID;
+                var index = $scope.myOptions.items.length + 1;
+                var objParent = [];
+                var objSpouse = [];
+                if ($rootScope.NewlyCreatedPerson.RelationshipTypeId != 3) {
+                    var jsonParent = '[' + personId + ']';
+                    objParent = angular.fromJson(jsonParent);
+                } else {
+                    var jsonSpouse = '[' + personId + ']';
+                    objSpouse = angular.fromJson(jsonSpouse);
+                }
+
+                $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
+                    id: id,
+                    parents: objParent,
+                    spouses: objSpouse,
+                    title: $rootScope.NewlyCreatedPerson.SurName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
+                    description: $rootScope.NewlyCreatedPerson.Notes
+                }));
             });
         }
 
 
         var options = {};
  
-        var items = [
-            new primitives.famdiagram.ItemConfig({
-                id: 0,
-                title: "Scott Aasrud",
-                description: "Root",
-                phone: "1 (416) 001-4567",
-                email: "scott.aasrud@mail.com",
-                image: "demo/images/photos/a.png",
-                itemTitleColor: primitives.common.Colors.RoyalBlue
-            }),
-             new primitives.famdiagram.ItemConfig({
-                 id: 10,
-                 title: "Scott Aasrud 2",
-                 description: "Root",
-                 phone: "1 (416) 001-4567",
-                 email: "scott.aasrud@mail.com",
-                 image: "demo/images/photos/a.png",
-                 itemTitleColor: primitives.common.Colors.RoyalBlue
-             }),
-            new primitives.famdiagram.ItemConfig({
-                id: 1,
-                parents: [0, 10],
-                title: "Ted Lucas",
-                description: "Left",
-                phone: "1 (416) 002-4567",
-                email: "ted.lucas@mail.com",
-                image: "demo/images/photos/b.png",
-                itemTitleColor: primitives.common.Colors.RoyalBlue
-            }),
-            new primitives.famdiagram.ItemConfig({
-                id: 2,
-                parents: [0, 10],
-                title: "Joao Stuger",
-                description: "Right",
-                phone: "1 (416) 003-4567",
-                email: "joao.stuger@mail.com",
-                image: "demo/images/photos/c.png",
-                itemTitleColor: primitives.common.Colors.RoyalBlue
-            }),
-            new primitives.famdiagram.ItemConfig({
-                id: 3,
-                parents: [2],
-                title: "Hidden Node",
-                phone: "1 (416) 004-4567",
-                email: "hidden.node@mail.com",
-                description: "Dotted Node",
-                image: "demo/images/photos/e.png",
-                itemTitleColor: primitives.common.Colors.PaleVioletRed
-            })
-        ];
- 
-        options.items = items;
+        //$rootScope.items = [
+        //    new primitives.famdiagram.ItemConfig({
+        //        id: 0,
+        //        title: "Scott Aasrud",
+        //        description: "Root",
+        //        phone: "1 (416) 001-4567",
+        //        email: "scott.aasrud@mail.com",
+        //        image: "demo/images/photos/a.png",
+        //        itemTitleColor: primitives.common.Colors.RoyalBlue
+        //    }),
+        //     new primitives.famdiagram.ItemConfig({
+        //         id: 10,
+        //         title: "Scott Aasrud 2",
+        //         description: "Root",
+        //         phone: "1 (416) 001-4567",
+        //         email: "scott.aasrud@mail.com",
+        //         image: "demo/images/photos/a.png",
+        //         itemTitleColor: primitives.common.Colors.RoyalBlue
+        //     }),
+        //    new primitives.famdiagram.ItemConfig({
+        //        id: 1,
+        //        parents: [0, 10],
+        //        title: "Ted Lucas",
+        //        description: "Left",
+        //        phone: "1 (416) 002-4567",
+        //        email: "ted.lucas@mail.com",
+        //        image: "demo/images/photos/b.png",
+        //        itemTitleColor: primitives.common.Colors.RoyalBlue
+        //    }),
+        //    new primitives.famdiagram.ItemConfig({
+        //        id: 2,
+        //        parents: [0, 10],
+        //        title: "Joao Stuger",
+        //        description: "Right",
+        //        phone: "1 (416) 003-4567",
+        //        email: "joao.stuger@mail.com",
+        //        image: "demo/images/photos/c.png",
+        //        itemTitleColor: primitives.common.Colors.RoyalBlue
+        //    }),
+        //    new primitives.famdiagram.ItemConfig({
+        //        id: 3,
+        //        parents: [2],
+        //        title: "Hidden Node",
+        //        phone: "1 (416) 004-4567",
+        //        email: "hidden.node@mail.com",
+        //        description: "Dotted Node",
+        //        image: "demo/images/photos/e.png",
+        //        itemTitleColor: primitives.common.Colors.PaleVioletRed
+        //    })
+        //];
+
+        options.items = $rootScope.items;
         options.cursorItem = 0;
         options.highlightItem = 0;
-        options.hasSelectorCheckbox = primitives.common.Enabled.True;
+        options.hasSelectorCheckbox = primitives.common.Enabled.False;
         options.templates = [getContactTemplate()];
         options.defaultTemplateName = "contactTemplate";
  
@@ -102,17 +122,6 @@
  
         $scope.deleteItem = function (index) {
             $scope.myOptions.items.splice(index, 1);
-        }
- 
-        $scope.addItem = function (index, parent) {
-            var id = $scope.index++;
-            $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
-                id: id,
-                parent: parent,
-                title: "New title " + id,
-                description: "New description " + id,
-                image: "demo/images/photos/b.png"
-            }));
         }
  
         $scope.onMyCursorChanged = function () {
@@ -138,13 +147,9 @@
                 + '<div name="titleBackground" class="bp-item bp-corner-all bp-title-frame" style="background:{{itemTitleColor}};top: 2px; left: 2px; width: 216px; height: 20px;">'
                     + '<div name="title" class="bp-item bp-title" style="top: 3px; left: 6px; width: 208px; height: 18px;">{{itemConfig.title}}</div>'
                 + '</div>'
-                + '<div class="bp-item bp-photo-frame" style="top: 26px; left: 2px; width: 50px; height: 60px;">'
-                    + '<img name="photo" src="{{itemConfig.image}}" style="height: 60px; width:50px;" />'
-                + '</div>'
-                + '<div name="phone" class="bp-item" style="top: 26px; left: 56px; width: 162px; height: 18px; font-size: 12px;">{{itemConfig.phone}}</div>'
-                + '<div class="bp-item" style="top: 44px; left: 56px; width: 162px; height: 18px; font-size: 12px;">'
-                + '<a name="email" href="mailto::{{itemConfig.email}}" target="_top">{{itemConfig.email}}</a></div>'
-                + '<div name="description" class="bp-item" style="top: 62px; left: 56px; width: 162px; height: 36px; font-size: 10px;">{{itemConfig.description}}</div>'
+                + '<div name="deceased" class="bp-item" style="top: 26px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Deceased: {{itemConfig.deceased}}</div>'
+                + '<div name="gender" class="bp-item" style="top: 44px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Gender: {{itemConfig.gender}}</div>'
+                + '<div name="description" class="bp-item" style="top: 62px; left: 6px; width: 162px; height: 36px; font-size: 10px;">{{itemConfig.description}}</div>'
             + '</div>'
             ).css({
                 width: result.itemSize.width + "px",

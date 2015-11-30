@@ -14,8 +14,13 @@ namespace Phoenix.Web.Models
         // lower case required for the receiving ajax call
         public int id { get; set; }
         public string parents { get; set; }
+        public string spouses { get; set; }
         public string title { get; set; }
         public string label { get; set; }
         public string description { get; set; }
+        public bool deceased { get; set; }
+        public string gender { get; set; }
+
+
     }
 }
