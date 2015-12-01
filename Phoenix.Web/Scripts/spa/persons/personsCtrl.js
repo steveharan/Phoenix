@@ -6,6 +6,7 @@
     personsCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService', '$location'];
 
     function personsCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService, $location) {
+
         $scope.pageClass = 'page-persons';
         $scope.loadingPersons = true;
         $scope.loadingTree = true;

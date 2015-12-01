@@ -120,7 +120,7 @@
                     <th style="text-align:center;" >Date Registered</th>
                 </tr>
                 <tr ng-repeat="person in Persons | filter:filterPersons" ng-class="{'selected':$index == selectedRow}">
-                    <td style="text-align:center;" >
+                    <!--<td style="text-align:center;" >
                         <button uib-popover="Click to edit {{person.FirstName}}" popover-trigger="mouseenter"
                                 popover-placement="right"
                                 type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
@@ -138,7 +138,38 @@
                                 ng-click="deletePerson(person);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
+                    </td>-->
+                    <td style="text-align: center;">
+                        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                            <button id="btn-append-to-body" type="button" class="btn btn-flat" uib-dropdown-toggle>
+                                Actions<span class="caret"></span>
+                            </button>
+                            <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+                                <li role="menuitem">
+                                    <button uib-popover="Click to edit {{person.FirstName}}" popover-trigger="mouseenter"
+                                            popover-placement="right"
+                                            type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                    <button uib-popover="Click to manage family relationships for {{person.FirstName}}" popover-trigger="mouseenter"
+                                            popover-placement="right"
+                                            type="button" class="btn btn-warning btn-sm"
+                                            ng-click="manageRelations(person);">
+                                        <span class="glyphicon glyphicon-tree-conifer"></span>
+                                    </button>
+                                    <button uib-popover="Click to delete {{person.FirstName}}" popover-trigger="mouseenter"
+                                            popover-placement="right"
+                                            type="button" class="btn btn-danger btn-sm"
+                                            ng-click="deletePerson(person);">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </li>
+                                <li class="divider"></li>
+                                <li role="menuitem"><a href="#">Event</a></li>
+                            </ul>
+                        </div>
                     </td>
+
                     <td><span uib-popover="NHS No. {{person.NhsNumber}}" popover-title="{{person.FirstName}}"  popover-trigger="mouseenter">{{person.FirstName}} {{person.SurName}}</span></td>
                     <td>{{person.DateOfBirth | date:'mediumDate'}}</td>
                     <td>{{person.Gender}}</td>

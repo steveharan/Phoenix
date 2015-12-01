@@ -3,9 +3,9 @@
 
     app.controller('bpFamilyTreeCtrl', bpFamilyTreeCtrl);
 
-    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal'];
+    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'notificationService'];
 
-    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal) {
+    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal, notificationService) {
 
         $scope.index = 10;
         $scope.Message = "";
@@ -14,12 +14,21 @@
         $scope.deletePerson = deletePerson;
 
         function deletePerson(personId) {
-            alert('delete person ' + personId);
+            apiService.get("/api/persons/details/" + personId, null,
+                personLoadCompleted,
+                personLoadFailed); 
         }
 
-        function addChild(personId) {
-            alert('addChild');
+        function personLoadCompleted(response) {
+            $scope.RelatedPerson = response.data;
+        }
 
+        function personLoadFailed(response) {
+            notificationService.displayError(response.data);
+        }
+
+
+        function addChild(personId) {
             $scope.addingChild = true;
             $scope.addingParent= false;
 
@@ -61,7 +70,6 @@
         }
 
         function addParent(personId) {
-            alert('addparent');
             $scope.addingParent = true;
             $scope.addingChild = false;
             // pass the personid that we are adding a person to
