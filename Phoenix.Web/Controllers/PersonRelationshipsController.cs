@@ -103,7 +103,7 @@ namespace Phoenix.Web.Controllers
 
                 IEnumerable<FamilyTreeViewModel> treeVM = Mapper.Map<IEnumerable<FamilyTree>, IEnumerable<FamilyTreeViewModel>>(familyTrees);
 
-                PaginationSet<FamilyTreeViewModel> pagedSet = new PaginationSet<FamilyTreeViewModel>()
+                var pagedSet = new PaginationSet<FamilyTreeViewModel>()
                 {
                     Page = 1,
                     TotalCount = 10,
@@ -129,6 +129,8 @@ namespace Phoenix.Web.Controllers
                 familyTree.Label = person.SurName;
                 familyTree.Deceased = person.Deceased;
                 familyTree.Gender = person.Gender;
+                familyTree.DateOfBirth = person.DateOfBirth;
+                familyTree.FirstRegisteredDate = person.FirstRegisteredDate;
                 FatherId = 0;
                 MotherId = 0;
                 SpouseId = 0;

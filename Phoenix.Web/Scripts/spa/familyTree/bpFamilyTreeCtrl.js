@@ -3,17 +3,28 @@
 
     app.controller('bpFamilyTreeCtrl', bpFamilyTreeCtrl);
 
-    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService', '$location'];
+    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal'];
 
-    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService, $location) {
+    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal) {
 
         $scope.index = 10;
         $scope.Message = "";
-        $scope.addrelation = addrelation;
- 
-        function addrelation(personId) {
+        $scope.addChild = addChild;
+        $scope.addParent = addParent;
+        $scope.deletePerson = deletePerson;
+
+        function deletePerson(personId) {
+            alert('delete person ' + personId);
+        }
+
+        function addChild(personId) {
+            alert('addChild');
+
+            $scope.addingChild = true;
+            $scope.addingParent= false;
+
             // pass the personid that we are adding a person to
-            $scope.addRelationToPersonId = personId;;
+            $scope.addRelationToPersonId = personId;
             var person = "";
             $scope.EditedPerson = person;
             $scope.newPerson = true;
@@ -25,81 +36,72 @@
                 windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
             }, function () {
-                var id = $rootScope.NewlyCreatedPerson.PersonID;
-                var index = $scope.myOptions.items.length + 1;
-                var objParent = [];
-                var objSpouse = [];
-                if ($rootScope.NewlyCreatedPerson.RelationshipTypeId != 3) {
-                    var jsonParent = '[' + personId + ']';
-                    objParent = angular.fromJson(jsonParent);
-                } else {
-                    var jsonSpouse = '[' + personId + ']';
-                    objSpouse = angular.fromJson(jsonSpouse);
-                }
+                if ($rootScope.NewlyCreatedPerson != null) {
+                    var id = $rootScope.NewlyCreatedPerson.PersonID;
+                    var index = $scope.myOptions.items.length + 1;
+                    var objParent = [];
+                    var objSpouse = [];
+                    if ($rootScope.NewlyCreatedPerson.RelationshipTypeId !== 3) {
+                        var jsonParent = '[' + personId + ']';
+                        objParent = angular.fromJson(jsonParent);
+                    } else {
+                        var jsonSpouse = '[' + personId + ']';
+                        objSpouse = angular.fromJson(jsonSpouse);
+                    }
 
-                $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
-                    id: id,
-                    parents: objParent,
-                    spouses: objSpouse,
-                    title: $rootScope.NewlyCreatedPerson.FirstName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
-                    description: $rootScope.NewlyCreatedPerson.Notes
-                }));
+                    $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
+                        id: id,
+                        parents: objParent,
+                        spouses: objSpouse,
+                        title: $rootScope.NewlyCreatedPerson.FirstName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
+                        description: $rootScope.NewlyCreatedPerson.Notes
+                    }));
+                }
             });
         }
 
+        function addParent(personId) {
+            alert('addparent');
+            $scope.addingParent = true;
+            $scope.addingChild = false;
+            // pass the personid that we are adding a person to
+            $scope.addRelationToPersonId = personId;
+            var person = "";
+            $scope.EditedPerson = person;
+            $scope.newPerson = true;
+            $uibModal.open({
+                templateUrl: 'scripts/spa/persons/personEditModal.html',
+                controller: 'personEditCtrl',
+                backdrop: 'static',
+                scope: $scope,
+                windowClass: 'app-modal-window'
+            }).result.then(function ($scope) {
+            }, function () {
+                if ($rootScope.NewlyCreatedPerson != null) {
+                    var id = $rootScope.NewlyCreatedPerson.PersonID;
+                    var index = $scope.myOptions.items.length + 1;
+                    var objParent = [];
+                    var objSpouse = [];
+                    if ($rootScope.NewlyCreatedPerson.RelationshipTypeId != 3) {
+                        var jsonParent = '[' + personId + ']';
+                        objParent = angular.fromJson(jsonParent);
+                    } else {
+                        var jsonSpouse = '[' + personId + ']';
+                        objSpouse = angular.fromJson(jsonSpouse);
+                    }
+
+                    $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
+                        id: id,
+                        parents: objParent,
+                        spouses: objSpouse,
+                        title: $rootScope.NewlyCreatedPerson.FirstName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
+                        description: $rootScope.NewlyCreatedPerson.Notes
+                    }));
+                }
+            });
+        }
 
         var options = {};
- 
-        //$rootScope.items = [
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 0,
-        //        title: "Scott Aasrud",
-        //        description: "Root",
-        //        phone: "1 (416) 001-4567",
-        //        email: "scott.aasrud@mail.com",
-        //        image: "demo/images/photos/a.png",
-        //        itemTitleColor: primitives.common.Colors.RoyalBlue
-        //    }),
-        //     new primitives.famdiagram.ItemConfig({
-        //         id: 10,
-        //         title: "Scott Aasrud 2",
-        //         description: "Root",
-        //         phone: "1 (416) 001-4567",
-        //         email: "scott.aasrud@mail.com",
-        //         image: "demo/images/photos/a.png",
-        //         itemTitleColor: primitives.common.Colors.RoyalBlue
-        //     }),
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 1,
-        //        parents: [0, 10],
-        //        title: "Ted Lucas",
-        //        description: "Left",
-        //        phone: "1 (416) 002-4567",
-        //        email: "ted.lucas@mail.com",
-        //        image: "demo/images/photos/b.png",
-        //        itemTitleColor: primitives.common.Colors.RoyalBlue
-        //    }),
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 2,
-        //        parents: [0, 10],
-        //        title: "Joao Stuger",
-        //        description: "Right",
-        //        phone: "1 (416) 003-4567",
-        //        email: "joao.stuger@mail.com",
-        //        image: "demo/images/photos/c.png",
-        //        itemTitleColor: primitives.common.Colors.RoyalBlue
-        //    }),
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 3,
-        //        parents: [2],
-        //        title: "Hidden Node",
-        //        phone: "1 (416) 004-4567",
-        //        email: "hidden.node@mail.com",
-        //        description: "Dotted Node",
-        //        image: "demo/images/photos/e.png",
-        //        itemTitleColor: primitives.common.Colors.PaleVioletRed
-        //    })
-        //];
 
         options.items = $rootScope.items;
         options.cursorItem = 0;
@@ -147,7 +149,8 @@
                 + '</div>'
                 + '<div name="deceased" class="bp-item" style="top: 26px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Deceased: {{itemConfig.deceased}}</div>'
                 + '<div name="gender" class="bp-item" style="top: 44px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Gender: {{itemConfig.gender}}</div>'
-                + '<div name="description" class="bp-item" style="top: 62px; left: 6px; width: 162px; height: 36px; font-size: 10px;">{{itemConfig.description}}</div>'
+                + '<div name="dob" class="bp-item" style="top: 62px; left: 6px; width: 162px; height: 18px; font-size: 12px;">DOB: {{itemConfig.dob | date:"mediumDate"}}</div>'
+                + '<div name="reg" class="bp-item" style="top: 80px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Registered: {{itemConfig.registered | date:"mediumDate"}}</div>'
             + '</div>'
             ).css({
                 width: result.itemSize.width + "px",
@@ -234,14 +237,14 @@
                 }
 
                 element.on('$destroy', function () {
-                    /* destroy items scopes */
-                    //console.log('length is ' + itemScopes.length);
+                    ///* destroy items scopes */
+                    ////console.log('length is ' + itemScopes.length);
                     //for (var index = 0; index < itemScopes.length; index++) {
                     //    itemScopes[index].$destroy();
                     //}
 
-                    /* destory jQuery UI widget instance */
-//                    chart.remove();
+                    ///* destory jQuery UI widget instance */
+                    //chart.remove();
                 });
             };
 

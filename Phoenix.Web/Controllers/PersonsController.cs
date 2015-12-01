@@ -29,28 +29,6 @@ namespace Phoenix.Web.Controllers
             _personRepository = personRepository;
             _personRelationshipRepository = personRelationshipRepository;
         }
-        [HttpGet]
-        [Route("{id:int}")]
-        public HttpResponseMessage Get(HttpRequestMessage request, int? id, string filter)
-        {
-            filter = filter.ToLower().Trim();
-
-            return CreateHttpResponse(request, () =>
-            {
-                HttpResponseMessage response = null;
-
-                var persons = _personRepository.FindBy(p => p.FamilyId == id && p.Deleted == false)
-                    .Where(p => p.FirstName.ToLower().Contains(filter) ||
-                    p.SurName.ToLower().Contains(filter)).ToList();
-
-                var personsVm = Mapper.Map<IEnumerable<Person>, IEnumerable<PersonViewModel>>(persons);
-
-                response = request.CreateResponse<IEnumerable<PersonViewModel>>(HttpStatusCode.OK, personsVm);
-
-                return response;
-            });
-        }
-
 
         [HttpGet]
         [Route("search/{id:int}/{page:int=0}/{pageSize=10}/{filter?}")]
@@ -82,9 +60,8 @@ namespace Phoenix.Web.Controllers
                     totalPersons = _personRepository
                         .FindBy(c => (c.SurName.ToLower().Contains(filter.ToLower())
                              || c.FirstName.ToLower().Contains(filter.ToLower())) && c.Deleted == false)
-                        .Where(c => (c.SurName.ToLower().Contains(filter.ToLower())
-                             || c.FirstName.ToLower().Contains(filter.ToLower())) && c.Deleted == false)
-                        .Count();
+                        .Count(c => (c.SurName.ToLower().Contains(filter.ToLower())
+                             || c.FirstName.ToLower().Contains(filter.ToLower())) && c.Deleted == false);
                 }
                 else
                 {
@@ -235,6 +212,51 @@ namespace Phoenix.Web.Controllers
                 return response;
             });
         }
+
+        [HttpPost]
+        [Route("createparent/{childId:int?}/{relationTypeId:int?}")]
+        public HttpResponseMessage CreateParent(HttpRequestMessage request, PersonViewModel person, int childId = -1, int relationTypeId = -1)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest,
+                        ModelState.Keys.SelectMany(k => ModelState[k].Errors)
+                              .Select(m => m.ErrorMessage).ToArray());
+                }
+                else
+                {
+                    Person newPerson = new Person();
+                    newPerson.UpdatePerson(person);
+
+                    _personRepository.Add(newPerson);
+
+                    _unitOfWork.Commit();
+
+                    // Update view model
+                    person = Mapper.Map<Person, PersonViewModel>(newPerson);
+                    response = request.CreateResponse<PersonViewModel>(HttpStatusCode.Created, person);
+                }
+
+                if (childId > -1)
+                {
+                    PersonRelationship personRelationship = new PersonRelationship();
+                    personRelationship.RelationshipFromPersonId = childId;
+                    personRelationship.RelationWithPersonId = person.ID;
+                    personRelationship.RelationshipTypeId = relationTypeId;
+
+                    _personRelationshipRepository.Add(personRelationship);
+
+                    _unitOfWork.Commit();
+                }
+
+                return response;
+            });
+        }
+
 
     }
 }

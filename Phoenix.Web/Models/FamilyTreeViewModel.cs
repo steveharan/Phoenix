@@ -20,7 +20,7 @@ namespace Phoenix.Web.Models
         public string description { get; set; }
         public bool deceased { get; set; }
         public string gender { get; set; }
-
-
+        public DateTime dateOfBirth { get; set; }
+        public DateTime firstRegisteredDate { get; set; }
     }
 }

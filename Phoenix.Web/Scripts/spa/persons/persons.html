@@ -107,7 +107,8 @@
         <div class="panel-body" ng-hide="!showTableFormat">
             <table class="table table-bordered table table-striped table-hover table-responsive">
                 <tr>
-                    <th style="text-align:center;" ><button class="btn btn-info" ng-click="callFamilyTree(person)">View Family Tree</button></th>
+                    <th style="text-align: center;" ng-show="loadingTree"><button disabled class="btn btn-info" ng-click="callFamilyTree(person)">Loading....</button></th>
+                    <th style="text-align:center;" ng-hide="loadingTree"><button class="btn btn-info" ng-click="callFamilyTree(person)">View Family Tree</button></th>
                     <th style="text-align:center;" >Name</th>
                     <th style="text-align:center;" >DOB</th>
                     <th style="text-align:center;" >Gender</th>

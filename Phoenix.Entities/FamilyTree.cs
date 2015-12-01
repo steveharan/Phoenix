@@ -17,5 +17,8 @@ namespace Phoenix.Entities
         public string Description { get; set; }
         public bool Deceased { get; set; }
         public string Gender { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public DateTime FirstRegisteredDate { get; set; }
+
     }
 }
