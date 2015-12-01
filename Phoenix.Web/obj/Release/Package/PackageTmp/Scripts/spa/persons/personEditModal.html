@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+</body>
+</html>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{addOrEdit}} {{EditedPerson.FirstName}} {{EditedPerson.SurName}}
+    </div>
+
+    <div class="panel-body">
+        <form role="form" novalidate angular-validator name="addPersonForm" angular-validator-submit="Register()">
+            <div class="">
+                <div class="form-group">
+                    <div class="row" ng-show="addRelationToPersonId">
+                        <div class="col-xs-5">
+                            <label class="control-label" for="relationshipTypeId">Type of Relationship</label>
+                            <select class="form-control black" name="mySelect" id="mySelect"
+                                    ng-options="option.name for option in relations.availableOptions track by option.id"
+                                    ng-model="relations.selectedOption"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <label class="control-label" for="nhsNumber">NHS Number</label>
+                            <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.NhsNumber" name="nhsNumber" id="nhsNumber" placeholder="NHS Number"
+                                   validate-on="blur" required required-message="'NHS Number is required'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <label class="control-label" for="firstName">First Name</label>
+                            <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.FirstName" name="firstName" id="firstName" placeholder="First Name"
+                                   validate-on="blur" required required-message="'First Name is required'">
+                        </div>
+                        <div class="col-xs-5">
+                            <label class="control-label" for="firstName">Last Name</label>
+                            <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.SurName" name="surName" id="surName" placeholder="Last Name"
+                                   validate-on="blur" required required-message="'Last Name is required'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-5 selectContainer">
+                            <label class="control-label" for="firstRegisteredDate">Date First Registered</label>
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="firstRegisteredDate" uib-datepicker-popup="{{format}}" ng-model="EditedPerson.FirstRegisteredDate" is-open="datepicker.opened"
+                                       datepicker-options="dateOptions" ng-disabled="EditedPerson.deleted" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                       validate-on="blur" required required-message="'Registered Date is required'" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="EditedPerson.deleted" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-5 selectContainer">
+                                <label class="control-label" for="dateOfBirth">Date of Birth</label>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" name="firstRegisteredDate" uib-datepicker-popup="{{format}}" ng-model="EditedPerson.DateOfBirth" is-open="datepicker2.opened"
+                                           datepicker-options="dateOptions" ng-disabled="EditedPerson.deleted" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                           validate-on="blur" required required-message="'Registered Date is required'" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-disabled="EditedPerson.deleted" ng-click="openDatePicker2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2 selectContainer">
+                            <label class="control-label" for="gender">Gender</label>
+                            <select class="form-control black" name="mySelect" id="mySelect"
+                                    ng-options="option.name for option in data.availableOptions track by option.id"
+                                    ng-model="data.selectedOption"></select>
+                        </div>
+                        <div class="col-xs-3 selectContainer">
+                            <label class="control-label" for="weightKg">Weight KG</label>
+                            <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.WeightKG" name="weightKg" id="weighKg" placeholder="Weight in KG"
+                                   validate-on="blur" required required-message="'Weight is required'">
+                        </div>
+                        <div class="col-xs-3 selectContainer">
+                            <label class="control-label" for="heightCm">Height CM</label>
+                            <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.HeightCM" name="heightCm" id="heightCm" placeholder="Height in CM"
+                                   validate-on="blur" required required-message="'Height is required'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <label class="checkbox" for="adopted">Adopted</label>
+                            <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Adopted" name="adopted" id="adopted"
+                                   validate-on="blur">
+                        </div>
+                        <div class="col-xs-1 selectContainer">
+                            <label class="checkbox" for="twin">Twin</label>
+                            <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Twin" name="twin" id="twin"
+                                   validate-on="blur">
+                        </div>
+                        <div class="col-xs-1 selectContainer">
+                            <label class="checkbox" for="Notes">Deceased</label>
+                            <input type="checkbox" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Deceased" name="deceased" id="deceased"
+                                   validate-on="blur">
+                        </div>
+                        <div ng-show="EditedPerson.Deceased" class="col-xs-5 selectContainer">
+                            <label class="control-label" for="dateOfBirth">Date Deceased</label>
+                            <p class="input-group">
+                                <input type="text" class="form-control" name="deceasedDate" uib-datepicker-popup="{{format}}" ng-model="EditedPerson.DateDeceased" is-open="datepicker3.opened"
+                                       datepicker-options="dateOptions" ng-disabled="EditedPerson.deleted" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                       validate-on="blur" required required-message="'Deceased Date is required'" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="EditedPerson.deleted" ng-click="openDatePicker3($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-10 selectContainer">
+                            <label class="control-label" for="Notes">Notes</label>
+                            <textarea rows="5" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.Notes" id="notes" name="notes" placeholder="General Notes"
+                                      validate-on="blur" required required-message="'Notes are required'"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="primaryEthnicity">Primary Ethnicity</label>
+                                <select ng-model="EditedPerson.EthnicityID" class="form-control black" ng-disabled="EditedPerson.deleted" ng-options="option.ID as option.EthnicityName for option in ethniticies" required></select>
+                                <input type="hidden" name="EthnicityId" ng-disabled="EditedPerson.deleted" ng-value="EditedPerson.EthnicityId" />
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label for="primaryEthnicity">Primary Diagnosis</label>
+                                <select ng-model="EditedPerson.DiagnosisID" class="form-control black" ng-disabled="EditedPerson.deleted" ng-change="GetDiagnosisSubType()" ng-options="option.ID as option.Name for option in diagnoses" required></select>
+                                <input type="hidden" name="DiagnosisId" ng-disabled="EditedPerson.deleted" ng-value="EditedPerson.DiagnosisId" />
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label for="primaryEthnicity">Diagnosis Subtype</label>
+                                <select ng-model="EditedPerson.DiagnosisSubTypeID" ng-disabled="EditedPerson.deleted" class="form-control black" ng-options="option.ID as option.Name for option in diagnosesSubType" required></select>
+                                <input type="hidden" name="DiagnosisSubTypeId" ng-disabled="EditedPerson.deleted" ng-value="EditedPerson.DiagnosisSubTypeId" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <button type="button" class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
+            <button type="button" class="btn btn-primary" ng-show="!newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Update</button>
+            <button type="button" class="btn btn-primary" ng-show="newPerson && !EditedPerson.deleted" ng-click="updatePerson()">Add</button>
+            <button type="button" class="btn btn-primary" ng-show="EditedPerson.deleted" ng-click="updatePerson()">Delete</button>
+        </div>
+    </div>
+</div>
