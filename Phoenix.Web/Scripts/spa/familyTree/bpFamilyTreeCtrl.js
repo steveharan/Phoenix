@@ -3,15 +3,20 @@
 
     app.controller('bpFamilyTreeCtrl', bpFamilyTreeCtrl);
 
-    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'notificationService'];
+    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'notificationService', 'apiService', '$routeParams'];
 
-    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal, notificationService) {
+    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal, notificationService, apiService, $routeParams) {
 
         $scope.index = 10;
         $scope.Message = "";
         $scope.addChild = addChild;
         $scope.addParent = addParent;
         $scope.deletePerson = deletePerson;
+        $scope.loadTree = loadTree;
+        var objParents = "";
+        var objSpouses = "";
+
+        //loadTree();
 
         function deletePerson(personId) {
             apiService.get("/api/persons/details/" + personId, null,
@@ -26,7 +31,6 @@
         function personLoadFailed(response) {
             notificationService.displayError(response.data);
         }
-
 
         function addChild(personId) {
             $scope.addingChild = true;
@@ -45,28 +49,52 @@
                 windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
             }, function () {
-                if ($rootScope.NewlyCreatedPerson != null) {
-                    var id = $rootScope.NewlyCreatedPerson.PersonID;
-                    var index = $scope.myOptions.items.length + 1;
-                    var objParent = [];
-                    var objSpouse = [];
-                    if ($rootScope.NewlyCreatedPerson.RelationshipTypeId !== 3) {
-                        var jsonParent = '[' + personId + ']';
-                        objParent = angular.fromJson(jsonParent);
-                    } else {
-                        var jsonSpouse = '[' + personId + ']';
-                        objSpouse = angular.fromJson(jsonSpouse);
-                    }
-
-                    $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
-                        id: id,
-                        parents: objParent,
-                        spouses: objSpouse,
-                        title: $rootScope.NewlyCreatedPerson.FirstName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
-                        description: $rootScope.NewlyCreatedPerson.Notes
-                    }));
-                }
+                loadTree();
             });
+        }
+
+        function loadTree() {
+            apiService.get('/api/personRelationships/getfamilytree/' + $routeParams.id, null,
+                familyTreeLoadCompleted,
+                familyTreeLoadFailed);
+        }
+
+        function familyTreeLoadCompleted(result) {
+            $scope.loadingTree = false;
+            $rootScope.items = [];
+            $scope.myOptions.items = [];
+            var index = 0;
+            angular.forEach(result.data.Items, function (value, key) {
+                objParents = angular.fromJson(value.parents);
+                objSpouses = angular.fromJson(value.spouses);
+                var colour = "";
+                if (value.gender == 'F') {
+                    colour = primitives.common.Colors.LavenderBlush;
+                } else {
+                    colour = primitives.common.Colors.RoyalBlue;
+                }
+
+                $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
+                    id: value.id,
+                    title: value.title,
+                    description: value.description,
+                    parents: objParents,
+                    spouses: objSpouses,
+                    itemTitleColor: colour,
+                    groupTitle: value.gender,
+                    groupTitleColor: colour,
+                    deceased: value.deceased,
+                    gender: value.gender,
+                    dob: value.dateOfBirth,
+                    registered: value.firstRegisteredDate
+                }));
+                index++;
+            });
+            $scope.myOptions.cursorItem = 1;
+        }
+
+        function familyTreeLoadFailed(response) {
+            notificationService.displayError(response.data);
         }
 
         function addParent(personId) {
@@ -85,27 +113,7 @@
                 windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
             }, function () {
-                if ($rootScope.NewlyCreatedPerson != null) {
-                    var id = $rootScope.NewlyCreatedPerson.PersonID;
-                    var index = $scope.myOptions.items.length + 1;
-                    var objParent = [];
-                    var objSpouse = [];
-                    if ($rootScope.NewlyCreatedPerson.RelationshipTypeId != 3) {
-                        var jsonParent = '[' + personId + ']';
-                        objParent = angular.fromJson(jsonParent);
-                    } else {
-                        var jsonSpouse = '[' + personId + ']';
-                        objSpouse = angular.fromJson(jsonSpouse);
-                    }
-
-                    $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
-                        id: id,
-                        parents: objParent,
-                        spouses: objSpouse,
-                        title: $rootScope.NewlyCreatedPerson.FirstName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
-                        description: $rootScope.NewlyCreatedPerson.Notes
-                    }));
-                }
+                loadTree();
             });
         }
 
@@ -119,7 +127,8 @@
         options.defaultTemplateName = "contactTemplate";
  
         $scope.myOptions = options;
- 
+        $rootScope.myOptions = options;
+
         $scope.setCursorItem = function (item) {
             $scope.myOptions.cursorItem = item;
         };
@@ -196,13 +205,11 @@
                     var cursorItem = chart.famDiagram("option", "cursorItem");
                     if (cursorItem != newValue) {
                         chart.famDiagram("option", { cursorItem: newValue });
-//                        chart.famDiagram("update", primitives.famdiagram.UpdateMode.Refresh);
                     }
                 });
 
                 scope.$watchCollection('options.items', function (items) {
                     chart.famDiagram("option", { items: items });
-//                    chart.famDiagram("update", primitives.famdiagram.UpdateMode.Refresh);
                 });
 
                 function onTemplateRender(event, data) {
@@ -266,8 +273,4 @@
             };
         });
     });
-
-
-
-
 })(angular.module('phoenix'));

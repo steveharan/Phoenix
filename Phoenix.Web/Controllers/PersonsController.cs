@@ -29,7 +29,27 @@ namespace Phoenix.Web.Controllers
             _personRepository = personRepository;
             _personRelationshipRepository = personRelationshipRepository;
         }
+        [HttpGet]
+        [Route("{id:int}")]
+        public HttpResponseMessage Get(HttpRequestMessage request, int? id, string filter)
+        {
+            filter = filter.ToLower().Trim();
 
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var persons = _personRepository.FindBy(p => p.FamilyId == id && p.Deleted == false)
+                    .Where(p => p.FirstName.ToLower().Contains(filter) ||
+                    p.SurName.ToLower().Contains(filter)).ToList();
+
+                var personsVm = Mapper.Map<IEnumerable<Person>, IEnumerable<PersonViewModel>>(persons);
+
+                response = request.CreateResponse<IEnumerable<PersonViewModel>>(HttpStatusCode.OK, personsVm);
+
+                return response;
+            });
+        }
         [HttpGet]
         [Route("search/{id:int}/{page:int=0}/{pageSize=10}/{filter?}")]
         public HttpResponseMessage Search(HttpRequestMessage request, int id, int? page, int? pageSize, string filter = null)
@@ -126,6 +146,14 @@ namespace Phoenix.Web.Controllers
                 {
                     Person _person = _personRepository.GetSingle(person.ID);
                     _person.UpdatePerson(person);
+                    if (_person.Deleted)
+                    {
+                        var personRelationships = _personRelationshipRepository.FindBy(p => p.RelationWithPersonId == person.ID).ToList();
+                        foreach (var personRelationship in personRelationships)
+                        {
+                            _personRelationshipRepository.Delete(personRelationship);
+                        }
+                    }
                     _unitOfWork.Commit();
 
                     response = request.CreateResponse(HttpStatusCode.OK);
@@ -164,7 +192,6 @@ namespace Phoenix.Web.Controllers
                         response = request.CreateResponse<PersonViewModel>(HttpStatusCode.OK, person);
                     }
                 }
-
                 return response;
             });
         }

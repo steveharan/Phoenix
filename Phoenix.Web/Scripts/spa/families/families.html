@@ -5,17 +5,6 @@
     }
 </style>
 
-	<!--<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle uib experiments</button>
-	<hr>
-	<div uib-collapse="isCollapsed">
-        <div class="well well-lg">Some content</div>
-	</div>
-
-<button uib-popover="{{dynamicPopover.content}}" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-default">Dynamic Popover</button>
-<button uib-popover="I appeared on mouse enter!" popover-trigger="mouseenter" type="button" class="btn btn-default">Mouseenter</button>
-<button uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-default">Popover With Template</button>-->
-
-
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -36,51 +25,52 @@
         </div>
         <div class="panel-body" ng-hide="showTableFormat">
             <div class="row">
-                <div class="col-sm-6" ng-repeat="family in Families | filter:filterFamilies">
-                    <div class="panel panel-default" >
-                        <div class="panel-heading" style="font-weight:bolder;" >
-                            <strong>The {{family.FamilyName}} Family ({{family.Persons}} family members)</strong><br />
-                        </div>
-                        <div class="panel-warning" ng-click="callPersons(family)" onmouseover="" style="cursor: pointer;" >
-                            <div class="table-responsive">
-                                <table class="table table-condensed shortMargin">
-                                    <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Family Reference Number:</td>
-                                        <td class="shortPadding"><i>{{family.FamilyIdentifier}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Date First Registered:</td>
-                                        <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Primary Ethnicity:</td>
-                                        <td class="shortPadding"><i>{{family.Ethnicity}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Notes:</td>
-                                        <td class="shortPadding"><i>{{family.Notes}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis:</td>
-                                        <td class="shortPadding"><i>{{family.Diagnosis}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis SubType:</td>
-                                        <td class="shortPadding"><i>{{family.DiagnosisSubType}}</i></td>
-                                    </tr>
-                                </table>
+                <!--<div class="col-sm-6" ng-repeat="family in Families | filter:filterFamilies">-->
+                <div class="col-sm-6" ng-repeat="family in Families">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="font-weight:bolder;">
+                                <strong>The {{family.FamilyName}} Family ({{family.Persons}} family members)</strong><br />
                             </div>
-                        </div>
-                        <div class="panel-footer clearfix">
-                            <div class="pull-left">
-                                <buton uib-popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-primary btn-xs" ng-click="updateFamily(family);">Edit <i class="fa fa-pencil pull-right"></i></buton>
+                            <div class="panel-warning" ng-click="callPersons(family)" onmouseover="" style="cursor: pointer;">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed shortMargin">
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Family Reference Number:</td>
+                                            <td class="shortPadding"><i>{{family.FamilyIdentifier}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Date First Registered:</td>
+                                            <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Primary Ethnicity:</td>
+                                            <td class="shortPadding"><i>{{family.Ethnicity}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Notes:</td>
+                                            <td class="shortPadding"><i>{{family.Notes}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis:</td>
+                                            <td class="shortPadding"><i>{{family.Diagnosis}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis SubType:</td>
+                                            <td class="shortPadding"><i>{{family.DiagnosisSubType}}</i></td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="pull-right">
-                                <buton uib-popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-danger btn-xs" ng-click="deleteFamily(family);">Delete <i class="fa fa-remove pull-right"></i></buton>
+                            <div class="panel-footer clearfix">
+                                <div class="pull-left">
+                                    <buton uib-popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-primary btn-xs" ng-click="updateFamily(family);">Edit <i class="fa fa-pencil pull-right"></i></buton>
+                                </div>
+                                <div class="pull-right">
+                                    <buton uib-popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-danger btn-xs" ng-click="deleteFamily(family);">Delete <i class="fa fa-remove pull-right"></i></buton>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         <div class="panel-body" ng-hide="!showTableFormat">
@@ -96,13 +86,14 @@
                     <th>Diagnosis Subtype</th>
                     <th>Members</th>
                 </tr>
-                <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
+                <!--<tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">-->
+                <tr ng-repeat="family in Families" ng-class="{'selected':$index == selectedRow}">
                     <td>
                         <button uib-popover="Click to edit {{family.FamilyName}} family details" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="updateFamily(family);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
-                        <button uib-popover="Click to delete {{family.FamilyName}} family" popover-trigger="mouseenter" type="button" class="btn btn-danger btn-sm" 
-                                 ng-click="deleteFamily(family);">
+                        <button uib-popover="Click to delete {{family.FamilyName}} family" popover-trigger="mouseenter" type="button" class="btn btn-danger btn-sm"
+                                ng-click="deleteFamily(family);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>

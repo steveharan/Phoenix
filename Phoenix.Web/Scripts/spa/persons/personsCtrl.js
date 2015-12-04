@@ -153,6 +153,8 @@
         }
 
         function familyTreeLoadCompleted(result) {
+            console.log('tree load complete');
+            console.log(result.data.Items);
             $scope.loadingTree = false;
             apiItems = [];
             angular.forEach(result.data.Items, function (value, key) {

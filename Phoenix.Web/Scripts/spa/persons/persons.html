@@ -146,26 +146,30 @@
                             </button>
                             <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
                                 <li role="menuitem">
-                                    <button uib-popover="Click to edit {{person.FirstName}}" popover-trigger="mouseenter"
-                                            popover-placement="right"
-                                            type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </button>
-                                    <button uib-popover="Click to manage family relationships for {{person.FirstName}}" popover-trigger="mouseenter"
-                                            popover-placement="right"
-                                            type="button" class="btn btn-warning btn-sm"
-                                            ng-click="manageRelations(person);">
-                                        <span class="glyphicon glyphicon-tree-conifer"></span>
-                                    </button>
-                                    <button uib-popover="Click to delete {{person.FirstName}}" popover-trigger="mouseenter"
-                                            popover-placement="right"
-                                            type="button" class="btn btn-danger btn-sm"
-                                            ng-click="deletePerson(person);">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
+                                    <div style="align-content: center">
+                                        <button uib-popover="Click to edit {{person.FirstName}}" popover-trigger="mouseenter"
+                                                popover-placement="right"
+                                                type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </button>
+                                        <button uib-popover="Click to manage family relationships for {{person.FirstName}}" popover-trigger="mouseenter"
+                                                popover-placement="right"
+                                                type="button" class="btn btn-warning btn-sm"
+                                                ng-click="manageRelations(person);">
+                                            <span class="glyphicon glyphicon-tree-conifer"></span>
+                                        </button>
+                                        <button uib-popover="Click to delete {{person.FirstName}}" popover-trigger="mouseenter"
+                                                popover-placement="right"
+                                                type="button" class="btn btn-danger btn-sm"
+                                                ng-click="deletePerson(person);">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </div>
                                 </li>
                                 <li class="divider"></li>
-                                <li role="menuitem"><a href="#">Event</a></li>
+                                <li role="menuitem"><a href="#">Create New Test</a></li>
+                                <li class="divider"></li>
+                                <li role="menuitem"><a href="#">List Tests</a></li>
                             </ul>
                         </div>
                     </td>

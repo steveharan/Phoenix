@@ -16,7 +16,6 @@ namespace Phoenix.Web.Models
         public int RelationWithPersonId { get; set; }
         public string RelationshipName { get; set; }
         public string RelationshipTypeName { get; set; }
-
         public int RelationshipTypeId { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

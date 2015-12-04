@@ -39,23 +39,34 @@ namespace Phoenix.Web.Controllers
             {
                 HttpResponseMessage response = null;
                 List<Family> families = null;
+                List<Family> familiesWithPeople = null;
                 int totalFamilies = new int();
 
                 if (!string.IsNullOrEmpty(filter))
                 {
                     filter = filter.Trim().ToLower();
 
-                    families = _familyRepository.FindBy(c => (c.FamilyName.ToLower().Contains(filter))
-                                                        && c.Deleted == false)
+                    families = _familyRepository.FindBy(c => (c.FamilyName.ToLower().Contains(filter) 
+                                        || c.FamilyIdentifier.ToLower().Contains(filter))
+                                        && c.Deleted == false)
                         .OrderByDescending(c => c.FamilyName)
                         .Skip(currentPage * currentPageSize)
                         .Take(currentPageSize)
                         .ToList();
 
+                    //familiesWithPeople = _familyRepository.FindBy(c => c.Deleted == false).Where(p => p.Persons.Any(n => n.FirstName.Contains(filter)))
+                    //    .OrderByDescending(c => c.FamilyName)
+                    //    .Skip(currentPage * currentPageSize)
+                    //    .Take(currentPageSize)
+                    //    .ToList();
+
                     totalFamilies = _familyRepository
-                        .FindBy(c => c.FamilyName.ToLower().Contains(filter)
-                                                        && c.Deleted == false)
-                        .Count(c => c.FamilyName.ToLower().Contains(filter));
+                        .FindBy(c => (c.FamilyName.ToLower().Contains(filter)
+                                        || c.FamilyIdentifier.ToLower().Contains(filter))
+                                        && c.Deleted == false)
+                        .Count(c => (c.FamilyName.ToLower().Contains(filter)
+                                        || c.FamilyIdentifier.ToLower().Contains(filter))
+                                        && c.Deleted == false);
                 }
                 else
                 {

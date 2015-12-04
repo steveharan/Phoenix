@@ -36,6 +36,8 @@
                                     ng-options="option.name for option in relations.availableOptions track by option.id"
                                     ng-model="relations.selectedOption"></select>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xs-5">
                             <label class="control-label" for="nhsNumber">NHS Number</label>
                             <input type="text" class="form-control" ng-disabled="EditedPerson.deleted" ng-model="EditedPerson.NhsNumber" name="nhsNumber" id="nhsNumber" placeholder="NHS Number"
