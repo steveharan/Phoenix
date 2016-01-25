@@ -6,8 +6,10 @@
     personsCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService', '$location'];
 
     function personsCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService, $location) {
+
         $scope.pageClass = 'page-persons';
         $scope.loadingPersons = true;
+        $scope.loadingTree = true;
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.Persons = [];
@@ -108,8 +110,10 @@
                 windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
                 clearSearch();
+                $scope.loadTree();
             }, function () {
                 clearSearch();
+                $scope.loadTree();
             });
         }
 
@@ -138,70 +142,21 @@
         }
 
         function callFamilyTree(person) {
-            //$rootScope.itemsHard = [
-            //    new primitives.famdiagram.ItemConfig({
-            //        id: 0,
-            //        title: "Scott Aasrud",
-            //        description: "Root",
-            //        phone: "1 (416) 001-4567",
-            //        email: "scott.aasrud@mail.com",
-            //        image: "demo/images/photos/a.png",
-            //        itemTitleColor: primitives.common.Colors.RoyalBlue
-            //    }),
-            //     new primitives.famdiagram.ItemConfig({
-            //         id: 10,
-            //         title: "Scott Aasrud 2",
-            //         description: "Root",
-            //         phone: "1 (416) 001-4567",
-            //         email: "scott.aasrud@mail.com",
-            //         image: "demo/images/photos/a.png",
-            //         itemTitleColor: primitives.common.Colors.RoyalBlue
-            //     }),
-            //    new primitives.famdiagram.ItemConfig({
-            //        id: 1,
-            //        parents: [0, 10],
-            //        title: "Ted Lucas",
-            //        description: "Left",
-            //        phone: "1 (416) 002-4567",
-            //        email: "ted.lucas@mail.com",
-            //        image: "demo/images/photos/b.png",
-            //        itemTitleColor: primitives.common.Colors.RoyalBlue
-            //    }),
-            //    new primitives.famdiagram.ItemConfig({
-            //        id: 2,
-            //        parents: [0, 10],
-            //        title: "Joao Stuger",
-            //        description: "Right",
-            //        phone: "1 (416) 003-4567",
-            //        email: "joao.stuger@mail.com",
-            //        image: "demo/images/photos/c.png",
-            //        itemTitleColor: primitives.common.Colors.RoyalBlue
-            //    }),
-            //    new primitives.famdiagram.ItemConfig({
-            //        id: 3,
-            //        parents: [2],
-            //        title: "Hidden Node",
-            //        phone: "1 (416) 004-4567",
-            //        email: "hidden.node@mail.com",
-            //        description: "Dotted Node",
-            //        image: "demo/images/photos/e.png",
-            //        itemTitleColor: primitives.common.Colors.PaleVioletRed
-            //    })
-            //];
-
-            //            loadTree();
             $location.path("/familyTree/" + $scope.FamilyId);
-
-            //$location.path("/familyTree/" + $scope.FamilyId);
         }
 
         function loadTree() {
+                $scope.loadingTree = true;
                 apiService.get('/api/personRelationships/getfamilytree/' + $routeParams.id, null,
                 familyTreeLoadCompleted,
                 familyTreeLoadFailed);
         }
 
         function familyTreeLoadCompleted(result) {
+            console.log('tree load complete');
+            console.log(result.data.Items);
+            $scope.loadingTree = false;
+            apiItems = [];
             angular.forEach(result.data.Items, function (value, key) {
                 objParents = angular.fromJson(value.parents);
                 objSpouses = angular.fromJson(value.spouses);
@@ -222,13 +177,13 @@
                     groupTitle: value.gender,
                     groupTitleColor: colour,
                     deceased: value.deceased,
-                    gender: value.gender
+                    gender: value.gender,
+                    dob: value.dateOfBirth,
+                    registered: value.firstRegisteredDate
                 });
                 apiItems.push(apiItem);
             });
             $rootScope.items = apiItems;
-            console.log('load complete, tree is:');
-            console.log($rootScope.items);
         }
 
         function familyTreeLoadFailed(response) {

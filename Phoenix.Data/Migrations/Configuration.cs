@@ -30,7 +30,7 @@ namespace Phoenix.Data.Migrations
 
             //context.RelationshipTypeSet.AddOrUpdate(GenerateRelationTypes());
 
-            context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
+            //context.RoleSet.AddOrUpdate(r => r.Name, GenerateRoles());
             //context.UserSet.AddOrUpdate(u => u.Email, new User[]{
             //    new User()
             //    {

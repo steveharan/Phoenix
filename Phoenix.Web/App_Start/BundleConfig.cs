@@ -36,7 +36,11 @@ namespace Phoenix.Web.App_Start
                 "~/Scripts/Vendors/jquery.fancybox.js",
                 "~/Scripts/Vendors/jquery.fancybox-media.js",
                 "~/Scripts/Vendors/loading-bar.js",
-                "~/Scripts/Vendors/primitives.min.js"
+                "~/Scripts/Vendors/primitives.min.js",
+                "~/Scripts/Vendors/TV4.js",
+                "~/Scripts/Vendors/object-path/objectpath.js",
+                "~/Scripts/Vendors/angular-schema-form/dist/schema-form.js",
+                "~/Scripts/Vendors/angular-bootstrap-decorator/bootstrap-decorator.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(

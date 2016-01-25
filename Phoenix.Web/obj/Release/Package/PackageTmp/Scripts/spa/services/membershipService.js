@@ -22,7 +22,6 @@
         }
 
         function register(user, completed) {
-            alert('register');
             apiService.post('/api/account/register', user,
             completed,
             registrationFailed);

@@ -1,6 +1,5 @@
 ﻿(function (app) {
     'use strict';
-
     app.controller('personEditCtrl', personEditCtrl);
 
     personEditCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', '$uibModalInstance', '$timeout', 'apiService', 'notificationService'];
@@ -111,7 +110,7 @@
         function loadEthnicities() {
             apiService.get("/api/data/ethnicity", null,
                 ethnicitiesLoadCompleted,
-                ethnicitiesLoadFailed)
+                ethnicitiesLoadFailed);
         }
 
         function diagnosesLoadCompleted(response) {
@@ -140,13 +139,29 @@
             GetDiagnosisSubType();
         }
 
+        function loadRelatedPerson(personId) {
+            apiService.get("/api/persons/details/" + personId, null,
+                relatedPersonLoadCompleted,
+                relatedPersonLoadFailed);
+        }
+
+        function relatedPersonLoadCompleted(response) {
+            $scope.RelatedPerson = response.data;
+        }
+
+        function relatedPersonLoadFailed(response) {
+            notificationService.displayError(response.data);
+        }
+
         function loadData() {
+            if ($scope.addRelationToPersonId != null) {
+                loadRelatedPerson($scope.addRelationToPersonId);
+            }
             loadEthnicities();
             loadDiagnoses();
         }
 
         function GetDiagnosisSubType() {
-
             var config = {
                 params: {
                     diagnosisId: $scope.EditedPerson.DiagnosisID
@@ -155,7 +170,7 @@
 
             apiService.get("/api/data/diagnosisSubType", config,
                 diagnosesSubTypeLoadCompleted,
-                diagnosesSubTypeLoadFailed)
+                diagnosesSubTypeLoadFailed);
         }
 
         function updatePerson() {
@@ -171,9 +186,15 @@
                 $scope.EditedPerson.DateDeceased = now;
                 $scope.EditedPerson.Gender = $scope.data.selectedOption.id;
                 if ($scope.addRelationToPersonId != null) {
-                    apiService.post('/api/persons/create/' + $scope.addRelationToPersonId + '/' + $scope.relations.selectedOption.id, $scope.EditedPerson,
-                        updatePersonCompleted,
-                        updatePersonLoadFailed);
+                    if ($scope.addingChild) {
+                        apiService.post('/api/persons/create/' + $scope.addRelationToPersonId + '/' + $scope.relations.selectedOption.id, $scope.EditedPerson,
+                            updatePersonCompleted,
+                            updatePersonLoadFailed);
+                    } else {
+                        apiService.post('/api/persons/createparent/' + $scope.addRelationToPersonId + '/' + $scope.relations.selectedOption.id, $scope.EditedPerson,
+                            updatePersonCompleted,
+                            updatePersonLoadFailed);
+                    }
                 } else {
                     apiService.post('/api/persons/create/', $scope.EditedPerson,
                         updatePersonCompleted,

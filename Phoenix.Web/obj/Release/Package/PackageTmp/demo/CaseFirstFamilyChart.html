@@ -15,37 +15,69 @@
     <script type='text/javascript'>//<![CDATA[ 
         $(window).load(function () {
             var options = new primitives.famdiagram.Config();
+            var items = [];
+            var ajaxitems = [];
 
-            var items = [
-                { id: 1, spouses: [2], title: "Thomas Williams", label: "Thomas Williams", description: "1, 1st husband", image: "demo/images/photos/t.png" },
-                { id: 2, spouses: [], title: "Mary Spencer", label: "Mary Spencer", description: "2, The Mary",image: "demo/images/photos/m.png" },
-                { id: 3, spouses: [2], title: "David Kirby", label: "David Kirby", description: "3, 2nd Husband", image: "demo/images/photos/d.png" },
-                { id: 4, parents: [1, 2], title: "Brad Williams", label: "Brad Williams", description: "4, 1st son", image: "demo/images/photos/b.png" },
-                { id: 5, parents: [2, 3], spouses: [6, 7], title: "Mike Kirby", label: "Mike Kirby", description: "5, 2nd son, having 2 spouses", image: "demo/images/photos/m.png"},
-                { id: 6, title: "Lynette Maloney", label: "Lynette Maloney", description: "5, Spouse I", image: "demo/images/photos/m.png" },
-                { id: 7, title: "Sara Kemp", label: "Sara Kemp", description: "5, Spouse II :-)", image: "demo/images/photos/s.png" },
-                { id: 8, parents: [7], title: "Leon Kemp", label: "Leon Kemp", description: "5, Orphant", image: "demo/images/photos/l.png" }
-            ];
+            //var items = [
+            //    { id: 1, spouses: [2], title: "Thomas Williams", label: "Thomas Williams", description: "1, 1st husband", image: "demo/images/photos/t.png" },
+            //    { id: 2, spouses: [], title: "Mary Spencer", label: "Mary Spencer", description: "2, The Mary",image: "demo/images/photos/m.png" },
+            //    { id: 3, spouses: [2], title: "David Kirby", label: "David Kirby", description: "3, 2nd Husband", image: "demo/images/photos/d.png" },
+            //    { id: 4, parents: [1, 2], title: "Brad Williams", label: "Brad Williams", description: "4, 1st son", image: "demo/images/photos/b.png" },
+            //    { id: 5, parents: [2, 3], spouses: [6, 7], title: "Mike Kirby", label: "Mike Kirby", description: "5, 2nd son, having 2 spouses", image: "demo/images/photos/m.png"},
+            //    { id: 6, title: "Lynette Maloney", label: "Lynette Maloney", description: "5, Spouse I", image: "demo/images/photos/m.png" },
+            //    { id: 7, title: "Sara Kemp", label: "Sara Kemp", description: "5, Spouse II :-)", image: "demo/images/photos/s.png" },
+            //    { id: 8, parents: [7], title: "Leon Kemp", label: "Leon Kemp", description: "5, Orphant", image: "demo/images/photos/l.png" }
+            //];
 
-            options.items = items;
-            options.cursorItem = 2;
-            options.linesWidth = 1;
-            options.linesColor = "black";
-            options.hasSelectorCheckbox = primitives.common.Enabled.False;
-            options.normalLevelShift = 20;
-            options.dotLevelShift = 20;
-            options.lineLevelShift = 20;
-            options.normalItemsInterval = 10;
-            options.dotItemsInterval = 10;
-            options.lineItemsInterval = 10;
-            options.arrowsDirection = primitives.common.GroupByType.Parents;
 
-            jQuery("#basicdiagram").famDiagram(options);
-        });//]]>  
+            $.ajax({
+                    url: "/api/personRelationships/getfamilytree/1",
+                })
+                .done(function (data) {
+                    ajaxitems = data.Items;
+                    options.items = ajaxitems;
+                    options.cursorItem = 2;
+                    options.linesWidth = 1;
+                    options.linesColor = "black";
+                    options.hasSelectorCheckbox = primitives.common.Enabled.True;
+                    options.normalLevelShift = 20;
+                    options.dotLevelShift = 20;
+                    options.lineLevelShift = 20;
+                    options.normalItemsInterval = 10;
+                    options.dotItemsInterval = 10;
+                    options.lineItemsInterval = 10;
+                    options.arrowsDirection = primitives.common.GroupByType.parents;
+                    jQuery("#basicdiagram").famDiagram(options);
+
+                });
+
+            //var items = [
+            //    { id: 1, parents: [5, 6], title: "Steve Haran", label: "Steve", description: "Desc" },
+            //    { id: 2, parents: [7, 8], title: "Maite Tome Esteban", label: "Maite", description: "Desc" },
+            //    { id: 3, parents: [1, 2], title: "Pablo Haran Tome", label: "Pablo", description: "Desc"},
+            //    { id: 4, parents: [1, 2], title: "Elena Haran Tome", label: "Elena", description: "Desc"},
+            //    { id: 5, title: "Tony Haran", label: "Tone", description: "Desc"},
+            //    { id: 6, title: "Patricia Haran", label: "Tone", description: "Desc" },
+            //    { id: 7, title: "Camilo", label: "Camilo", description: "Desc" },
+            //    { id: 8, title: "Mj", label: "Mj", description: "Desc" },
+            //    { id: 9, parents: [5, 6], title: "Wendy Allen", label: "Wendy", description: "Desc" },
+            //    { id: 10, title: "Tim Allen", label: "Wendy", description: "Desc" },
+            //    { id: 11, parents: [9, 10], title: "Jack Allen", label: "Jack", description: "Desc" },
+            //    { id: 12, parents: [9, 10], title: "Sophie Allen", label: "Sophie", description: "Desc" },
+            //    { id: 13, parents: [7, 8], title: "Mari Jose", label: "Mari Jose", description: "Desc" },
+            //    { id: 14, spouses: [13], title: "Mari Jose Future Husband", label: "Mari Jose Husband", description: "Desc" }
+            //];
+
+                //var items = [{ "Id": 1, "Parents": "[13]", "Title": "Steve Haran", "Label": "Haran", "Description": "Father" }, { "Id": 2, "Parents": "[1, 11]", "Title": "Pablo Haran", "Label": "Haran", "Description": "Mother" }, { "Id": 11, "Parents": "[]", "Title": "Maite Tome Esteban", "Label": "Tome Esteban", "Description": null }, { "Id": 12, "Parents": "[1, 11]", "Title": "Elena Haran Tome", "Label": "Haran Tome", "Description": "Mother" }, { "Id": 13, "Parents": "[]", "Title": "Anthony Haran", "Label": "Haran", "Description": null }, { "Id": 14, "Parents": "[]", "Title": "Patricia Haran", "Label": "Haran", "Description": null }];
+
+
+
+
+        });
 
     </script>
 </head>
 <body>
-    <div id="basicdiagram" style="width: 640px; height: 480px; border-style: dotted; border-width: 1px;" />
+    <div id="basicdiagram" style="width: 1000px; height: 800px; border-style: dotted; border-width: 1px;" />
 </body>
 </html>

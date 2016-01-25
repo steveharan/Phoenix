@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -25,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -488,6 +490,7 @@
     <Content Include="demopedd3\LICENSE" />
     <Content Include="demopedd3\package.json" />
     <Content Include="demopedd3\README.md" />
+    <None Include="Properties\PublishProfiles\phoenixdb.pubxml" />
     <None Include="Properties\PublishProfiles\phoenixsh.pubxml" />
     <Content Include="Scripts\bower_components\materialize\font\material-design-icons\Material-Design-Icons.eot" />
     <Content Include="Scripts\bower_components\materialize\font\material-design-icons\Material-Design-Icons.ttf" />
@@ -1035,9 +1038,78 @@
     <Content Include="Scripts\vendors\angular-animate.js" />
     <Content Include="Scripts\vendors\angular-animate.min.js" />
     <Content Include="Scripts\vendors\angular-base64.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\.gitignore" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\bootstrap-decorator.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\bootstrap-decorator.min.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\bootstrap-example.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\custom-validators.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulpfile.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulp\index.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulp\tasks\bootstrap-datepicker.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulp\tasks\default.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulp\tasks\jscs.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulp\tasks\minify.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulp\tasks\protractor.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\gulp\tasks\watch.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\actions-trcl.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\actions.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\array.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\bootstrap-decorator.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\checkbox.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\checkboxes.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\default.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\fieldset.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\help.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\radio-buttons.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\radios-inline.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\radios.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\section.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\select.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\submit.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\tabarray.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\tabs.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\src\textarea.html" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\test\protractor\conf.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\test\protractor\specs\custom-validation.js" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\test\protractor\specs\validation-messages.js" />
     <Content Include="Scripts\vendors\angular-cookies.js" />
     <Content Include="Scripts\vendors\angular-file-upload.js" />
     <Content Include="Scripts\vendors\angular-route.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\.gitignore" />
+    <Content Include="Scripts\vendors\angular-schema-form\dist\schema-form.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\dist\schema-form.min.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\examples\builder.html" />
+    <Content Include="Scripts\vendors\angular-schema-form\examples\builder2.html" />
+    <Content Include="Scripts\vendors\angular-schema-form\gulpfile.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\gulp\index.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\gulp\tasks\default.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\gulp\tasks\jscs.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\gulp\tasks\minify.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\gulp\tasks\watch.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\jslicense.html" />
+    <Content Include="Scripts\vendors\angular-schema-form\karma.conf.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\array.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\changed.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\field.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\message.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\newArray.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\schema-form.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\schema-validate.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\module.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\services\builder.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\services\decorators.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\services\errors.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\services\schema-form.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\services\Select.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\services\validator.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\sfPath.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\test\directives\schema-form-test.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\test\directives\sf-messages-test.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\test\lib\angular-mocks.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\test\lib\angular.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\test\services\decorators-test.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\test\services\messages-test.js" />
+    <Content Include="Scripts\vendors\angular-schema-form\test\services\schema-form-test.js" />
     <Content Include="Scripts\vendors\angular-validator.js" />
     <Content Include="Scripts\vendors\angular.js" />
     <Content Include="Scripts\vendors\bootstrap.js" />
@@ -1072,10 +1144,14 @@
     <Content Include="Scripts\vendors\loading-bar.js" />
     <Content Include="Scripts\vendors\modernizr.js" />
     <Content Include="Scripts\vendors\morris.js" />
+    <Content Include="Scripts\vendors\object-path\index.js" />
+    <Content Include="Scripts\vendors\object-path\objectpath.js" />
+    <Content Include="Scripts\vendors\object-path\test.js" />
     <Content Include="Scripts\vendors\primitives.min.js" />
     <Content Include="Scripts\vendors\raphael.js" />
     <Content Include="Scripts\vendors\respond.src.js" />
     <Content Include="Scripts\vendors\toastr.js" />
+    <Content Include="Scripts\vendors\TV4.js" />
     <Content Include="Scripts\vendors\ui-bootstrap-tpls-0.13.1.js" />
     <Content Include="Scripts\vendors\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\vendors\ui-bootstrap-tpls.min.js" />
@@ -1151,6 +1227,43 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\vendors\angular-animate.min.js.map" />
+    <Content Include="Scripts\vendors\angular-schema-form\.coveralls.yml" />
+    <Content Include="Scripts\vendors\angular-schema-form\.jscs.json" />
+    <Content Include="Scripts\vendors\angular-schema-form\.jshintrc" />
+    <Content Include="Scripts\vendors\angular-schema-form\.npmignore" />
+    <Content Include="Scripts\vendors\angular-schema-form\.travis.yml" />
+    <Content Include="Scripts\vendors\angular-schema-form\bower.json" />
+    <Content Include="Scripts\vendors\angular-schema-form\CHANGELOG" />
+    <Content Include="Scripts\vendors\angular-schema-form\CONTRIBUTING.md" />
+    <Content Include="Scripts\vendors\angular-schema-form\dist\WHERE_IS_BOOTSTRAP_DECORATOR.md" />
+    <Content Include="Scripts\vendors\angular-schema-form\docs\extending.md" />
+    <Content Include="Scripts\vendors\angular-schema-form\docs\index.md" />
+    <Content Include="Scripts\vendors\angular-schema-form\docs\knownlimitations.md" />
+    <Content Include="Scripts\vendors\angular-schema-form\LICENSE" />
+    <Content Include="Scripts\vendors\angular-schema-form\package.json" />
+    <Content Include="Scripts\vendors\angular-schema-form\README.md" />
+    <Content Include="Scripts\vendors\angular-schema-form\src\directives\WHERE_ARE_THE_DECORATORS.md" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\.jscsrc" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\bower.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\array.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\complex-keys.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\conditional-required.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\grid.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\simple-oneOf.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\simple.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\sink.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\tabarray.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\titlemaps.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\examples\data\types.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\package.json" />
+    <Content Include="Scripts\vendors\angular-bootstrap-decorator\README.md" />
+    <Content Include="Scripts\vendors\object-path\.npmignore" />
+    <Content Include="Scripts\vendors\object-path\.travis.yml" />
+    <Content Include="Scripts\vendors\object-path\bower.json" />
+    <Content Include="Scripts\vendors\object-path\component.json" />
+    <Content Include="Scripts\vendors\object-path\LICENSE" />
+    <Content Include="Scripts\vendors\object-path\package.json" />
+    <Content Include="Scripts\vendors\object-path\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1185,11 +1298,18 @@
       <Name>Phoenix.Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\typings\object-path\object-path.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

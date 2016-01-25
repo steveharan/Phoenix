@@ -1,0 +1,44 @@
+{
+  "name": "object-path",
+  "description": "Access deep properties using a path",
+  "version": "0.9.3",
+  "author": {
+    "name": "Mario Casciaro"
+  },
+  "homepage": "https://github.com/mariocasciaro/object-path",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mariocasciaro/object-path.git"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "chai": "^2.2.0",
+    "mocha-lcov-reporter": "^0.0.2",
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.13"
+  },
+  "scripts": {
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha test.js --report html -- -R spec"
+  },
+  "keywords": [
+    "deep",
+    "path",
+    "access",
+    "bean",
+    "get",
+    "property",
+    "dot",
+    "prop",
+    "object",
+    "obj",
+    "notation",
+    "segment",
+    "value",
+    "nested",
+    "key"
+  ],
+  "license": "MIT"
+}

@@ -4,69 +4,73 @@
         color: white;
     }
 </style>
-<hr />
+
 <div class="row">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Families</h3>
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><strong>Family Tree View</strong></h3>
             <div class="input-group">
                 <input id="inputSearchFamilies" type="search" ng-model="filterFamilies" class="form-control shortInputSearch" placeholder="Filter, search families..">
                 <div class="input-group-btn">
-                    <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
-                    <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <button class="btn btn-info" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-info" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <button class="btn btn-info" ng-click="updateFamily();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="!showTableFormat"><i class="glyphicon glyphicon-tasks"></i></button>
+                    <button class="btn btn-info" ng-click="toggleView()" ng-show="showTableFormat"><i class="glyphicon glyphicon-calendar"></i></button>
                 </div>
-
             </div>
             <div class="text-center">
                 <family-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></family-pager>
             </div>
         </div>
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="!showTableFormat">Show Table View</button>
-        <button class="btn btn-default btn-xs" aria-label="Left Align" ng-click="toggleView()" ng-show="showTableFormat">Show Card View</button>
-        <button class="btn btn-primary btn-xs" ng-click="openEditDialog();">Add Family<i class="fa fa-pencil pull-right"></i></button>
         <div class="panel-body" ng-hide="showTableFormat">
             <div class="row">
-                <div class="col-sm-6" ng-repeat="family in Families | filter:filterFamilies">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong>{{family.FamilyName}}</strong><br />
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-condensed shortMargin">
-                                    <tr>
-                                        <td class="shortPadding">Date First Registered:</td>
-                                        <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding">Primary Ethnicity:</td>
-                                        <td class="shortPadding"><i>{{family.Ethnicity}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding">Notes:</td>
-                                        <td class="shortPadding"><i>{{family.Notes}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding">Primary Diagnosis:</td>
-                                        <td class="shortPadding"><i>{{family.Diagnosis}}</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shortPadding">Primary Diagnosis SubType:</td>
-                                        <td class="shortPadding"><i>{{family.DiagnosisSubType}}</i></td>
-                                    </tr>
-                                </table>
+                <!--<div class="col-sm-6" ng-repeat="family in Families | filter:filterFamilies">-->
+                <div class="col-sm-6" ng-repeat="family in Families">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="font-weight:bolder;">
+                                <strong>The {{family.FamilyName}} Family ({{family.Persons}} family members)</strong><br />
                             </div>
-                        </div>
-                        <div class="panel-footer clearfix">
-                            <div class="pull-right">
-                                <buton class="btn btn-primary btn-xs" ng-click="openEditDialog(family);">Edit <i class="fa fa-pencil pull-right"></i></buton>
+                            <div class="panel-warning" ng-click="callPersons(family)" onmouseover="" style="cursor: pointer;">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed shortMargin">
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Family Reference Number:</td>
+                                            <td class="shortPadding"><i>{{family.FamilyIdentifier}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Date First Registered:</td>
+                                            <td class="shortPadding"><i>{{family.FirstRegisteredDate | date:'mediumDate'}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Primary Ethnicity:</td>
+                                            <td class="shortPadding"><i>{{family.Ethnicity}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Notes:</td>
+                                            <td class="shortPadding"><i>{{family.Notes}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis:</td>
+                                            <td class="shortPadding"><i>{{family.Diagnosis}}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="shortPadding" style="font-weight:bold;">Primary Diagnosis SubType:</td>
+                                            <td class="shortPadding"><i>{{family.DiagnosisSubType}}</i></td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="pull-right">
-                                <buton class="btn btn-primary btn-xs" ng-click="deleteFamily(family);">Delete <i class="fa fa-remove pull-right"></i></buton>
+                            <div class="panel-footer clearfix">
+                                <div class="pull-left">
+                                    <buton uib-popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-primary btn-xs" ng-click="updateFamily(family);">Edit <i class="fa fa-pencil pull-right"></i></buton>
+                                </div>
+                                <div class="pull-right">
+                                    <buton uib-popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-danger btn-xs" ng-click="deleteFamily(family);">Delete <i class="fa fa-remove pull-right"></i></buton>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         <div class="panel-body" ng-hide="!showTableFormat">
@@ -74,28 +78,35 @@
                 <tr>
                     <th class="col-md-1"></th>
                     <th>Family Name</th>
+                    <th>Reference</th>
                     <th>First Registered</th>
                     <th>Notes</th>
                     <th>Primary Ethnicity</th>
                     <th>Diagnosis</th>
                     <th>Diagnosis Subtype</th>
+                    <th>Members</th>
                 </tr>
-                <tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">
-                    <td class="col-md-1">
-                        <button type="button" class="btn btn-default btn-sm" ng-click="openEditDialog(family);">
+                <!--<tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">-->
+                <tr ng-repeat="family in Families" ng-class="{'selected':$index == selectedRow}">
+                    <td>
+                        <button uib-popover="Click to edit {{family.FamilyName}} family details" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="updateFamily(family);">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm" 
-                                 ng-click="deleteFamily(family);">
+                        <button uib-popover="Click to delete {{family.FamilyName}} family" popover-trigger="mouseenter" type="button" class="btn btn-danger btn-sm"
+                                ng-click="deleteFamily(family);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
-                    <td><strong>{{family.FamilyName}}</strong></td>
-                    <td>{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
-                    <td>{{family.Notes}}</td>
-                    <td>{{family.Ethnicity}}</td>
-                    <td>{{family.Diagnosis}}</td>
-                    <td>{{family.DiagnosisSubType}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">
+                        <strong>{{family.FamilyName}}</strong>
+                    </td>
+                    <td>{{family.FamilyIdentifier}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Notes}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Ethnicity}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Diagnosis}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.DiagnosisSubType}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Persons}}</td>
                 </tr>
             </table>
         </div>
@@ -104,28 +115,13 @@
                 <custom-pager page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="Cancel" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Sure?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Really??</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteFamily(family);">Delete</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
     </div>
 </div>
+
+<script type="text/ng-template" id="myPopoverTemplate.html">
+    <div>{{dynamicPopover.content}}</div>
+    <div class="form-group">
+        <label>Popup Title:</label>
+        <input type="text" ng-model="dynamicPopover.title" class="form-control">
+    </div>
+</script>

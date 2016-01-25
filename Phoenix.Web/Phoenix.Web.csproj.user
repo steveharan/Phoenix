@@ -9,7 +9,7 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>True</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
-    <NameOfLastUsedPublishProfile>phoenixsh</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>phoenixdb</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_DbContextTypeFullName>Phoenix.Data.PhoenixContext</WebStackScaffolding_DbContextTypeFullName>
   </PropertyGroup>
   <ProjectExtensions>

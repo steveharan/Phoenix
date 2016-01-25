@@ -25,46 +25,46 @@
                var options = {};
 
                var items = [
-                   new primitives.orgdiagram.ItemConfig({
-                       id: 0,
-                       parent: null,
-                       title: "Scott Aasrud",
-                       description: "Root",
-                       phone: "1 (416) 001-4567",
-                       email: "scott.aasrud@mail.com",
-                       image: "demo/images/photos/a.png",
-                       itemTitleColor: primitives.common.Colors.RoyalBlue
-                   }),
-                   new primitives.orgdiagram.ItemConfig({
+                   new primitives.famdiagram.ItemConfig({
                        id: 1,
-                       parent: 0,
-                       title: "Ted Lucas",
-                       description: "Left",
-                       phone: "1 (416) 002-4567",
-                       email: "ted.lucas@mail.com",
-                       image: "demo/images/photos/b.png",
-                       itemTitleColor: primitives.common.Colors.RoyalBlue
-                   }),
-                   new primitives.orgdiagram.ItemConfig({
-                       id: 2,
-                       parent: 0,
-                       title: "Joao Stuger",
+                       parents: 0,
+                       title: "Tony Haran",
                        description: "Right",
                        phone: "1 (416) 003-4567",
                        email: "joao.stuger@mail.com",
                        image: "demo/images/photos/c.png",
                        itemTitleColor: primitives.common.Colors.RoyalBlue
                    }),
-                   new primitives.orgdiagram.ItemConfig({
+                    new primitives.famdiagram.ItemConfig({
+                        id: 2,
+                        parents: 0,
+                        title: "Patricia Haran",
+                        phone: "1 (416) 004-4567",
+                        email: "hidden.node@mail.com",
+                        description: "Dotted Node",
+                        image: "demo/images/photos/e.png",
+                        itemTitleColor: primitives.common.Colors.PaleVioletRed
+                    }),
+                   new primitives.famdiagram.ItemConfig({
                        id: 3,
-                       parent: 2,
-                       title: "Hidden Node",
+                       parents: [1, 2],
+                       title: "Wendy Allen",
                        phone: "1 (416) 004-4567",
                        email: "hidden.node@mail.com",
                        description: "Dotted Node",
                        image: "demo/images/photos/e.png",
                        itemTitleColor: primitives.common.Colors.PaleVioletRed
-                   })
+                   }),
+                    new primitives.famdiagram.ItemConfig({
+                        id: 4,
+                        parents: [1, 2],
+                        title: "Steve Hara",
+                        phone: "1 (416) 004-4567",
+                        email: "hidden.node@mail.com",
+                        description: "Dotted Node",
+                        image: "demo/images/photos/e.png",
+                        itemTitleColor: primitives.common.Colors.PaleVioletRed
+                    })
                ];
 
                options.items = items;
@@ -75,6 +75,7 @@
                options.defaultTemplateName = "contactTemplate";
 
                $scope.myOptions = options;
+               console.log($scope.myOptions);
 
                $scope.setCursorItem = function (item) {
                    $scope.myOptions.cursorItem = item;
@@ -90,9 +91,11 @@
 
                $scope.addItem = function (index, parent) {
                    var id = $scope.index++;
-                   $scope.myOptions.items.splice(index, 0, new primitives.orgdiagram.ItemConfig({
+                   var jsonParent = '[' + parent + ']';
+                   var obj = angular.fromJson(jsonParent);
+                   $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
                        id: id,
-                       parent: parent,
+                       parents: obj,
                        title: "New title " + id,
                        description: "New description " + id,
                        image: "demo/images/photos/b.png"
@@ -108,7 +111,7 @@
                }
 
                function getContactTemplate() {
-                   var result = new primitives.orgdiagram.TemplateConfig();
+                   var result = new primitives.famdiagram.TemplateConfig();
                    result.name = "contactTemplate";
 
                    result.itemSize = new primitives.common.Size(220, 120);
@@ -140,38 +143,38 @@
            }]);
 
            angular.module('BasicPrimitives', [], function ($compileProvider) {
-               $compileProvider.directive('bpOrgDiagram', function ($compile) {
+               $compileProvider.directive('bpFamDiagram', function ($compile) {
                    function link(scope, element, attrs) {
                        var itemScopes = [];
 
-                       var config = new primitives.orgdiagram.Config();
+                       var config = new primitives.famdiagram.Config();
                        angular.extend(config, scope.options);
 
                        config.onItemRender = onTemplateRender;
                        config.onCursorChanged = onCursorChanged;
                        config.onHighlightChanged = onHighlightChanged;
 
-                       var chart = jQuery(element).orgDiagram(config);
+                       var chart = jQuery(element).famDiagram(config);
 
                        scope.$watch('options.highlightItem', function (newValue, oldValue) {
-                           var highlightItem = chart.orgDiagram("option", "highlightItem");
+                           var highlightItem = chart.famDiagram("option", "highlightItem");
                            if (highlightItem != newValue) {
-                               chart.orgDiagram("option", { highlightItem: newValue });
-                               chart.orgDiagram("update", primitives.orgdiagram.UpdateMode.PositonHighlight);
+                               chart.famDiagram("option", { highlightItem: newValue });
+                               chart.famDiagram("update", primitives.famDiagram.UpdateMode.PositonHighlight);
                            }
                        });
 
                        scope.$watch('options.cursorItem', function (newValue, oldValue) {
-                           var cursorItem = chart.orgDiagram("option", "cursorItem");
+                           var cursorItem = chart.famDiagram("option", "cursorItem");
                            if (cursorItem != newValue) {
-                               chart.orgDiagram("option", { cursorItem: newValue });
-                               chart.orgDiagram("update", primitives.orgdiagram.UpdateMode.Refresh);
+                               chart.famDiagram("option", { cursorItem: newValue });
+                               chart.famDiagram("update", primitives.famDiagram.UpdateMode.Refresh);
                            }
                        });
 
                        scope.$watchCollection('options.items', function (items) {
-                           chart.orgDiagram("option", { items: items });
-                           chart.orgDiagram("update", primitives.orgdiagram.UpdateMode.Refresh);
+                           chart.famDiagram("option", { items: items });
+                           chart.famDiagram("update", primitives.famDiagram.UpdateMode.Refresh);
                        });
 
                        function onTemplateRender(event, data) {
@@ -238,7 +241,7 @@
 </head>
 <body data-ng-controller="myController" style="font-size: 12px">
     <div id="westpanel" style="width: 400px; padding: 10px; margin: 0px; border-style: dotted; font-size: 12px; border-color: grey; float: left; border-width: 1px; overflow: scroll; -webkit-overflow-scrolling: touch;">
-        <p>Here is example of syncronized content between ngRepeat directive and bpOrgDiagram directive. 
+        <p>Here is example of syncronized content between ngRepeat directive and bpFamDiagram directive. 
         <p>Cursor: {{myOptions.cursorItem}}
         <p>Highlight: {{myOptions.highlightItem}}
         <p>Message: {{Message}}
@@ -257,7 +260,7 @@
                
     </div>
     <div id="centerpanel"  style="overflow: hidden; padding: 0px; margin: 0px; border: 0px;">
-        <div bp-org-diagram data-options="myOptions" data-on-highlight-changed="onMyHighlightChanged()"  data-on-cursor-changed="onMyCursorChanged()" style="width: 800px; height: 600px; border-style: dotted; border-width: 1px;"></div>
+        <div bp-fam-diagram data-options="myOptions" data-on-highlight-changed="onMyHighlightChanged()"  data-on-cursor-changed="onMyCursorChanged()" style="width: 800px; height: 600px; border-style: dotted; border-width: 1px;"></div>
     </div>
 </body>
 </html>

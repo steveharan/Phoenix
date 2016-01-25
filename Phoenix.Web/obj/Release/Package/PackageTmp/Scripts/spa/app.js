@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('phoenix', ['common.core', 'common.ui'])
+    angular.module('phoenix', ['common.core', 'common.ui', 'ngAnimate', 'schemaForm', 'BasicPrimitives', 'ui.bootstrap'])
         .config(config)
         .run(run);
 
@@ -51,9 +51,23 @@
                 templateUrl: "scripts/spa/rental/rental.html",
                 controller: "rentStatsCtrl"
             })
+            .when("/persons/:id", {
+                templateUrl: "scripts/spa/persons/persons.html",
+                controller: "personsCtrl"
+            })
+            .when("/personRelationships/:id", {
+                templateUrl: "scripts/spa/personRelationships/personRelationships.html",
+                controller: "personRelationshipsCtrl"
+            })
             .when("/families", {
                 templateUrl: "scripts/spa/families/families.html",
                 controller: "familiesCtrl"
+            })
+            .when("/familyTree/:id", {
+                //templateUrl: "scripts/spa/familyTree/familyTree.html",
+                //controller: "familyTreeCtrl"
+                templateUrl: "scripts/spa/familyTree/bpFamilyTree.html",
+                controller: "bpFamilyTreeCtrl"
             }).otherwise({ redirectTo: "/" });
     }
 
@@ -87,6 +101,11 @@
     }
 
     isAuthenticated.$inject = ['membershipService', '$rootScope', '$location'];
+
+    $(".nav a").on("click", function () {
+        $(".nav").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
 
     function isAuthenticated(membershipService, $rootScope, $location) {
         if (!membershipService.isUserLoggedIn()) {

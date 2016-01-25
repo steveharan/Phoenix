@@ -4,6 +4,7 @@
     app.directive('topBar', topBar);
 
     function topBar() {
+
         return {
             restrict: 'E',
             replace: true,

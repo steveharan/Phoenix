@@ -11,6 +11,10 @@
         $scope.userData.displayUserInfo = displayUserInfo;
         $scope.logout = logout;
 
+        $scope.isMenuActive = function (viewLocation) {
+            var active = (viewLocation === $location.path());
+            return active;
+        };
 
         function displayUserInfo() {
             $scope.userData.isUserLoggedIn = membershipService.isUserLoggedIn();

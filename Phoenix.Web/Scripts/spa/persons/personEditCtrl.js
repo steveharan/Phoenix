@@ -24,7 +24,7 @@
         }
         $scope.cancelEdit = cancelEdit;
         $scope.updatePerson = updatePerson;
-        $scope.getDiagnosisSubType = getDiagnosisSubType;
+        $scope.GetDiagnosisSubType = GetDiagnosisSubType;
 
         if ($scope.EditedPerson.Gender == 'M')
         {
@@ -136,7 +136,7 @@
                 diagnosesLoadCompleted,
                 diagnosesLoadFailed);
 
-            getDiagnosisSubType();
+            GetDiagnosisSubType();
         }
 
         function loadRelatedPerson(personId) {
@@ -161,8 +161,7 @@
             loadDiagnoses();
         }
 
-        function getDiagnosisSubType() {
-
+        function GetDiagnosisSubType() {
             var config = {
                 params: {
                     diagnosisId: $scope.EditedPerson.DiagnosisID

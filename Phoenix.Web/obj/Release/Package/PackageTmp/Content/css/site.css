@@ -26,7 +26,7 @@ body {
 #main {
     height: 100%;
     overflow: auto;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .movie {
@@ -267,4 +267,10 @@ ul.pagination > li
 
 .red {
     color: red;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.app-modal-window .modal-dialog {
+  width: 1000px;
 }

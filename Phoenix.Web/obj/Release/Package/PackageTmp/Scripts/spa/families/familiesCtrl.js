@@ -3,9 +3,30 @@
 
     app.controller('familiesCtrl', familiesCtrl);
 
-    familiesCtrl.$inject = ['$scope', '$modal', 'apiService', 'notificationService'];
+    familiesCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'apiService', 'notificationService', '$location', '$log'];
 
-    function familiesCtrl($scope, $modal, apiService, notificationService) {
+    function familiesCtrl($scope, $rootScope, $uibModal, apiService, notificationService, $location) {
+
+        $scope.items = [
+          'The first choice!',
+          'And another choice for you.',
+          'but wait! A third!'
+        ];
+
+        $scope.status = {
+            isopen: false
+        };
+
+        $scope.toggled = function (open) {
+            alert('toggle');
+            $log.log('Dropdown is now: ', open);
+        };
+
+        $scope.toggleDropdown = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.status.isopen = !$scope.status.isopen;
+        };
 
         $scope.pageClass = 'page-families';
         $scope.loadingFamilies = true;
@@ -16,16 +37,30 @@
         $scope.search = search;
         $scope.clearSearch = clearSearch;
 
+        $scope.isCollapsed = false;
+
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         $scope.openEditDialog = openEditDialog;
+        $scope.updateFamily = updateFamily;
         $scope.deleteFamily = deleteFamily;
+        $scope.callPersons = callPersons;
+        $scope.selectedFamily = {};
+        $scope.showTableFormat = true;
 
-        $scope.showTableFormat = false;
+        $scope.dynamicPopover = {
+            content: 'Hello, World!',
+            templateUrl: 'myPopoverTemplate.html',
+            title: 'Title'
+        };
 
         $scope.toggleView = function () {
-            $scope.showTableFormat = $scope.showTableFormat === false ? true : false;
+            $scope.showTableFormat = $scope.showTableFormat === true ? false : true;
         };
+
+        function callPersons(family) {
+            $location.path("/persons/" + family.ID);
+        }
 
         function search(page) {
             page = page || 0;
@@ -45,42 +80,36 @@
             familiesLoadFailed);
         }
 
-        function deleteFamilyCompleted(response) {
-            notificationService.displaySuccess('The family has been deleted');
-            clearSearch();
-        }
-
         function updateFamilyLoadFailed(response) {
             console.log(response);
             notificationService.displayError(response.data);
         }
 
         function deleteFamily(family) {
-            console.log('Delete family');
-            console.log(family);
             family.deleted = true;
-            console.log(family);
-            apiService.post('/api/families/update/', family,
-                        deleteFamilyCompleted,
-                        deleteFamilyCompleted);
+            openEditDialog(family);
         }
 
-        function openEditDialog(family) {
-            console.log('Editing...');
-            console.log(family);
+        function updateFamily(family) {
             if (family == null) {
                 $scope.newFamily = true;
+                family = {};
             }
             else {
                 $scope.newFamily = false;
             }
-            console.log('newfamily=');
-            console.log($scope.newFamily);
+            family.deleted = false;
+            openEditDialog(family);
+        }
+
+        function openEditDialog(family) {
             $scope.EditedFamily = family;
-            $modal.open({
+            $uibModal.open({
                 templateUrl: 'scripts/spa/families/familyEditModal.html',
                 controller: 'familyEditCtrl',
-                scope: $scope
+                backdrop: 'static',
+                scope: $scope,
+                windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
                 clearSearch();
             }, function () {
@@ -90,7 +119,8 @@
 
         function familiesLoadCompleted(result) {
             $scope.Families = result.data.Items;
-            console.log(Families);
+            console.log('famloadcomp');
+            console.log($scope.Families);
 
             $scope.page = result.data.Page;
             $scope.pagesCount = result.data.TotalPages;
@@ -113,6 +143,8 @@
         }
 
         $scope.search();
+
     }
+
 
 })(angular.module('phoenix'));

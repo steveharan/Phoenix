@@ -3,17 +3,41 @@
 
     app.controller('bpFamilyTreeCtrl', bpFamilyTreeCtrl);
 
-    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService', '$location'];
+    bpFamilyTreeCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'notificationService', 'apiService', '$routeParams'];
 
-    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService, $location) {
+    function bpFamilyTreeCtrl($scope, $rootScope, $uibModal, notificationService, apiService, $routeParams) {
 
         $scope.index = 10;
         $scope.Message = "";
-        $scope.addrelation = addrelation;
- 
-        function addrelation(personId) {
+        $scope.addChild = addChild;
+        $scope.addParent = addParent;
+        $scope.deletePerson = deletePerson;
+        $scope.loadTree = loadTree;
+        var objParents = "";
+        var objSpouses = "";
+
+        //loadTree();
+
+        function deletePerson(personId) {
+            apiService.get("/api/persons/details/" + personId, null,
+                personLoadCompleted,
+                personLoadFailed); 
+        }
+
+        function personLoadCompleted(response) {
+            $scope.RelatedPerson = response.data;
+        }
+
+        function personLoadFailed(response) {
+            notificationService.displayError(response.data);
+        }
+
+        function addChild(personId) {
+            $scope.addingChild = true;
+            $scope.addingParent= false;
+
             // pass the personid that we are adding a person to
-            $scope.addRelationToPersonId = personId;;
+            $scope.addRelationToPersonId = personId;
             var person = "";
             $scope.EditedPerson = person;
             $scope.newPerson = true;
@@ -25,81 +49,75 @@
                 windowClass: 'app-modal-window'
             }).result.then(function ($scope) {
             }, function () {
-                var id = $rootScope.NewlyCreatedPerson.PersonID;
-                var index = $scope.myOptions.items.length + 1;
-                var objParent = [];
-                var objSpouse = [];
-                if ($rootScope.NewlyCreatedPerson.RelationshipTypeId != 3) {
-                    var jsonParent = '[' + personId + ']';
-                    objParent = angular.fromJson(jsonParent);
-                } else {
-                    var jsonSpouse = '[' + personId + ']';
-                    objSpouse = angular.fromJson(jsonSpouse);
-                }
-
-                $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
-                    id: id,
-                    parents: objParent,
-                    spouses: objSpouse,
-                    title: $rootScope.NewlyCreatedPerson.FirstName + ' ' + $rootScope.NewlyCreatedPerson.SurName,
-                    description: $rootScope.NewlyCreatedPerson.Notes
-                }));
+                loadTree();
             });
         }
 
+        function loadTree() {
+            apiService.get('/api/personRelationships/getfamilytree/' + $routeParams.id, null,
+                familyTreeLoadCompleted,
+                familyTreeLoadFailed);
+        }
+
+        function familyTreeLoadCompleted(result) {
+            $scope.loadingTree = false;
+            $rootScope.items = [];
+            $scope.myOptions.items = [];
+            var index = 0;
+            angular.forEach(result.data.Items, function (value, key) {
+                objParents = angular.fromJson(value.parents);
+                objSpouses = angular.fromJson(value.spouses);
+                var colour = "";
+                if (value.gender == 'F') {
+                    colour = primitives.common.Colors.LavenderBlush;
+                } else {
+                    colour = primitives.common.Colors.RoyalBlue;
+                }
+
+                $scope.myOptions.items.splice(index, 0, new primitives.famdiagram.ItemConfig({
+                    id: value.id,
+                    title: value.title,
+                    description: value.description,
+                    parents: objParents,
+                    spouses: objSpouses,
+                    itemTitleColor: colour,
+                    groupTitle: value.gender,
+                    groupTitleColor: colour,
+                    deceased: value.deceased,
+                    gender: value.gender,
+                    dob: value.dateOfBirth,
+                    registered: value.firstRegisteredDate
+                }));
+                index++;
+            });
+            $scope.myOptions.cursorItem = 1;
+        }
+
+        function familyTreeLoadFailed(response) {
+            notificationService.displayError(response.data);
+        }
+
+        function addParent(personId) {
+            $scope.addingParent = true;
+            $scope.addingChild = false;
+            // pass the personid that we are adding a person to
+            $scope.addRelationToPersonId = personId;
+            var person = "";
+            $scope.EditedPerson = person;
+            $scope.newPerson = true;
+            $uibModal.open({
+                templateUrl: 'scripts/spa/persons/personEditModal.html',
+                controller: 'personEditCtrl',
+                backdrop: 'static',
+                scope: $scope,
+                windowClass: 'app-modal-window'
+            }).result.then(function ($scope) {
+            }, function () {
+                loadTree();
+            });
+        }
 
         var options = {};
- 
-        //$rootScope.items = [
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 0,
-        //        title: "Scott Aasrud",
-        //        description: "Root",
-        //        phone: "1 (416) 001-4567",
-        //        email: "scott.aasrud@mail.com",
-        //        image: "demo/images/photos/a.png",
-        //        itemTitleColor: primitives.common.Colors.RoyalBlue
-        //    }),
-        //     new primitives.famdiagram.ItemConfig({
-        //         id: 10,
-        //         title: "Scott Aasrud 2",
-        //         description: "Root",
-        //         phone: "1 (416) 001-4567",
-        //         email: "scott.aasrud@mail.com",
-        //         image: "demo/images/photos/a.png",
-        //         itemTitleColor: primitives.common.Colors.RoyalBlue
-        //     }),
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 1,
-        //        parents: [0, 10],
-        //        title: "Ted Lucas",
-        //        description: "Left",
-        //        phone: "1 (416) 002-4567",
-        //        email: "ted.lucas@mail.com",
-        //        image: "demo/images/photos/b.png",
-        //        itemTitleColor: primitives.common.Colors.RoyalBlue
-        //    }),
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 2,
-        //        parents: [0, 10],
-        //        title: "Joao Stuger",
-        //        description: "Right",
-        //        phone: "1 (416) 003-4567",
-        //        email: "joao.stuger@mail.com",
-        //        image: "demo/images/photos/c.png",
-        //        itemTitleColor: primitives.common.Colors.RoyalBlue
-        //    }),
-        //    new primitives.famdiagram.ItemConfig({
-        //        id: 3,
-        //        parents: [2],
-        //        title: "Hidden Node",
-        //        phone: "1 (416) 004-4567",
-        //        email: "hidden.node@mail.com",
-        //        description: "Dotted Node",
-        //        image: "demo/images/photos/e.png",
-        //        itemTitleColor: primitives.common.Colors.PaleVioletRed
-        //    })
-        //];
 
         options.items = $rootScope.items;
         options.cursorItem = 0;
@@ -109,7 +127,8 @@
         options.defaultTemplateName = "contactTemplate";
  
         $scope.myOptions = options;
- 
+        $rootScope.myOptions = options;
+
         $scope.setCursorItem = function (item) {
             $scope.myOptions.cursorItem = item;
         };
@@ -147,7 +166,8 @@
                 + '</div>'
                 + '<div name="deceased" class="bp-item" style="top: 26px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Deceased: {{itemConfig.deceased}}</div>'
                 + '<div name="gender" class="bp-item" style="top: 44px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Gender: {{itemConfig.gender}}</div>'
-                + '<div name="description" class="bp-item" style="top: 62px; left: 6px; width: 162px; height: 36px; font-size: 10px;">{{itemConfig.description}}</div>'
+                + '<div name="dob" class="bp-item" style="top: 62px; left: 6px; width: 162px; height: 18px; font-size: 12px;">DOB: {{itemConfig.dob | date:"mediumDate"}}</div>'
+                + '<div name="reg" class="bp-item" style="top: 80px; left: 6px; width: 162px; height: 18px; font-size: 12px;">Registered: {{itemConfig.registered | date:"mediumDate"}}</div>'
             + '</div>'
             ).css({
                 width: result.itemSize.width + "px",
@@ -185,13 +205,11 @@
                     var cursorItem = chart.famDiagram("option", "cursorItem");
                     if (cursorItem != newValue) {
                         chart.famDiagram("option", { cursorItem: newValue });
-//                        chart.famDiagram("update", primitives.famdiagram.UpdateMode.Refresh);
                     }
                 });
 
                 scope.$watchCollection('options.items', function (items) {
                     chart.famDiagram("option", { items: items });
-//                    chart.famDiagram("update", primitives.famdiagram.UpdateMode.Refresh);
                 });
 
                 function onTemplateRender(event, data) {
@@ -234,14 +252,14 @@
                 }
 
                 element.on('$destroy', function () {
-                    /* destroy items scopes */
-                    //console.log('length is ' + itemScopes.length);
+                    ///* destroy items scopes */
+                    ////console.log('length is ' + itemScopes.length);
                     //for (var index = 0; index < itemScopes.length; index++) {
                     //    itemScopes[index].$destroy();
                     //}
 
-                    /* destory jQuery UI widget instance */
-//                    chart.remove();
+                    ///* destory jQuery UI widget instance */
+                    //chart.remove();
                 });
             };
 
@@ -255,8 +273,4 @@
             };
         });
     });
-
-
-
-
 })(angular.module('phoenix'));
