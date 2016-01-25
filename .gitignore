@@ -61,3 +61,5 @@ Phoenix.Data/obj/Debug/Phoenix.Data.pdb
 *.pdb
 *.dll
 *.pdb
+*.pdb
+Phoenix.Web/bin/Phoenix.Web.dll.config
