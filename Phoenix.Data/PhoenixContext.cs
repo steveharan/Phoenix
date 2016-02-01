@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Phoenix.Data
 {
@@ -33,6 +34,11 @@ namespace Phoenix.Data
         public IDbSet<Ethnicity> EthnicitySet { get; set; }
         public IDbSet<RelationshipType> RelationshipTypeSet { get; set; }
         public IDbSet<Error> ErrorSet { get; set; }
+        public IDbSet<TestType> TestTypeSet { get; set; }
+        public IDbSet<Test> TestSet { get; set; }
+        public IDbSet<TestAttributeValue> TestAttributeValuesSet { get; set; }
+        public IDbSet<PatientTestAnswer> PatientTestAnswerSet { get; set; }
+        public IDbSet<PatientTest> PatientTestSet { get; set; }
         #endregion
 
         public virtual void Commit()

@@ -26,6 +26,7 @@
         $scope.deletePerson = deletePerson;
         $scope.manageRelations = manageRelations;
         $scope.callFamilyTree = callFamilyTree;
+        $scope.tests = tests;
 
         $scope.data = {
             availableOptions: [
@@ -36,7 +37,6 @@
             ],
             selectedOption: { id: '0', name: '-- Select --' }
         };
-
 
         $scope.showTableFormat = true;
 
@@ -64,6 +64,11 @@
 
         function updatePersonLoadFailed(response) {
             notificationService.displayError(response.data);
+        }
+
+        function tests(person) {
+            console.log(person);
+            $location.path('/tests/' + person.ID);
         }
 
         function deletePerson(person) {

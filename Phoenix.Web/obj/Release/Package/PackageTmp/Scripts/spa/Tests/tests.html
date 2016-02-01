@@ -8,7 +8,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><strong>Family members for the {{FamilyName}} family</strong></h3>
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;"><strong>Test Management For Bob</strong></h3>
             <div class="input-group">
                 <input id="inputSearchPersons" type="search" ng-model="filterPersons" class="form-control shortInputSearch" placeholder="Filter, search people..">
                 <div class="input-group-btn">
@@ -108,7 +108,7 @@
             <table class="table table-bordered table table-striped table-hover table-responsive">
                 <tr>
                     <th style="text-align: center;" ng-show="loadingTree"><button disabled class="btn btn-info" ng-click="callFamilyTree(person)">Loading....</button></th>
-                    <th style="text-align:center;" ng-hide="loadingTree"><button class="btn btn-info" ng-click="callFamilyTree(person)">View Family Tree</button></th>
+                    <th style="text-align:center;" ng-hide="loadingTree"><button class="btn btn-info" ng-click="callFamilyTree(person)">Create New Test</button></th>
                     <th style="text-align:center;" >Name</th>
                     <th style="text-align:center;" >DOB</th>
                     <th style="text-align:center;" >Gender</th>
@@ -145,6 +145,27 @@
                                 Actions<span class="caret"></span>
                             </button>
                             <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+                                <!--<li role="menuitem">
+                                    <div style="align-content: center">
+                                        <button uib-popover="Click to edit {{person.FirstName}}" popover-trigger="mouseenter"
+                                                popover-placement="right"
+                                                type="button" class="btn btn-success btn-sm" ng-click="updatePerson(person);">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </button>
+                                        <button uib-popover="Click to manage family relationships for {{person.FirstName}}" popover-trigger="mouseenter"
+                                                popover-placement="right"
+                                                type="button" class="btn btn-warning btn-sm"
+                                                ng-click="manageRelations(person);">
+                                            <span class="glyphicon glyphicon-tree-conifer"></span>
+                                        </button>
+                                        <button uib-popover="Click to delete {{person.FirstName}}" popover-trigger="mouseenter"
+                                                popover-placement="right"
+                                                type="button" class="btn btn-danger btn-sm"
+                                                ng-click="deletePerson(person);">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </div>
+                                </li>-->
                                 <li role="menuitem">
                                     <button class="btn-default btn-large btn-block"
                                             uib-popover="Click to edit {{person.FirstName}}" popover-trigger="mouseenter"
@@ -179,7 +200,7 @@
                                 </li>
                                 <li role="menuitem">
                                     <button class="btn-default btn-large btn-block"
-                                            uib-popover="Manage Tests For {{person.FirstName}}" popover-trigger="mouseenter"
+                                            uib-popover="Click to delete {{person.FirstName}}" popover-trigger="mouseenter"
                                             popover-placement="right"
                                             type="button"
                                             ng-click="tests(person);">

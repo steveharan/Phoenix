@@ -29,28 +29,6 @@
                 controller: "customersRegCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
-            .when("/movies", {
-                templateUrl: "scripts/spa/movies/movies.html",
-                controller: "moviesCtrl"
-            })
-            .when("/movies/add", {
-                templateUrl: "scripts/spa/movies/add.html",
-                controller: "movieAddCtrl",
-                resolve: { isAuthenticated: isAuthenticated }
-            })
-            .when("/movies/:id", {
-                templateUrl: "scripts/spa/movies/details.html",
-                controller: "movieDetailsCtrl",
-                resolve: { isAuthenticated: isAuthenticated }
-            })
-            .when("/movies/edit/:id", {
-                templateUrl: "scripts/spa/movies/edit.html",
-                controller: "movieEditCtrl"
-            })
-            .when("/rental", {
-                templateUrl: "scripts/spa/rental/rental.html",
-                controller: "rentStatsCtrl"
-            })
             .when("/persons/:id", {
                 templateUrl: "scripts/spa/persons/persons.html",
                 controller: "personsCtrl"
@@ -64,11 +42,14 @@
                 controller: "familiesCtrl"
             })
             .when("/familyTree/:id", {
-                //templateUrl: "scripts/spa/familyTree/familyTree.html",
-                //controller: "familyTreeCtrl"
                 templateUrl: "scripts/spa/familyTree/bpFamilyTree.html",
                 controller: "bpFamilyTreeCtrl"
-            }).otherwise({ redirectTo: "/" });
+            })
+            .when("/tests/:id", {
+                templateUrl: "scripts/spa/tests/tests.html",
+                controller: "testsCtrl"
+            })
+            .otherwise({ redirectTo: "/" });
     }
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];

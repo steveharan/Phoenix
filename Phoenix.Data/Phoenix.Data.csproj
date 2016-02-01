@@ -102,6 +102,30 @@
     <Compile Include="Migrations\201511231256454_initial.Designer.cs">
       <DependentUpon>201511231256454_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602011317481_tests.cs" />
+    <Compile Include="Migrations\201602011317481_tests.Designer.cs">
+      <DependentUpon>201602011317481_tests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602011344273_tests2.cs" />
+    <Compile Include="Migrations\201602011344273_tests2.Designer.cs">
+      <DependentUpon>201602011344273_tests2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602011402091_tests3.cs" />
+    <Compile Include="Migrations\201602011402091_tests3.Designer.cs">
+      <DependentUpon>201602011402091_tests3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602011505385_tests4.cs" />
+    <Compile Include="Migrations\201602011505385_tests4.Designer.cs">
+      <DependentUpon>201602011505385_tests4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602011507480_tests5.cs" />
+    <Compile Include="Migrations\201602011507480_tests5.Designer.cs">
+      <DependentUpon>201602011507480_tests5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602011510064_tests6.cs" />
+    <Compile Include="Migrations\201602011510064_tests6.Designer.cs">
+      <DependentUpon>201602011510064_tests6.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhoenixContext.cs" />
     <Compile Include="Phoenix\Data\Repositories\IEntityBaseRepository.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
@@ -131,6 +155,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511231256454_initial.resx">
       <DependentUpon>201511231256454_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011317481_tests.resx">
+      <DependentUpon>201602011317481_tests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011344273_tests2.resx">
+      <DependentUpon>201602011344273_tests2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011402091_tests3.resx">
+      <DependentUpon>201602011402091_tests3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011505385_tests4.resx">
+      <DependentUpon>201602011505385_tests4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011507480_tests5.resx">
+      <DependentUpon>201602011507480_tests5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011510064_tests6.resx">
+      <DependentUpon>201602011510064_tests6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

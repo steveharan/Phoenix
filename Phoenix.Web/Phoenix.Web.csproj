@@ -1034,6 +1034,8 @@
     <Content Include="Scripts\spa\services\fileUploadService.js" />
     <Content Include="Scripts\spa\services\membershipService.js" />
     <Content Include="Scripts\spa\services\notificationService.js" />
+    <Content Include="Scripts\spa\Tests\tests.html" />
+    <Content Include="Scripts\spa\Tests\testsCtrl.js" />
     <Content Include="Scripts\vendors\angucomplete-alt.min.js" />
     <Content Include="Scripts\vendors\angular-animate.js" />
     <Content Include="Scripts\vendors\angular-animate.min.js" />
@@ -1173,6 +1175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonRelationshipsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Infrastructure\Validators\DiagnosisSubTypeViewModelValidator.cs" />
     <Compile Include="Infrastructure\Validators\DiagnosisViewModelValidator.cs" />
     <Compile Include="Infrastructure\Validators\PersonRelationshipViewModelValidator.cs" />
@@ -1283,6 +1286,7 @@
     <Folder Include="Views\Person\" />
     <Folder Include="Views\Rentals\" />
     <Folder Include="Views\Stocks\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Phoenix.Data\Phoenix.Data.csproj">

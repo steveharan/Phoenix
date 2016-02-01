@@ -86,21 +86,41 @@
                     <th>Diagnosis Subtype</th>
                     <th>Members</th>
                 </tr>
-                <!--<tr ng-repeat="family in Families | filter:filterFamilies" ng-class="{'selected':$index == selectedRow}">-->
                 <tr ng-repeat="family in Families" ng-class="{'selected':$index == selectedRow}">
                     <td>
-                        <button uib-popover="Click to edit {{family.FamilyName}} family details" popover-trigger="mouseenter" popover-placement="right" type="button" class="btn btn-success btn-sm" ng-click="updateFamily(family);">
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </button>
-                        <button uib-popover="Click to delete {{family.FamilyName}} family" popover-trigger="mouseenter" type="button" class="btn btn-danger btn-sm"
-                                ng-click="deleteFamily(family);">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
+                        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                            <button id="btn-append-to-body" type="button" class="btn btn-flat" uib-dropdown-toggle>
+                                Actions<span class="caret"></span>
+                            </button>
+                            <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+                                <li role="menuitem">
+                                    <button class="btn-default btn-large btn-block"
+                                            uib-popover="Click to edit {{family.FamilyName}} family details" popover-trigger="mouseenter"
+                                            popover-placement="right"
+                                            type="button"
+                                            ng-click="updateFamily(family);">
+                                        <!--<span class="glyphicon glyphicon-edit">Edit Person</span>-->
+                                        <span>Edit Family</span>
+                                    </button>
+                                </li>
+                                <!--<li class="divider"></li>-->
+                                <li role="menuitem">
+                                    <button class="btn-default btn-large btn-block"
+                                            uib-popover="Delete Family" popover-trigger="mouseenter"
+                                            popover-placement="right"
+                                            type="button"
+                                            ng-click="deleteFamily(family);">
+                                        <!--<span class="glyphicon glyphicon-tree-conifer"></span>-->
+                                        Delete Family
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">
                         <strong>{{family.FamilyName}}</strong>
                     </td>
-                    <td>{{family.FamilyIdentifier}}</td>
+                    <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.FamilyIdentifier}}</td>
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.FirstRegisteredDate | date:'mediumDate'}}</td>
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Notes}}</td>
                     <td onmouseover="" style="cursor: pointer;" ng-click="callPersons(family)">{{family.Ethnicity}}</td>

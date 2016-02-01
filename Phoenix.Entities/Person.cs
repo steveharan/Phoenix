@@ -8,8 +8,6 @@ namespace Phoenix.Entities
 {
     public class Person : IEntityBase
     {
-        public Person() { PersonRelationships = new List<PersonRelationship>(); }
-
         public int ID { get; set; }
         public string NhsNumber { get; set; }
         public string FirstName { get; set; }
@@ -33,7 +31,12 @@ namespace Phoenix.Entities
         public int? EthnicityId { get; set; }
         public virtual Ethnicity Ethnicity { get; set; }
         public bool Deleted { get; set; }
+        public Person()
+        {
+            PersonRelationships = new List<PersonRelationship>();
+            PatientTests = new List<PatientTest>();
+        }
         public virtual ICollection<PersonRelationship> PersonRelationships { get; set; }
-
+        public virtual ICollection<PatientTest> PatientTests { get; set; }
     }
 }

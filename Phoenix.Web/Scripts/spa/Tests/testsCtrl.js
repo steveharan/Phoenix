@@ -1,13 +1,13 @@
 ﻿(function (app) {
     'use strict';
 
-    app.controller('personsCtrl', personsCtrl);
+    app.controller('testsCtrl', testsCtrl);
 
-    personsCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService', '$location'];
+    testsCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$routeParams', 'apiService', 'notificationService', '$location'];
 
-    function personsCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService, $location) {
+    function testsCtrl($scope, $rootScope, $uibModal, $routeParams, apiService, notificationService, $location) {
 
-        $scope.pageClass = 'page-persons';
+        $scope.pageClass = 'page-tests';
         $scope.loadingPersons = true;
         $scope.loadingTree = true;
         $scope.page = 0;
@@ -67,8 +67,7 @@
         }
 
         function tests(person) {
-            console.log(person);
-            $location.path('/tests/' + person.ID);
+            $location.path('/tests/' + person.id);
         }
 
         function deletePerson(person) {
